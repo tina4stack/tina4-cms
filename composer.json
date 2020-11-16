@@ -1,0 +1,10 @@
+{
+  "name": "andrevanzuydam/tina4cms",
+  "description": "Tina4 CMS Module",
+  "license": "MIT",
+  "autoload": {
+  "files": [
+      "index.php"
+    ]
+  }
+}

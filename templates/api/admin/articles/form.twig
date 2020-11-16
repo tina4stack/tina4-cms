@@ -1,0 +1,69 @@
+<form id="articleForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="title">Title</label>
+            <input class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
+        </div>
+        <div class="form-group col-md-8">
+            <label for="description">Description</label>
+            <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
+        </div>
+        <div class="form-group col-md-2">
+            <img class="img-thumbnail" src="data:image/png;base64,{{ data.image }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="image">Image</label>
+            <input class="form-control" type="file" name="image" placeholder="Image" value="">
+        </div>
+        {% if session.user.id %}
+        <div class="form-group col-md-3">
+            <label for="author">Author</label>
+            <input class="form-control" type="text" name="author" readonly placeholder="Author" value="{{ session.user.firstName }} {{ session.user.lastName }}">
+            <input type="hidden" name="userId" value="{{ session.user.id }}">
+        </div>
+        {%  else %}
+        <div class="form-group col-md-6">
+            <label for="author">Author</label>
+            <input class="form-control" type="text" name="author" placeholder="Author" value="{{ data.author }}">
+        </div>
+        {% endif %}
+        <div class="form-group col-md-9">
+            <label for="content">Content</label>
+            <textarea id="contentEditor" name="content" rows="20">{{ data.content }}</textarea>
+            <script>
+                var contentEditor = CKEDITOR.replace( 'contentEditor', {
+                    filebrowserBrowseUrl: '/content/file/browse?formToken={{ formToken }}',
+                    filebrowserUploadUrl: '/content/file/upload?formToken={{ formToken }}',
+                    allowedContent: true,
+                    enterMode : CKEDITOR.ENTER_BR,
+                    shiftEnterMode: CKEDITOR.ENTER_P
+                });
+                contentEditor.on( 'change', function( evt ) {
+                    $('#contentEditor').val(evt.editor.getData());
+                    console.log( 'Total bytes: ' + evt.editor.getData().length );
+                });
+            </script>
+        </div>
+        <div class="form-group col-md-3">
+                <label>Choose Categories</label>
+                {% set categories = Tina4.call('Content', 'getCategories', [data.id]) %}
+                <ul class="tree" style="border:1px solid black">
+                    {{ categories | raw }}
+                </ul>
+
+        </div>
+        <div class="form-group col-md-12">
+            <label>Keywords/Tags</label>
+            {% include "tagLookup.twig" %}
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="playerKey">Published</label>
+            <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
+        </div>
+
+
+
+    </div>
+    {{  "articleForm" | formToken | raw }}
+</form>
