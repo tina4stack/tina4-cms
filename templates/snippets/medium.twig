@@ -1,0 +1,8 @@
+<div class="col-sm-3 col-lg-3">
+    <div class="medium" onclick="document.location.href = '/content/article/{{ article.slug }}';">
+        <img src="{{ article.image }}"/>
+        <a class="title" href="/content/article/{{ article.slug }}">{{ article.title }}</a>
+        <span class="d-flex flex-row justify-content-between"><strong>{{ article.author }}</strong> &nbsp;<small>{{ article.publishedDate }}</small></span>
+        <p>{{ article.description | raw }}</p>
+    </div>
+</div>

@@ -52,7 +52,7 @@
             unset($page->content);
         break;
         case "update":
-            $page->slug = (new Content())->slug($request->data->name);
+            $page->slug = (new Content())->getSlug($request->data->name);
             //Manipulate the $object here
             $page->dateModified = date("Y-m-d H:i:s");
 

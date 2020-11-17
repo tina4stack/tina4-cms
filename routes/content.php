@@ -31,12 +31,14 @@
 \Tina4\Get::add("/content/article/{slug}", function ($slug, \Tina4\Response $response, \Tina4\Request $request) {
   $content = (new Content())->getArticle($slug);
   $articleMeta = (new Content())->getArticleMeta($slug);
+
+
   if (!file_exists("./src/assets/images/og-{$slug}.png")) {
     if ($articleMeta->image) {
       file_put_contents("./src/assets/images/og-{$slug}.png", base64_decode($articleMeta->image));
     }
   }
-  $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => $articleMeta->name, "title" => $articleMeta->title, "image" => "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$slug}.png" , "description" => $articleMeta->description, "keywords" => $articleMeta->keywords]);
+  $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => $articleMeta->title, "title" => $articleMeta->title, "image" => "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$slug}.png" , "description" => $articleMeta->description, "keywords" => $articleMeta->keywords]);
   return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
@@ -61,7 +63,7 @@
     foreach ($_FILES as $name => $file) {
         $filename = explode(".", $file["name"]);
         $extension = array_pop($filename);
-        $filename = (new Content())->slug(implode('_', $filename));
+        $filename = (new Content())->getSlug(implode('_', $filename));
         if (move_uploaded_file($file["tmp_name"], "./uploads/{$filename}.{$extension}")) {
             $result->uploaded = 1;
             $result->fileName = $filename;

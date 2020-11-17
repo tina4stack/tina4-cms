@@ -159,32 +159,34 @@
 {% endblock %}
 
 {% block content %}
+    <div class="col-md-12">
+        <h3>Content</h3>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/email-templates', 'sub-content')">Email Templates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
+            </li>
+        </ul>
+        <div id="sub-content">
 
-
-    <h3>Content</h3>
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/email-templates', 'sub-content')">Email Templates</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
-        </li>
-    </ul>
-    <div id="sub-content">
-
+        </div>
+        <script>
+            loadPage('/cms/pages', 'sub-content');
+        </script>
     </div>
-    <script>
-        loadPage('/cms/pages', 'sub-content');
-    </script>
+
+
 
 
 {% endblock %}

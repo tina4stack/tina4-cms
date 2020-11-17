@@ -1,0 +1,54 @@
+
+    <div class="col-sm-12 col-lg-12">
+        <div class="text-left">
+            {% for category in article.categories %}
+                <a class="badge badge-primary m-1 p-2" href="/content/{{ category.categoryName | getSlug }}" >{{ category.categoryName }}</a>
+            {% endfor %}
+        </div>
+        <h1><span>{{ title }}</span></h1>
+
+        <p>By {{ article.author  }} {{ article.publishedDate }}</p>
+        <span class="large mb-4">
+            <img src="data:image/png;base64,{{ image }}" style='height: 100%; width: 100%; object-fit: contain' />
+        </span>
+    </div>
+    <div class="col-sm-12 col-lg-12">
+        {{ content | raw }}
+    </div>
+    <div class="col-sm-12 col-lg-12">
+            {% set keywords = article.keywords|split(',') %}
+            <div class="text-left">
+                <a class="badge badge-primary m-1 p-2" href="#" >TAGS</a>
+                {% for keyword in keywords %}
+                    <a class="badge badge-secondary m-1 p-2" href="/content/tags/{{ keyword | getSlug }}" >{{ keyword }}</a>
+                {% endfor %}
+            </div>
+    </div>
+    <div class="col-sm-3 col-lg-3 text-right">
+        {{ socialMedia | raw }}
+    </div>
+    <hr>
+    <div class="col-sm-12 col-lg-12">
+        <div class="previous-next">
+            <span class="page-item">
+                <a href="/content/article/{{ article.relatedArticles[0].slug }}">Previous Article<br>
+                {{ article.relatedArticles[0].title }}
+                    </a>
+            </span>
+            <span class="page-item float-right text-right">
+                <a  href="/content/article/{{ article.relatedArticles[1].slug }}">Next Article<br>
+                    {{ article.relatedArticles[1].title }}
+                </a>
+            </span>
+        </div>
+
+
+    </div>
+
+    <div class="col-sm-12">
+        <h3><span>Related Articles</span></h3>
+        <div class="row">
+            {% for article in article.relatedArticles %} {% include "snippets/small.twig" with {'article': article} %} {% endfor %}
+        </div>
+
+    </div>

@@ -2,110 +2,7 @@
 
 
 
-\Tina4\Get::add("/cms/article-categories", function (\Tina4\Response $response){
-    return $response (\Tina4\renderTemplate("/content/article-categories.twig"), HTTP_OK, TEXT_HTML);
-});
 
-
-
-/**
- * CRUD Prototype Example
- * Creates  GET @ /path, /path/{id}, - fetch for whole or for single
-            POST @ /path, /path/{id} - create & update
-            DELETE @ /path/{id} - delete for single
- */
-\Tina4\Crud::route ("/api/admin/article-categories", new ArticleCategory(), function ($action, $articleCategory, $filter, $request) {
-
-
-      if (isset($request->params["websiteId"]) && $request->params["websiteId"] != 0) {
-        $websiteId = $request->params["websiteId"];
-        $categories = (new ArticleCategory())->select("id,name,parent_id,slug,is_menu,is_active,display_order", 1000)
-            ->where("(id = 0 or website_id = {$websiteId})")
-            ->filter(function($record){
-                $article = new ArticleCategory();
-                $article->load("id = {$record->parentId}");
-                $record->parentName = $article->name;
-            })
-            ->asArray();
-    } else {
-        $websiteId = 0;
-        $categories = (new ArticleCategory())->select("id,name,parent_id,slug,is_menu,is_active,display_order")
-            ->filter(function($record){
-                $article = new ArticleCategory();
-                $article->load("id = {$record->parentId}");
-                $record->parentName = $article->name;
-            })
-            ->asArray();
-    }
-
-
-
-    switch ($action) {
-       case "form":
-            //Return back a form to be submitted to the create
-
-            $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig", ["categories" => $categories]);
-
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => "Add Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories', 'message'); }", "content" => $content]);
-       break;
-       case "fetch":
-            //Return back a form to be submitted to the create
-
-            $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig",["data" => $articleCategory, "categories" => $categories]);
-
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => "Edit Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories/{$articleCategory->id}', 'message'); }", "content" => $content]);
-       break;
-       case "read":
-            //Return a dataset to be consumed by the grid with a filter
-           if ($websiteId != 0) {
-               $where = "website_id = {$websiteId}";
-           } else {
-               $where = "";
-           }
-            if (!empty($filter["where"])) {
-                $where = "{$filter["where"]}";
-            }
-
-
-            return   $articleCategory->select ("id,name,parent_id,slug,is_menu,is_active,display_order", $filter["length"], $filter["start"])
-                ->where("{$where}")
-                ->filter(function($record){
-                    $article = new ArticleCategory();
-                    $article->load("id = {$record->parentId}");
-                    $record->parentName = $article->name;
-                })
-                ->orderBy($filter["orderBy"])
-                ->asResult();
-        break;
-        case "create":
-           //no return needed
-
-        break;
-
-        case "afterCreate":
-           //no return needed
-            return (object)["httpCode" => 200, "message" => "<script>articleCategoryTable.ajax.reload(null, false); showMessage ('{$articleCategory->name} Created');</script>"];
-
-            break;
-        case "update":
-           //no return needed
-        break;
-
-        case "afterUpdate":
-           //no return needed
-            return (object)["httpCode" => 200, "message" => "<script>articleCategoryTable.ajax.reload(null, false); showMessage ('{$articleCategory->name} Updated');</script>"];
-            break;
-        case "delete":
-           //no return needed
-        break;
-
-        case "afterDelete":
-           //no return needed
-            return (object)["httpCode" => 200, "message" => "<script>articleCategoryTable.ajax.reload(null, false); showMessage ('{$articleCategory->name} Deleted');</script>"];
-
-            break;
-    }
-});
 
 
 \Tina4\Get::add("/cms/articles", function (\Tina4\Response $response){
@@ -127,8 +24,8 @@
        case "fetch":
             //Return back a form to be submitted to the create
             $articleCategories = (new ArticleCategory())
-                ->select('id,name,parent_id,is_menu,display_order,website_id', 100)
-                ->where("(id = 0")
+                ->select('id,name,parent_id,is_menu,display_order', 100)
+                ->where("id = 0")
                 ->filter(function($record){
                     $article = new ArticleCategory();
                     $article->load("id = {$record->parentId}");
@@ -172,18 +69,17 @@
             unset($article->image);
             unset($article->content);
 
-            if (!empty($request->params["article_categories"])) {
-                $article->DBA->exec("delete from article_article_category where article_id = {$article->id}");
-                foreach ($request->params["article_categories"] as $id => $value) {
-                    if ($value != 0) {
-                        $article->DBA->exec("insert into article_article_category (article_id, article_category_id) values ({$article->id}, {$id})");
-                    }
+
+
+
+
+            if($article->isPublished == 1) {
+                if (empty($article->publishedDate)) {
+                    $article->publishedDate = date($article->DBA->dateFormat." H:i:s");
                 }
             }
 
-
-            $article->isPublished = 0;
-            $article->slug = (new Content())->slug($request->data->title);
+            $article->slug = (new Content())->getSlug($request->data->title);
 
 
         break;
@@ -191,6 +87,8 @@
             unset($article->image);
             unset($article->content);
 
+
+
             if (!empty($request->params["article_categories"])) {
                 $article->DBA->exec("delete from article_article_category where article_id = {$article->id}");
                 foreach ($request->params["article_categories"] as $id => $value) {
@@ -200,22 +98,30 @@
                 }
             }
 
-            $article->slug = (new Content())->slug($request->data->title);
+            $article->slug = (new Content())->getSlug($request->data->title);
             //Manipulate the $object here
 
             if($article->isPublished == 1) {
-                if ($article->publishedDate !== "") {
-                    $article->publishedDate = date("d/m/Y H:i:s");
+                if (empty($article->publishedDate)) {
+                    $article->publishedDate = date($article->DBA->dateFormat." H:i:s");
                 }
-            } else {
-                $article->publishedDate = null;
             }
+
 
             break;
         case "afterCreate":
             $article->saveBlob("content", $request->params["content"]);
             $article->saveFile("image", "image");
             //return needed
+
+            if (!empty($request->params["article_categories"])) {
+                $article->DBA->exec("delete from article_article_category where article_id = {$article->id}");
+                foreach ($request->params["article_categories"] as $id => $value) {
+                    if ($value != 0) {
+                        $article->DBA->exec("insert into article_article_category (article_id, article_category_id) values ({$article->id}, {$id})");
+                    }
+                }
+            }
 
             return (object)["httpCode" => 200, "message" => "<script>articleGrid.ajax.reload(null, false); showMessage ('Article Created');</script>"];
         break;

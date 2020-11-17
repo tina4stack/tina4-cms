@@ -2,35 +2,34 @@
 
 class Content extends \Tina4\Data
 {
-  /**
-   * Create a slug from the title
-   * @param $tile
-   * @param $separator
-   * @return String
-   */
-  function slug($title, $separator = '-') {
-    // lower string
-    $title = strtolower($title);
+    /**
+     * Create a slug from the title
+     * @param $tile
+     * @param $separator
+     * @return String
+     */
+    function getSlug($title, $separator = '-') {
+        // lower string
+        $title = strtolower($title);
 
-    // Convert all dashes/underscores into separator
-    $flip = $separator === '-' ? '_' : '-';
+        // Convert all dashes/underscores into separator
+        $flip = $separator === '-' ? '_' : '-';
 
-    $title = str_replace("'", "", $title);
+        $title = str_replace("'", "", $title);
 
-    $title = preg_replace('!['.preg_quote($flip).']+!u', $separator, $title);
+        $title = preg_replace('!['.preg_quote($flip).']+!u', $separator, $title);
 
-    // Replace @ with the word 'at'
-    $title = str_replace('@', $separator.'at'.$separator, $title);
+        // Replace @ with the word 'at'
+        $title = str_replace('@', $separator.'at'.$separator, $title);
 
-    // Remove all characters that are not the separator, letters, numbers, or whitespace.
-    $title = preg_replace('![^'.preg_quote($separator).'\pL\pN\s]+!u', '-', $title);
+        // Remove all characters that are not the separator, letters, numbers, or whitespace.
+        $title = preg_replace('![^'.preg_quote($separator).'\pL\pN\s]+!u', '-', $title);
 
-    // Replace all separator characters and whitespace by a single separator
-    $title = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $title);
+        // Replace all separator characters and whitespace by a single separator
+        $title = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $title);
 
-    return trim($title, $separator);
-  }
-
+        return trim($title, $separator);
+    }
 
     /**
      * Get Page Meta
@@ -75,13 +74,20 @@ class Content extends \Tina4\Data
 
         $articles->and("id <> 0 and is_published = 1");
         $articles = $articles->orderBy("published_date desc")->asObject();
-        $html = "";
+
         foreach ($articles as $id => $article) {
-            if (isset($article->id)) {
-                $html .= $this->renderArticle($article->title, $article->content, $article->image, $template);
+            $articles[$id]->content = $this->parseContent($article->content);
+            if (!file_exists("./cache/article-".md5($article->image).".png")) {
+                if ($article->image) {
+                    file_put_contents("./cache/article-".md5($article->image).".png", base64_decode($article->image));
+                }
+                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
+            } else {
+                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
             }
         }
-        return $html;
+
+        return $articles;
     }
 
     /**
@@ -140,7 +146,7 @@ class Content extends \Tina4\Data
     public function getArticleMeta($slug) {
         $article = new Article();
         $article->load("slug = '{$slug}'");
-        return $article;
+        return $article->asObject();
     }
 
     /**
@@ -265,9 +271,9 @@ class Content extends \Tina4\Data
                 }
             } else {
                 if ($category["slug"] !== "") {
-                    $url = "/content/".$this->slug($category["slug"]);
+                    $url = "/content/".$this->getSlug($category["slug"]);
                 } else {
-                    $url = "/content/".$this->slug($category["name"]);
+                    $url = "/content/".$this->getSlug($category["name"]);
                 }
                 $lis[] = _li(["class" => $liClass], _a(["class" => $aClass, "href" => $url],  $category["name"]));
             }

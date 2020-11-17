@@ -1,7 +1,6 @@
 <?php
 
 \Tina4\Module::addModule("CMS Module", "1.0.0", "tina4css", function($config) {
-
     $config->addTwigGlobal("Content",  new Content());
 
     $config->addTwigFilter("getPage",  function ($name) {
