@@ -6,5 +6,8 @@
   "files": [
       "index.php"
     ]
+  },
+  "require": {
+    "andrevanzuydam/tina4php": "v0.1.33^"
   }
 }

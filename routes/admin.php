@@ -56,8 +56,8 @@
     }
 });
 
-\Tina4\Post::add("/cms/login/reset", function (\Tina4\Response $response, \Tina4\Request $request) {
-
-
+\Tina4\Get::add("/cms/logout", function (\Tina4\Response $response, \Tina4\Request $request) {
+    session_destroy();
+    \Tina4\redirect("/cms/login");
 });
 
