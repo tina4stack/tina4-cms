@@ -14,7 +14,7 @@ class Article extends \Tina4\ORM
 	public $image;
 	public $content;
 	public $author;
-	public $isPublished=0;
+	public $isPublished;
     public $userId;
     public $slug;
 

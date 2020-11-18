@@ -1,27 +1,48 @@
-# Tina4 Module Development
+# Tina4 CMS Module
 
-## The composer file setup for module development
+Happy you have decided to try this, how does it work?
 
-The Example here is for how I am testing the tina4 module.
-You would obviously replace ```"andrevanzuydam/tina4module"``` with your own module name.
 ```
-{
-    "require": {
-        "andrevanzuydam/tina4php": "v.1.10",
-        "andrevanzuydam/tina4module": "@dev"
-    },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../tina4-module",
-            "options": {
-                "symlink": true
-            }
-        }
-    ]
-}
+composer require andrevanzuydam/tina4php
+composer require andrevanzuydam/tina4cms
+php -S localhost:8080 index.php
 ```
-## Some things to remember at this point in time
 
-- Module naming on objects will clash with your main project so should be unique
-- Module routes will also clash with the main project so should be unique
+http://localhost:8080/cms/login -> will get you started
+
+### Customization
+
+Make a new base.twig file in your templates folder, it needs the following blocks
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+
+    <meta prefix="og: https://ogp.me/ns#" property="og:title" content="Darts Group - {{ title }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:type" content="website"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:url" content="{{ url }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
+    {% block headers %}
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    {% block navigation %}
+        {% include "navigation.twig" %}
+    {% endblock %}
+
+    <div class="row">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% block footer %}
+    {% endblock %}
+</div>
+
+</body>
+
+
+```

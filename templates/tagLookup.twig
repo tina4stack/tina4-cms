@@ -1,5 +1,4 @@
 <script>
-
     var engine = new Bloodhound({
         local: '{{ data.keywords }}'.split(','),
         datumTokenizer: function(d) {
@@ -7,7 +6,6 @@
         },
         queryTokenizer: Bloodhound.tokenizers.whitespace
     });
-
     engine.initialize();
 </script>
 <input id="tags" name="keywords" data-role="tagsinput" class="form-control tokenfield" type="text" placeholder="Enter keywords" title="Please enter some keywords" value="{{ data.keywords }}" required>

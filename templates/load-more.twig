@@ -1,28 +1,21 @@
-<div class="col-md-12" id="loadMore">
-    <div id="loading"  style="display:none" ><center><div class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
-    </div></center></div>
-    <div class="col-md-12" style="margin-top: 20px;">
-        <center><a id="loadingButton" style="padding: 10px; border:1px solid #000" href="#loadMore" onclick="loadMore()" >Load more</a></center>
+<div id="content">
+</div>
+<div id="loadMore">
+    <div>
+        <a id="loadingButton" href="#loadMore" onclick="loadMore()" >Load more</a>
     </div>
 </div>
 <script>
     var skip = {{ skip }};
     var limit = {{ limit  }};
     function loadMore() {
-        $('#loading').show();
-        $('#loadingButton').hide();
         let parent = document.getElementById('content');
         let loadMore = document.getElementById('loadMore');
-        let placeholder = document.getElementById('hidden-placeholder');
         skip += limit;
         fetch('/content/tags/{{ tag }}?limit={{ limit }}&skip='+skip+'&return=true&template={{ template }}')
             .then(response => response.text())
             .then((data) => {
-
-                 $('#loading').hide();
-                 $('#loadingButton').show();
-                 placeholder.appendChild(loadMore);
+                 loadMore.remove();
                  parent.innerHTML += data;
                  parent.appendChild(loadMore);
             });

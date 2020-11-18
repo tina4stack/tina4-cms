@@ -1,75 +1,121 @@
-{% extends "@tina4css/base.twig" %}
+{% extends "@tina4cms/base.twig" %}
 
 {% block headers %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"
+            integrity="sha256-xLhce0FUawd11QSwrvXSwST0oHhOolNoH9cUXAcsIAg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"
+            integrity="sha256-NdDw7k+fJewgwI1XmH9NMR6OILvTX+3arqb/OgFicoM=" crossorigin="anonymous"></script>
+
+    <!-- Boostrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css"
+          integrity="sha384-3fdgwJw17Bi87e1QQ4fsLn4rUFqWw//KU0g8TvV6quvahISRewev6/EocKNuJmEw" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <!-- Boostrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/b-html5-1.5.6/b-print-1.5.6/r-2.2.2/sl-1.3.0/datatables.min.css"/>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/b-html5-1.5.6/b-print-1.5.6/r-2.2.2/sl-1.3.0/datatables.min.js"></script>
+
+    <script src="/src/assets/js/tina4helper.js"></script>
     <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-twig.min.js" integrity="sha512-ZtTfixyUItifC8wzQ1PwinttMP5W02H6zYeC/cAU+YPCA88vcrIUMI+fCk27yWN5k92zm32PWjpKYPYR/npZzg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-monokai.min.js" integrity="sha512-S4i/WUGRs22+8rjUVu4kBjfNuBNp8GVsgcK2lbaFdws4q6TF3Nd00LxqnHhuxS9iVDfNcUh0h6OxFUMP5DBD+g==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-sqlserver.min.js" integrity="sha512-TkNvDZzCp+GGiwfXNAOxt6JDzuELz8qquDcZrUzPXuKRvOcUA6kSZu2/uPhKbbjqeJIjoevYn10yrt8TS+qUXQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"
+            integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/mode-twig.min.js"
+            integrity="sha512-ZtTfixyUItifC8wzQ1PwinttMP5W02H6zYeC/cAU+YPCA88vcrIUMI+fCk27yWN5k92zm32PWjpKYPYR/npZzg=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-monokai.min.js"
+            integrity="sha512-S4i/WUGRs22+8rjUVu4kBjfNuBNp8GVsgcK2lbaFdws4q6TF3Nd00LxqnHhuxS9iVDfNcUh0h6OxFUMP5DBD+g=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/theme-sqlserver.min.js"
+            integrity="sha512-TkNvDZzCp+GGiwfXNAOxt6JDzuELz8qquDcZrUzPXuKRvOcUA6kSZu2/uPhKbbjqeJIjoevYn10yrt8TS+qUXQ=="
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <style>
         .tree, .tree ul {
-            margin:0;
-            padding:0;
-            list-style:none
+            margin: 0;
+            padding: 0;
+            list-style: none
         }
+
         .tree ul {
-            margin-left:1em;
-            position:relative
+            margin-left: 1em;
+            position: relative
         }
+
         .tree ul ul {
-            margin-left:.5em
+            margin-left: .5em
         }
+
         .tree ul:before {
-            content:"";
-            display:block;
-            width:0;
-            position:absolute;
-            top:0;
-            bottom:0;
-            left:0;
-            border-left:1px solid
+            content: "";
+            display: block;
+            width: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            border-left: 1px solid
         }
+
         .tree li {
-            margin:0;
-            padding:0 1em;
-            line-height:2em;
-            color:#369;
-            font-weight:700;
-            position:relative;
+            margin: 0;
+            padding: 0 1em;
+            line-height: 2em;
+            color: #369;
+            font-weight: 700;
+            position: relative;
             list-style-type: none;
         }
+
         .tree ul li:before {
-            content:"";
-            display:block;
-            width:10px;
-            height:0;
-            border-top:1px solid;
-            margin-top:-1px;
-            position:absolute;
-            top:1em;
-            left:0
+            content: "";
+            display: block;
+            width: 10px;
+            height: 0;
+            border-top: 1px solid;
+            margin-top: -1px;
+            position: absolute;
+            top: 1em;
+            left: 0
         }
+
         .tree ul li:last-child:before {
-            background:#fff;
-            height:auto;
-            top:1em;
-            bottom:0
+            background: #fff;
+            height: auto;
+            top: 1em;
+            bottom: 0
         }
+
         .indicator {
-            margin-right:5px;
+            margin-right: 5px;
         }
+
         .tree li a {
             text-decoration: none;
-            color:#369;
+            color: #369;
         }
+
         .tree li button, .tree li button:active, .tree li button:focus {
             text-decoration: none;
-            color:#369;
-            border:none;
-            background:transparent;
-            margin:0px 0px 0px 0px;
-            padding:0px 0px 0px 0px;
+            color: #369;
+            border: none;
+            background: transparent;
+            margin: 0px 0px 0px 0px;
+            padding: 0px 0px 0px 0px;
             outline: 0;
         }
 
@@ -105,16 +151,20 @@
             color: #777;
             opacity: 1;
         }
+
         .bootstrap-tagsinput.form-control input:-ms-input-placeholder {
             color: #777;
         }
+
         .bootstrap-tagsinput.form-control input::-webkit-input-placeholder {
             color: #777;
         }
+
         .bootstrap-tagsinput input:focus {
             border: none;
             box-shadow: none;
         }
+
         .bootstrap-tagsinput .tag {
             margin-right: 2px;
             background: #0d5aa7;
@@ -122,17 +172,21 @@
             padding: 2px;
             border-radius: 2px;
         }
+
         .bootstrap-tagsinput .tag [data-role="remove"] {
             margin-left: 8px;
             cursor: pointer;
         }
+
         .bootstrap-tagsinput .tag [data-role="remove"]:after {
             content: "x";
             padding: 0px 2px;
         }
+
         .bootstrap-tagsinput .tag [data-role="remove"]:hover {
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
         }
+
         .bootstrap-tagsinput .tag [data-role="remove"]:hover:active {
             box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
         }
@@ -148,10 +202,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
-            {% set menus = Content.getMenu("") %}
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="/cms/dashboard">Content</a></li>
-                <li class="nav-item"><a class="nav-link float-right" href="/cms/logout">Logout</a></li>
+                {% if session.user is not null %}
+                    <li class="nav-item"><a class="nav-link" href="/cms/dashboard">Content</a></li>
+                    <li class="nav-item"><a class="nav-link float-right" href="/cms/logout">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="/cms/login">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -163,19 +220,28 @@
         <h3>Content</h3>
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
+                <a class="nav-link active" data-toggle="tab" role="tab" href="#"
+                   onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
+                <a class="nav-link" data-toggle="tab" role="tab" href="#"
+                   onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
+                <a class="nav-link" data-toggle="tab" role="tab" href="#"
+                   onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/email-templates', 'sub-content')">Email Templates</a>
+                <a class="nav-link" data-toggle="tab" role="tab" href="#"
+                   onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" role="tab" href="#" onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
+                <a class="nav-link" data-toggle="tab" role="tab" href="#"
+                   onclick="loadPage('/cms/users', 'sub-content')">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" role="tab" href="#"
+                   onclick="loadPage('/cms/site', 'sub-content')">Site</a>
             </li>
         </ul>
         <div id="sub-content">

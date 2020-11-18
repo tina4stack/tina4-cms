@@ -60,14 +60,14 @@ class Content extends \Tina4\Data
     /**
      * Get Articles
      * @param $category
+     * @param int $limit
+     * @param int $skip
      * @param string $template
-     * @param null $websiteId
      * @return string
-     * @throws \Twig\Error\LoaderError
      */
-    public function getArticles($category, $template="article.twig") {
+    public function getArticles($category, $limit=10, $skip=0, $template="article.twig") {
 
-        $articles = (new Article())->select("*")->where("1 = 1");
+        $articles = (new Article())->select("*", $limit, $skip)->where("1 = 1");
         if ($category) {
             $articles->and("article_category_id in (select id from article_category where upper(name) = upper('{$category}'))");
         }
@@ -113,12 +113,13 @@ class Content extends \Tina4\Data
      * @param $title
      * @param $content
      * @param $image
+     * @param $article
      * @param string $template
      * @return string
      * @throws \Twig\Error\LoaderError
      */
-    public function renderArticle($title, $content, $image, $template="article.twig") {
-        $content = \Tina4\renderTemplate($template, ["title" => $title, "content" => html_entity_decode( $content, ENT_QUOTES), "image" => $image, "request" => $_REQUEST]);
+    public function renderArticle($title, $content, $image, $article, $template="article.twig") {
+        $content = \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" => html_entity_decode( $content, ENT_QUOTES), "image" => $image, "request" => $_REQUEST]);
         return $content;
     }
 
@@ -132,8 +133,8 @@ class Content extends \Tina4\Data
     public function getArticle($slug, $template="article.twig") {
         $article = new Article();
         $article->load("slug = '{$slug}'");
-
-        $html = $this->renderArticle($article->title, $article->content, $article->image, $template);
+        $this->enhanceArticle($article);
+        $html = $this->renderArticle($article->title, $article->content, $article->image, $article, $template);
         return $html;
     }
 
@@ -146,6 +147,7 @@ class Content extends \Tina4\Data
     public function getArticleMeta($slug) {
         $article = new Article();
         $article->load("slug = '{$slug}'");
+
         return $article->asObject();
     }
 
@@ -248,7 +250,7 @@ class Content extends \Tina4\Data
      * @param int $level
      * @return string
      */
-    public function getMenu($parentId="", $liClass="nav-item", $aClass="nav-link", $level=0) {
+    public function getMenu($parentId="", $liClass="", $aClass="", $level=0) {
 
         $html = "";
         if (!empty($parentId)) {
@@ -306,20 +308,27 @@ class Content extends \Tina4\Data
     {
         $keywords = explode(",", $article->keywords);
         //fetch articles with these keywords by latest
-
         $likes = [];
         foreach ($keywords as $id => $keyword) {
-            $likes[] = "instr(`keywords`, '".trim($keyword)."')";
+            $likes[] = "instr(keywords, '".trim($keyword)."')";
         }
         $filter = "id <> {$article->id} and ( ".join(" or ", $likes)." )";
-
         $related = (new Article())->select("id,title,description,slug,image", 4)->where($filter)->orderBy("published_date desc");
+        $article->relatedArticles = $related->asObject();
 
+        foreach ( $article->relatedArticles as $id => $articleData) {
 
-        $article->relatedArticles = $related->asArray();
+            if (!file_exists("./cache/article-".md5($articleData->image).".png")) {
+                if ($articleData->image) {
+                    file_put_contents("./cache/article-".md5($articleData->image).".png", base64_decode($article->image));
+                }
+                $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->image).".png";
+            } else {
+                $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->image).".png";
+            }
+        }
 
-
-        $article->categories =  $this->DBA->fetch("select * from view_article_category where article_id = {$article->id}", 10)->asArray();
+        $article->categories =  $this->DBA->fetch("select * from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = {$article->id}", 10)->asArray();
     }
 
     /**
@@ -339,5 +348,38 @@ class Content extends \Tina4\Data
     public function getSnippets() {
         $snippets = (new Snippet())->select("*", 1000)->AsObject();
         return $snippets;
+    }
+
+    public function getArticlesByTag($category, $limit=1, $skip=0) {
+
+
+        $articles = (new Article())->select("*", $limit, $skip)
+            ->where("id <> 0 and is_published = 1");
+
+        if (!empty($category) && $category !== "all") {
+            $articles->and("(id in (select article_id from article_article_category aac join article_category ac on ac.id = aac.article_category_id and upper(ac.name) = upper('{$category}')) or INSTR(keywords, '{$category}') ) ");
+        }
+
+        $articles->orderBy("published_date desc");
+
+
+        $articles = $articles->asObject();
+
+
+
+        foreach ($articles as $id => $article) {
+            $articles[$id]->content = $this->parseContent($article->content);
+            if (!file_exists("./cache/article-".md5($article->image).".png")) {
+                if ($article->image) {
+                    file_put_contents("./cache/article-".md5($article->image).".png", base64_decode($article->image));
+                }
+                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
+            } else {
+                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
+            }
+        }
+
+
+        return $articles;
     }
 }
