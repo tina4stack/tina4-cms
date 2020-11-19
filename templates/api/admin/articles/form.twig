@@ -1,10 +1,10 @@
 <form id="articleForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
             <label for="title">Title</label>
             <input class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
         </div>
-        <div class="form-group col-md-8">
+        <div class="form-group col-md-6">
             <label for="description">Description</label>
             <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
         </div>
@@ -16,7 +16,7 @@
             <input class="form-control" type="file" name="image" placeholder="Image" value="">
         </div>
         {% if session.user.id %}
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-6">
             <label for="author">Author</label>
             <input class="form-control" type="text" name="author" readonly placeholder="Author" value="{{ session.user.firstName }} {{ session.user.lastName }}">
             <input type="hidden" name="userId" value="{{ session.user.id }}">

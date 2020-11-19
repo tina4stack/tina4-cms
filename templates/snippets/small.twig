@@ -1,9 +1,8 @@
-<div class="col-sm-6 col-lg-6">
-  <div class="small" onclick="document.location.href = '/content/article/{{ article.slug }}';">
-    <img src="{{ article.image }}" />
-    <div class="px-2">
-      <a class="title" href="/content/article/{{ article.slug }}">{{ article.title }}</a>
-      <p><span class="d-block"><strong>{{ article.publishedDate }}</strong></span>{{ article.description | raw }}</p>
-    </div>
-  </div>
-</div>
+<h3>{{ article.title }}<br> <sub>{{ article.publishedDate }} by {{  article.author }} </sub></h3>
+<a href="{{ article.url }}">
+  <img src="{{ article.image }}"/>
+</a>
+<p> {{ article.description | raw }}</p>
+
+
+

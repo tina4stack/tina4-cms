@@ -16,13 +16,10 @@
 
             {% set keywords = article.keywords|split(',') %}
 
-<a class="badge badge-primary m-1 p-2" href="#">TAGS</a>
+<a href="#">TAGS</a>
 {% for keyword in keywords %}
-    <a class="badge badge-secondary m-1 p-2" href="/content/tags/{{ keyword | getSlug }}">{{ keyword }}</a>
+    <a href="/content/tags/{{ keyword | getSlug }}">{{ keyword }}</a>
 {% endfor %}
-
-
-
 
 <a href="/content/article/{{ article.relatedArticles[0].slug }}">Previous Article<br>
     {{ article.relatedArticles[0].title }}

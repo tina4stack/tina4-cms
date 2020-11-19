@@ -76,6 +76,7 @@ class Content extends \Tina4\Data
         $articles = $articles->orderBy("published_date desc")->asObject();
 
         foreach ($articles as $id => $article) {
+            $articles[$id]->url = "/content/article/{$article->slug}";
             $articles[$id]->content = $this->parseContent($article->content);
             if (!file_exists("./cache/article-".md5($article->image).".png")) {
                 if ($article->image) {
@@ -250,40 +251,25 @@ class Content extends \Tina4\Data
      * @param int $level
      * @return string
      */
-    public function getMenu($parentId="", $liClass="", $aClass="", $level=0) {
-
-        $html = "";
+    public function getMenu($parentId="",  $level=0) {
         if (!empty($parentId)) {
             $filter = "where parent_id = {$parentId} and is_active = 1 and is_menu = 1 ";
         } else {
             $filter = "where parent_id = 0 and is_active = 1 and is_menu = 1 ";
         }
         $sql = "select a.*,(select count(id) from article_category where parent_id = a.id) as has_children from article_category a {$filter} order by display_order asc";
-        $categories = $this->DBA->fetch($sql, 1000)->asArray();
+        $menus = $this->DBA->fetch($sql, 1000)->asObject();
 
-        $lis = [];
-        foreach ($categories as $id => $category) {
-            if ($category["hasChildren"] > 0) {
-                $childrenMenus = $this->getMenu($category["id"],  "", "dropdown-item", $level+=1);
-                $children = _ul(["class" => "dropdown-menu"], $childrenMenus );
-                if ($level > 1) {
-                    $lis[] = _li(["class" => trim($liClass . " dropdown-submenu")], _a(["class" => $aClass . " dropdown-toggle", "href" => "#", "data-toggle" => "dropdown"], $category["name"]), $children);
-                } else {
-                    $lis[] = _li(["class" => trim($liClass . " dropdown")], _a(["class" => $aClass . " dropdown-toggle", "href" => "#", "data-toggle" => "dropdown"], $category["name"]), $children);
-                }
-            } else {
-                if ($category["slug"] !== "") {
-                    $url = "/content/".$this->getSlug($category["slug"]);
-                } else {
-                    $url = "/content/".$this->getSlug($category["name"]);
-                }
-                $lis[] = _li(["class" => $liClass], _a(["class" => $aClass, "href" => $url],  $category["name"]));
+        foreach ($menus as $id => $menu) {
+            if ($menu->hasChildren > 0) {
+                $childrenMenus = $this->getMenu($menu->id,   $level+=1);
+                $menu->children = $childrenMenus;
             }
+            $menu->url = "/content/{$menu->slug}";
+
         }
 
-        $html .= _shape($lis);
-
-        return $html;
+        return $menus;
     }
 
     /**

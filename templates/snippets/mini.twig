@@ -1,9 +1,5 @@
-<div class="col-sm-3 col-lg-3">
-    <div class="mini row" onclick="document.location.href = '/content/article/{{ article.slug }}';">
-        <div class="col text-right"><img src="{{ article.image }}" /></div>
-        <div class="col flex-column">
-            <h5><a href="/content/article/{{ article.slug }}">{{ article.title }}</a></h5>
-            <cite class="text-muted"><small>{{ article.publishedDate }}</small></cite>
-        </div>
-    </div>
-</div>
+<h3>{{ article.title }}<br> <sub>{{ article.publishedDate }} by {{  article.author }} </sub></h3>
+<a href="{{ article.url }}">
+    <img src="{{ article.image }}"/>
+</a>
+<p> {{ article.description | raw }}</p>
