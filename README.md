@@ -20,7 +20,7 @@ Make a new base.twig file in your templates folder, it needs the following block
 <head>
     <title>{{ title }}</title>
 
-    <meta prefix="og: https://ogp.me/ns#" property="og:title" content="Darts Group - {{ title }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:title" content="{{ title }}"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:type" content="website"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:url" content="{{ url }}"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
