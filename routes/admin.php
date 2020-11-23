@@ -1,8 +1,9 @@
 <?php
 
 \Tina4\Get::add("/cms/login", function (\Tina4\Response $response) {
-    $users = (new Users())->select("count(id) as number")->asObject()[0];
-    if ($users->number === 0) {
+    $users = (new Users())->select("count(id) as number");
+
+    if (empty($users)) {
         return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
         return (\Tina4\renderTemplate("@tina4cms/admin/login.twig"));
@@ -19,8 +20,9 @@
 });
 
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
-    $users = (new Users())->select("count(id) as number")->asObject()[0];
-    if ($users->number === 0) {
+    $users = (new Users())->select("count(id) as number");
+
+    if (empty($users)) {
         return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
         return (\Tina4\renderTemplate("@tina4cms/admin/dashboard.twig"));

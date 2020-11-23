@@ -8,6 +8,6 @@
     ]
   },
   "require": {
-    "andrevanzuydam/tina4php": "^v0.1.41"
+    "andrevanzuydam/tina4php": "^1.42"
   }
 }

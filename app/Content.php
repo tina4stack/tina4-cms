@@ -158,7 +158,8 @@ class Content extends \Tina4\Data
      * @return string
      * @throws \Twig\Error\LoaderError
      */
-    public function getSnippet($name) {
+    public function
+    getSnippet($name) {
         $snippet = new Snippet();
         $snippet->load("name = '{$name}'");
 
@@ -258,18 +259,23 @@ class Content extends \Tina4\Data
             $filter = "where parent_id = 0 and is_active = 1 and is_menu = 1 ";
         }
         $sql = "select a.*,(select count(id) from article_category where parent_id = a.id) as has_children from article_category a {$filter} order by display_order asc";
-        $menus = $this->DBA->fetch($sql, 1000)->asObject();
 
-        foreach ($menus as $id => $menu) {
-            if ($menu->hasChildren > 0) {
-                $childrenMenus = $this->getMenu($menu->id,   $level+=1);
-                $menu->children = $childrenMenus;
+        if ($this->DBA->tableExists("article_category")) {
+            $menus = $this->DBA->fetch($sql, 1000)->asObject();
+
+            foreach ($menus as $id => $menu) {
+                if ($menu->hasChildren > 0) {
+                    $childrenMenus = $this->getMenu($menu->id, $level += 1);
+                    $menu->children = $childrenMenus;
+                }
+                $menu->url = "/content/{$menu->slug}";
+
             }
-            $menu->url = "/content/{$menu->slug}";
 
+            return $menus;
+        } else {
+            return [];
         }
-
-        return $menus;
     }
 
     /**
@@ -332,8 +338,12 @@ class Content extends \Tina4\Data
      * @return string|string[]
      */
     public function getSnippets() {
-        $snippets = (new Snippet())->select("*", 1000)->AsObject();
-        return $snippets;
+        $snippets = (new Snippet())->select("*", 1000);
+        if (!empty($snippets)) {
+            return $snippets->asObject();
+        } else {
+            return [];
+        }
     }
 
     public function getArticlesByTag($category, $limit=1, $skip=0) {
