@@ -21,7 +21,6 @@
 
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number");
-
     if (empty($users)) {
         return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
@@ -34,6 +33,7 @@
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {
     if (!empty($request->params["confirmPassword"])) {
         $user = new Users($request->params);
+
         if (!$user->load("email = '{$request->params["email"]}'")) {
             $user->isActive = 1;
             $user->password = password_hash($user->password, PASSWORD_BCRYPT);
@@ -48,13 +48,13 @@
         //perform login
         if ($user->load("email = '{$request->params["email"]}'")) {
             if (password_verify($request->params["password"],$user->password)) {
-                error_log("try");
                 $_SESSION["user"] = $user->asArray();
-                error_log(print_r ($_SESSION,1));
                 \Tina4\redirect("/cms/dashboard");
             } else {
                 \Tina4\redirect("/cms/login?error=true");
             }
+        } else {
+            \Tina4\redirect("/cms/login?error=true");
         }
     }
 });

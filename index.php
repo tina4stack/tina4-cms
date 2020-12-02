@@ -1,13 +1,15 @@
 <?php
 
-\Tina4\Module::addModule("CMS Module", "1.0.0", "tina4cms", function($config) {
-
-
+\Tina4\Module::addModule("CMS Module", "1.0.0", "tina4cms", function(\Tina4\Config $config) {
     $config->addTwigGlobal("Content",  new Content());
 
     $config->addTwigFilter("getPage",  function ($name) {
         $page = (new Content())->getPage($name);
         return $page["content"];
+    });
+
+    $config->addTwigFunction("redirect", function ($url, $code=301) {
+        \Tina4\redirect($url, $code);
     });
 
     $config->addTwigFilter("getSnippet",  function ($name) {
