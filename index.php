@@ -1,6 +1,11 @@
 <?php
 
 \Tina4\Module::addModule("CMS Module", "1.0.0", "tina4cms", function(\Tina4\Config $config) {
+    global $DBA;
+    if (!$DBA->tableExists("article")) {
+        (new \Tina4\Migration(__DIR__."/migrations"))->doMigration();
+    }
+
     $config->addTwigGlobal("Content",  new Content());
 
     $config->addTwigFilter("getPage",  function ($name) {
