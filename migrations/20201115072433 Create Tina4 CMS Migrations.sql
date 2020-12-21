@@ -10,16 +10,16 @@ CREATE TABLE article (
   is_published integer DEFAULT 0,
   slug varchar(200) DEFAULT '',
   user_id integer DEFAULT 0,
-  date_created timestamp,
-  date_modified timestamp
+  date_created timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+  date_modified timestamp NULL ON UPDATE CURRENT_TIMESTAMP
 );  
 
 CREATE TABLE article_article_category (
   id integer primary key,
   article_id integer DEFAULT 0,
   article_category_id integer DEFAULT 0,
-  date_created timestamp,
-  date_modified timestamp
+  date_created timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+  date_modified timestamp NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE article_category (
@@ -30,8 +30,8 @@ CREATE TABLE article_category (
   is_menu integer DEFAULT 0,
   slug varchar(200) DEFAULT '',
   display_order integer DEFAULT 0,
-  date_created timestamp,
-  date_modified timestamp
+  date_created timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+  date_modified timestamp NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE page (
@@ -46,8 +46,8 @@ CREATE TABLE page (
   author varchar(200) DEFAULT '',
   slug varchar(200) DEFAULT '',
   user_id integer DEFAULT 0,
-  date_created timestamp,
-  date_modified timestamp
+  date_created timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+  date_modified timestamp NULL ON UPDATE CURRENT_TIMESTAMP
 );  
 
 create table snippet (
@@ -55,8 +55,8 @@ create table snippet (
   name  varchar(200) DEFAULT '',
   description varchar(1000) DEFAULT '',
   content blob,
-  date_created timestamp,
-  date_modified timestamp
+  date_created timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+  date_modified timestamp NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 create table users (
@@ -67,8 +67,8 @@ create table users (
   password varchar (500) default '',
   is_active integer default 0 not null,
   reset_token varchar (500) default '',
-  date_created timestamp,
-  date_modified timestamp
+  date_created timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+  date_modified timestamp NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 create table site (
@@ -85,6 +85,6 @@ create table site (
    smtp_username varchar (100),
    smtp_password varchar (100),
    smtp_server varchar (200),
-   date_created timestamp,
-   date_modified timestamp
+   date_created timestamp NULL ON UPDATE CURRENT_TIMESTAMP,
+   date_modified timestamp NULL ON UPDATE CURRENT_TIMESTAMP
 );
