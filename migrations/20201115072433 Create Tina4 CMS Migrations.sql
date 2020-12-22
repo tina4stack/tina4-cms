@@ -1,5 +1,5 @@
 CREATE TABLE article (
-  id integer primary key,
+  id integer,
   published_date date DEFAULT NULL,
   title varchar(500) DEFAULT '',
   description varchar(1000) DEFAULT '',
@@ -11,19 +11,21 @@ CREATE TABLE article (
   slug varchar(200) DEFAULT '',
   user_id integer DEFAULT 0,
   date_created timestamp,
-  date_modified timestamp
+  date_modified timestamp,
+  primary key (id)
 );  
 
 CREATE TABLE article_article_category (
-  id integer primary key,
+  id integer,
   article_id integer DEFAULT 0,
   article_category_id integer DEFAULT 0,
   date_created timestamp,
-  date_modified timestamp
+  date_modified timestamp,
+  primary key (id)
 );
 
 CREATE TABLE article_category (
-  id integer primary key,
+  id integer,
   name varchar(200) DEFAULT '',
   is_active integer DEFAULT 1,
   parent_id integer DEFAULT 0,
@@ -31,11 +33,14 @@ CREATE TABLE article_category (
   slug varchar(200) DEFAULT '',
   display_order integer DEFAULT 0,
   date_created timestamp,
-  date_modified timestamp
+  date_modified timestamp,
+  primary key (id)
 );
 
+insert into article_category(id, name) values(0, 'Root');
+
 CREATE TABLE page (
-  id integer primary key,
+  id integer,
   name varchar(200) DEFAULT '',
   title varchar(500) DEFAULT '',
   description varchar(1000) DEFAULT '',
@@ -47,20 +52,22 @@ CREATE TABLE page (
   slug varchar(200) DEFAULT '',
   user_id integer DEFAULT 0,
   date_created timestamp,
-  date_modified timestamp
+  date_modified timestamp,
+  primary key (id)
 );  
 
 create table snippet (
-  id integer primary key,
+  id integer,
   name  varchar(200) DEFAULT '',
   description varchar(1000) DEFAULT '',
   content blob,
   date_created timestamp,
-  date_modified timestamp
+  date_modified timestamp,
+  primary key (id)
 );
 
 create table users (
-  id integer primary key,
+  id integer,
   first_name varchar (100) default '',
   last_name varchar (100) default '',
   email varchar (400) default '',
@@ -68,11 +75,12 @@ create table users (
   is_active integer default 0 not null,
   reset_token varchar (500) default '',
   date_created timestamp,
-  date_modified timestamp
+  date_modified timestamp,
+  primary key (id)
 );
 
 create table site (
-   id integer primary key,
+   id integer,
    site_name varchar (200) default '',
    site_url varchar (200) default '',
    description blob,
@@ -86,5 +94,6 @@ create table site (
    smtp_password varchar (100),
    smtp_server varchar (200),
    date_created timestamp,
-   date_modified timestamp
+   date_modified timestamp,
+   primary key (id)
 );

@@ -4,6 +4,7 @@ class Page extends \Tina4\ORM
     public $tableName="page";
     public $primaryKey="id"; //set for primary key
     //public $softDelete=true; //uncomment for soft deletes in crud
+    public $genPrimaryKey = true;
     
 	public $id;
 	public $name;

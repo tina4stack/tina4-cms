@@ -4,6 +4,7 @@ class ArticleCategory extends \Tina4\ORM
     public $tableName="article_category";
     public $primaryKey="id"; //set for primary key
     //public $softDelete=true; //uncomment for soft deletes in crud
+    public $genPrimaryKey = true;
     
 	public $id;
 	public $name;

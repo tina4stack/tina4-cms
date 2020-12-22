@@ -5,6 +5,7 @@ class Users extends \Tina4\ORM
 {
     public $tableName = "users";
     public $primaryKey = "id";
+    public $genPrimaryKey = true;
 
     public $id;
     public $firstName;
