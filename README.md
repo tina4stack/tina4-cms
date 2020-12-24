@@ -3,7 +3,6 @@
 Happy you have decided to try this, how does it work?
 
 ```
-composer require andrevanzuydam/tina4php
 composer require andrevanzuydam/tina4cms
 php -S localhost:8080 index.php
 ```
