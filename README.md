@@ -28,6 +28,10 @@ Open up the CMS to setup the admin user
 
 http://localhost:8080/cms/login -> will get you started
 
+### The Landing Page - home
+
+You need to create a landing page called "home" as your starting page for things to working properly.
+
 ### Customization
 
 Make a new base.twig file in your templates folder, it needs the following blocks
@@ -47,20 +51,48 @@ Make a new base.twig file in your templates folder, it needs the following block
     {% endblock %}
 </head>
 <body>
-<div class="container">
-    {% block navigation %}
-        {% include "navigation.twig" %}
-    {% endblock %}
 
-    <div class="row">
-        {% block content %}
-        {% endblock %}
-    </div>
-    {% block footer %}
-    {% endblock %}
-</div>
+{% block navigation %}
+    {% include "navigation.twig" %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
 
 </body>
 
+</html>
+```
 
+### Including your snippets in the CMS
+ 
+There are two ways you can do this:
+
+When you want to include content as it is, and not have the snippet parsed with Twig you can simply use the following:
+Use the raw filter when you want to have scripts or other things included correctly
+```
+{{snippetName | raw}} or {{snippetName}}
+```
+
+The following is how you would include a snippet where you want variables in the page for example parsed in the snippet
+```
+{{ include(getSnippet("snippetName")) }}
+```
+
+#### Example:
+
+Page content of "home"
+```
+  {% set world = "World!" %}
+  
+  {{ include (getSnippet("mySnippet")) }}
+```
+
+Snippet content of "mySnippet"
+```
+  Hello {{world}}!
+  
 ```
