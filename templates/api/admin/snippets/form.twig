@@ -11,7 +11,7 @@
         <div class="form-group col-md-12">
             <label for="content">Content</label>
             <textarea id="saveContent" style="display:none" name="content"></textarea>
-            <div id="contentEditor" style="height:500px" ></div>
+            <div id="contentEditor" style="height:500px" >{{ data.content | raw }}</div>
             <script>
 
                 window.editorACE = ace.edit("contentEditor");
@@ -33,7 +33,7 @@
                     readOnly: true // false if this command should not apply in readOnly mode
                 });**/
 
-                window.editorACE.setValue(`{{ data.content | raw }}`);
+                //window.editorACE.setValue(``);
 
             </script>
         </div>

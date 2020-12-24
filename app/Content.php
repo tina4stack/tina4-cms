@@ -4,7 +4,7 @@ class Content extends \Tina4\Data
 {
     /**
      * Create a slug from the title
-     * @param $tile
+     * @param $title
      * @param $separator
      * @return String
      */
@@ -158,12 +158,14 @@ class Content extends \Tina4\Data
      * @return string
      * @throws \Twig\Error\LoaderError
      */
-    public function
-    getSnippet($name) {
+    public function getSnippet($name): string
+    {
         $snippet = new Snippet();
         $snippet->load("name = '{$name}'");
 
-        return \Tina4\renderTemplate(html_entity_decode($snippet->content, ENT_QUOTES), ["request" => $_REQUEST]);
+        $fileName = "snippet".$this->getSlug($name);
+        file_put_contents("./cache".DIRECTORY_SEPARATOR.$fileName, html_entity_decode($snippet->content, ENT_QUOTES));
+        return $fileName;
     }
 
     public static function iterateDirectory($path, $clickEvent="returnFileUrl", $relativePath = "")

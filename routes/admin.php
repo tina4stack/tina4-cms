@@ -3,7 +3,8 @@
 \Tina4\Get::add("/cms/login", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number")->asArray();
 
-    if ($users[0]["number"] === 0) {
+    if ((int)$users[0]["number"] === 0) {
+
         return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
         return (\Tina4\renderTemplate("@tina4cms/admin/login.twig"));

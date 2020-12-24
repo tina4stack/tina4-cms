@@ -21,6 +21,10 @@
         return (new Content())->getSnippet($name);
     });
 
+    $config->addTwigFunction("getSnippet",  function ($name) {
+        return (new Content())->getSnippet($name);
+    });
+
     $config->addTwigFilter("getSlug", function ($name) {
         return (new Content())->getSlug($name);
     });

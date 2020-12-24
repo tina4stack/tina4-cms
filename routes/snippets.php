@@ -17,9 +17,6 @@
        case "fetch":
 
             //Return back a form to be submitted to the create
-
-            $snippet->content = html_entity_decode($snippet->content, ENT_QUOTES );
-
             if ($action == "form") {
                 $title = "Add Snippet";
                 $savePath =  TINA4_BASE_URL . "/api/admin/snippets";
@@ -46,13 +43,13 @@
                 ->asResult();
         break;
         case "create":
-            $snippet->content = null;
+            $snippet->dateCreated = date($snippet->DBA->dateFormat." H:i:s");
         break;
         case "update":
             //Manipulate the $object here
 
-            $snippet->content = null;
-            $snippet->dateModified = date("Y-m-d H:i:s");
+
+            $snippet->dateModified = date($snippet->DBA->dateFormat." H:i:s");
         break;
         case "afterCreate":
             $snippet->saveBlob("content", $request->params["content"]);

@@ -46,18 +46,14 @@
                 ->asResult();
         break;
         case "create":
-            $page->isPublished = 0;
-
-            unset($page->image);
-            unset($page->content);
+            $page->dateCreated = date($page->DBA->dateFormat." H:i:s");
         break;
         case "update":
             $page->slug = (new Content())->getSlug($request->data->name);
             //Manipulate the $object here
-            $page->dateModified = date("Y-m-d H:i:s");
+            $page->dateModified = date($page->DBA->dateFormat." H:i:s");
 
-            unset($page->image);
-            unset($page->content);
+
         break;
         case "afterCreate":
 

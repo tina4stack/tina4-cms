@@ -12,18 +12,14 @@
     {% endblock %}
 </head>
 <body>
-<div class="container">
-    {% block navigation %}
-        {% include "navigation.twig" %}
-    {% endblock %}
+{% block navigation %}
+    {% include "navigation.twig" %}
+{% endblock %}
 
-    <div class="row">
-        {% block content %}
-        {% endblock %}
-    </div>
-    {% block footer %}
-    {% endblock %}
-</div>
+{% block content %}
+{% endblock %}
 
+{% block footer %}
+{% endblock %}
 </body>
 </html>
