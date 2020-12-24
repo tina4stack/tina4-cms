@@ -74,8 +74,6 @@
             }
 
             $article->slug = (new Content())->getSlug($request->data->title);
-
-
         break;
         case "update":
             if (!empty($request->params["article_categories"])) {
