@@ -19,10 +19,6 @@ $DBA = new \Tina4\DataSQLite3("test.db","", "", "d/m/Y");
 echo new \Tina4\Tina4Php();
 ```
 
-Run the migrations
-
-http://localhost:8080/migrate
-
 Open up the CMS to setup the admin user
 
 http://localhost:8080/cms/login -> will get you started
