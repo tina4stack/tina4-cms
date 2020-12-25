@@ -4,8 +4,8 @@ CREATE TABLE article (
   title varchar(500) DEFAULT '',
   description varchar(1000) DEFAULT '',
   keywords varchar(1000) DEFAULT '',
-  image blob,
-  content blob,
+  image text,
+  content text,
   author varchar(200) DEFAULT '',
   is_published integer DEFAULT 0,
   slug varchar(200) DEFAULT '',
@@ -45,8 +45,8 @@ CREATE TABLE page (
   title varchar(500) DEFAULT '',
   description varchar(1000) DEFAULT '',
   keywords varchar(1000) DEFAULT '',
-  image blob,
-  content blob,
+  image text,
+  content text,
   is_published integer DEFAULT 1,
   author varchar(200) DEFAULT '',
   slug varchar(200) DEFAULT '',
@@ -54,13 +54,15 @@ CREATE TABLE page (
   date_created datetime default null,
   date_modified datetime default null,
   primary key (id)
-);  
+);
+
+insert into page (id, name, description, title, content, slug) values (1, 'home', 'Example Home Page', 'Home Page', 'Hello World!', 'home');
 
 create table snippet (
   id integer,
   name  varchar(200) DEFAULT '',
   description varchar(1000) DEFAULT '',
-  content blob,
+  content text,
   date_created datetime default null,
   date_modified datetime default null,
   primary key (id)
@@ -72,7 +74,7 @@ create table users (
   last_name varchar (100) default '',
   email varchar (400) default '',
   password varchar (500) default '',
-  is_active integer default 0 not null,
+  is_active integer default 0,
   reset_token varchar (500) default '',
   date_created datetime default null,
   date_modified datetime default null,
@@ -83,12 +85,12 @@ create table site (
    id integer,
    site_name varchar (200) default '',
    site_url varchar (200) default '',
-   description blob,
-   google blob,
-   facebook blob,
-   bing blob,
-   twitter blob,
-   custom blob,
+   description text,
+   google text,
+   facebook text,
+   bing text,
+   twitter text,
+   custom text,
    smtp_port varchar (20),
    smtp_username varchar (100),
    smtp_password varchar (100),
