@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <title>{{ title }}</title>
-
     <meta prefix="og: https://ogp.me/ns#" property="og:title" content="{{ title }}"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:type" content="website"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:url" content="{{ url }}"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
-    {% block headers %}
-    {% endblock %}
+{% block headers %}
+{% endblock %}
 </head>
 <body>
 {% block navigation %}
