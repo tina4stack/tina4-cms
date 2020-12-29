@@ -19,14 +19,17 @@
        case "form":
        case "fetch":
             //Return back a form to be submitted to the create
+
+            $snippets = (new Snippet())->select("id,name", 1000)->orderBy("name")->asArray();
+
             if ($action == "form") {
                 $title = "Add Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages";
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", []);
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["snippets" => $snippets]);
             } else {
                 $title = "Edit Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages/".$page->id;
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page]);
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#pageForm').valid() ) { saveForm('pageForm', '" .$savePath."', 'message'); }", "content" => $content]);

@@ -11,7 +11,7 @@
         </span>
 
 
-{{ content | raw }}
+{{ render(content) | raw }}
 
 
             {% set keywords = article.keywords|split(',') %}

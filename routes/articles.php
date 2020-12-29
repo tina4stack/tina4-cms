@@ -34,14 +34,16 @@
                 ->orderBy("parent_id,name")
                 ->asArray();
 
+            $snippets = (new Snippet())->select("id,name", 1000)->orderBy("name")->asArray();
+
             if ($action == "form") {
                 $title = "Add Article";
                 $savePath =  TINA4_BASE_URL . "/api/admin/articles";
-                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ['categories' => $articleCategories]);
+                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ['categories' => $articleCategories, "snippets" => $snippets]);
             } else {
                 $title = "Edit Article";
                 $savePath =  TINA4_BASE_URL . "/api/admin/articles/".$article->id;
-                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ["data" => $article, 'categories' => $articleCategories]);
+                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ["data" => $article, 'categories' => $articleCategories, "snippets" => $snippets]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#articleForm').valid() ) { saveForm('articleForm', '" .$savePath."', 'message'); }", "content" => $content]);

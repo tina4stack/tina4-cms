@@ -1,5 +1,7 @@
-<h3>{{ article.title }}<br> <sub>{{ article.publishedDate }} by {{  article.author }} </sub></h3>
-<a href="{{ article.url }}">
-    <img src="{{ article.image }}"/>
-</a>
-<p> {{ article.description | raw }}</p>
+<div class="med-large">
+    <h3>{{ article.title }}<br> <sub>{{ article.publishedDate }} by {{  article.author }} </sub></h3>
+    <a href="{{ article.url }}">
+        <img src="{{ article.image }}"/>
+    </a>
+    <p> {{ article.description | raw }}</p>
+</div>

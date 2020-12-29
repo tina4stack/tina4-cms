@@ -120,7 +120,7 @@ class Content extends \Tina4\Data
      * @throws \Twig\Error\LoaderError
      */
     public function renderArticle($title, $content, $image, $article, $template="article.twig") {
-        $content = \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" => html_entity_decode( $content, ENT_QUOTES), "image" => $image, "request" => $_REQUEST]);
+        $content = \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
         return $content;
     }
 

@@ -1,6 +1,6 @@
 <form id="articleForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
     <div class="row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
             <label for="title">Title</label>
             <input class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
         </div>
@@ -8,40 +8,105 @@
             <label for="description">Description</label>
             <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
         </div>
-        <div class="form-group col-md-2">
+        {% if session.user.id %}
+            <div class="form-group col-md-2">
+                <label for="author">Author</label>
+                <input class="form-control" type="text" name="author" readonly placeholder="Author" value="{{ session.user.firstName }} {{ session.user.lastName }}">
+                <input type="hidden" name="userId" value="{{ session.user.id }}">
+            </div>
+        {%  else %}
+            <div class="form-group col-md-2">
+                <label for="author">Author</label>
+                <input class="form-control" type="text" name="author" placeholder="Author" value="{{ data.author }}">
+            </div>
+        {% endif %}
+        <div class="form-group col-md-1">
             <img class="img-thumbnail" src="data:image/png;base64,{{ data.image }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-5">
             <label for="image">Image</label>
             <input class="form-control" type="file" name="image" placeholder="Image" value="">
         </div>
-        {% if session.user.id %}
-        <div class="form-group col-md-6">
-            <label for="author">Author</label>
-            <input class="form-control" type="text" name="author" readonly placeholder="Author" value="{{ session.user.firstName }} {{ session.user.lastName }}">
-            <input type="hidden" name="userId" value="{{ session.user.id }}">
+        <div class="form-group col-md-2">
+            <label for="playerKey">Published</label>
+            <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
         </div>
-        {%  else %}
-        <div class="form-group col-md-6">
-            <label for="author">Author</label>
-            <input class="form-control" type="text" name="author" placeholder="Author" value="{{ data.author }}">
-        </div>
-        {% endif %}
+
         <div class="form-group col-md-9">
-            <label for="content">Content</label>
-            <textarea id="contentEditor" name="content" rows="20">{{ data.content }}</textarea>
+            <label for="contentEditor">Content</label>
+            <textarea id="saveContent" style="display:none" name="content">{{ data.content | raw }}</textarea>
+            <div id="contentEditor" class="form-control" style="height:300px">{{ data.content | raw }}</div>
+            <style>
+                .ql-snippets {
+                    width: 140px;
+                }
+                {% for snippet in snippets %}
+                .ql-snippets.ql-picker [data-value="{{ snippet.name }}"]::before {
+                    content: '{{ snippet.name }}'
+                }
+                {% endfor %}
+                .ql-articles {
+                    width: 140px;
+                }
+                .ql-articles.ql-picker [data-value="small"]::before {content: 'small'}
+                .ql-articles.ql-picker [data-value="mini"]::before {content: 'mini'}
+                .ql-articles.ql-picker [data-value="medium"]::before {content: 'medium'}
+                .ql-articles.ql-picker [data-value="med-large"]::before {content: 'med-large'}
+                .ql-articles.ql-picker [data-value="large"]::before {content: 'large'}
+
+            </style>
             <script>
-                var contentEditor = CKEDITOR.replace( 'contentEditor', {
-                    filebrowserBrowseUrl: '/content/file/browse?formToken={{ formToken }}',
-                    filebrowserUploadUrl: '/content/file/upload?formToken={{ formToken }}',
-                    allowedContent: true,
-                    enterMode : CKEDITOR.ENTER_BR,
-                    shiftEnterMode: CKEDITOR.ENTER_P
+                var toolbarOptions = [
+                    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                    ['blockquote', 'code-block'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                    [{ 'direction': 'rtl' }],                         // text direction
+
+                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    ['link','image', 'video'],
+
+                    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                    [{ 'font': [] }],
+                    [{ 'align': [] }],
+
+                    ['clean']   ,
+                    [{'snippets': [{% for snippet in snippets %}'{{ snippet.name }}',{% endfor %}]}],// remove formatting button
+                    [{'articles': ['small', 'mini', 'medium', 'med-large', 'large']}]
+
+                ];
+
+                var editor = new Quill('#contentEditor', {
+                    modules: {
+                        toolbar: {container: toolbarOptions,
+                                  handlers: {
+                                  "snippets": insertSnippet,
+                                      "articles": insertArticle
+                            }}
+                    },
+                    theme: 'snow'
                 });
-                contentEditor.on( 'change', function( evt ) {
-                    $('#contentEditor').val(evt.editor.getData());
-                    console.log( 'Total bytes: ' + evt.editor.getData().length );
+
+
+                function insertSnippet(snippetName) {
+                        console.log ('Inserting Snippet ', snippetName);
+
+                    const cursorPosition = editor.getSelection().index;
+                    editor.insertText(cursorPosition, '\n\{\{ include( getSnippet("'+snippetName+'") ) \}\}');
+                }
+
+                function insertArticle(articleType) {
+                    articleText = `\{\% set articles = Content.getArticles ("", 8) \%\}\n\{\% for article in articles \%\}{\% include "snippets/${articleType}.twig" with {"article": article} \%\}\{\% endfor \%\}\n{\% set params = {"tag": "all", "skip": 4, "limit": 4, "template": "${articleType}.twig"} \%\}\n\{\% include "load-more.twig" with params \%\}`;
+                    const cursorPosition = editor.getSelection().index;
+                    editor.insertText(cursorPosition, '\n'+articleText);
+
+                }
+
+                editor.on('text-change', function(delta, source) {
+                    $('#saveContent').val(editor.root.innerHTML);
                 });
+
             </script>
         </div>
         <div class="form-group col-md-3">
@@ -57,10 +122,7 @@
             {% include "tagLookup.twig" %}
         </div>
 
-        <div class="form-group col-md-2">
-            <label for="playerKey">Published</label>
-            <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
-        </div>
+
 
 
 

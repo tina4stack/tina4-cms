@@ -25,6 +25,10 @@
         return (new Content())->getSnippet($name);
     });
 
+    $config->addTwigFunction("render",  function ($content) {
+        return \Tina4\renderTemplate($content);
+    });
+
     $config->addTwigFilter("getSlug", function ($name) {
         return (new Content())->getSlug($name);
     });
