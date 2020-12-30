@@ -17,7 +17,10 @@
 
 
 \Tina4\Get::add("/content/{pageName}", function ($pageName, \Tina4\Response $response, \Tina4\Request $request) {
+
     $content = (new Content())->getPage($pageName);
+
+
     $pageMeta = (new Content())->getPageMeta($pageName);
     if (!file_exists("./src/assets/images/og-{$pageName}.png")) {
       if ($pageMeta->image) {

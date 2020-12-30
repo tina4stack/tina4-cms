@@ -49,6 +49,7 @@
                 ->asResult();
         break;
         case "create":
+            $page->slug = (new Content())->getSlug($request->data->name);
             $page->dateCreated = date($page->DBA->dateFormat." H:i:s");
         break;
         case "update":

@@ -69,7 +69,10 @@ class Content extends \Tina4\Data
 
         $articles = (new Article())->select("*", $limit, $skip)->where("1 = 1");
         if ($category) {
-            $articles->and("article_category_id in (select id from article_category where upper(name) = upper('{$category}'))");
+            $articles->and("id in (select article_id 
+                                                  from article_article_category 
+                                                 where article_category_id in ( select id from article_category where upper(name) = upper('{$category}')
+            ))");
         }
 
         $articles->and("id <> 0 and is_published = 1");
