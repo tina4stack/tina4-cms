@@ -34,7 +34,7 @@
 
         <div class="form-group col-md-9">
             <label for="contentEditor">Content</label>
-            <textarea id="saveContent" style="display:none" name="content">{{ data.content | raw }}</textarea>
+
             <div id="contentEditor" class="form-control" style="height:300px">{{ data.content | raw }}</div>
             <style>
                 .ql-snippets {
@@ -53,6 +53,8 @@
                 .ql-articles.ql-picker [data-value="medium"]::before {content: 'medium'}
                 .ql-articles.ql-picker [data-value="med-large"]::before {content: 'med-large'}
                 .ql-articles.ql-picker [data-value="large"]::before {content: 'large'}
+
+                .ql-html::before { content: '<html>' }
 
             </style>
             <script>
@@ -73,16 +75,18 @@
 
                     ['clean']   ,
                     [{'snippets': [{% for snippet in snippets %}'{{ snippet.name }}',{% endfor %}]}],// remove formatting button
-                    [{'articles': ['small', 'mini', 'medium', 'med-large', 'large']}]
+                    [{'articles': ['small', 'mini', 'medium', 'med-large', 'large']}],
+                    ['html']
 
                 ];
 
                 var editor = new Quill('#contentEditor', {
                     modules: {
                         toolbar: {container: toolbarOptions,
-                                  handlers: {
-                                  "snippets": insertSnippet,
-                                      "articles": insertArticle
+                            handlers: {
+                                "snippets": insertSnippet,
+                                "articles": insertArticle,
+                                "html": toggleSource
                             }}
                     },
                     theme: 'snow'
@@ -90,7 +94,7 @@
 
 
                 function insertSnippet(snippetName) {
-                        console.log ('Inserting Snippet ', snippetName);
+                    console.log ('Inserting Snippet ', snippetName);
 
                     const cursorPosition = editor.getSelection().index;
                     editor.insertText(cursorPosition, '\n\{\{ include( getSnippet("'+snippetName+'") ) \}\}');
@@ -103,11 +107,24 @@
 
                 }
 
+                function toggleSource() {
+                    if (!$('#saveContent').is(':visible')) {
+                        $('#saveContent').show();
+                        $('#contentEditor').hide();
+                        $('#saveContent').val(editor.root.innerHTML);
+                    } else {
+                        $('#saveContent').hide();
+                        $('#contentEditor').show();
+                        editor.root.innerHTML =  $('#saveContent').val();
+                    }
+                }
+
                 editor.on('text-change', function(delta, source) {
                     $('#saveContent').val(editor.root.innerHTML);
                 });
 
             </script>
+            <textarea id="saveContent" class="form-control" style="display:none; height: 300px" name="content">{{ data.content | raw }}</textarea>
         </div>
         <div class="form-group col-md-3">
                 <label>Choose Categories</label>

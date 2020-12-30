@@ -50,7 +50,8 @@ class Content extends \Tina4\Data
      * @return string
      * @throws \Twig\Error\LoaderError
      */
-    public function getPage($slug) {
+    public function getPage($slug): string
+    {
         $page = (new Page());
         $page->load("slug = '{$slug}'");
 
@@ -270,7 +271,7 @@ class Content extends \Tina4\Data
 
             foreach ($menus as $id => $menu) {
                 if ($menu->hasChildren > 0) {
-                    $childrenMenus = $this->getMenu($menu->id, $level += 1);
+                    $childrenMenus = $this->getMenu($menu->id, ++$level);
                     $menu->children = $childrenMenus;
                 }
                 $menu->url = "/content/{$menu->slug}";
