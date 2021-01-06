@@ -28,7 +28,7 @@
             }
 
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#snippetForm').valid() ) { saveForm('snippetForm', '" .$savePath."', 'message'); }", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#snippetForm').valid() ) { saveForm('snippetForm', '" .$savePath."', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
