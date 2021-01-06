@@ -48,7 +48,7 @@
             if (!empty($users->password)) {
                 $users->password = password_hash($users->password, PASSWORD_BCRYPT);
             } else {
-                unset($users->password);
+                $users->password = null;
             }
         break;
         case "afterCreate":
@@ -60,7 +60,7 @@
             if (!empty($users->password)) {
                 $users->password = password_hash($users->password, PASSWORD_BCRYPT);
             } else {
-                unset($users->password);
+                $users->password = null;
             }
         break;    
         case "afterUpdate":
