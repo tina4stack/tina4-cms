@@ -313,7 +313,7 @@ class Content extends \Tina4\Data
             $likes[] = "instr(keywords, '".trim($keyword)."')";
         }
         $filter = "id <> {$article->id} and ( ".join(" or ", $likes)." )";
-        $related = (new Article())->select("id,title,description,slug,image", 4)->where($filter)->orderBy("published_date desc");
+        $related = (new Article())->select("id,title,description,slug,image,author,published_date", 4)->where($filter)->orderBy("published_date desc");
         $article->relatedArticles = $related->asObject();
 
         foreach ( $article->relatedArticles as $id => $articleData) {
