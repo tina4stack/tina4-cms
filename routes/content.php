@@ -6,11 +6,16 @@
 
     $pageMeta = (new Content())->getPageMeta($pageName);
     if (!file_exists("./src/assets/images/og-{$pageName}.png")) {
-      if ($pageMeta->image) {
-        file_put_contents("./src/assets/images/og-{$pageName}.png", base64_decode($pageMeta->image));
+      if (!empty($pageMeta->image)) {
+          $image = "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$pageName}.png";
+          file_put_contents("./src/assets/images/og-{$pageName}.png", base64_decode($pageMeta->image));
+      } else {
+          $image = null;
       }
+    } else {
+        $image = "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$pageName}.png";
     }
-    $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$pageName}.png" , "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
+    $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image , "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
 
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
@@ -23,11 +28,16 @@
 
     $pageMeta = (new Content())->getPageMeta($pageName);
     if (!file_exists("./src/assets/images/og-{$pageName}.png")) {
-      if ($pageMeta->image) {
-        file_put_contents("./src/assets/images/og-{$pageName}.png", base64_decode($pageMeta->image));
-      }
+        if (!empty($pageMeta->image)) {
+            $image = "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$pageName}.png";
+            file_put_contents("./src/assets/images/og-{$pageName}.png", base64_decode($pageMeta->image));
+        } else {
+            $image = null;
+        }
+    } else {
+        $image = "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$pageName}.png";
     }
-    $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$pageName}.png" , "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
+    $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image , "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
@@ -36,11 +46,16 @@
   $articleMeta = (new Content())->getArticleMeta($slug);
 
   if (!file_exists("./src/assets/images/og-{$slug}.png")) {
-    if ($articleMeta->image) {
+    if (!empty($articleMeta->image)) {
+      $image = "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$slug}.png";
       file_put_contents("./src/assets/images/og-{$slug}.png", base64_decode($articleMeta->image));
+    } else {
+        $image =  null;
     }
+  } else {
+      $image = "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$slug}.png";
   }
-  $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "article" => $articleMeta, "pageName" => $articleMeta->title, "title" => $articleMeta->title, "image" => "https://".$_SERVER["HTTP_HOST"]."/src/assets/images/og-{$slug}.png" , "description" => $articleMeta->description, "keywords" => $articleMeta->keywords]);
+  $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "article" => $articleMeta, "pageName" => $articleMeta->title, "title" => $articleMeta->title, "image" => $image , "description" => $articleMeta->description, "keywords" => $articleMeta->keywords]);
   return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
