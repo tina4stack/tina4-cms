@@ -82,13 +82,15 @@ class Content extends \Tina4\Data
         foreach ($articles as $id => $article) {
             $articles[$id]->url = "/content/article/{$article->slug}";
             $articles[$id]->content = $this->parseContent($article->content);
-            if (!file_exists("./cache/article-".md5($article->image).".png")) {
-                if ($article->image) {
-                    file_put_contents("./cache/article-".md5($article->image).".png", base64_decode($article->image));
+            if (!file_exists("./cache/article-".md5($article->id).".png")) {
+                if (!empty($article->image)) {
+                    file_put_contents("./cache/article-".md5($article->id).".png", base64_decode($article->image));
+                    $articles[$id]->image = "/cache/article-".md5($article->id).".png";
+                } else {
+                    $articles[$id]->image = null;
                 }
-                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
             } else {
-                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
+                $articles[$id]->image = "/cache/article-".md5($article->id).".png";
             }
         }
 
@@ -316,13 +318,15 @@ class Content extends \Tina4\Data
 
         foreach ( $article->relatedArticles as $id => $articleData) {
 
-            if (!file_exists("./cache/article-".md5($articleData->image).".png")) {
-                if ($articleData->image) {
-                    file_put_contents("./cache/article-".md5($articleData->image).".png", base64_decode($article->image));
+            if (!file_exists("./cache/article-".md5($articleData->id).".png")) {
+                if (!empty($articleData->image)) {
+                    file_put_contents("./cache/article-".md5($articleData->id).".png", base64_decode($article->image));
+                    $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->id).".png";
+                } else {
+                    $article->relatedArticles[$id]->image = null;
                 }
-                $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->image).".png";
             } else {
-                $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->image).".png";
+                $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->id).".png";
             }
         }
 
@@ -371,13 +375,16 @@ class Content extends \Tina4\Data
 
         foreach ($articles as $id => $article) {
             $articles[$id]->content = $this->parseContent($article->content);
-            if (!file_exists("./cache/article-".md5($article->image).".png")) {
-                if ($article->image) {
-                    file_put_contents("./cache/article-".md5($article->image).".png", base64_decode($article->image));
+            if (!file_exists("./cache/article-".md5($article->id).".png")) {
+                if (!empty($article->image)) {
+                    file_put_contents("./cache/article-".md5($article->id).".png", base64_decode($article->image));
+                    $articles[$id]->image = "/cache/article-".md5($article->id).".png";
+                } else {
+                    $articles[$id]->image = null;
                 }
-                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
+
             } else {
-                $articles[$id]->image = "/cache/article-".md5($article->image).".png";
+                $articles[$id]->image = "/cache/article-".md5($article->id).".png";
             }
         }
 
