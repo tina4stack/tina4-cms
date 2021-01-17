@@ -315,9 +315,9 @@ class Content extends \Tina4\Data
         $filter = "id <> {$article->id} and ( ".join(" or ", $likes)." )";
         $related = (new Article())->select("id,title,description,slug,image,author,published_date", 4)->where($filter)->orderBy("published_date desc");
         $article->relatedArticles = $related->asObject();
-
+        $article->url = "/content/article/".$this->getSlug($article->title);
         foreach ( $article->relatedArticles as $id => $articleData) {
-
+            $article->relatedArticles[$id]->url = "/content/article/".$this->getSlug($article->title);
             if (!file_exists("./cache/article-".md5($articleData->id).".png")) {
                 if (!empty($articleData->image)) {
                     file_put_contents("./cache/article-".md5($articleData->id).".png", base64_decode($article->image));
@@ -375,10 +375,12 @@ class Content extends \Tina4\Data
 
         foreach ($articles as $id => $article) {
             $articles[$id]->content = $this->parseContent($article->content);
+            $articles[$id]->url = "/content/article/".$this->getSlug($article->title);
             if (!file_exists("./cache/article-".md5($article->id).".png")) {
                 if (!empty($article->image)) {
                     file_put_contents("./cache/article-".md5($article->id).".png", base64_decode($article->image));
                     $articles[$id]->image = "/cache/article-".md5($article->id).".png";
+
                 } else {
                     $articles[$id]->image = null;
                 }

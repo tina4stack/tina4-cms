@@ -6,9 +6,12 @@
 <h1>{{ title }}</h1>
 
 <p>By {{ article.author }} {{ article.publishedDate }}</p>
+
+{%  if (image) %}
 <span class="large mb-4">
-            <img src="data:image/png;base64,{{ image }}" style='height: 100%; width: 100%; object-fit: contain'/>
-        </span>
+    <img src="data:image/png;base64,{{ image }}" style='height: 100%; width: 100%; object-fit: contain'/>
+</span>
+{% endif %}
 
 
 {{ render(content) | raw }}
@@ -28,7 +31,6 @@
 <a href="/content/article/{{ article.relatedArticles[1].slug }}">Next Article<br>
     {{ article.relatedArticles[1].title }}
 </a>
-
 
 
 <h3><span>Related Articles</span></h3>
