@@ -36,93 +36,48 @@
             <label for="contentEditor">Content</label>
 
             <div id="contentEditor" class="form-control" style="height:300px">{{ data.content | raw }}</div>
-            <style>
-                .ql-snippets {
-                    width: 140px;
-                }
-                {% for snippet in snippets %}
-                .ql-snippets.ql-picker [data-value="{{ snippet.name }}"]::before {
-                    content: '{{ snippet.name }}'
-                }
-                {% endfor %}
-                .ql-articles {
-                    width: 140px;
-                }
-                .ql-articles.ql-picker [data-value="small"]::before {content: 'small'}
-                .ql-articles.ql-picker [data-value="mini"]::before {content: 'mini'}
-                .ql-articles.ql-picker [data-value="medium"]::before {content: 'medium'}
-                .ql-articles.ql-picker [data-value="med-large"]::before {content: 'med-large'}
-                .ql-articles.ql-picker [data-value="large"]::before {content: 'large'}
-
-                .ql-html::before { content: '<html>' }
-
-            </style>
             <script>
-                var toolbarOptions = [
-                    ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-                    ['blockquote', 'code-block'],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-                    [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-                    [{ 'direction': 'rtl' }],                         // text direction
-
-                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                    ['link','image', 'video'],
-
-                    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-                    [{ 'font': [] }],
-                    [{ 'align': [] }],
-
-                    ['clean']   ,
-                    [{'snippets': [{% for snippet in snippets %}'{{ snippet.name }}',{% endfor %}]}],// remove formatting button
-                    [{'articles': ['small', 'mini', 'medium', 'med-large', 'large']}],
-                    ['html']
-
-                ];
-
-                var editor = new Quill('#contentEditor', {
-                    modules: {
-                        toolbar: {container: toolbarOptions,
-                            handlers: {
-                                "snippets": insertSnippet,
-                                "articles": insertArticle,
-                                "html": toggleSource
-                            }}
-                    },
-                    theme: 'snow'
-                });
-
-
-                function insertSnippet(snippetName) {
-                    console.log ('Inserting Snippet ', snippetName);
-
-                    const cursorPosition = editor.getSelection().index;
-                    editor.insertText(cursorPosition, '\n\{\{ include( getSnippet("'+snippetName+'") ) \}\}');
+                function saveContent(editor) {
+                    $('#saveContent').val(editor.getContent());
                 }
 
-                function insertArticle(articleType) {
-                    articleText = `\{\% set articles = Content.getArticles ("", 8) \%\}\n\{\% for article in articles \%\}{\% include "snippets/${articleType}.twig" with {"article": article} \%\}\{\% endfor \%\}\n{\% set params = {"tag": "all", "skip": 4, "limit": 4, "template": "${articleType}.twig"} \%\}\n\{\% include "load-more.twig" with params \%\}`;
-                    const cursorPosition = editor.getSelection().index;
-                    editor.insertText(cursorPosition, '\n'+articleText);
+                tinyMCE.execCommand('mceRemoveEditor', false, 'contentEditor');
 
-                }
+                tinymce.init({
+                    selector: '#contentEditor',
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste imagetools wordcount emoticons'
+                    ],
+                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets ',
+                    images_upload_url: '/cms/upload?formToken={{ formToken | raw }}',
+                    images_upload_base_path: '/uploads/',
+                    images_upload_credentials: true,
+                    setup:function(editor) {
+                        editor.on('change', function(e) {
+                            saveContent(editor)
+                        });
 
-                function toggleSource() {
-                    if (!$('#saveContent').is(':visible')) {
-                        $('#saveContent').show();
-                        $('#contentEditor').hide();
-                        $('#saveContent').val(editor.root.innerHTML);
-                    } else {
-                        $('#saveContent').hide();
-                        $('#contentEditor').show();
-                        editor.root.innerHTML =  $('#saveContent').val();
+                        editor.ui.registry.addMenuButton('menuSnippets', {
+                            text: 'Snippets',
+                            fetch: function (callback) {
+                                var items = [
+                                    {% for snippet in snippets %}
+                                    {
+                                        type: 'menuitem',
+                                        text: '{{ snippet.name }}',
+                                        onAction: function (_) {
+                                            editor.insertContent('\n\{\{ include( getSnippet("{{ snippet.name }}") ) \}\}');
+                                        }
+                                    },
+                                    {% endfor %}
+                                ];
+                                callback(items);
+                            }
+                        });
                     }
-                }
-
-                editor.on('text-change', function(delta, source) {
-                    $('#saveContent').val(editor.root.innerHTML);
                 });
-
             </script>
             <textarea id="saveContent" class="form-control" style="display:none; height: 300px" name="content">{{ data.content | raw }}</textarea>
         </div>

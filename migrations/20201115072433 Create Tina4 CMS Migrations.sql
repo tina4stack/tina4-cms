@@ -56,7 +56,7 @@ CREATE TABLE page (
   primary key (id)
 );
 
-insert into page (id, name, description, title, content, slug) values (1, 'home', 'Example Home Page', 'Home Page', 'Hello World!', 'home');
+insert into page (id, name, description, title, content, slug, date_created) values (1, 'home', 'Example Home Page', 'Home Page', 'Hello World!', 'home', '2021-01-01 00:00');
 
 create table snippet (
   id integer,
