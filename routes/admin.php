@@ -23,7 +23,7 @@
     }
 
     // Accept upload if there was no origin, or if it is an accepted origin
-    $fileToWrite = $imageFolder . $temp['name'];
+    $fileToWrite = $imageFolder . DIRECTORY_SEPARATOR. $temp['name'];
     move_uploaded_file($temp['tmp_name'], $fileToWrite);
 
 
