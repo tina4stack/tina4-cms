@@ -23,8 +23,6 @@
             <label for="playerKey">Published</label>
             <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
         </div>
-
-
         <div class="form-group col-md-12">
             <label for="contentEditor">Content</label>
             <div id="contentEditor" class="form-control" style="height:300px">{{ data.content | raw }}</div>
@@ -50,7 +48,6 @@
                         editor.on('change', function(e) {
                             saveContent(editor)
                         });
-
                         editor.ui.registry.addMenuButton('menuSnippets', {
                             text: 'Snippets',
                             fetch: function (callback) {
@@ -78,10 +75,6 @@
             <label>Keywords/Tags</label>
             {% include "tagLookup.twig" %}
         </div>
-
-
-
-
     </div>
     {{  "pageForm" | formToken | raw }}
 </form>

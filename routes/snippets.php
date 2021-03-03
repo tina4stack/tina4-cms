@@ -59,7 +59,7 @@
         case "afterUpdate":
 
            //return needed 
-           $snippet->saveBlob("content", htmlentities($request->params["content"]));
+           $snippet->saveBlob("content", $request->params["content"]);
            return (object)["httpCode" => 200, "message" => "<script>snippetGrid.ajax.reload(null, false); showMessage ('Snippet Updated');</script>"];
         break;   
         case "delete":

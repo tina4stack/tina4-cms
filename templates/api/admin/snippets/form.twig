@@ -11,7 +11,7 @@
         <div class="form-group col-md-12">
             <label for="content">Content</label>
             <textarea id="saveContent" style="display:none" name="content">{{ data.content | raw }}</textarea>
-            <div id="contentEditor" style="height:500px" >{{ data.content | raw }}</div>
+            <div id="contentEditor" style="height:500px" >{{ data.content }}</div>
             <script>
 
                 window.editorACE = ace.edit("contentEditor");
