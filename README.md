@@ -89,8 +89,16 @@ Create a *navigation.twig* file in your *src/templates* folder
     <ul>
         {% for menu in menus %}
             <li><a href="{{ menu.url }}">{{ menu.name }}</a>
-                    {% if menu.children %}<ul>{% for menu in menu.children %}<a href="{{ menu.url }}">{{ menu.name }}</a> </ul>{% endfor %}{% endif %}
-                    </li>
+                {% if menu.children %}
+                    <ul>
+                        {% for childmenu in menu.children %}
+                            <li>
+                                <a href="{{ childmenu.url }}">{{ childmenu.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
         {% endfor %}
     </ul>
 </nav>
