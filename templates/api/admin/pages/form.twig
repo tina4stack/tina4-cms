@@ -44,6 +44,11 @@
                     images_upload_url: '/cms/upload?formToken={{ formToken | raw }}',
                     images_upload_base_path: '/uploads/',
                     images_upload_credentials: true,
+                    force_p_newlines : false,
+                    file_picker_callback:   function(callback, url, type, win) {
+                        myWindow = popupCenter({url: "/cms/file-browser?formToken={{ formToken | raw }}", title: 'Tina4CMS - File Browser', w: 900, h: 500});
+                        myWindow.tinymceCallback = callback;
+                    },
                     setup:function(editor) {
                         editor.on('change', function(e) {
                             saveContent(editor)
