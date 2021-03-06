@@ -8,6 +8,14 @@
     ]
   },
   "require": {
-    "andrevanzuydam/tina4php": "^0.1.66"
+    "andrevanzuydam/tina4php": "^0.1.88"
+  },
+  "scripts": {
+    "tina4": "tina4",
+    "tina4service": "tina4service",
+    "test" : "@tina4 tests:run",
+    "initialize": "@tina4 initialize:run",
+    "start" : "php -S localhost:7145 index.php",
+    "start-service": "@tina4service"
   }
 }

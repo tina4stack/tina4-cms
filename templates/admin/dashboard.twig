@@ -212,25 +212,29 @@
 {% endblock %}
 
 {% block navigation %}
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/"><img src="{{ baseUrl }}/src/assets/images/Tina4.png" height="30"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav">
-                {% if session.user is not null %}
-                    <li class="nav-item"><a class="nav-link" href="/cms/dashboard">Content</a></li>
-                    <li class="nav-item"><a class="nav-link float-right" href="/cms/logout">Logout</a></li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="/cms/login">Login</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/"><img src="{{ baseUrl }}/src/assets/images/Tina4.png" height="30"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav">
+            {% if session.user is not null %}
+                <li class="nav-item"><a class="nav-link" href="/cms/dashboard">Content</a></li>
+                {% for menuItem in menuItems %}
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="loadPage('{{ menuItem.href }}', 'content')">{{ menuItem.caption }}</a></li>
+                {% endfor %}
+                <li class="nav-item"><a class="nav-link float-right" href="/cms/logout">Logout</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="/cms/login">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
 {% endblock %}
 {% block content %}
+<div id="content">
     {% if not session.user %}
         {% do redirect('/cms/login') %}
     {% endif %}
@@ -269,8 +273,5 @@
             loadPage('/cms/pages', 'sub-content');
         </script>
     </div>
-
-
-
-
+</div>
 {% endblock %}

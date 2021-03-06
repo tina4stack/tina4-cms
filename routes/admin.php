@@ -69,7 +69,8 @@
     if (empty($users)) {
         return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
-        return (\Tina4\renderTemplate("@tina4cms/admin/dashboard.twig"));
+        $menuItems = (new Content())->getCmsMenus();
+        return (\Tina4\renderTemplate("@tina4cms/admin/dashboard.twig", ["menuItems" => $menuItems]));
     }
 });
 

@@ -3,12 +3,34 @@
 class Content extends \Tina4\Data
 {
     /**
+     * Add CMS menu
+     * @param string $href
+     * @param string $caption
+     */
+    public function addCmsMenu($href="", $caption=""): void
+    {
+        global $TINA4_CMS_MENU_ITEMS;
+        $TINA4_CMS_MENU_ITEMS[] = ["href" => $href, "caption" => $caption];
+    }
+
+    /**
+     * Get CMS menus
+     * @return mixed
+     */
+    public function getCmsMenus(): array
+    {
+        global $TINA4_CMS_MENU_ITEMS;
+        return $TINA4_CMS_MENU_ITEMS;
+    }
+
+
+    /**
      * Create a slug from the title
      * @param $title
      * @param $separator
      * @return String
      */
-    function getSlug($title, $separator = '-') {
+    public function getSlug($title, $separator = '-') {
         // lower string
         $title = strtolower($title);
 
