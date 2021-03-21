@@ -3,6 +3,7 @@
     "description": "Tina4 CMS Module",
     "license": "MIT",
     "autoload": {
+        "files": ["index.php"],
         "psr-4": {
             "": [
                 "src/",
