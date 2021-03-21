@@ -11,9 +11,6 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/articles", new Article(), function ($action, Article $article, $filter, $request) {
-
-
-
     switch ($action) {
        case "form":
        case "fetch":
@@ -113,9 +110,6 @@
            $article->saveBlob("content", $request->params["content"]);
             //return needed
            $article->saveFile("image", "image");
-
-
-
            return (object)["httpCode" => 200, "message" => "<script>articleGrid.ajax.reload(null, false); showMessage ('Article Updated');</script>"];
         break;
         case "delete":

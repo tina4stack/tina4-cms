@@ -4,17 +4,13 @@
 });
 
 
-
 /**
  * CRUD Prototype Example
  * Creates  GET @ /path, /path/{id}, - fetch for whole or for single
 POST @ /path, /path/{id} - create & update
 DELETE @ /path/{id} - delete for single
  */
-\Tina4\Crud::route ("/api/admin/article-categories", new ArticleCategory(), function ($action, $articleCategory, $filter, $request) {
-
-
-
+\Tina4\Crud::route ("/api/admin/article-categories", new ArticleCategory(), function ($action, ArticleCategory $articleCategory, $filter, $request) {
     $categories = (new ArticleCategory())->select("id,name,parent_id,slug,is_menu,is_active,display_order")
         ->filter(function($record){
             $article = new ArticleCategory();
@@ -22,10 +18,6 @@ DELETE @ /path/{id} - delete for single
             $record->parentName = $article->name;
         })
         ->asArray();
-
-
-
-
     switch ($action) {
         case "form":
             //Return back a form to be submitted to the create
@@ -48,7 +40,6 @@ DELETE @ /path/{id} - delete for single
                 $where = "{$filter["where"]}";
             }
 
-
             return   $articleCategory->select ("id,name,parent_id,slug,is_menu,is_active,display_order", $filter["length"], $filter["start"])
                 ->where("{$where}")
                 ->filter(function($record){
@@ -60,27 +51,23 @@ DELETE @ /path/{id} - delete for single
                 ->asResult();
             break;
         case "create":
+        case "update":
             //no return needed
-
-            break;
-
+            if ($articleCategory->isMenu && $articleCategory->slug === "") {
+                $articleCategory->slug = (new Content())->getSlug($articleCategory->name);
+            }
+        break;
         case "afterCreate":
             //no return needed
             return (object)["httpCode" => 200, "message" => "<script>articleCategoryTable.ajax.reload(null, false); showMessage ('{$articleCategory->name} Created');</script>"];
-
-            break;
-        case "update":
-            //no return needed
-            break;
-
+        break;
         case "afterUpdate":
             //no return needed
             return (object)["httpCode" => 200, "message" => "<script>articleCategoryTable.ajax.reload(null, false); showMessage ('{$articleCategory->name} Updated');</script>"];
-            break;
+        break;
         case "delete":
             //no return needed
-            break;
-
+        break;
         case "afterDelete":
             //no return needed
             return (object)["httpCode" => 200, "message" => "<script>articleCategoryTable.ajax.reload(null, false); showMessage ('{$articleCategory->name} Deleted');</script>"];

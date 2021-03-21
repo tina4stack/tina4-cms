@@ -278,6 +278,10 @@ class Content extends \Tina4\Data
                     $childrenMenus = $this->getMenu($menu->id, ++$level);
                     $menu->children = $childrenMenus;
                 }
+                if ($menu->slug === "")
+                {
+                    $menu->slug = $this->getSlug($menu->name);
+                }
                 $menu->url = "/content/{$menu->slug}";
 
             }
