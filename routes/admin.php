@@ -6,9 +6,6 @@
  */
 \Tina4\Get::add("/cms/file-browser",function (\Tina4\Response $response, \Tina4\Request $request) {
     $files = \Tina4\Tina4Php::iterateDirectory("./uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
-
-
-
     return $response(\Tina4\renderTemplate("admin/file-browser.twig", ["files" => $files]));
 });
 
@@ -25,22 +22,19 @@
     // Sanitize input
     if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $temp['name'])) {
         header("HTTP/1.1 400 Invalid file name.");
-        return;
+        return null;
     }
 
     // Verify extension
     if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
         header("HTTP/1.1 400 Invalid extension.");
-        return;
+        return null;
     }
 
     // Accept upload if there was no origin, or if it is an accepted origin
     $fileToWrite = $imageFolder . "/". $temp['name'];
     move_uploaded_file($temp['tmp_name'], $fileToWrite);
-
-
     return $response (["location" => str_replace("./uploads", "", $fileToWrite)]);
-
 });
 
 
@@ -48,29 +42,28 @@
     $users = (new Users())->select("count(id) as number")->asArray();
 
     if ((int)$users[0]["number"] === 0) {
-
-        return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
+        return $response(\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
-        return (\Tina4\renderTemplate("@tina4cms/admin/login.twig"));
+        return $response(\Tina4\renderTemplate("@tina4cms/admin/login.twig"));
     }
 });
 
 \Tina4\Get::add("/cms/login/reset", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number")->asObject()[0];
     if ($users->number === 0) {
-        return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
+        return $response(\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
-        return (\Tina4\renderTemplate("@tina4cms/admin/reset.twig"));
+        return $response(\Tina4\renderTemplate("@tina4cms/admin/reset.twig"));
     }
 });
 
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number");
     if (empty($users)) {
-        return (\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
+        return $response(\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
     } else {
         $menuItems = (new Content())->getCmsMenus();
-        return (\Tina4\renderTemplate("@tina4cms/admin/dashboard.twig", ["menuItems" => $menuItems]));
+        return $response(\Tina4\renderTemplate("@tina4cms/admin/dashboard.twig", ["menuItems" => $menuItems]));
     }
 });
 
@@ -103,6 +96,7 @@
             \Tina4\redirect("/cms/login?error=true");
         }
     }
+    return null;
 });
 
 \Tina4\Get::add("/cms/logout", function (\Tina4\Response $response, \Tina4\Request $request) {
@@ -112,5 +106,7 @@
     session_write_close();
 
     \Tina4\redirect("/cms/login");
+
+    return null;
 });
 
