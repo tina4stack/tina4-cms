@@ -15,11 +15,18 @@ class Content extends \Tina4\Data
 
     /**
      * Get CMS menus
-     * @return mixed
+     * @return array
+     * @tests
+     *   assert is_array() === true, "Result must be an array"
      */
     public function getCmsMenus(): array
     {
         global $TINA4_CMS_MENU_ITEMS;
+
+        if (empty($TINA4_CMS_MENU_ITEMS))
+        {
+            $TINA4_CMS_MENU_ITEMS = [];
+        }
         return $TINA4_CMS_MENU_ITEMS;
     }
 
@@ -30,7 +37,8 @@ class Content extends \Tina4\Data
      * @param $separator
      * @return String
      */
-    public function getSlug($title, $separator = '-') {
+    public function getSlug($title, $separator = '-'): string
+    {
         // lower string
         $title = strtolower($title);
 
@@ -39,27 +47,27 @@ class Content extends \Tina4\Data
 
         $title = str_replace("'", "", $title);
 
-        $title = preg_replace('!['.preg_quote($flip).']+!u', $separator, $title);
+        $title = preg_replace('!['.preg_quote($flip, null).']+!u', $separator, $title);
 
         // Replace @ with the word 'at'
         $title = str_replace('@', $separator.'at'.$separator, $title);
 
         // Remove all characters that are not the separator, letters, numbers, or whitespace.
-        $title = preg_replace('![^'.preg_quote($separator).'\pL\pN\s]+!u', '-', $title);
+        $title = preg_replace('![^'.preg_quote($separator, null).'\pL\pN\s]+!u', '-', $title);
 
         // Replace all separator characters and whitespace by a single separator
-        $title = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $title);
+        $title = preg_replace('!['.preg_quote($separator, null).'\s]+!u', $separator, $title);
 
         return trim($title, $separator);
     }
 
     /**
      * Get Page Meta
-     * @param $pageName
+     * @param $slug
      * @return Page
-     * @throws Exception
      */
-    public function getPageMeta($slug) {
+    public function getPageMeta($slug)
+    {
         $page = (new Page());
         $page->load("slug = '{$slug}'");
 
@@ -86,9 +94,10 @@ class Content extends \Tina4\Data
      * @param int $limit
      * @param int $skip
      * @param string $template
-     * @return string
+     * @return array
      */
-    public function getArticles($category, $limit=10, $skip=0, $template="article.twig") {
+    public function getArticles($category, $limit=10, $skip=0, $template="article.twig")
+    {
 
         $articles = (new Article())->select("*", $limit, $skip)->where("1 = 1");
         if ($category) {
@@ -127,7 +136,8 @@ class Content extends \Tina4\Data
      * @return string
      * @throws \Twig\Error\LoaderError
      */
-    public function getArticleList($category, $className="", $limit=0) {
+    public function getArticleList($category, $className="", $limit=0)
+    {
         $articles = (new Article())->select("title, description, image, slug, date_created", $limit)
           ->where("id <> 0 and is_published = 1");
         if ($category) {
@@ -147,7 +157,8 @@ class Content extends \Tina4\Data
      * @return string
      * @throws \Twig\Error\LoaderError
      */
-    public function renderArticle($title, $content, $image, $article, $template="article.twig") {
+    public function renderArticle($title, $content, $image, $article, $template="article.twig"): string
+    {
         $content = \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
         return $content;
     }
@@ -196,6 +207,12 @@ class Content extends \Tina4\Data
         return $fileName;
     }
 
+    /**
+     * @param $path
+     * @param string $clickEvent
+     * @param string $relativePath
+     * @return string
+     */
     public static function iterateDirectory($path, $clickEvent="returnFileUrl", $relativePath = "")
     {
         if (empty($relativePath)) $relativePath = $path;
@@ -206,8 +223,8 @@ class Content extends \Tina4\Data
         $fileItems = [];
 
         foreach ($files as $id => $fileName) {
-            if ($fileName[0] == "." || $fileName == "cache" || $fileName == "vendor") continue;
-            if (is_dir($path . "/" . $fileName) && $fileName != "." && $fileName != "..") {
+            if ($fileName[0] == "." || $fileName == "cache" || $fileName === "vendor") continue;
+            if (is_dir($path . "/" . $fileName) && $fileName !== "." && $fileName != "..") {
                 $html = '<li data-jstree=\'{"icon":"//img.icons8.com/metro/26/000000/folder-invoices.png"}\'>' . $fileName;
                 $html .= self::iterateDirectory($path . "/" . $fileName, $clickEvent, $relativePath);
                 $html .= "</li>";
@@ -222,8 +239,8 @@ class Content extends \Tina4\Data
         }
 
         $html = "<ul>";
-        $html .= join("", $dirItems);
-        $html .= join("", $fileItems);
+        $html .= implode("", $dirItems);
+        $html .= implode("", $fileItems);
         $html .= "</ul>";
         return $html;
     }

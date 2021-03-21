@@ -3,7 +3,7 @@
 \Tina4\Module::addModule("CMS Module", "1.0.0", "tina4cms", function(\Tina4\Config $config) {
     global $DBA;
 
-    if (empty($DBA))
+    if ($DBA === null)
     {
         die("Please create a database for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
     }
@@ -13,11 +13,9 @@
     }
 
     $config->addTwigGlobal("Content",  new Content());
+    $config->addTwigGlobal("Snippet",  new Content());
+    $config->addTwigGlobal("Article",  new Content());
 
-    $config->addTwigFilter("getPage",  function ($name) {
-        $page = (new Content())->getPage($name);
-        return $page["content"];
-    });
 
     $config->addTwigFunction("redirect", function ($url, $code=301) {
         \Tina4\redirect($url, $code);
