@@ -2,6 +2,7 @@
     "name": "andrevanzuydam/tina4cms",
     "description": "Tina4 CMS Module",
     "license": "MIT",
+    "classmap": ["src/*"],
     "autoload": {
         "files": ["index.php"],
         "psr-4": {
