@@ -1,21 +1,28 @@
 {
-  "name": "andrevanzuydam/tina4cms",
-  "description": "Tina4 CMS Module",
-  "license": "MIT",
-  "autoload": {
-  "files": [
-      "index.php"
-    ]
-  },
-  "require": {
-    "andrevanzuydam/tina4php": "dev-feature/routing"
-  },
-  "scripts": {
-    "tina4": "tina4",
-    "tina4service": "tina4service",
-    "test" : "@tina4 tests:run",
-    "initialize": "@tina4 initialize:run",
-    "start" : "php -S localhost:7145 index.php",
-    "start-service": "@tina4service"
-  }
+    "name": "andrevanzuydam/tina4cms",
+    "description": "Tina4 CMS Module",
+    "license": "MIT",
+    "autoload": {
+        "psr4": {
+            "": [
+                "src/",
+                "src/app/",
+                "src/orm/"
+            ]
+        }
+    },
+    "require": {
+        "andrevanzuydam/tina4php": "dev-feature/routing"
+    },
+    "scripts": {
+        "tina4": "tina4",
+        "tina4service": "tina4service",
+        "test": "@tina4 tests:run",
+        "initialize": "@tina4 initialize:run",
+        "start": "@tina4 webservice:run",
+        "start-service": "@tina4service"
+    },
+    "config": {
+        "process-timeout": 0
+    }
 }
