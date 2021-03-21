@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da2cc792651018b4c1971948208e63f6",
+    "content-hash": "ce6c4840ffb90e9a3c9d2500ecfac035",
     "packages": [
         {
             "name": "andrevanzuydam/tina4php",
-            "version": "dev-feature/routing",
+            "version": "v0.1.97",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andrevanzuydam/tina4-php.git",
-                "reference": "dfe9fd4ad6a796c3df975e0e7f9c08e3b63dc054"
+                "reference": "4cf0e18059b6bb11ac26d933d7e397810ea46c7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/dfe9fd4ad6a796c3df975e0e7f9c08e3b63dc054",
-                "reference": "dfe9fd4ad6a796c3df975e0e7f9c08e3b63dc054",
+                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/4cf0e18059b6bb11ac26d933d7e397810ea46c7c",
+                "reference": "4cf0e18059b6bb11ac26d933d7e397810ea46c7c",
                 "shasum": ""
             },
             "require": {
@@ -69,9 +69,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/andrevanzuydam/tina4-php/issues",
-                "source": "https://github.com/andrevanzuydam/tina4-php/tree/feature/routing"
+                "source": "https://github.com/andrevanzuydam/tina4-php/tree/v0.1.97"
             },
-            "time": "2021-03-21T21:04:30+00:00"
+            "time": "2021-03-21T21:16:00+00:00"
         },
         {
             "name": "coyl/git",
@@ -741,9 +741,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "andrevanzuydam/tina4php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
