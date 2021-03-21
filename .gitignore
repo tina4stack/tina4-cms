@@ -13,3 +13,4 @@ composer.phar
 /.env
 /.htaccess
 /favicon.ico
+/cache/
