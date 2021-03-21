@@ -139,3 +139,11 @@ Snippet content of "mySnippet"
   Hello {{world}}!
   
 ```
+
+Adding articles into a page
+```
+{% set articles = Content.getArticles ("", 8) %}
+{% for article in articles %}{% include "snippets/medium.twig" with {"article": article} %}{% endfor %}
+{% set params = {"tag": "all", "skip": 4, "limit": 4, "template": "medium.twig"} %}
+{% include "load-more.twig" with params %}
+```
