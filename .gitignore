@@ -10,3 +10,6 @@ composer.phar
 /.idea/
 /composer.lock
 /test/
+/.env
+/.htaccess
+/favicon.ico

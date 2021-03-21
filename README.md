@@ -1,13 +1,14 @@
 # Tina4 CMS Module
 
-Happy you have decided to try this, how does it work?
+Welcome to the Tina4CMS module, how does it work?
 
 ```
 composer require andrevanzuydam/tina4cms
-php -S localhost:8080 index.php
+
+composer exec tina4 initialize:run
 ```
 
-Make the usual tina4 index.php file - we do need a database!
+Add the database connection to your index.php file which would have been created
 
 ```
 require_once "vendor/autoload.php";
@@ -17,6 +18,11 @@ global $DBA;
 $DBA = new \Tina4\DataSQLite3("test.db","", "", "d/m/Y");
 
 echo new \Tina4\Tina4Php();
+```
+
+Run the CMS
+```commandline
+composer start 8080
 ```
 
 Open up the CMS to setup the admin user

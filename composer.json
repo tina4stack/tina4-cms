@@ -3,11 +3,12 @@
     "description": "Tina4 CMS Module",
     "license": "MIT",
     "autoload": {
-        "psr4": {
+        "psr-4": {
             "": [
                 "src/",
                 "src/app/",
-                "src/orm/"
+                "src/orm/",
+                "src/routes/"
             ]
         }
     },
