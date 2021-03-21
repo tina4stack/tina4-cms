@@ -43,7 +43,7 @@
         break;
         case "create":
             //Manipulate the $object here
-
+            $users->dateCreated = date($users->DBA->dateFormat);
 
             if (!empty($users->password)) {
                 $users->password = password_hash($users->password, PASSWORD_BCRYPT);
@@ -62,6 +62,7 @@
             } else {
                 $users->password = null;
             }
+            $users->dateModified = date($users->DBA->dateFormat);
         break;    
         case "afterUpdate":
            //return needed 
