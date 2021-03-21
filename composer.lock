@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andrevanzuydam/tina4-php.git",
-                "reference": "9b7e8044b78bf29a975a8480f5855f6c7b1c35ec"
+                "reference": "dfe9fd4ad6a796c3df975e0e7f9c08e3b63dc054"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/9b7e8044b78bf29a975a8480f5855f6c7b1c35ec",
-                "reference": "9b7e8044b78bf29a975a8480f5855f6c7b1c35ec",
+                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/dfe9fd4ad6a796c3df975e0e7f9c08e3b63dc054",
+                "reference": "dfe9fd4ad6a796c3df975e0e7f9c08e3b63dc054",
                 "shasum": ""
             },
             "require": {
@@ -71,7 +71,7 @@
                 "issues": "https://github.com/andrevanzuydam/tina4-php/issues",
                 "source": "https://github.com/andrevanzuydam/tina4-php/tree/feature/routing"
             },
-            "time": "2021-03-21T20:38:30+00:00"
+            "time": "2021-03-21T21:04:30+00:00"
         },
         {
             "name": "coyl/git",
