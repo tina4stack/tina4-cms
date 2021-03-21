@@ -207,43 +207,6 @@ class Content extends \Tina4\Data
         return $fileName;
     }
 
-    /**
-     * @param $path
-     * @param string $clickEvent
-     * @param string $relativePath
-     * @return string
-     */
-    public static function iterateDirectory($path, $clickEvent="returnFileUrl", $relativePath = "")
-    {
-        if (empty($relativePath)) $relativePath = $path;
-        $files = scandir($path);
-        asort($files);
-
-        $dirItems = [];
-        $fileItems = [];
-
-        foreach ($files as $id => $fileName) {
-            if ($fileName[0] == "." || $fileName == "cache" || $fileName === "vendor") continue;
-            if (is_dir($path . "/" . $fileName) && $fileName !== "." && $fileName != "..") {
-                $html = '<li data-jstree=\'{"icon":"//img.icons8.com/metro/26/000000/folder-invoices.png"}\'>' . $fileName;
-                $html .= self::iterateDirectory($path . "/" . $fileName, $clickEvent, $relativePath);
-                $html .= "</li>";
-                $dirItems[] = $html;
-
-            } else {
-                if (strpos($fileName, ".jpg") !== false || strpos($fileName, ".png") !== false || strpos($fileName, ".jpeg") !== false ) {
-                    $fileItems[] = '<li data-jstree=\'{"icon":"//img.icons8.com/plasticine/32/000000/image.png"}\' onclick="previewFile(\'' . str_replace("./", "/", $path) . "/" . $fileName . '\')" ondblclick="' . $clickEvent . '(\'' . str_replace("./", "/", $path) . "/" . $fileName . '\')">' . $fileName . '</li>';
-                }
-            }
-
-        }
-
-        $html = "<ul>";
-        $html .= implode("", $dirItems);
-        $html .= implode("", $fileItems);
-        $html .= "</ul>";
-        return $html;
-    }
 
     /**
      * Gets articles
