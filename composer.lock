@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce6c4840ffb90e9a3c9d2500ecfac035",
+    "content-hash": "95bc47604adc97e6f2892f6d35abafcc",
     "packages": [
         {
             "name": "andrevanzuydam/tina4php",
-            "version": "v0.1.97",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andrevanzuydam/tina4-php.git",
-                "reference": "4cf0e18059b6bb11ac26d933d7e397810ea46c7c"
+                "reference": "f5391f5d96b908cff6993f4f8b4e8b0ed2bbe4f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/4cf0e18059b6bb11ac26d933d7e397810ea46c7c",
-                "reference": "4cf0e18059b6bb11ac26d933d7e397810ea46c7c",
+                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/f5391f5d96b908cff6993f4f8b4e8b0ed2bbe4f4",
+                "reference": "f5391f5d96b908cff6993f4f8b4e8b0ed2bbe4f4",
                 "shasum": ""
             },
             "require": {
@@ -28,6 +28,7 @@
                 "scssphp/scssphp": "^1.4",
                 "twig/twig": "^3.3"
             },
+            "default-branch": true,
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -39,8 +40,8 @@
                     "Tina4/Initialize.php"
                 ],
                 "classmap": [
-                    "Tina4/*",
-                    "src/*"
+                    "Tina4/",
+                    "src/"
                 ],
                 "psr-4": {
                     "\\": [
@@ -69,9 +70,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/andrevanzuydam/tina4-php/issues",
-                "source": "https://github.com/andrevanzuydam/tina4-php/tree/v0.1.97"
+                "source": "https://github.com/andrevanzuydam/tina4-php/tree/master"
             },
-            "time": "2021-03-21T21:16:00+00:00"
+            "time": "2021-03-23T19:24:08+00:00"
         },
         {
             "name": "coyl/git",
@@ -741,7 +742,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "andrevanzuydam/tina4php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
