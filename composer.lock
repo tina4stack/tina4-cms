@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andrevanzuydam/tina4-php.git",
-                "reference": "f5391f5d96b908cff6993f4f8b4e8b0ed2bbe4f4"
+                "reference": "b7f2f9cd51a069c78cac02a6173d3ada5ed756b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/f5391f5d96b908cff6993f4f8b4e8b0ed2bbe4f4",
-                "reference": "f5391f5d96b908cff6993f4f8b4e8b0ed2bbe4f4",
+                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/b7f2f9cd51a069c78cac02a6173d3ada5ed756b6",
+                "reference": "b7f2f9cd51a069c78cac02a6173d3ada5ed756b6",
                 "shasum": ""
             },
             "require": {
@@ -40,6 +40,7 @@
                     "Tina4/Initialize.php"
                 ],
                 "classmap": [
+                    "Helpers/",
                     "Tina4/",
                     "src/"
                 ],
@@ -48,7 +49,8 @@
                         "src",
                         "src/app",
                         "src/orm",
-                        "src/routes"
+                        "src/routes",
+                        "Helpers/"
                     ],
                     "Tina4\\": [
                         "Tina4/",
@@ -72,7 +74,7 @@
                 "issues": "https://github.com/andrevanzuydam/tina4-php/issues",
                 "source": "https://github.com/andrevanzuydam/tina4-php/tree/master"
             },
-            "time": "2021-03-23T19:24:08+00:00"
+            "time": "2021-03-29T13:36:27+00:00"
         },
         {
             "name": "coyl/git",
