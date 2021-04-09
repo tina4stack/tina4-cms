@@ -55,6 +55,7 @@
                     images_upload_base_path: '/uploads/',
                     images_upload_credentials: true,
                     force_p_newlines : false,
+                    convert_urls: false,
                     file_picker_callback:   function(callback, url, type, win) {
                         myWindow = popupCenter({url: "/cms/file-browser?formToken={{ formToken | raw }}", title: 'Tina4CMS - File Browser', w: 900, h: 500});
                         myWindow.tinymceCallback = callback;
@@ -81,6 +82,12 @@
                                 callback(items);
                             }
                         });
+                    }
+                });
+
+                $(document).on('focusin', function(e) {
+                    if ($(e.target).closest(".tox").length) {
+                        e.stopImmediatePropagation();
                     }
                 });
             </script>
