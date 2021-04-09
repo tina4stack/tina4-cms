@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "andrevanzuydam/tina4php": "dev-master"
+        "andrevanzuydam/tina4php": "v0.1.100"
     },
     "scripts": {
         "tina4": "tina4",

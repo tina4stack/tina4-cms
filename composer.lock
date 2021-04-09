@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "95bc47604adc97e6f2892f6d35abafcc",
+    "content-hash": "e2f3242bdb19e2adc5e7a3a6c4394faa",
     "packages": [
         {
             "name": "andrevanzuydam/tina4php",
-            "version": "dev-master",
+            "version": "v0.1.100",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andrevanzuydam/tina4-php.git",
@@ -28,7 +28,6 @@
                 "scssphp/scssphp": "^1.4",
                 "twig/twig": "^3.3"
             },
-            "default-branch": true,
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -744,9 +743,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "andrevanzuydam/tina4php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
