@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/andrevanzuydam/tina4-php.git",
-                "reference": "b7f2f9cd51a069c78cac02a6173d3ada5ed756b6"
+                "reference": "d572e0ea0379af1e8377409796fd4d032e60fcaf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/b7f2f9cd51a069c78cac02a6173d3ada5ed756b6",
-                "reference": "b7f2f9cd51a069c78cac02a6173d3ada5ed756b6",
+                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/d572e0ea0379af1e8377409796fd4d032e60fcaf",
+                "reference": "d572e0ea0379af1e8377409796fd4d032e60fcaf",
                 "shasum": ""
             },
             "require": {
@@ -72,9 +72,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/andrevanzuydam/tina4-php/issues",
-                "source": "https://github.com/andrevanzuydam/tina4-php/tree/master"
+                "source": "https://github.com/andrevanzuydam/tina4-php/tree/v0.1.100"
             },
-            "time": "2021-03-29T13:36:27+00:00"
+            "time": "2021-04-05T08:56:32+00:00"
         },
         {
             "name": "coyl/git",
@@ -173,16 +173,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "8.0.4",
+            "version": "8.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "f1a22a821a30b928b28d2ec73ed1b0245b5ab3f9"
+                "reference": "6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/f1a22a821a30b928b28d2ec73ed1b0245b5ab3f9",
-                "reference": "f1a22a821a30b928b28d2ec73ed1b0245b5ab3f9",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c",
+                "reference": "6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c",
                 "shasum": ""
             },
             "require": {
@@ -274,7 +274,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPSocialNetwork/phpfastcache/issues",
-                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.4"
+                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.5"
             },
             "funding": [
                 {
@@ -286,7 +286,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-12-21T19:35:04+00:00"
+            "time": "2021-04-05T22:24:16+00:00"
         },
         {
             "name": "psr/cache",
