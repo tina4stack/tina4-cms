@@ -21,7 +21,7 @@
             crossorigin="anonymous"></script>
 
     <script src="/src/public/js/tina4helper.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
@@ -31,21 +31,23 @@
 {% endblock %}
 {% block content %}
 
-        <h5>Navigate the files on the left, double click the image to insert</h5>
+    <h5>Navigate the files on the left, double click the image to insert</h5>
 
     <div class="row">
         <div class="col-md-4" style="border: 1px solid black; height: 90vh; overflow: auto" id="fileTree">
-            {{ files | raw}}
+            {{ files | raw }}
         </div>
         <div class="col-md-8" style="border: 1px solid black; height: 90vh">
-            <img class="img-thumbnail" ondblclick="window.tinymceCallback(this.src); window.close()" style="border: 1px solid #000; max-width:100%; max-height:100%;" id="imagePreview" src="" object-fit="cover">
+            <img class="img-thumbnail" ondblclick="window.tinymceCallback(this.src); window.close()"
+                 style="border: 1px solid #000; max-width:100%; max-height:100%;" id="imagePreview" src=""
+                 object-fit="cover">
         </div>
         <script>
 
             $('#fileTree').jstree({});
 
             function previewFile(fileName) {
-                $('#imagePreview').attr('src',fileName);
+                $('#imagePreview').attr('src', fileName);
             }
         </script>
     </div>

@@ -1,43 +1,40 @@
 {% extends "@tina4cms/admin/dashboard.twig" %}
 
 {% block content %}
-
-
-
-            <div class="col-md-4 offset-md-4">
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <h4>Login</h4>
-                    </div>
-                    <div class="card-body">
-                        <form id="loginForm" method="post">
-                            <div class="form-group">
-                                <label>Email</label>
-                                <input class="form-control" type="text" name="email" placeholder="Email Address"
-                                       autocomplete="on"/>
-                            </div>
-                            <button class="btn btn-block btn-primary">Reset</button>
-
-                            <a href="/cms/login">back to login</a>
-                            {{ "reset" | formToken | raw }}
-                        </form>
-                        <script>
-                            $("#loginForm").validate({
-                                rules: {
-                                    email: "required",
-
-
-                                },
-                                messages: {
-                                    email: "Email address required",
-
-                                }
-                            });
-                        </script>
-
-                    </div>
-
+    <div class="col-md-4 offset-md-4">
+    <div class="card mt-4">
+        <div class="card-header">
+            <h4>Login</h4>
+        </div>
+        <div class="card-body">
+            <form id="loginForm" method="post">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input class="form-control" type="text" name="email" placeholder="Email Address"
+                           autocomplete="on"/>
                 </div>
+                <button class="btn btn-block btn-primary">Reset</button>
+
+                <a href="/cms/login">back to login</a>
+                {{ "reset" | formToken | raw }}
+            </form>
+            <script>
+                $("#loginForm").validate({
+                    rules: {
+                        email: "required",
+
+
+                    },
+                    messages: {
+                        email: "Email address required",
+
+                    }
+                });
+            </script>
+
+        </div>
+
+    </div>
 
 
 {% endblock %}

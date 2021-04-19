@@ -4,24 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e2f3242bdb19e2adc5e7a3a6c4394faa",
+    "content-hash": "70187fdf1f09878e011f418475e9833e",
     "packages": [
         {
             "name": "andrevanzuydam/tina4php",
-            "version": "v0.1.100",
+            "version": "v0.1.101",
             "source": {
                 "type": "git",
                 "url": "https://github.com/andrevanzuydam/tina4-php.git",
-                "reference": "d572e0ea0379af1e8377409796fd4d032e60fcaf"
+                "reference": "32cec190518c8344054553de85dbbc386b2174d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/d572e0ea0379af1e8377409796fd4d032e60fcaf",
-                "reference": "d572e0ea0379af1e8377409796fd4d032e60fcaf",
+                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/32cec190518c8344054553de85dbbc386b2174d2",
+                "reference": "32cec190518c8344054553de85dbbc386b2174d2",
                 "shasum": ""
             },
             "require": {
                 "coyl/git": "^0.1.7",
+                "ext-curl": "*",
+                "ext-json": "*",
                 "nowakowskir/php-jwt": "^2.0",
                 "phpfastcache/phpfastcache": "^8.0",
                 "psr/log": "^1.1",
@@ -71,9 +73,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/andrevanzuydam/tina4-php/issues",
-                "source": "https://github.com/andrevanzuydam/tina4-php/tree/v0.1.100"
+                "source": "https://github.com/andrevanzuydam/tina4-php/tree/v0.1.101"
             },
-            "time": "2021-04-05T08:56:32+00:00"
+            "time": "2021-04-19T20:14:19+00:00"
         },
         {
             "name": "coyl/git",

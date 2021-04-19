@@ -15,15 +15,15 @@
     var articleGrid = null;
     $(document).ready(function () {
         articleGrid = $('#articleGrid').DataTable({
-            order: [[ 0, "desc" ]],
+            order: [[0, "desc"]],
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
             ajax: '/api/admin/articles',
             columns: [
-                {"data" : "id" },
-                {"data" : "publishedDate" },
-                {"data" : "title" },
-                {"data" : "description" },
-                {"data" : "author" },
+                {"data": "id"},
+                {"data": "publishedDate"},
+                {"data": "title"},
+                {"data": "description"},
+                {"data": "author"},
                 {
                     "mRender": function (data, type, row) {
                         return (row.isPublished == 1) ? 'Yes' : 'No';
@@ -46,14 +46,14 @@
             processing: true,
             serverSide: true,
             responsive: true,
-            buttons:  [
+            buttons: [
                 {
                     text: 'Create',
                     action: function (e, dt, node, config) {
                         let data = {};
                         showForm('create', '/api/admin/articles/form');
                     }
-                },'copy', 'excel', 'pdf', 'print'
+                }, 'copy', 'excel', 'pdf', 'print'
 
             ]
         });

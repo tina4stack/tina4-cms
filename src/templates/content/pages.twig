@@ -19,17 +19,17 @@
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
             ajax: '/api/admin/pages',
             columns: [
-                {"data" : "id" },
-                {"data" : "name" },
-                {"data" : "title" },
-                {"data" : "keywords" },
+                {"data": "id"},
+                {"data": "name"},
+                {"data": "title"},
+                {"data": "keywords"},
                 {
                     "mRender": function (data, type, row) {
                         return (row.isPublished == 1) ? 'Yes' : 'No';
                     }
                 },
-                {"data" : "dateCreated" },
-                {"data" : "dateModified" },
+                {"data": "dateCreated"},
+                {"data": "dateModified"},
                 {
                     "mRender": function (data, type, row) {
                         let html = '';

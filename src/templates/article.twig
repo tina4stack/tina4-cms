@@ -7,8 +7,8 @@
 
 <p>By {{ article.author }} {{ article.publishedDate }}</p>
 
-{%  if (image) %}
-<span class="large mb-4">
+{% if (image) %}
+    <span class="large mb-4">
     <img src="data:image/png;base64,{{ image }}" style='height: 100%; width: 100%; object-fit: contain'/>
 </span>
 {% endif %}
