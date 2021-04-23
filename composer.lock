@@ -4,79 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70187fdf1f09878e011f418475e9833e",
+    "content-hash": "8e6e37a0fcbe1079412d713546c726e1",
     "packages": [
-        {
-            "name": "andrevanzuydam/tina4php",
-            "version": "v0.1.101",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/andrevanzuydam/tina4-php.git",
-                "reference": "32cec190518c8344054553de85dbbc386b2174d2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/andrevanzuydam/tina4-php/zipball/32cec190518c8344054553de85dbbc386b2174d2",
-                "reference": "32cec190518c8344054553de85dbbc386b2174d2",
-                "shasum": ""
-            },
-            "require": {
-                "coyl/git": "^0.1.7",
-                "ext-curl": "*",
-                "ext-json": "*",
-                "nowakowskir/php-jwt": "^2.0",
-                "phpfastcache/phpfastcache": "^8.0",
-                "psr/log": "^1.1",
-                "scssphp/scssphp": "^1.4",
-                "twig/twig": "^3.3"
-            },
-            "bin": [
-                "bin/tina4",
-                "bin/tina4service"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Tina4/Functions.php",
-                    "Tina4/Initialize.php"
-                ],
-                "classmap": [
-                    "Helpers/",
-                    "Tina4/",
-                    "src/"
-                ],
-                "psr-4": {
-                    "\\": [
-                        "src",
-                        "src/app",
-                        "src/orm",
-                        "src/routes",
-                        "Helpers/"
-                    ],
-                    "Tina4\\": [
-                        "Tina4/",
-                        "Tina4/Api/",
-                        "Tina4/Core/",
-                        "Tina4/Database/",
-                        "Tina4/Messaging/",
-                        "Tina4/ORM/",
-                        "Tina4/Routing/",
-                        "Tina4/Security/",
-                        "Tina4/Service/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Tina4 PHP",
-            "support": {
-                "issues": "https://github.com/andrevanzuydam/tina4-php/issues",
-                "source": "https://github.com/andrevanzuydam/tina4-php/tree/v0.1.101"
-            },
-            "time": "2021-04-19T20:14:19+00:00"
-        },
         {
             "name": "coyl/git",
             "version": "0.1.7",
@@ -664,6 +593,77 @@
                 }
             ],
             "time": "2021-01-22T09:19:47+00:00"
+        },
+        {
+            "name": "tina4stack/tina4php",
+            "version": "v0.1.101",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4-php.git",
+                "reference": "32cec190518c8344054553de85dbbc386b2174d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/32cec190518c8344054553de85dbbc386b2174d2",
+                "reference": "32cec190518c8344054553de85dbbc386b2174d2",
+                "shasum": ""
+            },
+            "require": {
+                "coyl/git": "^0.1.7",
+                "ext-curl": "*",
+                "ext-json": "*",
+                "nowakowskir/php-jwt": "^2.0",
+                "phpfastcache/phpfastcache": "^8.0",
+                "psr/log": "^1.1",
+                "scssphp/scssphp": "^1.4",
+                "twig/twig": "^3.3"
+            },
+            "bin": [
+                "bin/tina4",
+                "bin/tina4service"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Tina4/Functions.php",
+                    "Tina4/Initialize.php"
+                ],
+                "classmap": [
+                    "Helpers/",
+                    "Tina4/",
+                    "src/"
+                ],
+                "psr-4": {
+                    "\\": [
+                        "src",
+                        "src/app",
+                        "src/orm",
+                        "src/routes",
+                        "Helpers/"
+                    ],
+                    "Tina4\\": [
+                        "Tina4/",
+                        "Tina4/Api/",
+                        "Tina4/Core/",
+                        "Tina4/Database/",
+                        "Tina4/Messaging/",
+                        "Tina4/ORM/",
+                        "Tina4/Routing/",
+                        "Tina4/Security/",
+                        "Tina4/Service/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 PHP",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4-php/issues",
+                "source": "https://github.com/tina4stack/tina4-php/tree/v0.1.101"
+            },
+            "time": "2021-04-19T20:14:19+00:00"
         },
         {
             "name": "twig/twig",

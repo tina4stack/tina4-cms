@@ -1,5 +1,5 @@
 {
-    "name": "andrevanzuydam/tina4cms",
+    "name": "tina4stack/tina4cms",
     "description": "Tina4 CMS Module",
     "license": "MIT",
     "classmap": ["src/*"],
@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "andrevanzuydam/tina4php": "v0.1.101"
+        "tina4stack/tina4php": "v0.1.101"
     },
     "scripts": {
         "tina4": "tina4",
