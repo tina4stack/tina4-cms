@@ -3,7 +3,7 @@
 Welcome to the Tina4CMS module, how does it work?
 
 ```
-composer require andrevanzuydam/tina4cms
+composer require tina4stack/tina4cms
 
 composer exec tina4 initialize:run
 ```
