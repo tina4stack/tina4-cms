@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "tina4stack/tina4php": "v0.1.113"
+        "tina4stack/tina4php": "v0.1.116"
     },
     "scripts": {
         "tina4": "tina4",
