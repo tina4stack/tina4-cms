@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4826646038d304c8c76b00f961dc8525",
+    "content-hash": "68a1f6d152054f3c725f71c4c61383d0",
     "packages": [
         {
             "name": "coyl/git",
@@ -602,16 +602,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v0.1.113",
+            "version": "v0.1.117",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "e46b59f849dcc84ce523c71180ce541420ff65aa"
+                "reference": "5a3993b28fcf7baee243c9fd03fe832fba88279f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/e46b59f849dcc84ce523c71180ce541420ff65aa",
-                "reference": "e46b59f849dcc84ce523c71180ce541420ff65aa",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/5a3993b28fcf7baee243c9fd03fe832fba88279f",
+                "reference": "5a3993b28fcf7baee243c9fd03fe832fba88279f",
                 "shasum": ""
             },
             "require": {
@@ -667,9 +667,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v0.1.113"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v0.1.117"
             },
-            "time": "2021-05-27T13:01:31+00:00"
+            "time": "2021-06-15T10:09:22+00:00"
         },
         {
             "name": "twig/twig",
