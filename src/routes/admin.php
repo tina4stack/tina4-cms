@@ -40,30 +40,33 @@
 
 \Tina4\Get::add("/cms/login", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number")->asArray();
+    $twigNameSpace = (new Content())->getTwigNameSpace();
 
     if ((int)$users[0]["number"] === 0) {
-        return $response(\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
     } else {
-        return $response(\Tina4\renderTemplate("@tina4cms/admin/login.twig"));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/login.twig", ["twigNameSpace" => $twigNameSpace]));
     }
 });
 
 \Tina4\Get::add("/cms/login/reset", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number")->asObject()[0];
+    $twigNameSpace = (new Content())->getTwigNameSpace();
     if ($users->number === 0) {
-        return $response(\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
     } else {
-        return $response(\Tina4\renderTemplate("@tina4cms/admin/reset.twig"));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/reset.twig", ["twigNameSpace" => $twigNameSpace]));
     }
 });
 
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number");
+    $twigNameSpace = (new Content())->getTwigNameSpace();
     if (empty($users)) {
-        return $response(\Tina4\renderTemplate("@tina4cms/admin/setup.twig"));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
     } else {
         $menuItems = (new Content())->getCmsMenus();
-        return $response(\Tina4\renderTemplate("@tina4cms/admin/dashboard.twig", ["menuItems" => $menuItems]));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace]));
     }
 });
 

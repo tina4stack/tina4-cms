@@ -147,3 +147,8 @@ Adding articles into a page
 {% set params = {"tag": "all", "skip": 4, "limit": 4, "template": "medium.twig"} %}
 {% include "load-more.twig" with params %}
 ```
+
+Overwriting the default CMS twig namespace - your own namespace
+```
+CMS_TWIG_NAMESPACE=""
+```

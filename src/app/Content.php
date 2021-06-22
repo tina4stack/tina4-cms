@@ -2,6 +2,21 @@
 
 class Content extends \Tina4\Data
 {
+    private $twigNamespace = "@tina4cms";
+
+    /**
+     * Get a different twig name space for changing dashboard and other screens
+     * @return string
+     */
+    public function getTwigNameSpace(): string
+    {
+        if (defined("CMS_TWIG_NAMESPACE")) {
+            return CMS_TWIG_NAMESPACE;
+        } else {
+            $this->twigNamespace;
+        }
+    }
+
     /**
      * Add CMS menu
      * @param string $href
