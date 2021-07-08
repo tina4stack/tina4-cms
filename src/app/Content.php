@@ -13,7 +13,7 @@ class Content extends \Tina4\Data
         if (defined("CMS_TWIG_NAMESPACE")) {
             return CMS_TWIG_NAMESPACE;
         } else {
-            $this->twigNamespace;
+            return $this->twigNamespace;
         }
     }
 
