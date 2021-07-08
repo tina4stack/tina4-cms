@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68a1f6d152054f3c725f71c4c61383d0",
+    "content-hash": "c34dfeac0ca0f0de9c01994d16aa369c",
     "packages": [
         {
             "name": "coyl/git",
@@ -103,16 +103,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "8.0.5",
+            "version": "8.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c"
+                "reference": "c93bd7d341176b64b428953365ef67002af9f61e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c",
-                "reference": "6d66cc0604bcbd7681ef1b3fdd1ba22901a16b1c",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/c93bd7d341176b64b428953365ef67002af9f61e",
+                "reference": "c93bd7d341176b64b428953365ef67002af9f61e",
                 "shasum": ""
             },
             "require": {
@@ -204,7 +204,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPSocialNetwork/phpfastcache/issues",
-                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.5"
+                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.6"
             },
             "funding": [
                 {
@@ -216,7 +216,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-04-05T22:24:16+00:00"
+            "time": "2021-07-07T14:21:56+00:00"
         },
         {
             "name": "psr/cache",
@@ -370,16 +370,16 @@
         },
         {
             "name": "scssphp/scssphp",
-            "version": "v1.5.2",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scssphp/scssphp.git",
-                "reference": "6fe16f169f55f5e793474fb210aac0a4481619e5"
+                "reference": "b83594e2323c5d6e80785df3f91b9d1d32aad530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/6fe16f169f55f5e793474fb210aac0a4481619e5",
-                "reference": "6fe16f169f55f5e793474fb210aac0a4481619e5",
+                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/b83594e2323c5d6e80785df3f91b9d1d32aad530",
+                "reference": "b83594e2323c5d6e80785df3f91b9d1d32aad530",
                 "shasum": ""
             },
             "require": {
@@ -437,9 +437,9 @@
             ],
             "support": {
                 "issues": "https://github.com/scssphp/scssphp/issues",
-                "source": "https://github.com/scssphp/scssphp/tree/v1.5.2"
+                "source": "https://github.com/scssphp/scssphp/tree/v1.6.0"
             },
-            "time": "2021-05-18T00:05:58+00:00"
+            "time": "2021-07-02T16:28:10+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -602,28 +602,36 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v0.1.117",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "5a3993b28fcf7baee243c9fd03fe832fba88279f"
+                "reference": "d7112273fba8eb0ccbf3fbf3c717d229d178738b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/5a3993b28fcf7baee243c9fd03fe832fba88279f",
-                "reference": "5a3993b28fcf7baee243c9fd03fe832fba88279f",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/d7112273fba8eb0ccbf3fbf3c717d229d178738b",
+                "reference": "d7112273fba8eb0ccbf3fbf3c717d229d178738b",
                 "shasum": ""
             },
             "require": {
                 "coyl/git": "^0.1.7",
                 "ext-curl": "*",
                 "ext-json": "*",
-                "nowakowskir/php-jwt": "^2.0",
-                "phpfastcache/phpfastcache": "^8.0",
-                "psr/log": "^1.1",
-                "scssphp/scssphp": "^1.4",
-                "twig/twig": "^3.3"
+                "nowakowskir/php-jwt": "^2.0.1",
+                "phpfastcache/phpfastcache": "^8.0.5",
+                "psr/log": "^1.1.4",
+                "scssphp/scssphp": "^1.5.2",
+                "tina4stack/tina4php-debug": "^2.0",
+                "tina4stack/tina4php-env": "^2.0",
+                "tina4stack/tina4php-shape": "^2.0",
+                "twig/twig": "^3.3.2"
             },
+            "require-dev": {
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9"
+            },
+            "default-branch": true,
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -667,9 +675,146 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v0.1.117"
+                "source": "https://github.com/tina4stack/tina4-php/tree/master"
             },
-            "time": "2021-06-15T10:09:22+00:00"
+            "time": "2021-07-08T16:34:16+00:00"
+        },
+        {
+            "name": "tina4stack/tina4php-debug",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4php-debug.git",
+                "reference": "666db74269de5d05ab6e09920063a96cf5a351fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-debug/zipball/666db74269de5d05ab6e09920063a96cf5a351fe",
+                "reference": "666db74269de5d05ab6e09920063a96cf5a351fe",
+                "shasum": ""
+            },
+            "require": {
+                "psr/log": "^1.1",
+                "twig/twig": "^3.3"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Tina4/Initialize.php"
+                ],
+                "classmap": [
+                    "Tina4/"
+                ],
+                "psr-4": {
+                    "Tina4\\": [
+                        "Tina4/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 PHP Debug Functionality",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4php-debug/issues",
+                "source": "https://github.com/tina4stack/tina4php-debug/tree/v2.0.1"
+            },
+            "time": "2021-06-25T16:41:39+00:00"
+        },
+        {
+            "name": "tina4stack/tina4php-env",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4php-env.git",
+                "reference": "4c5a95b0dea557913134211c1dc61cd87a733028"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-env/zipball/4c5a95b0dea557913134211c1dc61cd87a733028",
+                "reference": "4c5a95b0dea557913134211c1dc61cd87a733028",
+                "shasum": ""
+            },
+            "require-dev": {
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9",
+                "tina4stack/tina4php-debug": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Tina4/Initialize.php"
+                ],
+                "classmap": [
+                    "Tina4/"
+                ],
+                "psr-4": {
+                    "Tina4\\": [
+                        "Tina4/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 PHP Environment Functionality",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4php-env/issues",
+                "source": "https://github.com/tina4stack/tina4php-env/tree/v2.0.2"
+            },
+            "time": "2021-07-07T12:23:54+00:00"
+        },
+        {
+            "name": "tina4stack/tina4php-shape",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4php-shape.git",
+                "reference": "50f4e698b9a774f45d2b5000f7fdbc86d6f3a7ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-shape/zipball/50f4e698b9a774f45d2b5000f7fdbc86d6f3a7ee",
+                "reference": "50f4e698b9a774f45d2b5000f7fdbc86d6f3a7ee",
+                "shasum": ""
+            },
+            "require-dev": {
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Tina4/HTMLElement.php",
+                    "Tina4/Initialize.php"
+                ],
+                "classmap": [
+                    "Tina4/"
+                ],
+                "psr-4": {
+                    "Tina4\\": [
+                        "Tina4/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 PHP HTML Shape Language",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4php-shape/issues",
+                "source": "https://github.com/tina4stack/tina4php-shape/tree/v2.0.0"
+            },
+            "time": "2021-07-03T13:09:41+00:00"
         },
         {
             "name": "twig/twig",
@@ -751,7 +896,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "tina4stack/tina4php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
