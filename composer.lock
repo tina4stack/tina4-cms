@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c34dfeac0ca0f0de9c01994d16aa369c",
+    "content-hash": "96ba44a72d6e7c9c9aacbaecac7394fe",
     "packages": [
         {
             "name": "coyl/git",
@@ -859,16 +859,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "dev-master",
+            "version": "v0.1.122",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d"
+                "reference": "6c62f43118bb83af9fb009fb28c8028131569815"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d",
-                "reference": "f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/6c62f43118bb83af9fb009fb28c8028131569815",
+                "reference": "6c62f43118bb83af9fb009fb28c8028131569815",
                 "shasum": ""
             },
             "require": {
@@ -890,7 +890,6 @@
                 "overtrue/phplint": "^2.0",
                 "phpunit/phpunit": "^9"
             },
-            "default-branch": true,
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -934,9 +933,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/master"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v0.1.122"
             },
-            "time": "2021-11-16T10:30:52+00:00"
+            "time": "2021-11-11T16:20:51+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
@@ -1211,9 +1210,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "tina4stack/tina4php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
