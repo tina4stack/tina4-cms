@@ -14,3 +14,4 @@ composer.phar
 /favicon.ico
 /cache/
 /.env.test
+/log/

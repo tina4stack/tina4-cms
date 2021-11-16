@@ -863,12 +863,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "a007048b4dfe12ee23263c1fdeb36689493ae7aa"
+                "reference": "f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/a007048b4dfe12ee23263c1fdeb36689493ae7aa",
-                "reference": "a007048b4dfe12ee23263c1fdeb36689493ae7aa",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d",
+                "reference": "f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d",
                 "shasum": ""
             },
             "require": {
@@ -936,7 +936,7 @@
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
                 "source": "https://github.com/tina4stack/tina4-php/tree/master"
             },
-            "time": "2021-11-15T08:53:16+00:00"
+            "time": "2021-11-16T10:30:52+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
