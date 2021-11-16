@@ -1,24 +1,31 @@
 <?php
+require_once "./vendor/autoload.php";
 
-\Tina4\Module::addModule("CMS Module", "1.0.0", "tina4cms", function(\Tina4\Config $config) {
-    global $DBA;
+define("TINA4_TEMPLATE_LOCATIONS", ["src/templates", "src/public", "src/assets", "src/assets/components", "src/templates/snippets", "src/templates/dashboard", "src/templates/public", "src/templates/messenger"]);
 
-    if ($DBA === null)
-    {
-        die("Please create a database for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
-    }
+class_alias("\Tina4\ORM", "Tina4Object");
 
-    if (!$DBA->tableExists("article")) {
-        (new \Tina4\Migration(__DIR__."/migrations"))->doMigration();
-    }
+//Initialize the database
+global $DBA;
+$DBA = new \Tina4\DataSQLite3("cmstest.db");
 
-    $config->addTwigGlobal("Content",  new Content());
-    $config->addTwigGlobal("Snippet",  new Content());
-    $config->addTwigGlobal("Article",  new Content());
+$config = new \Tina4\Config(
+    function ($config) {
 
+    $config->addTwigFilter("getArticles",  function ($category) {
+        return (new Content())->getArticles($category);
+    });
 
-    $config->addTwigFunction("redirect", function ($url, $code=301) {
-        \Tina4\redirect($url, $code);
+    $config->addTwigFilter("getArticleList",  function ($category, $classname="", $limit=0) {
+        return (new Content())->getArticleList($category, $classname, $limit);
+    });
+
+    $config->addTwigFilter("getArticle",  function ($name) {
+        return (new Content())->getArticle($name);
+    });
+
+    $config->addTwigFilter("getPage",  function ($name) {
+        return (new Content())->getPage($name);
     });
 
     $config->addTwigFilter("getSnippet",  function ($name) {
@@ -26,20 +33,32 @@
     });
 
     $config->addTwigFunction("getSnippet",  function ($name) {
-        return (new Content())->getSnippet($name);
+        return (new Content())->getSnippetInclude($name);
     });
 
-    $config->addTwigFunction("render",  function ($content) {
-        return \Tina4\renderTemplate($content);
-    });
-
-    $config->addTwigFilter("getSlug", function ($name) {
-        return (new Content())->getSlug($name);
+    $config->addTwigFilter("dateOnly", function($dateString) {
+        global $DBA;
+        return substr($DBA->formatDate($dateString, $DBA->dateFormat, "Y-m-d"), 0, 10);
     });
 
     $snippets = (new Content())->getSnippets();
 
     foreach ($snippets as $id => $snippet) {
-        $config->addTwigGlobal($snippet->name, (new Content())->parseContent($snippet->content));
+        if (isset($snippet->name)) {
+            $config->addTwigGlobal($snippet->name, (new Content())->parseContent($snippet->content));
+        }
     }
+
+    $config->addTwigGlobal("Content",  new Content());
+
+    $config->addTwigFunction('calendarDisplay', function() {
+        $calendar = new Calendar();
+        return $calendar->show();
+    });
 });
+
+global $auth;
+$auth = new \Tina4\Auth();
+$config->setAuthentication($auth);
+
+echo new \Tina4\Tina4Php($config);
