@@ -1,5 +1,4 @@
 <?php
-
 \Tina4\Module::addModule("CMS Module", "1.0.0", "tina4cms", function(\Tina4\Config $config) {
     global $DBA;
 

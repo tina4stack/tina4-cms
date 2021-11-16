@@ -53,6 +53,139 @@
             "time": "2017-09-12T08:37:07+00:00"
         },
         {
+            "name": "mpdf/mpdf",
+            "version": "v8.0.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/mpdf.git",
+                "reference": "d8a5294a6cc2e814c4157aecc8d7ac25014b18ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/d8a5294a6cc2e814c4157aecc8d7ac25014b18ed",
+                "reference": "d8a5294a6cc2e814c4157aecc8d7ac25014b18ed",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "myclabs/deep-copy": "^1.7",
+                "paragonie/random_compat": "^1.4|^2.0|^9.99.99",
+                "php": "^5.6 || ^7.0 || ~8.0.0 || ~8.1.0",
+                "psr/log": "^1.0 || ^2.0",
+                "setasign/fpdi": "^2.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.0",
+                "mpdf/qrcode": "^1.1.0",
+                "squizlabs/php_codesniffer": "^3.5.0",
+                "tracy/tracy": "^2.4",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "suggest": {
+                "ext-bcmath": "Needed for generation of some types of barcodes",
+                "ext-xml": "Needed mainly for SVG manipulation",
+                "ext-zlib": "Needed for compression of embedded resources, such as fonts"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mpdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Matěj Humpál",
+                    "role": "Developer, maintainer"
+                },
+                {
+                    "name": "Ian Back",
+                    "role": "Developer (retired)"
+                }
+            ],
+            "description": "PHP library generating PDF files from UTF-8 encoded HTML",
+            "homepage": "https://mpdf.github.io",
+            "keywords": [
+                "pdf",
+                "php",
+                "utf-8"
+            ],
+            "support": {
+                "docs": "http://mpdf.github.io",
+                "issues": "https://github.com/mpdf/mpdf/issues",
+                "source": "https://github.com/mpdf/mpdf"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.me/mpdf",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-11-10T08:15:22+00:00"
+        },
+        {
+            "name": "myclabs/deep-copy",
+            "version": "1.10.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/776f831124e9c62e1a2c601ecc52e776d8bb7220",
+                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "replace": {
+                "myclabs/deep-copy": "self.version"
+            },
+            "require-dev": {
+                "doctrine/collections": "^1.0",
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^7.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                },
+                "files": [
+                    "src/DeepCopy/deep_copy.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Create deep copies (clones) of your objects",
+            "keywords": [
+                "clone",
+                "copy",
+                "duplicate",
+                "object",
+                "object graph"
+            ],
+            "support": {
+                "issues": "https://github.com/myclabs/DeepCopy/issues",
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.10.2"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/myclabs/deep-copy",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-11-13T09:40:50+00:00"
+        },
+        {
             "name": "nowakowskir/php-jwt",
             "version": "2.0.1",
             "source": {
@@ -102,17 +235,67 @@
             "time": "2020-12-24T23:12:11+00:00"
         },
         {
-            "name": "phpfastcache/phpfastcache",
-            "version": "8.0.6",
+            "name": "paragonie/random_compat",
+            "version": "v9.99.100",
             "source": {
                 "type": "git",
-                "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "c93bd7d341176b64b428953365ef67002af9f61e"
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/c93bd7d341176b64b428953365ef67002af9f61e",
-                "reference": "c93bd7d341176b64b428953365ef67002af9f61e",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "reference": "996434e5492cb4c3edcb9168db6fbb1359ef965a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">= 7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*",
+                "vimeo/psalm": "^1"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "polyfill",
+                "pseudorandom",
+                "random"
+            ],
+            "support": {
+                "email": "info@paragonie.com",
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "time": "2020-10-15T08:29:30+00:00"
+        },
+        {
+            "name": "phpfastcache/phpfastcache",
+            "version": "8.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
+                "reference": "c413ffd8185564db3d670e20f9135497be9ebe85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/c413ffd8185564db3d670e20f9135497be9ebe85",
+                "reference": "c413ffd8185564db3d670e20f9135497be9ebe85",
                 "shasum": ""
             },
             "require": {
@@ -123,15 +306,16 @@
                 "psr/simple-cache": "~1.0.0"
             },
             "conflict": {
-                "basho/riak": "*",
                 "doctrine/couchdb": "*"
             },
             "require-dev": {
+                "ext-gettext": "*",
                 "league/climate": "^3.5"
             },
             "suggest": {
                 "ext-apc": "*",
                 "ext-couchbase": "*",
+                "ext-couchbase_v3": "*",
                 "ext-intl": "*",
                 "ext-leveldb": "*",
                 "ext-memcache": "*",
@@ -140,16 +324,16 @@
                 "ext-sqlite": "*",
                 "ext-wincache": "*",
                 "ext-xcache": "*",
-                "mongodb/mongodb": "^1.1",
+                "mongodb/mongodb": "^1.9",
                 "phpfastcache/couchdb": "~1.0.0",
                 "phpfastcache/phpssdb": "~1.0.0",
-                "phpfastcache/riak-client": "~1.4.4",
-                "predis/predis": "~1.1.0"
+                "predis/predis": "^1.1"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Phpfastcache\\": "lib/Phpfastcache/"
+                    "Phpfastcache\\": "lib/Phpfastcache/",
+                    "Phpfastcache\\Tests\\": "tests/lib/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -204,7 +388,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPSocialNetwork/phpfastcache/issues",
-                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.6"
+                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.0.8"
             },
             "funding": [
                 {
@@ -216,7 +400,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-07-07T14:21:56+00:00"
+            "time": "2021-08-18T01:26:03+00:00"
         },
         {
             "name": "psr/cache",
@@ -370,16 +554,16 @@
         },
         {
             "name": "scssphp/scssphp",
-            "version": "v1.6.0",
+            "version": "v1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scssphp/scssphp.git",
-                "reference": "b83594e2323c5d6e80785df3f91b9d1d32aad530"
+                "reference": "5e37759a63caf54392a4b709358a39ac7425a69f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/b83594e2323c5d6e80785df3f91b9d1d32aad530",
-                "reference": "b83594e2323c5d6e80785df3f91b9d1d32aad530",
+                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/5e37759a63caf54392a4b709358a39ac7425a69f",
+                "reference": "5e37759a63caf54392a4b709358a39ac7425a69f",
                 "shasum": ""
             },
             "require": {
@@ -393,6 +577,7 @@
                 "sass/sass-spec": "*",
                 "squizlabs/php_codesniffer": "~3.5",
                 "symfony/phpunit-bridge": "^5.1",
+                "thoughtbot/bourbon": "^7.0",
                 "twbs/bootstrap": "~5.0",
                 "twbs/bootstrap4": "4.6.0",
                 "zurb/foundation": "~6.5"
@@ -437,9 +622,81 @@
             ],
             "support": {
                 "issues": "https://github.com/scssphp/scssphp/issues",
-                "source": "https://github.com/scssphp/scssphp/tree/v1.6.0"
+                "source": "https://github.com/scssphp/scssphp/tree/v1.8.1"
             },
-            "time": "2021-07-02T16:28:10+00:00"
+            "time": "2021-09-18T21:20:53+00:00"
+        },
+        {
+            "name": "setasign/fpdi",
+            "version": "v2.3.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDI.git",
+                "reference": "6231e315f73e4f62d72b73f3d6d78ff0eed93c31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/6231e315f73e4f62d72b73f3d6d78ff0eed93c31",
+                "reference": "6231e315f73e4f62d72b73f3d6d78ff0eed93c31",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zlib": "*",
+                "php": "^5.6 || ^7.0 || ^8.0"
+            },
+            "conflict": {
+                "setasign/tfpdf": "<1.31"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.7",
+                "setasign/fpdf": "~1.8",
+                "setasign/tfpdf": "1.31",
+                "squizlabs/php_codesniffer": "^3.5",
+                "tecnickcom/tcpdf": "~6.2"
+            },
+            "suggest": {
+                "setasign/fpdf": "FPDI will extend this class but as it is also possible to use TCPDF or tFPDF as an alternative. There's no fixed dependency configured."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "setasign\\Fpdi\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Slabon",
+                    "email": "jan.slabon@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                },
+                {
+                    "name": "Maximilian Kresse",
+                    "email": "maximilian.kresse@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                }
+            ],
+            "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
+            "homepage": "https://www.setasign.com/fpdi",
+            "keywords": [
+                "fpdf",
+                "fpdi",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/Setasign/FPDI/issues",
+                "source": "https://github.com/Setasign/FPDI/tree/v2.3.6"
+            },
+            "funding": [
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/setasign/fpdi",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-02-11T11:37:01+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -522,16 +779,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "2df51500adbaebdc4c38dea4c89a2e131c45c8a1"
+                "reference": "9174a3d80210dca8daa7f31fec659150bbeabfc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2df51500adbaebdc4c38dea4c89a2e131c45c8a1",
-                "reference": "2df51500adbaebdc4c38dea4c89a2e131c45c8a1",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/9174a3d80210dca8daa7f31fec659150bbeabfc6",
+                "reference": "9174a3d80210dca8daa7f31fec659150bbeabfc6",
                 "shasum": ""
             },
             "require": {
@@ -582,7 +839,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.23.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.23.1"
             },
             "funding": [
                 {
@@ -598,7 +855,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-27T09:27:20+00:00"
+            "time": "2021-05-27T12:26:48+00:00"
         },
         {
             "name": "tina4stack/tina4php",
@@ -606,22 +863,24 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "d7112273fba8eb0ccbf3fbf3c717d229d178738b"
+                "reference": "a007048b4dfe12ee23263c1fdeb36689493ae7aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/d7112273fba8eb0ccbf3fbf3c717d229d178738b",
-                "reference": "d7112273fba8eb0ccbf3fbf3c717d229d178738b",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/a007048b4dfe12ee23263c1fdeb36689493ae7aa",
+                "reference": "a007048b4dfe12ee23263c1fdeb36689493ae7aa",
                 "shasum": ""
             },
             "require": {
                 "coyl/git": "^0.1.7",
                 "ext-curl": "*",
                 "ext-json": "*",
+                "mpdf/mpdf": "^8.0",
                 "nowakowskir/php-jwt": "^2.0.1",
                 "phpfastcache/phpfastcache": "^8.0.5",
                 "psr/log": "^1.1.4",
                 "scssphp/scssphp": "^1.5.2",
+                "tina4stack/tina4php-database": "^1.0",
                 "tina4stack/tina4php-debug": "^2.0",
                 "tina4stack/tina4php-env": "^2.0",
                 "tina4stack/tina4php-shape": "^2.0",
@@ -639,8 +898,7 @@
             "type": "library",
             "autoload": {
                 "files": [
-                    "Tina4/Functions.php",
-                    "Tina4/Initialize.php"
+                    "Tina4/Functions.php"
                 ],
                 "classmap": [
                     "Helpers/",
@@ -662,6 +920,7 @@
                         "Tina4/Database/",
                         "Tina4/Messaging/",
                         "Tina4/ORM/",
+                        "Tina4/Reporting/",
                         "Tina4/Routing/",
                         "Tina4/Security/",
                         "Tina4/Service/"
@@ -677,20 +936,76 @@
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
                 "source": "https://github.com/tina4stack/tina4-php/tree/master"
             },
-            "time": "2021-07-08T16:34:16+00:00"
+            "time": "2021-11-15T08:53:16+00:00"
         },
         {
-            "name": "tina4stack/tina4php-debug",
-            "version": "v2.0.1",
+            "name": "tina4stack/tina4php-database",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tina4stack/tina4php-debug.git",
-                "reference": "666db74269de5d05ab6e09920063a96cf5a351fe"
+                "url": "https://github.com/tina4stack/tina4php-database.git",
+                "reference": "4026611e22a7cde15b90d1db9c0a135e73223c37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-debug/zipball/666db74269de5d05ab6e09920063a96cf5a351fe",
-                "reference": "666db74269de5d05ab6e09920063a96cf5a351fe",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-database/zipball/4026611e22a7cde15b90d1db9c0a135e73223c37",
+                "reference": "4026611e22a7cde15b90d1db9c0a135e73223c37",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "tina4stack/tina4php-debug": "^2.0"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Tina4/constants.php",
+                    "Tina4/Interfaces/DataBase.php",
+                    "Tina4/Interfaces/DataBaseMetaData.php",
+                    "Tina4/DataBaseCore.php",
+                    "Tina4/DataError.php",
+                    "Tina4/DataField.php",
+                    "Tina4/DataRecord.php",
+                    "Tina4/DataResult.php",
+                    "Tina4/SQL.php"
+                ],
+                "classmap": [
+                    "Tina4/"
+                ],
+                "psr-4": {
+                    "Tina4\\": [
+                        "Tina4/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 PHP Database Module",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4php-database/issues",
+                "source": "https://github.com/tina4stack/tina4php-database/tree/v1.0.8"
+            },
+            "time": "2021-11-15T20:09:10+00:00"
+        },
+        {
+            "name": "tina4stack/tina4php-debug",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4php-debug.git",
+                "reference": "b5fc8c6fa41360082fc6c6dd9d9aa0ac2e61e47c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-debug/zipball/b5fc8c6fa41360082fc6c6dd9d9aa0ac2e61e47c",
+                "reference": "b5fc8c6fa41360082fc6c6dd9d9aa0ac2e61e47c",
                 "shasum": ""
             },
             "require": {
@@ -723,22 +1038,22 @@
             "description": "Tina4 PHP Debug Functionality",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-debug/issues",
-                "source": "https://github.com/tina4stack/tina4php-debug/tree/v2.0.1"
+                "source": "https://github.com/tina4stack/tina4php-debug/tree/v2.0.4"
             },
-            "time": "2021-06-25T16:41:39+00:00"
+            "time": "2021-10-20T15:44:16+00:00"
         },
         {
             "name": "tina4stack/tina4php-env",
-            "version": "v2.0.2",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-env.git",
-                "reference": "4c5a95b0dea557913134211c1dc61cd87a733028"
+                "reference": "4dc170b9df8672a683239fedb4f47beeb9efc3c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-env/zipball/4c5a95b0dea557913134211c1dc61cd87a733028",
-                "reference": "4c5a95b0dea557913134211c1dc61cd87a733028",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-env/zipball/4dc170b9df8672a683239fedb4f47beeb9efc3c9",
+                "reference": "4dc170b9df8672a683239fedb4f47beeb9efc3c9",
                 "shasum": ""
             },
             "require-dev": {
@@ -767,22 +1082,22 @@
             "description": "Tina4 PHP Environment Functionality",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-env/issues",
-                "source": "https://github.com/tina4stack/tina4php-env/tree/v2.0.2"
+                "source": "https://github.com/tina4stack/tina4php-env/tree/v2.0.4"
             },
-            "time": "2021-07-07T12:23:54+00:00"
+            "time": "2021-08-07T14:17:44+00:00"
         },
         {
             "name": "tina4stack/tina4php-shape",
-            "version": "v2.0.0",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-shape.git",
-                "reference": "50f4e698b9a774f45d2b5000f7fdbc86d6f3a7ee"
+                "reference": "2701fdc744bea76afd9068d481d051ddcf9f04c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-shape/zipball/50f4e698b9a774f45d2b5000f7fdbc86d6f3a7ee",
-                "reference": "50f4e698b9a774f45d2b5000f7fdbc86d6f3a7ee",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-shape/zipball/2701fdc744bea76afd9068d481d051ddcf9f04c5",
+                "reference": "2701fdc744bea76afd9068d481d051ddcf9f04c5",
                 "shasum": ""
             },
             "require-dev": {
@@ -812,22 +1127,22 @@
             "description": "Tina4 PHP HTML Shape Language",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-shape/issues",
-                "source": "https://github.com/tina4stack/tina4php-shape/tree/v2.0.0"
+                "source": "https://github.com/tina4stack/tina4php-shape/tree/v2.0.2"
             },
-            "time": "2021-07-03T13:09:41+00:00"
+            "time": "2021-07-21T10:35:18+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v3.3.2",
+            "version": "v3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "21578f00e83d4a82ecfa3d50752b609f13de6790"
+                "reference": "a27fa056df8a6384316288ca8b0fa3a35fdeb569"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/21578f00e83d4a82ecfa3d50752b609f13de6790",
-                "reference": "21578f00e83d4a82ecfa3d50752b609f13de6790",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/a27fa056df8a6384316288ca8b0fa3a35fdeb569",
+                "reference": "a27fa056df8a6384316288ca8b0fa3a35fdeb569",
                 "shasum": ""
             },
             "require": {
@@ -837,7 +1152,7 @@
             },
             "require-dev": {
                 "psr/container": "^1.0",
-                "symfony/phpunit-bridge": "^4.4.9|^5.0.9"
+                "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
             },
             "type": "library",
             "extra": {
@@ -878,7 +1193,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.3.2"
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.3"
             },
             "funding": [
                 {
@@ -890,7 +1205,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-16T12:14:13+00:00"
+            "time": "2021-09-17T08:44:23+00:00"
         }
     ],
     "packages-dev": [],
