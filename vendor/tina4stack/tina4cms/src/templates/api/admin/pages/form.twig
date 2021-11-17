@@ -1,0 +1,91 @@
+<form id="pageForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="form-group col-md-2">
+            <label for="title">Name</label>
+            <input class="form-control" type="text" name="name" placeholder="Name" value="{{ data.name }}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="title">Title</label>
+            <input class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="description">Description</label>
+            <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
+        </div>
+        <div class="form-group col-md-1">
+            <img class="img-thumbnail" src="data:image/png;base64,{{ data.image }}">
+        </div>
+        <div class="form-group col-md-5">
+            <label for="image">Image</label>
+            <input class="form-control" type="file" name="image" placeholder="Image" value="">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="playerKey">Published</label>
+            <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
+        </div>
+        <div class="form-group col-md-12">
+            <label for="contentEditor">Content</label>
+            <div id="contentEditor" class="form-control" style="height:300px">{{ data.content | raw }}</div>
+            <script>
+                function saveContent(editor) {
+                    $('#saveContent').val(editor.getContent());
+                }
+
+                tinyMCE.execCommand('mceRemoveEditor', false, 'contentEditor');
+
+                tinymce.init({
+                    selector: '#contentEditor',
+                    plugins: [
+                        'advlist autolink lists link image charmap print preview anchor',
+                        'searchreplace visualblocks code fullscreen',
+                        'insertdatetime media table paste imagetools wordcount emoticons'
+                    ],
+                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets ',
+                    images_upload_url: '/cms/upload?formToken={{ formToken | raw }}',
+                    images_upload_base_path: '/uploads/',
+                    images_upload_credentials: true,
+                    force_p_newlines : false,
+                    convert_urls: false,
+                    file_picker_callback:   function(callback, url, type, win) {
+                        myWindow = popupCenter({url: "/cms/file-browser?formToken={{ formToken | raw }}", title: 'Tina4CMS - File Browser', w: 900, h: 500});
+                        myWindow.tinymceCallback = callback;
+                    },
+                    setup:function(editor) {
+                        editor.on('change', function(e) {
+                            saveContent(editor)
+                        });
+                        editor.ui.registry.addMenuButton('menuSnippets', {
+                            text: 'Snippets',
+                            fetch: function (callback) {
+                                var items = [
+                                {% for snippet in snippets %}
+                                    {
+                                        type: 'menuitem',
+                                        text: '{{ snippet.name }}',
+                                        onAction: function (_) {
+                                            editor.insertContent('\n\{\{ include( getSnippet("{{ snippet.name }}") ) \}\}');
+                                        }
+                                    },
+                                {% endfor %}
+                                ];
+                                callback(items);
+                            }
+                        });
+                    }
+                });
+                $(document).on('focusin', function(e) {
+                    if ($(e.target).closest(".tox").length) {
+                        e.stopImmediatePropagation();
+                    }
+                });
+            </script>
+            <textarea id="saveContent" class="form-control" style="display:none; height: 300px" name="content">{{ data.content | raw }}</textarea>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label>Keywords/Tags</label>
+            {% include "tagLookup.twig" %}
+        </div>
+    </div>
+    {{  "pageForm" | formToken | raw }}
+</form>

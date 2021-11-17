@@ -1,0 +1,31 @@
+{
+    "name": "tina4stack/tina4cms",
+    "description": "Tina4 CMS Module",
+    "license": "MIT",
+    "classmap": ["src/*"],
+    "autoload": {
+        "files": ["index.php"],
+        "psr-4": {
+            "": [
+                "src/",
+                "src/app/",
+                "src/orm/",
+                "src/routes/"
+            ]
+        }
+    },
+    "require": {
+        "tina4stack/tina4php": "^0.1.122"
+    },
+    "scripts": {
+        "tina4": "tina4",
+        "tina4service": "tina4service",
+        "test": "@tina4 tests:run",
+        "initialize": "@tina4 initialize:run",
+        "start": "@tina4 webservice:run",
+        "start-service": "@tina4service"
+    },
+    "config": {
+        "process-timeout": 0
+    }
+}

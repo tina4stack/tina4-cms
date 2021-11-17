@@ -1,0 +1,7 @@
+{% set menus = Content.getMenu("") %}
+<nav>
+    {% for menu in menus %}
+        <a href="{{ menu.url }}">{{ menu.name }}{% for menu in menu.children %}<a
+                href="{{ menu.url }}">{{ menu.name }}</a>{% endfor %}</a>
+    {% endfor %}
+</nav>

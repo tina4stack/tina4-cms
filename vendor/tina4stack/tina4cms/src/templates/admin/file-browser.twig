@@ -1,0 +1,56 @@
+{% extends twigNameSpace ~ '/base.twig' %}
+{% block headers %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"
+            integrity="sha256-xLhce0FUawd11QSwrvXSwST0oHhOolNoH9cUXAcsIAg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"
+            integrity="sha256-NdDw7k+fJewgwI1XmH9NMR6OILvTX+3arqb/OgFicoM=" crossorigin="anonymous"></script>
+
+    <!-- Boostrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css"
+          integrity="sha384-3fdgwJw17Bi87e1QQ4fsLn4rUFqWw//KU0g8TvV6quvahISRewev6/EocKNuJmEw" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <!-- Boostrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+
+    <script src="/src/public/js/tina4helper.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+{% endblock %}
+
+{% block navigation %}
+{% endblock %}
+{% block content %}
+
+    <h5>Navigate the files on the left, double click the image to insert</h5>
+
+    <div class="row">
+        <div class="col-md-4" style="border: 1px solid black; height: 90vh; overflow: auto" id="fileTree">
+            {{ files | raw }}
+        </div>
+        <div class="col-md-8" style="border: 1px solid black; height: 90vh">
+            <img class="img-thumbnail" ondblclick="window.tinymceCallback(this.src); window.close()"
+                 style="border: 1px solid #000; max-width:100%; max-height:100%;" id="imagePreview" src=""
+                 object-fit="cover">
+        </div>
+        <script>
+
+            $('#fileTree').jstree({});
+
+            function previewFile(fileName) {
+                $('#imagePreview').attr('src', fileName);
+            }
+        </script>
+    </div>
+
+
+
+{% endblock %}

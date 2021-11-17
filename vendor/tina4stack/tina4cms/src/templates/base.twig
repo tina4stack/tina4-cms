@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+    <meta prefix="og: https://ogp.me/ns#" property="og:title" content="{{ title }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:type" content="website"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:url" content="{{ url }}"/>
+    {% if image %}
+        <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
+    {% endif %}
+    {% if description %}
+        <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
+    {% endif %}
+    {% block headers %}
+    {% endblock %}
+</head>
+{% block body %}
+    <body>
+    {% block navigation %}
+        {% include "navigation.twig" %}
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+    </body>
+{% endblock %}
+</html>

@@ -1,0 +1,24 @@
+<div id="content">
+</div>
+<div id="loadMore">
+    <div>
+        <a id="loadingButton" href="#loadMore" onclick="loadMore()">Load more</a>
+    </div>
+</div>
+<script>
+    var skip = {{ skip }};
+    var limit = {{ limit }};
+
+    function loadMore() {
+        let parent = document.getElementById('content');
+        let loadMore = document.getElementById('loadMore');
+        skip += limit;
+        fetch('/content/tags/{{ tag }}?limit={{ limit }}&skip=' + skip + '&return=true&template={{ template }}')
+            .then(response => response.text())
+            .then((data) => {
+                loadMore.remove();
+                parent.innerHTML += data;
+                parent.appendChild(loadMore);
+            });
+    }
+</script>
