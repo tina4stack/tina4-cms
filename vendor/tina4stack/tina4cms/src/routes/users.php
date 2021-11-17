@@ -77,11 +77,3 @@
         break;
     }
 });
-
-/*
- * @description Redirects user to reset password screen
- *
- */
-\Tina4\Get::add("/cms/login/reset", function (\Tina4\Response $response, \Tina4\Request $request) {
-    return $response (\Tina4\renderTemplate("/admin/reset.twig", ["request" => $request->params]), HTTP_OK, TEXT_HTML);
-});

@@ -70,8 +70,6 @@
     }
 });
 
-
-
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {
     if (!empty($request->params["confirmPassword"])) {
         $user = new Users($request->params);
@@ -110,4 +108,3 @@
 
     return null;
 });
-
