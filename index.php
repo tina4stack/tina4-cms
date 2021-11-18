@@ -61,4 +61,5 @@ global $auth;
 $auth = new \Tina4\Auth();
 $config->setAuthentication($auth);
 
+\Tina4\Initialize();
 echo new \Tina4\Tina4Php($config);

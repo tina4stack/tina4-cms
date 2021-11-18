@@ -1,6 +1,6 @@
 {
     "require": {
-        "tina4stack/tina4cms": "^0.0.32"
+        "tina4stack/tina4cms": "dev-master"
     },
     "scripts": {
         "tina4": "tina4",

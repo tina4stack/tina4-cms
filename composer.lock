@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31547854b1aecb24c2dcef419a511b62",
+    "content-hash": "59f43de8f29b1eb255f0d81ba5c2e1e0",
     "packages": [
         {
             "name": "coyl/git",
@@ -859,7 +859,7 @@
         },
         {
             "name": "tina4stack/tina4cms",
-            "version": "v0.0.32",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-cms.git",
@@ -874,6 +874,7 @@
             "require": {
                 "tina4stack/tina4php": "^0.1.122"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -1252,7 +1253,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "tina4stack/tina4cms": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

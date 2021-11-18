@@ -892,8 +892,8 @@
         },
         {
             "name": "tina4stack/tina4cms",
-            "version": "v0.0.32",
-            "version_normalized": "0.0.32.0",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-cms.git",
@@ -909,6 +909,7 @@
                 "tina4stack/tina4php": "^0.1.122"
             },
             "time": "2021-11-16T20:44:40+00:00",
+            "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "autoload": {
