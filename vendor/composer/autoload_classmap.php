@@ -64,6 +64,7 @@ return array(
     'Tina4\\SQL' => $vendorDir . '/tina4stack/tina4php-database/Tina4/SQL.php',
     'Tina4\\Service' => $vendorDir . '/tina4stack/tina4php/Tina4/Service/Service.php',
     'Tina4\\Swagger' => $vendorDir . '/tina4stack/tina4php/Tina4/Api/Swagger.php',
+    'Tina4\\Test' => $vendorDir . '/tina4stack/tina4php/Tina4/Core/Test.php',
     'Tina4\\Tina4Php' => $vendorDir . '/tina4stack/tina4php/Tina4/Tina4Php.php',
     'Tina4\\TwigUtility' => $vendorDir . '/tina4stack/tina4php/Tina4/Core/TwigUtility.php',
     'Tina4\\Utility' => $vendorDir . '/tina4stack/tina4php/Tina4/Core/Utility.php',
