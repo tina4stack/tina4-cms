@@ -15,7 +15,7 @@
         }
     },
     "require": {
-        "tina4stack/tina4php": "^0.1.122"
+        "tina4stack/tina4php": "dev-master"
     },
     "scripts": {
         "tina4": "tina4",
