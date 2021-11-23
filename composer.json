@@ -15,7 +15,8 @@
         }
     },
     "require": {
-        "tina4stack/tina4php": "dev-master"
+        "tina4stack/tina4php": "dev-master",
+        "tina4stack/tina4php-sqlite3": "^1.0"
     },
     "scripts": {
         "tina4": "tina4",
