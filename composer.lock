@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51af5600ca055e686a5cd31b5ca58764",
+    "content-hash": "ccb736500879f9f7f77a97cf6d50566c",
     "packages": [
         {
             "name": "coyl/git",
@@ -859,16 +859,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "dev-master",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "e8eb45741b5cabf9572a5985e21a64f3beaeb878"
+                "reference": "4b6cca912e28b4cae2ec233c8313acdda87fe335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/e8eb45741b5cabf9572a5985e21a64f3beaeb878",
-                "reference": "e8eb45741b5cabf9572a5985e21a64f3beaeb878",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/4b6cca912e28b4cae2ec233c8313acdda87fe335",
+                "reference": "4b6cca912e28b4cae2ec233c8313acdda87fe335",
                 "shasum": ""
             },
             "require": {
@@ -889,9 +889,9 @@
             },
             "require-dev": {
                 "overtrue/phplint": "^2.0",
-                "phpunit/phpunit": "^9"
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
             },
-            "default-branch": true,
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -934,9 +934,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/master"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.0"
             },
-            "time": "2021-11-23T12:54:47+00:00"
+            "time": "2021-12-06T20:43:30+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
@@ -1301,12 +1301,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "tina4stack/tina4php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
