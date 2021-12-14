@@ -4,16 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862
+class ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '8a1ef99e7021170682ce21f6dd289bfb' => __DIR__ . '/..' . '/tina4stack/tina4php-debug/Tina4/Initialize.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '2cd2499e6c689b2ff09e470db3ffeaff' => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4/HTMLElement.php',
-        '23d8d8e5dfd632054ccac71ad5871f8a' => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4/Initialize.php',
-        '8d7415507a4180efeebb4facf972fdff' => __DIR__ . '/..' . '/tina4stack/tina4php-env/Tina4/Initialize.php',
         '6400f62476c6446031f8cb624400df32' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/constants.php',
         'efca3cb6f78cbe2aee8c38f74af81f2d' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/Interfaces/DataBase.php',
         'cd4d71d9d58c52a75b8df0be3c3296e0' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/Interfaces/DataBaseMetaData.php',
@@ -23,6 +19,10 @@ class ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862
         '72686750f9d49e8bc2558af706dddacf' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataRecord.php',
         'bd60a9ef2036b4ffe86cc8f839314192' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataResult.php',
         'f65f2c5937ef8a063d3483c8754fbe0c' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/SQL.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '8d7415507a4180efeebb4facf972fdff' => __DIR__ . '/..' . '/tina4stack/tina4php-env/Tina4/Initialize.php',
+        '2cd2499e6c689b2ff09e470db3ffeaff' => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4/HTMLElement.php',
+        '23d8d8e5dfd632054ccac71ad5871f8a' => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4/Initialize.php',
         '2fcb34ed428f65ba33fe56995b2a02f6' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Functions.php',
         'b065074695faddf250710abdf8530faa' => __DIR__ . '/..' . '/tina4stack/tina4cms/index.php',
     );
@@ -92,20 +92,21 @@ class ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862
         ),
         'Tina4\\' => 
         array (
-            0 => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4',
-            1 => __DIR__ . '/..' . '/tina4stack/tina4php-env/Tina4',
-            2 => __DIR__ . '/..' . '/tina4stack/tina4php-debug/Tina4',
-            3 => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4',
-            4 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4',
-            5 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Api',
-            6 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Core',
-            7 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Database',
-            8 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Messaging',
-            9 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/ORM',
-            10 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Reporting',
-            11 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Routing',
-            12 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Security',
-            13 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Service',
+            0 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4',
+            1 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Api',
+            2 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Core',
+            3 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Database',
+            4 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Messaging',
+            5 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Reporting',
+            6 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Routing',
+            7 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Security',
+            8 => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Service',
+            9 => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4',
+            10 => __DIR__ . '/..' . '/tina4stack/tina4php-debug/Tina4',
+            11 => __DIR__ . '/..' . '/tina4stack/tina4php-env/Tina4',
+            12 => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4',
+            13 => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4',
+            14 => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -181,11 +182,9 @@ class ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862
         'Tina4\\DataConnection' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataConnection.php',
         'Tina4\\DataError' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataError.php',
         'Tina4\\DataField' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataField.php',
-        'Tina4\\DataMongoDb' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Database/DataMongoDb.php',
-        'Tina4\\DataMySQL' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Database/DataMySQL.php',
         'Tina4\\DataRecord' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataRecord.php',
         'Tina4\\DataResult' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataResult.php',
-        'Tina4\\DataSQLite3' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Database/DataSQLite3.php',
+        'Tina4\\DataSQLite3' => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4/DataSQLite3.php',
         'Tina4\\DataUtility' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/DataUtility.php',
         'Tina4\\Debug' => __DIR__ . '/..' . '/tina4stack/tina4php-debug/Tina4/Debug.php',
         'Tina4\\DebugCodeHandler' => __DIR__ . '/..' . '/tina4stack/tina4php-debug/Tina4/DebugCodeHandler.php',
@@ -202,7 +201,13 @@ class ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862
         'Tina4\\Migration' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Database/Migration.php',
         'Tina4\\Module' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Core/Module.php',
         'Tina4\\NoSQLParser' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/NoSQLParser.php',
-        'Tina4\\ORM' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/ORM/ORM.php',
+        'Tina4\\ORM' => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4/ORM.php',
+        'Tina4\\ORMCRUDGenerator' => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4/ORMCRUDGenerator.php',
+        'Tina4\\ORMCache' => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4/ORMCache.php',
+        'Tina4\\ORMClassCreator' => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4/ORMClassCreator.php',
+        'Tina4\\ORMPluralFunctions' => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4/ORMPluralFunctions.php',
+        'Tina4\\ORMSQLGenerator' => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4/ORMSQLGenerator.php',
+        'Tina4\\ORMUtility' => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4/ORMUtility.php',
         'Tina4\\ParseTemplate' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Routing/ParseTemplate.php',
         'Tina4\\Patch' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Routing/Patch.php',
         'Tina4\\Post' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Routing/Post.php',
@@ -218,6 +223,10 @@ class ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862
         'Tina4\\Router' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Routing/Router.php',
         'Tina4\\RouterResponse' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Routing/RouterResponse.php',
         'Tina4\\SQL' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/SQL.php',
+        'Tina4\\SQLite3Connection' => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4/SQLite3Connection.php',
+        'Tina4\\SQLite3Exec' => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4/SQLite3Exec.php',
+        'Tina4\\SQLite3MetaData' => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4/SQLite3MetaData.php',
+        'Tina4\\SQLite3Query' => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4/SQLite3Query.php',
         'Tina4\\Service' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Service/Service.php',
         'Tina4\\Swagger' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Api/Swagger.php',
         'Tina4\\Test' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Core/Test.php',
@@ -230,10 +239,10 @@ class ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862::$fallbackDirsPsr4;
-            $loader->classMap = ComposerStaticInit9a4c9ea9cf7f9f76513f9edb03999862::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926::$fallbackDirsPsr4;
+            $loader->classMap = ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926::$classMap;
 
         }, null, ClassLoader::class);
     }
