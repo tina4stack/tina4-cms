@@ -108,7 +108,7 @@ trait DataBaseCore
      * @param array $params
      * @return array
      */
-    public function parseParams(array $params): array
+    final public function parseParams(array $params): array
     {
         $tranId = "";
         $newParams = [];
@@ -128,7 +128,7 @@ trait DataBaseCore
      * @param string $sql
      * @return mixed
      */
-    public function fetchOne(string $sql)
+    final public function fetchOne(string $sql)
     {
         $records = $this->fetch($sql)->records;
         if (is_array($records) && count($records) > 0) {
@@ -144,7 +144,7 @@ trait DataBaseCore
      * @param int $fieldIndex
      * @return string
      */
-    public function getQueryParam(string $fieldName, int $fieldIndex): string
+    final public function getQueryParam(string $fieldName, int $fieldIndex): string
     {
         return "?";
     }
@@ -158,7 +158,7 @@ trait DataBaseCore
      * @param array $hasMany
      * @return SQL
      */
-    public function select(string $fields = "*", int $limit = 10, int $offset = 0, array $hasOne = [], array $hasMany = []): SQL
+    final public function select(string $fields = "*", int $limit = 10, int $offset = 0, array $hasOne = [], array $hasMany = []): SQL
     {
         return (new SQL(null, $this))->select($fields, $limit, $offset, $hasOne, $hasMany);
     }

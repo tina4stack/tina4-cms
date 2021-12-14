@@ -8,27 +8,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/orm" isTestSource="false" packagePrefix="\" />
       <sourceFolder url="file://$MODULE_DIR$/src/routes" isTestSource="false" packagePrefix="\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/phpfastcache/phpfastcache" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/nowakowskir/php-jwt" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-shape" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-env" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-debug" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php-database" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4php" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/tina4stack/tina4cms" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/paragonie/random_compat" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/setasign/fpdi" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/scssphp/scssphp" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/mpdf/mpdf" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/coyl/git" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/simple-cache" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/log" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

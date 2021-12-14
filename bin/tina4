@@ -292,7 +292,7 @@ $menus[] = ["id" => 4, "name" => "orm", "description" => "Create orm objects", "
                         echo "Table: {$table}\n";
                         echo str_repeat("=", 40) . "\n";
                         foreach ($fields as $id => $field) {
-                            echo "{$field["field"]}\n";
+                            echo "{$field->fieldName}\n";
                         }
                         $session["tableData"][] = ["table" => $table, "fields" => $fields];
                     }
@@ -316,11 +316,11 @@ $menus[] = ["id" => 4, "name" => "orm", "description" => "Create orm objects", "
                         $fieldMapping = [];
                         $primaryKey = "";
                         foreach ($data["fields"] as $fid => $field) {
-                            if ($fid == 0 || $field["pk"] == "PRI") {
-                                $primaryKey = $field["field"];
+                            if ($fid == 0 || $field->isPrimaryKey === 1) {
+                                $primaryKey = $field->fieldName;
                             }
-                            $fieldMapping [] = '"' . $record->getObjectName($field["field"]) . '" => "' . $field["field"] . '"';
-                            $fields[] = "\tpublic \$" . $record->getObjectName($field["field"]) . ";";
+                            $fieldMapping [] = '"' . $record->getObjectName($field->fieldName) . '" => "' . $field->fieldName . '"';
+                            $fields[] = "\tpublic \$" . $record->getObjectName($field->fieldName) . ";";
                         }
 
                         $definition = '<?php
@@ -371,11 +371,13 @@ class [CLASS_NAME] extends \Tina4\ORM
 
 $menus[] = ["id" => 5, "name" => "webservice", "show" => false, "description" => "Runs webservice", "commandLine" => ["options" => ["run"]], "menuCode" => static function ($index, $input) use ($argv) {
     $port = $argv[2] ?? "7145";
-    if (strpos(php_uname(), "Windows") !== false) {
-        `php -S localhost:{$port} index.php`;
-    } else {
+    \Tina4\Debug::message("Server running on http://localhost:{$port}");
+    if (strpos(php_uname(), "Linux") !== false) {
         `php -S 0.0.0.0:{$port} index.php`;
+    } else {
+        `php -S localhost:{$port} index.php`;
     }
+
 }];
 
 /**
@@ -486,5 +488,3 @@ $comments[] = "Life is lemons, make lemonade!";
 $complimentary = $comments[rand(0, count($comments) - 1)];
 writeLine("");
 echo "Thank you for using Tina4 - {$complimentary}\n";
-
-

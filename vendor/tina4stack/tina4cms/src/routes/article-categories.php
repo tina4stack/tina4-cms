@@ -15,7 +15,7 @@ DELETE @ /path/{id} - delete for single
         ->filter(function($record){
             $article = new ArticleCategory();
             $article->load("id = {$record->parentId}");
-            $record->parentName = $article->name;
+            $record->parentName = $article->name; // { "parentName": "test" } record.parentName
         })
         ->asArray();
     switch ($action) {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "96ba44a72d6e7c9c9aacbaecac7394fe",
+    "content-hash": "ccb736500879f9f7f77a97cf6d50566c",
     "packages": [
         {
             "name": "coyl/git",
@@ -859,16 +859,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v0.1.123",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d"
+                "reference": "4b6cca912e28b4cae2ec233c8313acdda87fe335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d",
-                "reference": "f11f6ec1ddadfce2548892ceb5ac6df9b4c7f78d",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/4b6cca912e28b4cae2ec233c8313acdda87fe335",
+                "reference": "4b6cca912e28b4cae2ec233c8313acdda87fe335",
                 "shasum": ""
             },
             "require": {
@@ -883,12 +883,14 @@
                 "tina4stack/tina4php-database": "^1.0",
                 "tina4stack/tina4php-debug": "^2.0",
                 "tina4stack/tina4php-env": "^2.0",
+                "tina4stack/tina4php-orm": "^1.0",
                 "tina4stack/tina4php-shape": "^2.0",
                 "twig/twig": "^3.3.2"
             },
             "require-dev": {
                 "overtrue/phplint": "^2.0",
-                "phpunit/phpunit": "^9"
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
             },
             "bin": [
                 "bin/tina4",
@@ -918,7 +920,6 @@
                         "Tina4/Core/",
                         "Tina4/Database/",
                         "Tina4/Messaging/",
-                        "Tina4/ORM/",
                         "Tina4/Reporting/",
                         "Tina4/Routing/",
                         "Tina4/Security/",
@@ -933,22 +934,22 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v0.1.123"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.0"
             },
-            "time": "2021-11-16T10:30:52+00:00"
+            "time": "2021-12-06T20:43:30+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
-            "version": "v1.0.8",
+            "version": "v1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-database.git",
-                "reference": "4026611e22a7cde15b90d1db9c0a135e73223c37"
+                "reference": "f6fa48522b0f21833ceecbcf86ab53875cfa9bff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-database/zipball/4026611e22a7cde15b90d1db9c0a135e73223c37",
-                "reference": "4026611e22a7cde15b90d1db9c0a135e73223c37",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-database/zipball/f6fa48522b0f21833ceecbcf86ab53875cfa9bff",
+                "reference": "f6fa48522b0f21833ceecbcf86ab53875cfa9bff",
                 "shasum": ""
             },
             "require": {
@@ -989,9 +990,9 @@
             "description": "Tina4 PHP Database Module",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-database/issues",
-                "source": "https://github.com/tina4stack/tina4php-database/tree/v1.0.8"
+                "source": "https://github.com/tina4stack/tina4php-database/tree/v1.0.10"
             },
-            "time": "2021-11-15T20:09:10+00:00"
+            "time": "2021-11-23T10:06:26+00:00"
         },
         {
             "name": "tina4stack/tina4php-debug",
@@ -1086,6 +1087,51 @@
             "time": "2021-08-07T14:17:44+00:00"
         },
         {
+            "name": "tina4stack/tina4php-orm",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4php-orm.git",
+                "reference": "17d6358cc2191654d96d1b60000a60046d240ded"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/17d6358cc2191654d96d1b60000a60046d240ded",
+                "reference": "17d6358cc2191654d96d1b60000a60046d240ded",
+                "shasum": ""
+            },
+            "require": {
+                "tina4stack/tina4php-database": "^1.0"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest",
+                "tina4stack/tina4php-firebird": "^1.0.1"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Tina4/"
+                ],
+                "psr-4": {
+                    "Tina4\\": [
+                        "Tina4/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 ORM Module",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4php-orm/issues",
+                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.1"
+            },
+            "time": "2021-11-20T17:11:20+00:00"
+        },
+        {
             "name": "tina4stack/tina4php-shape",
             "version": "v2.0.2",
             "source": {
@@ -1129,6 +1175,51 @@
                 "source": "https://github.com/tina4stack/tina4php-shape/tree/v2.0.2"
             },
             "time": "2021-07-21T10:35:18+00:00"
+        },
+        {
+            "name": "tina4stack/tina4php-sqlite3",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4php-sqlite3.git",
+                "reference": "bb6d30794d4c1a99e0dc82a6e9ccfaa35a683251"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-sqlite3/zipball/bb6d30794d4c1a99e0dc82a6e9ccfaa35a683251",
+                "reference": "bb6d30794d4c1a99e0dc82a6e9ccfaa35a683251",
+                "shasum": ""
+            },
+            "require": {
+                "ext-sqlite3": "^7.3",
+                "tina4stack/tina4php-database": "^1.0"
+            },
+            "require-dev": {
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Tina4/"
+                ],
+                "psr-4": {
+                    "Tina4\\": [
+                        "Tina4/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 PHP Sqlite3 Database Driver",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4php-sqlite3/issues",
+                "source": "https://github.com/tina4stack/tina4php-sqlite3/tree/v1.0.0"
+            },
+            "time": "2021-11-23T13:24:48+00:00"
         },
         {
             "name": "twig/twig",

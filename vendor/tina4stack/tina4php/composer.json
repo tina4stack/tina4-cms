@@ -25,7 +25,6 @@
                 "Tina4/Core/",
                 "Tina4/Database/",
                 "Tina4/Messaging/",
-                "Tina4/ORM/",
                 "Tina4/Reporting/",
                 "Tina4/Routing/",
                 "Tina4/Security/",
@@ -42,11 +41,12 @@
         "scssphp/scssphp": "^1.5.2",
         "ext-json": "*",
         "ext-curl": "*",
+        "mpdf/mpdf": "^8.0",
         "tina4stack/tina4php-debug": "^2.0",
         "tina4stack/tina4php-shape": "^2.0",
         "tina4stack/tina4php-env": "^2.0",
-        "mpdf/mpdf": "^8.0",
-        "tina4stack/tina4php-database": "^1.0"
+        "tina4stack/tina4php-database": "^1.0",
+        "tina4stack/tina4php-orm": "^1.0"
     },
     "bin": [
         "bin/tina4",
@@ -69,6 +69,7 @@
         "process-timeout": 0
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^9",
         "overtrue/phplint": "^2.0"
     }

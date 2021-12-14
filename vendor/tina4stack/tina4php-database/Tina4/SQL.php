@@ -167,6 +167,8 @@ class SQL implements \JsonSerializable
         } else {
             $this->fields = array_map('trim', explode(',', $fields));
         }
+
+        //print_r ($this->fields);
         $this->limit = $limit;
         $this->offset = $offset;
         $this->hasOne = $hasOne;
@@ -370,6 +372,7 @@ class SQL implements \JsonSerializable
 
         if (!empty($this->DBA)) {
             $result = $this->DBA->fetch($sqlStatement, $this->limit, $this->offset);
+
             $this->noOfRecords = $result->getNoOfRecords();
             $this->resultFields = $result->fields;
             $records = [];
@@ -402,13 +405,15 @@ class SQL implements \JsonSerializable
                             }
                         }
 
+
                         //Only return what was requested
-                        if (!empty($this->fields) && !in_array("*", $this->getColumnNames($this->fields))) {
+                        if (!empty($this->fields) && !in_array("*", $this->getColumnNames($this->fields), true)) {
                             foreach ($newRecord as $key => $value) {
                                 if (in_array($key, $newRecord->protectedFields, true)) {
                                     continue;
                                 }
-                                if (!in_array($this->ORM->getFieldName($key), $this->getColumnNames($this->fields), true) && strpos($key, " as") === false && strpos($key, ".") === false) {
+
+                                if (strpos($key, " as") === false && strpos($key, ".") === false && !in_array($key, $this->getColumnNames($this->fields), true)) {
                                     unset($newRecord->{$key});
                                 }
                             }
@@ -489,6 +494,7 @@ class SQL implements \JsonSerializable
                 $explodedField = explode("^", $field);
                 $columnName = array_pop($explodedField);
             }
+            $columnNames[] = $this->ORM->getObjectName($columnName, true);
             $columnNames[] = $columnName;
         }
 

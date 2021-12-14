@@ -66,7 +66,7 @@ class Tina4Php extends Data
                 $includeLocation = TINA4_DOCUMENT_ROOT . $includeLocation;
             }
             if (file_exists($includeLocation)) {
-                \Tina4\Utility::includeDirectory($includeLocation);
+                self::includeDirectory($includeLocation);
             }
         }
 
@@ -75,7 +75,7 @@ class Tina4Php extends Data
                 $includeLocation = TINA4_DOCUMENT_ROOT . $includeLocation;
             }
             if (file_exists($includeLocation)) {
-                \Tina4\Utility::includeDirectory($includeLocation);
+                self::includeDirectory($includeLocation);
             }
         }
 
@@ -309,7 +309,7 @@ class Tina4Php extends Data
      * @return false|string
      * @throws \ReflectionException
      */
-    public function getSwagger($title = "Tina4", $description = "Swagger Documentation", $version = "1.0.0"): string
+    public function getSwagger(string $title = "Tina4", string $description = "Swagger Documentation", string $version = "1.0.0"): string
     {
         return (new Swagger($this->documentRoot, $title, $description, $version, $this->subFolder));
     }
