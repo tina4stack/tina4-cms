@@ -1,0 +1,1688 @@
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:41:57: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:41:57: SubFolder: 
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: Generating Auth keys - H:\Test\tina4-cms\secrets
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: Adding DBA
+2021-12-22 14:41:57: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:41:57: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:41:58: Adding DBA
+2021-12-22 14:41:58: Adding DBA
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:42:13: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:42:13: SubFolder: 
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:42:13: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Adding DBA
+2021-12-22 14:42:13: Server running on http://localhost:7145
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:42:17: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:42:17: SubFolder: 
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: GET - /
+2021-12-22 14:42:17: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Looking in routes for GET - /
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /cms/file-browser/
+2021-12-22 14:42:17: Method match GET -> POST
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /cms/login/
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /cms/login/reset/
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /cms/dashboard/
+2021-12-22 14:42:17: Method match GET -> POST
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /cms/logout/
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /cms/article-categories/
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /api/admin/article-categories/form/
+2021-12-22 14:42:17: Method match GET -> POST
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /api/admin/article-categories/
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /api/admin/article-categories/{id}/
+2021-12-22 14:42:17: Method match GET -> POST
+2021-12-22 14:42:17: Method match GET -> DELETE
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /cms/articles/
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /api/admin/articles/form/
+2021-12-22 14:42:17: Method match GET -> POST
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /api/admin/articles/
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> /api/admin/articles/{id}/
+2021-12-22 14:42:17: Method match GET -> POST
+2021-12-22 14:42:17: Method match GET -> DELETE
+2021-12-22 14:42:17: Method match GET -> GET
+2021-12-22 14:42:17: Matching // -> //
+2021-12-22 14:42:17: Matching // with //
+2021-12-22 14:42:17: 
+2021-12-22 14:42:17: Adding DBA
+2021-12-22 14:42:17: Creating select * from page where slug = 'home' into cache
+2021-12-22 14:42:18: Adding DBA
+2021-12-22 14:42:18: Creating select * from page where slug = 'home' into cache
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:42:40: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:42:40: SubFolder: 
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: GET - /cms/login
+2021-12-22 14:42:40: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Looking in routes for GET - /cms/login
+2021-12-22 14:42:40: Method match GET -> GET
+2021-12-22 14:42:40: Matching /cms/login/ -> /cms/file-browser/
+2021-12-22 14:42:40: Method match GET -> POST
+2021-12-22 14:42:40: Method match GET -> GET
+2021-12-22 14:42:40: Matching /cms/login/ -> /cms/login/
+2021-12-22 14:42:40: Matching /cms/login/ with /cms/login/
+2021-12-22 14:42:40: 
+2021-12-22 14:42:40: SQL:
+select	count(id) as number
+from	users t
+
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:42:40: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:42:40: SubFolder: 
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:42:40: Adding DBA
+2021-12-22 14:42:40: GET - /src/public/images/logo.png
+2021-12-22 14:42:40: GET - H:\Test\tina4-cms\src\public\images\logo.png
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:42:43: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:42:43: SubFolder: 
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:42:43: Adding DBA
+2021-12-22 14:42:43: GET - /favicon.ico
+2021-12-22 14:42:43: GET - H:\Test\tina4-cms\favicon.ico
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:11: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:11: SubFolder: 
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: POST - /cms/login
+2021-12-22 14:43:11: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:43:11: Adding DBA
+2021-12-22 14:43:11: Looking in routes for POST - /cms/login
+2021-12-22 14:43:11: Method match POST -> GET
+2021-12-22 14:43:11: Method match POST -> POST
+2021-12-22 14:43:11: Matching /cms/login/ -> /cms/upload/
+2021-12-22 14:43:11: Method match POST -> GET
+2021-12-22 14:43:11: Method match POST -> GET
+2021-12-22 14:43:11: Method match POST -> GET
+2021-12-22 14:43:11: Method match POST -> POST
+2021-12-22 14:43:11: Matching /cms/login/ -> /cms/login/
+2021-12-22 14:43:11: Matching /cms/login/ with /cms/login/
+2021-12-22 14:43:11: firstName=Clayton&lastName=Kl&email=claytonklassen17%40gmail.com&password=pASSword&confirmPassword=pASSword&formToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmb3JtTmFtZSI6InNldHVwIiwiZXhwaXJlcyI6MTY0MDE4NDc2MH0.ctcpPRmq8XxSwka8QchGmDgkNkrinLdlC1kWavfxkouwVoHn2JObJSL3MJsur6TWW4QXOHvzEF-g8MHcPj-Aym4mChb0knEkIqo1ajGxOsOMirbtYv3SuyPs6uMZbEi2J-wDPDwd-rLtMsF2LIIPZ4NUtTAm9RjJbl6-tE2-Ozw
+2021-12-22 14:43:11: Validating token
+2021-12-22 14:43:11: Getting token payload
+2021-12-22 14:43:11: Creating select * from users where email = 'claytonklassen17@gmail.com' into cache
+2021-12-22 14:43:12: TINA4: check select * from users where id is null
+2021-12-22 14:43:12: SQL:
+insert into users (first_Name,last_Name,email,password,is_Active,id)
+values (:1,:2,:3,:4,:5,:6)
+2021-12-22 14:43:12: Field Values:
+Array
+(
+    [0] => Clayton
+    [1] => Kl
+    [2] => claytonklassen17@gmail.com
+    [3] => $2y$10$GJuUXp6wBco77DQVhwUfXemI9nBzSKMWdazmco7pZPNnyZlUcN1we
+    [4] => 1
+    [5] => 1
+)
+
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:12: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:12: SubFolder: 
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: GET - /cms/dashboard
+2021-12-22 14:43:12: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Looking in routes for GET - /cms/dashboard
+2021-12-22 14:43:12: Method match GET -> GET
+2021-12-22 14:43:12: Matching /cms/dashboard/ -> /cms/file-browser/
+2021-12-22 14:43:12: Method match GET -> POST
+2021-12-22 14:43:12: Method match GET -> GET
+2021-12-22 14:43:12: Matching /cms/dashboard/ -> /cms/login/
+2021-12-22 14:43:12: Method match GET -> GET
+2021-12-22 14:43:12: Matching /cms/dashboard/ -> /cms/login/reset/
+2021-12-22 14:43:12: Method match GET -> GET
+2021-12-22 14:43:12: Matching /cms/dashboard/ -> /cms/dashboard/
+2021-12-22 14:43:12: Matching /cms/dashboard/ with /cms/dashboard/
+2021-12-22 14:43:12: 
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:12: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:12: SubFolder: 
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: GET - /cms/login
+2021-12-22 14:43:12: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:12: Looking in routes for GET - /cms/login
+2021-12-22 14:43:12: Method match GET -> GET
+2021-12-22 14:43:12: Matching /cms/login/ -> /cms/file-browser/
+2021-12-22 14:43:12: Method match GET -> POST
+2021-12-22 14:43:12: Method match GET -> GET
+2021-12-22 14:43:12: Matching /cms/login/ -> /cms/login/
+2021-12-22 14:43:12: Matching /cms/login/ with /cms/login/
+2021-12-22 14:43:12: 
+2021-12-22 14:43:12: SQL:
+select	count(id) as number
+from	users t
+
+2021-12-22 14:43:12: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:27: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:27: SubFolder: 
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: POST - /cms/login
+2021-12-22 14:43:27: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Looking in routes for POST - /cms/login
+2021-12-22 14:43:27: Method match POST -> GET
+2021-12-22 14:43:27: Method match POST -> POST
+2021-12-22 14:43:27: Matching /cms/login/ -> /cms/upload/
+2021-12-22 14:43:27: Method match POST -> GET
+2021-12-22 14:43:27: Method match POST -> GET
+2021-12-22 14:43:27: Method match POST -> GET
+2021-12-22 14:43:27: Method match POST -> POST
+2021-12-22 14:43:27: Matching /cms/login/ -> /cms/login/
+2021-12-22 14:43:27: Matching /cms/login/ with /cms/login/
+2021-12-22 14:43:27: email=claytonklassen17%40gmail.com&password=pASSword&formToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmb3JtTmFtZSI6ImxvZ2luIiwiZXhwaXJlcyI6MTY0MDE4NDc5Mn0.OLsB51rBLhRedWuBk60wB8PVfThOTd5dzs_QjUXQ97-qcfhZ2fCGekY04kb8Yh7Pb4OP3_BLVSV2-2zlbchiwLPmeJbRyMPDMaWyBmlSGDz7sEDZ0Q73zaWi3DDuvY-8YwgLOKHQH6Etz38SSkSBMMBghTN6mXsP_ItHsUKjnV8
+2021-12-22 14:43:27: Validating token
+2021-12-22 14:43:27: Getting token payload
+2021-12-22 14:43:27: Creating select * from users where email = 'claytonklassen17@gmail.com' into cache
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:27: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:27: SubFolder: 
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: GET - /cms/dashboard
+2021-12-22 14:43:27: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Looking in routes for GET - /cms/dashboard
+2021-12-22 14:43:27: Method match GET -> GET
+2021-12-22 14:43:27: Matching /cms/dashboard/ -> /cms/file-browser/
+2021-12-22 14:43:27: Method match GET -> POST
+2021-12-22 14:43:27: Method match GET -> GET
+2021-12-22 14:43:27: Matching /cms/dashboard/ -> /cms/login/
+2021-12-22 14:43:27: Method match GET -> GET
+2021-12-22 14:43:27: Matching /cms/dashboard/ -> /cms/login/reset/
+2021-12-22 14:43:27: Method match GET -> GET
+2021-12-22 14:43:27: Matching /cms/dashboard/ -> /cms/dashboard/
+2021-12-22 14:43:27: Matching /cms/dashboard/ with /cms/dashboard/
+2021-12-22 14:43:27: 
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:27: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:27: SubFolder: 
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: GET - /vendor/tina4stack/tina4cms/tinymce/tinymce.min.js
+2021-12-22 14:43:27: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\tinymce.min.js
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:27: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:27: SubFolder: 
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: GET - /src/public/js/tina4helper.js
+2021-12-22 14:43:27: GET - H:\Test\tina4-cms\src\public\js\tina4helper.js
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:27: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:27: SubFolder: 
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:27: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: GET - /cms/pages
+2021-12-22 14:43:28: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Looking in routes for GET - /cms/pages
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/file-browser/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/login/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/login/reset/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/dashboard/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/logout/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/article-categories/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/article-categories/form/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/article-categories/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/article-categories/{id}/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> DELETE
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/articles/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/articles/form/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/articles/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/articles/{id}/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> DELETE
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> //
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /content/{pageName}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /content/article/{slug}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /content/tags/{tag}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /content/categories/{category}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/email-templates/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/emailTemplates/form/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/emailTemplates/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /api/admin/emailTemplates/{id}/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> DELETE
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /content/file/browse/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /cms/pages/ -> /cms/pages/
+2021-12-22 14:43:28: Matching /cms/pages/ with /cms/pages/
+2021-12-22 14:43:28: 
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:43:28: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:43:28: SubFolder: 
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: GET - /api/admin/pages
+2021-12-22 14:43:28: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:43:28: Adding DBA
+2021-12-22 14:43:28: Looking in routes for GET - /api/admin/pages
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/file-browser/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/login/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/login/reset/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/dashboard/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/logout/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/article-categories/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/article-categories/form/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/article-categories/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/article-categories/{id}/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> DELETE
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/articles/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/articles/form/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/articles/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/articles/{id}/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> DELETE
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> //
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /content/{pageName}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /content/article/{slug}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /content/tags/{tag}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /content/categories/{category}/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/email-templates/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/emailTemplates/form/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/emailTemplates/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/emailTemplates/{id}/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> DELETE
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /content/file/browse/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /cms/pages/
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/pages/form/
+2021-12-22 14:43:28: Method match GET -> POST
+2021-12-22 14:43:28: Method match GET -> GET
+2021-12-22 14:43:28: Matching /api/admin/pages/ -> /api/admin/pages/
+2021-12-22 14:43:28: Matching /api/admin/pages/ with /api/admin/pages/
+2021-12-22 14:43:28: 
+2021-12-22 14:43:28: SQL:
+select	*
+from	page t
+where	1 = 1
+order by t.id asc
+
+2021-12-22 14:47:08: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /api/admin/pages/1
+2021-12-22 14:47:09: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Looking in routes for GET - /api/admin/pages/1
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/file-browser/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/login/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/login/reset/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/dashboard/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/logout/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/article-categories/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/article-categories/form/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/article-categories/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/article-categories/{id}/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> DELETE
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/articles/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/articles/form/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/articles/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/articles/{id}/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> DELETE
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> //
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /content/{pageName}/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /content/article/{slug}/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /content/tags/{tag}/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /content/categories/{category}/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/email-templates/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/emailTemplates/form/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/emailTemplates/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/emailTemplates/{id}/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> DELETE
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /content/file/browse/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /cms/pages/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/pages/form/
+2021-12-22 14:47:09: Method match GET -> POST
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/pages/
+2021-12-22 14:47:09: Method match GET -> GET
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ -> /api/admin/pages/{id}/
+2021-12-22 14:47:09: Matching /api/admin/pages/1/ with /api/admin/pages/{id}/
+2021-12-22 14:47:09: 
+2021-12-22 14:47:09: Creating select * from page where id = '1' into cache
+2021-12-22 14:47:09: SQL:
+select	id,
+	name
+from	snippet t
+order by name
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/themes/silver/theme.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\themes\silver\theme.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/icons/default/icons.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\icons\default\icons.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/advlist/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\advlist\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/autolink/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\autolink\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/lists/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\lists\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/link/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\link\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/image/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\image\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/charmap/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\charmap\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/print/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\print\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/preview/plugin.min.js
+2021-12-22 14:47:09: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\preview\plugin.min.js
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:09: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:09: SubFolder: 
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: Adding DBA
+2021-12-22 14:47:09: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/anchor/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\anchor\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/searchreplace/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\searchreplace\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/visualblocks/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\visualblocks\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/code/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\code\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/fullscreen/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\fullscreen\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/insertdatetime/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\insertdatetime\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/media/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\media\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/table/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\table\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/paste/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\paste\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/imagetools/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\imagetools\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/wordcount/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\wordcount\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/emoticons/plugin.min.js
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\emoticons\plugin.min.js
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/skins/ui/oxide/skin.min.css
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\skins\ui\oxide\skin.min.css
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: GET - /vendor/tina4stack/tina4cms/tinymce/skins/ui/oxide/content.min.css
+2021-12-22 14:47:10: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\skins\ui\oxide\content.min.css
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:10: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:10: SubFolder: 
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: Adding DBA
+2021-12-22 14:47:10: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: GET - /vendor/tina4stack/tina4cms/tinymce/skins/content/default/content.min.css
+2021-12-22 14:47:11: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\skins\content\default\content.min.css
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:11: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:11: SubFolder: 
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:11: Adding DBA
+2021-12-22 14:47:11: GET - /vendor/tina4stack/tina4cms/tinymce/plugins/emoticons/js/emojis.min.js
+2021-12-22 14:47:11: GET - H:\Test\tina4-cms\vendor\tina4stack\tina4cms\tinymce\plugins\emoticons\js\emojis.min.js
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:27: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:27: SubFolder: 
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: POST - /api/admin/pages/1
+2021-12-22 14:47:27: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Looking in routes for POST - /api/admin/pages/1
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /cms/upload/
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /cms/login/
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/article-categories/
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/article-categories/{id}/
+2021-12-22 14:47:27: Method match POST -> DELETE
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/articles/
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/articles/{id}/
+2021-12-22 14:47:27: Method match POST -> DELETE
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/emailTemplates/
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/emailTemplates/{id}/
+2021-12-22 14:47:27: Method match POST -> DELETE
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /content/file/upload/
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/pages/
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> GET
+2021-12-22 14:47:27: Method match POST -> POST
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ -> /api/admin/pages/{id}/
+2021-12-22 14:47:27: Matching /api/admin/pages/1/ with /api/admin/pages/{id}/
+2021-12-22 14:47:27: 
+2021-12-22 14:47:27: Validating token
+2021-12-22 14:47:27: Getting token payload
+2021-12-22 14:47:27: Creating select * from page where id = '1' into cache
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: TINA4: check select * from page where id = '1'
+2021-12-22 14:47:27: Table Data:
+Array
+(
+    [id] => 1
+    [name] => home
+    [title] => Test Page
+    [description] => Example Home Page
+    [keywords] => 
+    [image] => 
+    [content] => <p>Hello Mars!</p>
+    [is_Published] => 1
+    [date_Created] => 
+    [date_Modified] => 2021-12-22 14:47:27
+    [slug] => home
+    [content_Editor] => 
+    [form_Token] => eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJmb3JtTmFtZSI6InBhZ2VGb3JtIiwiZXhwaXJlcyI6MTY0MDE4NTAyOX0.T1j2RkSyz77SbJOObF47FRQ9Ku-p9FvCDdT-BlpLVLrZrU1YD4mGuPWdTz2iO-1a3KmOH8PQkRxLSjzsy3EhYx5lnVoeCKjsLMODXUtHQLMXECc_RvYNErxXtlx-Hr-S4_runEdNngy9Uf81aRi-2AccWjsF2pt-hxVYWc7DcaA
+)
+
+2021-12-22 14:47:27: SQL:
+update page set name = :1,title = :2,description = :3,keywords = :4,content = :5,is_Published = :6,date_Modified = :7,slug = :8 where id = '1'
+2021-12-22 14:47:27: Field Values:
+Array
+(
+    [0] => home
+    [1] => Test Page
+    [2] => Example Home Page
+    [3] => 
+    [4] => <p>Hello Mars!</p>
+    [5] => 1
+    [6] => 2021-12-22 14:47:27
+    [7] => home
+)
+
+2021-12-22 14:47:27: Adding DBA
+2021-12-22 14:47:27: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:27: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:27: SubFolder: 
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: GET - /api/admin/pages
+2021-12-22 14:47:28: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:47:28: Adding DBA
+2021-12-22 14:47:28: Looking in routes for GET - /api/admin/pages
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/file-browser/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/login/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/login/reset/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/dashboard/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/logout/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/article-categories/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/article-categories/form/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/article-categories/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/article-categories/{id}/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> DELETE
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/articles/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/articles/form/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/articles/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/articles/{id}/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> DELETE
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> //
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /content/{pageName}/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /content/article/{slug}/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /content/tags/{tag}/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /content/categories/{category}/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/email-templates/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/emailTemplates/form/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/emailTemplates/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/emailTemplates/{id}/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> DELETE
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /content/file/browse/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /cms/pages/
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/pages/form/
+2021-12-22 14:47:28: Method match GET -> POST
+2021-12-22 14:47:28: Method match GET -> GET
+2021-12-22 14:47:28: Matching /api/admin/pages/ -> /api/admin/pages/
+2021-12-22 14:47:28: Matching /api/admin/pages/ with /api/admin/pages/
+2021-12-22 14:47:28: 
+2021-12-22 14:47:28: SQL:
+select	*
+from	page t
+where	1 = 1
+order by t.id asc
+
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:47:39: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:47:39: SubFolder: 
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: GET - /
+2021-12-22 14:47:39: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Looking in routes for GET - /
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /cms/file-browser/
+2021-12-22 14:47:39: Method match GET -> POST
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /cms/login/
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /cms/login/reset/
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /cms/dashboard/
+2021-12-22 14:47:39: Method match GET -> POST
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /cms/logout/
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /cms/article-categories/
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /api/admin/article-categories/form/
+2021-12-22 14:47:39: Method match GET -> POST
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /api/admin/article-categories/
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /api/admin/article-categories/{id}/
+2021-12-22 14:47:39: Method match GET -> POST
+2021-12-22 14:47:39: Method match GET -> DELETE
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /cms/articles/
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /api/admin/articles/form/
+2021-12-22 14:47:39: Method match GET -> POST
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /api/admin/articles/
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> /api/admin/articles/{id}/
+2021-12-22 14:47:39: Method match GET -> POST
+2021-12-22 14:47:39: Method match GET -> DELETE
+2021-12-22 14:47:39: Method match GET -> GET
+2021-12-22 14:47:39: Matching // -> //
+2021-12-22 14:47:39: Matching // with //
+2021-12-22 14:47:39: 
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Creating select * from page where slug = 'home' into cache
+2021-12-22 14:47:39: html_entity_decode(): Passing null to parameter #1 ($string) of type string is deprecated
+[H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\app\Content.php:103]
+2021-12-22 14:47:39: Adding DBA
+2021-12-22 14:47:39: Creating select * from page where slug = 'home' into cache
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 14:49:46: Document Root: H:\Test\tina4-cms\
+2021-12-22 14:49:46: SubFolder: 
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: SQL:
+select	*
+from	snippet t
+
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: GET - /
+2021-12-22 14:49:46: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Looking in routes for GET - /
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /cms/file-browser/
+2021-12-22 14:49:46: Method match GET -> POST
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /cms/login/
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /cms/login/reset/
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /cms/dashboard/
+2021-12-22 14:49:46: Method match GET -> POST
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /cms/logout/
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /cms/article-categories/
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /api/admin/article-categories/form/
+2021-12-22 14:49:46: Method match GET -> POST
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /api/admin/article-categories/
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /api/admin/article-categories/{id}/
+2021-12-22 14:49:46: Method match GET -> POST
+2021-12-22 14:49:46: Method match GET -> DELETE
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /cms/articles/
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /api/admin/articles/form/
+2021-12-22 14:49:46: Method match GET -> POST
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /api/admin/articles/
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> /api/admin/articles/{id}/
+2021-12-22 14:49:46: Method match GET -> POST
+2021-12-22 14:49:46: Method match GET -> DELETE
+2021-12-22 14:49:46: Method match GET -> GET
+2021-12-22 14:49:46: Matching // -> //
+2021-12-22 14:49:46: Matching // with //
+2021-12-22 14:49:46: 
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Creating select * from page where slug = 'home' into cache
+2021-12-22 14:49:46: html_entity_decode(): Passing null to parameter #1 ($string) of type string is deprecated
+[H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\app\Content.php:103]
+2021-12-22 14:49:46: Adding DBA
+2021-12-22 14:49:46: Creating select * from page where slug = 'home' into cache
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 15:41:28: Document Root: H:\Test\tina4-cms\
+2021-12-22 15:41:28: SubFolder: 
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: SQL:
+select	*
+from	snippet t
+
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: GET - /
+2021-12-22 15:41:28: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Looking in routes for GET - /
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /cms/file-browser/
+2021-12-22 15:41:28: Method match GET -> POST
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /cms/login/
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /cms/login/reset/
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /cms/dashboard/
+2021-12-22 15:41:28: Method match GET -> POST
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /cms/logout/
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /cms/article-categories/
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /api/admin/article-categories/form/
+2021-12-22 15:41:28: Method match GET -> POST
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /api/admin/article-categories/
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /api/admin/article-categories/{id}/
+2021-12-22 15:41:28: Method match GET -> POST
+2021-12-22 15:41:28: Method match GET -> DELETE
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /cms/articles/
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /api/admin/articles/form/
+2021-12-22 15:41:28: Method match GET -> POST
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /api/admin/articles/
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> /api/admin/articles/{id}/
+2021-12-22 15:41:28: Method match GET -> POST
+2021-12-22 15:41:28: Method match GET -> DELETE
+2021-12-22 15:41:28: Method match GET -> GET
+2021-12-22 15:41:28: Matching // -> //
+2021-12-22 15:41:28: Matching // with //
+2021-12-22 15:41:28: 
+2021-12-22 15:41:28: Adding DBA
+2021-12-22 15:41:28: Creating select * from page where slug = 'home' into cache
+2021-12-22 15:41:28: html_entity_decode(): Passing null to parameter #1 ($string) of type string is deprecated
+[H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\app\Content.php:106]
+2021-12-22 15:41:28: Backtrace:
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 15:41:28: header(): Argument #3 ($response_code) must be of type int, array given
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 15:42:12: Document Root: H:\Test\tina4-cms\
+2021-12-22 15:42:12: SubFolder: 
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: SQL:
+select	*
+from	snippet t
+
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: GET - /
+2021-12-22 15:42:12: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Looking in routes for GET - /
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /cms/file-browser/
+2021-12-22 15:42:12: Method match GET -> POST
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /cms/login/
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /cms/login/reset/
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /cms/dashboard/
+2021-12-22 15:42:12: Method match GET -> POST
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /cms/logout/
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /cms/article-categories/
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /api/admin/article-categories/form/
+2021-12-22 15:42:12: Method match GET -> POST
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /api/admin/article-categories/
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /api/admin/article-categories/{id}/
+2021-12-22 15:42:12: Method match GET -> POST
+2021-12-22 15:42:12: Method match GET -> DELETE
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /cms/articles/
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /api/admin/articles/form/
+2021-12-22 15:42:12: Method match GET -> POST
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /api/admin/articles/
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> /api/admin/articles/{id}/
+2021-12-22 15:42:12: Method match GET -> POST
+2021-12-22 15:42:12: Method match GET -> DELETE
+2021-12-22 15:42:12: Method match GET -> GET
+2021-12-22 15:42:12: Matching // -> //
+2021-12-22 15:42:12: Matching // with //
+2021-12-22 15:42:12: 
+2021-12-22 15:42:12: Adding DBA
+2021-12-22 15:42:12: Creating select * from page where slug = 'home' into cache
+2021-12-22 15:42:12: html_entity_decode(): Passing null to parameter #1 ($string) of type string is deprecated
+[H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\app\Content.php:106]
+2021-12-22 15:42:12: Backtrace:
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 15:42:12: header(): Argument #3 ($response_code) must be of type int, array given
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 17:56:14: Adding DBA
+2021-12-22 17:56:14: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 17:56:14: Document Root: H:\Test\tina4-cms\
+2021-12-22 17:56:14: SubFolder: 
+2021-12-22 17:56:14: Adding DBA
+2021-12-22 17:56:14: Adding DBA
+2021-12-22 17:56:14: Backtrace:
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Tina4Php.php:78]
+2021-12-22 17:56:14: syntax error, unexpected token ";"
+[H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\app\Content.php:102]
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 17:56:37: Document Root: H:\Test\tina4-cms\
+2021-12-22 17:56:37: SubFolder: 
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: SQL:
+select	*
+from	snippet t
+
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: GET - /
+2021-12-22 17:56:37: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Looking in routes for GET - /
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /cms/file-browser/
+2021-12-22 17:56:37: Method match GET -> POST
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /cms/login/
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /cms/login/reset/
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /cms/dashboard/
+2021-12-22 17:56:37: Method match GET -> POST
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /cms/logout/
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /cms/article-categories/
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /api/admin/article-categories/form/
+2021-12-22 17:56:37: Method match GET -> POST
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /api/admin/article-categories/
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /api/admin/article-categories/{id}/
+2021-12-22 17:56:37: Method match GET -> POST
+2021-12-22 17:56:37: Method match GET -> DELETE
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /cms/articles/
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /api/admin/articles/form/
+2021-12-22 17:56:37: Method match GET -> POST
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /api/admin/articles/
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> /api/admin/articles/{id}/
+2021-12-22 17:56:37: Method match GET -> POST
+2021-12-22 17:56:37: Method match GET -> DELETE
+2021-12-22 17:56:37: Method match GET -> GET
+2021-12-22 17:56:37: Matching // -> //
+2021-12-22 17:56:37: Matching // with //
+2021-12-22 17:56:37: 
+2021-12-22 17:56:37: Adding DBA
+2021-12-22 17:56:37: Creating select * from page where slug = 'home' into cache
+2021-12-22 17:56:37: Backtrace:
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 17:56:37: header(): Argument #3 ($response_code) must be of type int, array given
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 18:01:20: Backtrace:
+[H:\Test\tina4-cms\vendor\composer\autoload_real.php:61]
+2021-12-22 18:01:20: syntax error, unexpected variable "$statusCode", expecting ")"
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 18:01:29: Backtrace:
+[H:\Test\tina4-cms\vendor\composer\autoload_real.php:61]
+2021-12-22 18:01:29: syntax error, unexpected variable "$statusCode", expecting ")"
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 18:02:15: Backtrace:
+[H:\Test\tina4-cms\vendor\composer\autoload_real.php:61]
+2021-12-22 18:02:15: syntax error, unexpected variable "$statusCode", expecting ")"
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:89]
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Project Root: H:\Test\tina4-cms\vendor\tina4stack\tina4php\
+2021-12-22 18:04:33: Document Root: H:\Test\tina4-cms\
+2021-12-22 18:04:33: SubFolder: 
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: SQL:
+select	*
+from	snippet t
+
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: GET - /
+2021-12-22 18:04:33: TINA4: Twig Paths - Array(    [0] => src\templates    [1] => src\public    [2] => src\assets    [3] => src\templates\snippets    [4] => Array        (            [path] => H:\Test\tina4-cms\vendor\tina4stack\tina4cms\src\templates            [nameSpace] => tina4cms        ))
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Looking in routes for GET - /
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /cms/file-browser/
+2021-12-22 18:04:33: Method match GET -> POST
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /cms/login/
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /cms/login/reset/
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /cms/dashboard/
+2021-12-22 18:04:33: Method match GET -> POST
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /cms/logout/
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /cms/article-categories/
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /api/admin/article-categories/form/
+2021-12-22 18:04:33: Method match GET -> POST
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /api/admin/article-categories/
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /api/admin/article-categories/{id}/
+2021-12-22 18:04:33: Method match GET -> POST
+2021-12-22 18:04:33: Method match GET -> DELETE
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /cms/articles/
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /api/admin/articles/form/
+2021-12-22 18:04:33: Method match GET -> POST
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /api/admin/articles/
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> /api/admin/articles/{id}/
+2021-12-22 18:04:33: Method match GET -> POST
+2021-12-22 18:04:33: Method match GET -> DELETE
+2021-12-22 18:04:33: Method match GET -> GET
+2021-12-22 18:04:33: Matching // -> //
+2021-12-22 18:04:33: Matching // with //
+2021-12-22 18:04:33: 
+2021-12-22 18:04:33: Adding DBA
+2021-12-22 18:04:33: Creating select * from page where slug = 'home' into cache
+2021-12-22 18:04:33: Backtrace:
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]
+2021-12-22 18:04:33: header(): Argument #3 ($response_code) must be of type int, array given
+[H:\Test\tina4-cms\vendor\tina4stack\tina4php\Tina4\Functions.php:92]

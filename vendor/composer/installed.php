@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'c4d5d91d9d46f57e49ff090a10f03858ba7442a4',
+        'reference' => 'c051596d3a804668c32194ce9358f440d724af99',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'c4d5d91d9d46f57e49ff090a10f03858ba7442a4',
+            'reference' => 'c051596d3a804668c32194ce9358f440d724af99',
             'dev_requirement' => false,
         ),
         'coyl/git' => array(

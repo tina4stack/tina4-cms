@@ -229,7 +229,6 @@ class ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926
         'Tina4\\SQLite3Query' => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4/SQLite3Query.php',
         'Tina4\\Service' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Service/Service.php',
         'Tina4\\Swagger' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Api/Swagger.php',
-        'Tina4\\Test' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Core/Test.php',
         'Tina4\\Tina4Php' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Tina4Php.php',
         'Tina4\\TwigUtility' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Core/TwigUtility.php',
         'Tina4\\Utility' => __DIR__ . '/..' . '/tina4stack/tina4php/Tina4/Core/Utility.php',

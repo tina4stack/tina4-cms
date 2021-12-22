@@ -22,7 +22,7 @@ class Content extends \Tina4\Data
      * @param string $href
      * @param string $caption
      */
-    public function addCmsMenu($href="", $caption=""): void
+    public function addCmsMenu($href = "", $caption = ""): void
     {
         global $TINA4_CMS_MENU_ITEMS;
         $TINA4_CMS_MENU_ITEMS[] = ["href" => $href, "caption" => $caption];
@@ -38,8 +38,7 @@ class Content extends \Tina4\Data
     {
         global $TINA4_CMS_MENU_ITEMS;
 
-        if (empty($TINA4_CMS_MENU_ITEMS))
-        {
+        if (empty($TINA4_CMS_MENU_ITEMS)) {
             $TINA4_CMS_MENU_ITEMS = [];
         }
         return $TINA4_CMS_MENU_ITEMS;
@@ -62,16 +61,16 @@ class Content extends \Tina4\Data
 
         $title = str_replace("'", "", $title);
 
-        $title = preg_replace('!['.preg_quote($flip, null).']+!u', $separator, $title);
+        $title = preg_replace('![' . preg_quote($flip, null) . ']+!u', $separator, $title);
 
         // Replace @ with the word 'at'
-        $title = str_replace('@', $separator.'at'.$separator, $title);
+        $title = str_replace('@', $separator . 'at' . $separator, $title);
 
         // Remove all characters that are not the separator, letters, numbers, or whitespace.
-        $title = preg_replace('![^'.preg_quote($separator, null).'\pL\pN\s]+!u', '-', $title);
+        $title = preg_replace('![^' . preg_quote($separator, null) . '\pL\pN\s]+!u', '-', $title);
 
         // Replace all separator characters and whitespace by a single separator
-        $title = preg_replace('!['.preg_quote($separator, null).'\s]+!u', $separator, $title);
+        $title = preg_replace('![' . preg_quote($separator, null) . '\s]+!u', $separator, $title);
 
         return trim($title, $separator);
     }
@@ -97,10 +96,13 @@ class Content extends \Tina4\Data
      */
     public function getPage($slug): string
     {
-        $page = (new Page());
-        $page->load("slug = '{$slug}'");
-
-        return \Tina4\renderTemplate( html_entity_decode($page->content, ENT_QUOTES ) , ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
+        if ($page = null) {
+            \Tina4\redirect("./vendor/tina4stack/images/404.png", 404);
+        } else {
+            ($page = (new Page()));
+            $page->load("slug = '{$slug}'");
+        }
+        return \Tina4\redirect(".vendor/tina4stack/tina4cms/src/templates/admin/dashboard.twig", ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
     }
 
     /**
