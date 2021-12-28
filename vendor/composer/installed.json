@@ -939,17 +939,17 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "v2.0.1",
+            "version_normalized": "2.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "4b6cca912e28b4cae2ec233c8313acdda87fe335"
+                "reference": "ac37e9a37a078d56c0d3370c8d473cb5f8a4669b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/4b6cca912e28b4cae2ec233c8313acdda87fe335",
-                "reference": "4b6cca912e28b4cae2ec233c8313acdda87fe335",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/ac37e9a37a078d56c0d3370c8d473cb5f8a4669b",
+                "reference": "ac37e9a37a078d56c0d3370c8d473cb5f8a4669b",
                 "shasum": ""
             },
             "require": {
@@ -971,9 +971,10 @@
             "require-dev": {
                 "overtrue/phplint": "^2.0",
                 "phpunit/phpunit": "^9",
-                "roave/security-advisories": "dev-latest"
+                "roave/security-advisories": "dev-latest",
+                "tina4stack/tina4php-sqlite3": "^v1.0.1"
             },
-            "time": "2021-12-06T20:43:30+00:00",
+            "time": "2021-12-27T12:24:39+00:00",
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -1017,7 +1018,7 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.0"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.1"
             },
             "install-path": "../tina4stack/tina4php"
         },

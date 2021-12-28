@@ -102,7 +102,7 @@ class Content extends \Tina4\Data
             ($page = (new Page()));
             $page->load("slug = '{$slug}'");
         }
-        return \Tina4\redirect(".vendor/tina4stack/tina4cms/src/templates/admin/dashboard.twig", ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
+        return \Tina4\redirect("./vendor/tina4stack/tina4cms/src/templates/admin/dashboard.twig", 202);
     }
 
     /**
