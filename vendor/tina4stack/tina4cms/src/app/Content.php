@@ -102,7 +102,8 @@ class Content extends \Tina4\Data
             $page->load("slug = '{$slug}'");
             ($page = (new Page())->select("*")
                                  ->where("")
-                                 ->asObject());
+                                 ->asObject()
+            );
         }
 //        $page = \Tina4\renderTemplate($page, ["title" => $title, "page" => $page, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
         return $page;
