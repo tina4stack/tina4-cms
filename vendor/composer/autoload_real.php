@@ -65,11 +65,16 @@ class ComposerAutoloaderInitcada4cb376bbbf2a3341ef7d19063926
     }
 }
 
+/**
+ * @param string $fileIdentifier
+ * @param string $file
+ * @return void
+ */
 function composerRequirecada4cb376bbbf2a3341ef7d19063926($fileIdentifier, $file)
 {
     if (empty($GLOBALS['__composer_autoload_files'][$fileIdentifier])) {
-        require $file;
-
         $GLOBALS['__composer_autoload_files'][$fileIdentifier] = true;
+
+        require $file;
     }
 }

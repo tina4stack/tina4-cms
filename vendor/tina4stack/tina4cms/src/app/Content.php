@@ -96,14 +96,19 @@ class Content extends \Tina4\Data
      */
     public function getPage($slug): string
     {
-        if ($page = null) {
+        if ($page == null) {
             \Tina4\redirect("./vendor/tina4stack/images/404.png", 404);
         } else {
-            ($page = (new Page()));
             $page->load("slug = '{$slug}'");
+            ($page = (new Page())->select("*")
+                                 ->where("")
+                                 ->asObject());
         }
-        return \Tina4\redirect("./vendor/tina4stack/tina4cms/src/templates/admin/dashboard.twig", 202);
+//        $page = \Tina4\renderTemplate($page, ["title" => $title, "page" => $page, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
+        return $page;
+//        \Tina4\redirect("./vendor/tina4stack/tina4cms/src/templates/content/pages.twig", 202);
     }
+
 
     /**
      * Get Articles
@@ -116,16 +121,18 @@ class Content extends \Tina4\Data
     public function getArticles($category, $limit=10, $skip=0, $template="article.twig")
     {
 
-        $articles = (new Article())->select("*", $limit, $skip)->where("1 = 1");
+        $articles = (new Article())->select("*", $limit, $skip)
+                                   ->where("1 = 1");
         if ($category) {
             $articles->and("id in (select article_id 
-                                                  from article_article_category 
-                                                 where article_category_id in ( select id from article_category where upper(name) = upper('{$category}')
+                                        from article_article_category 
+                                        where article_category_id in ( select id from article_category where upper(name) = upper('{$category}')
             ))");
         }
 
         $articles->and("id <> 0 and is_published = 1");
-        $articles = $articles->orderBy("published_date desc")->asObject();
+        $articles = $articles->orderBy("published_date desc")
+                             ->asObject();
 
         foreach ($articles as $id => $article) {
             $articles[$id]->url = "/content/article/{$article->slug}";
@@ -156,7 +163,7 @@ class Content extends \Tina4\Data
     public function getArticleList($category, $className="", $limit=0)
     {
         $articles = (new Article())->select("title, description, image, slug, date_created", $limit)
-          ->where("id <> 0 and is_published = 1");
+                                   ->where("id <> 0 and is_published = 1");
         if ($category) {
           $articles->and("article_category_id in (select id from article_category where upper(name) = upper('{$category}'))");
         }
