@@ -1181,17 +1181,17 @@
         },
         {
             "name": "tina4stack/tina4php-orm",
-            "version": "v1.0.4",
-            "version_normalized": "1.0.4.0",
+            "version": "v1.0.5",
+            "version_normalized": "1.0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-orm.git",
-                "reference": "ec7499ddad63a5621c9f1d65982b7901420a8811"
+                "reference": "5e7aef47238a52853bf9fc389e395d3b47d13ac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/ec7499ddad63a5621c9f1d65982b7901420a8811",
-                "reference": "ec7499ddad63a5621c9f1d65982b7901420a8811",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/5e7aef47238a52853bf9fc389e395d3b47d13ac5",
+                "reference": "5e7aef47238a52853bf9fc389e395d3b47d13ac5",
                 "shasum": ""
             },
             "require": {
@@ -1203,7 +1203,7 @@
                 "roave/security-advisories": "dev-latest",
                 "tina4stack/tina4php-firebird": "^1.0.1"
             },
-            "time": "2021-12-11T14:28:02+00:00",
+            "time": "2021-12-31T08:33:06+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1223,7 +1223,7 @@
             "description": "Tina4 ORM Module",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-orm/issues",
-                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.4"
+                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.5"
             },
             "install-path": "../tina4stack/tina4php-orm"
         },

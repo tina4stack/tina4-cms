@@ -144,9 +144,6 @@
             "require": {
                 "php": "^7.1 || ^8.0"
             },
-            "replace": {
-                "myclabs/deep-copy": "self.version"
-            },
             "require-dev": {
                 "doctrine/collections": "^1.0",
                 "doctrine/common": "^2.6",
@@ -1133,16 +1130,16 @@
         },
         {
             "name": "tina4stack/tina4php-orm",
-            "version": "v1.0.4",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-orm.git",
-                "reference": "ec7499ddad63a5621c9f1d65982b7901420a8811"
+                "reference": "5e7aef47238a52853bf9fc389e395d3b47d13ac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/ec7499ddad63a5621c9f1d65982b7901420a8811",
-                "reference": "ec7499ddad63a5621c9f1d65982b7901420a8811",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/5e7aef47238a52853bf9fc389e395d3b47d13ac5",
+                "reference": "5e7aef47238a52853bf9fc389e395d3b47d13ac5",
                 "shasum": ""
             },
             "require": {
@@ -1172,9 +1169,9 @@
             "description": "Tina4 ORM Module",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-orm/issues",
-                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.4"
+                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.5"
             },
-            "time": "2021-12-11T14:28:02+00:00"
+            "time": "2021-12-31T08:33:06+00:00"
         },
         {
             "name": "tina4stack/tina4php-shape",
@@ -1353,5 +1350,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

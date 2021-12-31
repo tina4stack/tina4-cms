@@ -20,7 +20,9 @@
        case "fetch":
             //Return back a form to be submitted to the create
 
-            $snippets = (new Snippet())->select("id,name", 1000)->orderBy("name")->asArray();
+            $snippets = (new Snippet())->select("id,name", 1000)
+                                       ->orderBy("name")
+                                       ->asArray();
 
             if ($action == "form") {
                 $title = "Add Page";
@@ -44,8 +46,8 @@
             }
 
             return   $page->select ("*", $filter["length"], $filter["start"])
-                ->where("{$where}")
-                ->orderBy($filter["orderBy"])
+                          ->where("{$where}")
+                          ->orderBy($filter["orderBy"])
                 ->asResult();
         break;
         case "create":

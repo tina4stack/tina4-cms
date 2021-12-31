@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '50feeb5a539cfbd837b0d24685f70de2162a486e',
+        'reference' => '615a7c2df99c5a456994e4c36e80c4c9b1e07113',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '50feeb5a539cfbd837b0d24685f70de2162a486e',
+            'reference' => '615a7c2df99c5a456994e4c36e80c4c9b1e07113',
             'dev_requirement' => false,
         ),
         'coyl/git' => array(
@@ -187,12 +187,12 @@
             'dev_requirement' => false,
         ),
         'tina4stack/tina4php-orm' => array(
-            'pretty_version' => 'v1.0.4',
-            'version' => '1.0.4.0',
+            'pretty_version' => 'v1.0.5',
+            'version' => '1.0.5.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../tina4stack/tina4php-orm',
             'aliases' => array(),
-            'reference' => 'ec7499ddad63a5621c9f1d65982b7901420a8811',
+            'reference' => '5e7aef47238a52853bf9fc389e395d3b47d13ac5',
             'dev_requirement' => false,
         ),
         'tina4stack/tina4php-shape' => array(
