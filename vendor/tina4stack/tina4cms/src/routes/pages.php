@@ -1,8 +1,13 @@
 <?php
 
-\Tina4\Get::add("/cms/pages", function (\Tina4\Response $response){
-    return $response (\Tina4\renderTemplate("/content/pages.twig"), HTTP_OK, TEXT_HTML);
-});
+\Tina4\Get::add("/cms/pages", function (\Tina4\Response $response, \Tina4\Request $request){
+    if (!isset($_SESSION["user"])) {
+        $user = new User();
+        \Tina4\redirect("./vendor/tina4stack/images/404.png", 404);
+    } elseif (!isset($_SESSION["user"])) {
+        }
+        \Tina4\renderTemplate("/content/pages.twig",  HTTP_OK, TEXT_HTML, 202);
+    });
 
 /**
  * CRUD Prototype Page Modify as needed
@@ -10,7 +15,7 @@
             POST @ /path, /path/{id} - create & update
             DELETE @ /path/{id} - delete for single
  */
-\Tina4\Crud::route ("/api/admin/pages", new Page(), function ($action, Page $page, $filter, \Tina4\Request $request) {
+\Tina4\Crud::route ("/api/admin/pages", new Page(), function ($action, Page $page, $filter, \Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->params["websiteId"])) {
         $websiteId = $request->params["websiteId"];
     }
@@ -48,7 +53,7 @@
             return   $page->select ("*", $filter["length"], $filter["start"])
                           ->where("{$where}")
                           ->orderBy($filter["orderBy"])
-                ->asResult();
+                          ->asResult();
         break;
         case "create":
             $page->slug = (new Content())->getSlug($request->data->name);
@@ -82,5 +87,5 @@
             //return needed
             return (object)["httpCode" => 200, "message" => "<script>pageGrid.ajax.reload(null, false); showMessage ('Page Deleted');</script>"];
         break;
-    }
+        }
 });

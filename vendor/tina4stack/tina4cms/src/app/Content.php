@@ -101,13 +101,11 @@ class Content extends \Tina4\Data
         } else {
             $page->load("slug = '{$slug}'");
             ($page = (new Page())->select("*")
-                                 ->where("")
-                                 ->asObject()
+                ->asArray()
             );
+            $page = \Tina4\renderTemplate($page, ["title" => $title, "page" => $page, "content" => $content, "image" => $image, "request" => $_REQUEST]);
         }
-//        $page = \Tina4\renderTemplate($page, ["title" => $title, "page" => $page, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
-        return $page;
-//        \Tina4\redirect("./vendor/tina4stack/tina4cms/src/templates/content/pages.twig", 202);
+//            \Tina4\redirect("vendor/tina4stack/tina4cms/src/templates/content/pages.twig", 202);
     }
 
 
