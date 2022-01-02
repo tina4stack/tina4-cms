@@ -104,9 +104,9 @@ class ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926
             9 => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4',
             10 => __DIR__ . '/..' . '/tina4stack/tina4php-debug/Tina4',
             11 => __DIR__ . '/..' . '/tina4stack/tina4php-env/Tina4',
-            12 => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4',
-            13 => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4',
-            14 => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4',
+            12 => __DIR__ . '/..' . '/tina4stack/tina4php-shape/Tina4',
+            13 => __DIR__ . '/..' . '/tina4stack/tina4php-sqlite3/Tina4',
+            14 => __DIR__ . '/..' . '/tina4stack/tina4php-orm/Tina4',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (

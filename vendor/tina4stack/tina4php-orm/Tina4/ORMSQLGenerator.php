@@ -96,8 +96,14 @@ class ORMSQLGenerator
 
             $insertColumns[] = $orm->getFieldName($fieldName,$orm->fieldMapping);
 
-            if (strtoupper($orm->getFieldName($fieldName,$orm->fieldMapping)) === strtoupper($orm->getFieldName($orm->primaryKey,$orm->fieldMapping))) {
-                $keyInFieldList = true;
+            if (is_array($orm->primaryKey)) {
+                if (strtoupper($orm->getFieldName($fieldName, $orm->fieldMapping)) === strtoupper($orm->getFieldName(join(",", $orm->primaryKey), $orm->fieldMapping))) {
+                    $keyInFieldList = true;
+                }
+            } else {
+                if (strtoupper($orm->getFieldName($fieldName, $orm->fieldMapping)) === strtoupper($orm->getFieldName($orm->primaryKey, $orm->fieldMapping))) {
+                    $keyInFieldList = true;
+                }
             }
 
             if (is_null($fieldValue)) {
@@ -141,11 +147,16 @@ class ORMSQLGenerator
 
         if (!empty($orm->DBA) && !$keyInFieldList) {
             if (get_class($orm->DBA) === "Tina4\DataFirebird") {
-                $primaryKeys = explode(",", $orm->primaryKey);
+                if (!is_array($orm->primaryKey)) {
+                    $primaryKeys = explode(",", $orm->primaryKey);
+                } else {
+                    $primaryKeys = $orm->primaryKey;
+                }
+
                 foreach ($primaryKeys as $id => $primaryKey) {
                     $primaryKeys[$id] = $orm->getFieldName($primaryKey,$orm->fieldMapping);
                 }
-                $returningStatement = " returning " . join($primaryKeys,",");
+                $returningStatement = " returning " . join(",", $primaryKeys);
             } elseif (get_class($orm->DBA) === "Tina4\DataSQLite3") {
                 $returningStatement = "";
             }

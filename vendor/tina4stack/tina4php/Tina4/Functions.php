@@ -42,13 +42,13 @@ function renderTemplate($fileNameString, $data = [], $location = ""): string
                 $renderFile = substr($renderFile, 1);
             }
             $internalTwig->getLoader()->addPath(TINA4_DOCUMENT_ROOT . $newPath);
-            return $internalTwig->render($renderFile, $data);
+            return $internalTwig->render($renderFile, $page);
         } elseif ((strlen($fileName) > 1 && $fileName[0] === DIRECTORY_SEPARATOR) || (strlen($fileName) > 1 && $fileName[0] === "/")) {
             $fileName = substr($fileName, 1);
         }
 
         if ($internalTwig->getLoader()->exists($fileName)) {
-            return $internalTwig->render($fileName, $data);
+            return $internalTwig->render($fileName,  $data);
         } elseif ($internalTwig->getLoader()->exists(basename($fileName))) {
             return $internalTwig->render(basename($fileName), $data);
         } else {
