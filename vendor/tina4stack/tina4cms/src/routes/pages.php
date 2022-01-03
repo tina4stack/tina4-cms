@@ -1,12 +1,19 @@
 <?php
 
+/**
+ * @description Based on user, directs user to error or login page.
+ * @param $pages
+ * @param $response
+ * @param $request
+ * return template
+ */
 \Tina4\Get::add("/cms/pages", function (\Tina4\Response $response, \Tina4\Request $request){
     if (!isset($_SESSION["user"])) {
         $user = new User();
         \Tina4\redirect("./vendor/tina4stack/images/404.png", 404);
-    } elseif (!isset($_SESSION["user"])) {
+    } elseif (isset($_SESSION["user"])) {
         }
-        \Tina4\renderTemplate("/content/pages.twig",  HTTP_OK, TEXT_HTML, 202);
+        \Tina4\renderTemplate("vendor/tina4stack/tina4cms/src/templates/admin/login.twig",  HTTP_OK, TEXT_HTML, 202);
     });
 
 /**

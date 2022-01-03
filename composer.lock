@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59f43de8f29b1eb255f0d81ba5c2e1e0",
+    "content-hash": "fc81c43590cd45370e97e6cf885c0393",
     "packages": [
         {
             "name": "coyl/git",
@@ -1130,16 +1130,16 @@
         },
         {
             "name": "tina4stack/tina4php-orm",
-            "version": "v1.0.5",
+            "version": "v1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-orm.git",
-                "reference": "5e7aef47238a52853bf9fc389e395d3b47d13ac5"
+                "reference": "6da3b29395c1b75b162c90902b2e8b45e971d03d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/5e7aef47238a52853bf9fc389e395d3b47d13ac5",
-                "reference": "5e7aef47238a52853bf9fc389e395d3b47d13ac5",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/6da3b29395c1b75b162c90902b2e8b45e971d03d",
+                "reference": "6da3b29395c1b75b162c90902b2e8b45e971d03d",
                 "shasum": ""
             },
             "require": {
@@ -1169,9 +1169,9 @@
             "description": "Tina4 ORM Module",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-orm/issues",
-                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.5"
+                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.6"
             },
-            "time": "2021-12-31T08:33:06+00:00"
+            "time": "2022-01-01T14:55:35+00:00"
         },
         {
             "name": "tina4stack/tina4php-shape",
