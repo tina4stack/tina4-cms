@@ -24,9 +24,10 @@ jobs:
                     - '7.3'
                     - '7.4'
                     - '8.0'
-                    - '8.1'
                 composer-options: ['']
                 experimental: [false]
+                include:
+                  - { php-version: '8.1', experimental: true, composer-options: '--ignore-platform-req=php' }
 
         steps:
             - name: "Checkout code"
@@ -82,7 +83,6 @@ jobs:
                     - '7.3'
                     - '7.4'
                     - '8.0'
-                    - '8.1'
                 extension:
                     - 'extra/cache-extra'
                     - 'extra/cssinliner-extra'
@@ -92,8 +92,6 @@ jobs:
                     - 'extra/markdown-extra'
                     - 'extra/string-extra'
                     - 'extra/twig-extra-bundle'
-                composer-options: ['']
-                experimental: [false]
 
         steps:
             - name: "Checkout code"

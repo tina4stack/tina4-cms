@@ -95,12 +95,10 @@ class Content extends \Tina4\Data
      * @throws \Twig\Error\LoaderError
      */
     public function getPage($slug): string
-
     {
         if ($page == null) {
             \Tina4\redirect("./vendor/tina4stack/images/404.png", 404);
         } else {
-            $page = (new Page());
             $page->load("slug = '{$slug}'");
             ($page = (new Page())->select("*")
                                  ->where("id = `name`")

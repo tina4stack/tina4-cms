@@ -7,8 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInitcada4cb376bbbf2a3341ef7d19063926
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '8a1ef99e7021170682ce21f6dd289bfb' => __DIR__ . '/..' . '/tina4stack/tina4php-debug/Tina4/Initialize.php',
         '6400f62476c6446031f8cb624400df32' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/constants.php',
         'efca3cb6f78cbe2aee8c38f74af81f2d' => __DIR__ . '/..' . '/tina4stack/tina4php-database/Tina4/Interfaces/DataBase.php',
