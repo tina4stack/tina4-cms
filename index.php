@@ -1,6 +1,5 @@
 <?php
-$devMode = true;
-
+$devMode = ($_SERVER["SERVER_NAME"] === "localhost" && __DIR__ === "D:\\projects\\php\\tina4-cms");
 if (!$devMode) {
     \Tina4\Module::addModule("CMS Module", "1.0.0", "tina4cms", function (\Tina4\Config $config) {
         (new Content())->addConfigMethods($config);

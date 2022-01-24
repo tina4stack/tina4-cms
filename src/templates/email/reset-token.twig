@@ -1,5 +1,9 @@
 Dear {{ user.firstName }}
 
-Please find a link to your reset password
+Please find a link to your reset password for {{ website.siteName }}
 
-{{ }}
+<a href="{{ website.siteUrl }}/cms/login/reset-confirm/{{ user.resetToken }}">Click here to reset your password!</a>
+
+Kind regards
+
+{{ website.siteName }}
