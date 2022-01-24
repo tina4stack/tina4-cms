@@ -312,6 +312,7 @@ class Content extends \Tina4\Data
      * @param $name
      * @param $websiteId
      * @return mixed|string
+     * @throws ReflectionException
      */
     public function getEmailTemplate($name) {
         $template = (new EmailTemplate())->select("*", 5)
@@ -357,7 +358,7 @@ class Content extends \Tina4\Data
     /**
      * Fixes content up for relative paths to get images and other sources to display
      * @param $content
-     * @return
+     * @return string
      */
     public function parseContent ($content) {
         $content = html_entity_decode($content);
@@ -367,6 +368,7 @@ class Content extends \Tina4\Data
     /**
      * Get Snippets
      * @return string|string[]
+     * @throws ReflectionException
      */
     public function getSnippets() {
         $snippets = (new Snippet())->select("*", 1000);
@@ -377,9 +379,8 @@ class Content extends \Tina4\Data
         }
     }
 
-    public function getArticlesByTag($category, $limit=1, $skip=0) {
-
-
+    public function getArticlesByTag($category, $limit=1, $skip=0)
+    {
         $articles = (new Article())->select("*", $limit, $skip)
             ->where("id <> 0 and is_published = 1");
 
@@ -414,4 +415,67 @@ class Content extends \Tina4\Data
 
         return $articles;
     }
+
+    /**
+     * Method to add Config methods on the CMS
+     * @param \Tina4\Config $config
+     * @throws ReflectionException
+     */
+    public function addConfigMethods(\Tina4\Config $config): void
+    {
+        global $DBA;
+
+        if ($DBA === null) {
+            die("Please create a database for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
+        }
+
+        if (!$DBA->tableExists("article")) {
+            \Tina4\Debug::message("Running migrations...on ".realpath(__DIR__ . "/../../migrations"));
+            (new \Tina4\Migration(__DIR__ . "/../../migrations"))->doMigration();
+        }
+
+        $config->addTwigGlobal("Content", new Content());
+        $config->addTwigGlobal("Snippet", new Content());
+        $config->addTwigGlobal("Article", new Content());
+
+
+        $config->addTwigFunction("redirect", function ($url, $code = 301) {
+            \Tina4\redirect($url, $code);
+        });
+
+        $config->addTwigFilter("getSnippet", function ($name) {
+            return (new Content())->getSnippet($name);
+        });
+
+        $config->addTwigFunction("getSnippet", function ($name) {
+            return (new Content())->getSnippet($name);
+        });
+
+        $config->addTwigFunction("render", function ($content) {
+            return \Tina4\renderTemplate($content);
+        });
+
+        $config->addTwigFilter("getSlug", function ($name) {
+            return (new Content())->getSlug($name);
+        });
+
+        $snippets = $this->getSnippets();
+
+        foreach ($snippets as $id => $snippet) {
+            $config->addTwigGlobal($snippet->name, $this->parseContent($snippet->content));
+        }
+    }
+
+    /**
+     * Get the tiny mce path
+     * @return string
+     */
+    public function getTinyMCEIncludePath () : string
+    {
+        $documentRoot = realpath("./"); //root path D:/projects/tina4cms
+        $contentPath = realpath(__DIR__."/../../"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
+
+        return  str_replace($documentRoot, "", $contentPath);
+    }
+
 }

@@ -28,5 +28,8 @@
     },
     "config": {
         "process-timeout": 0
+    },
+    "require-dev": {
+        "phpmailer/phpmailer": "^6.5"
     }
 }

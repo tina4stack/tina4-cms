@@ -58,7 +58,7 @@
 
             </div>
             {% if (request.error) %}
-                <div class="alert alert-danger"><strong>Invalid!</strong> Your username or password is incorrect!</div>
+                <div class="alert alert-danger"><strong>Invalid!</strong> Your username or password is incorrect!<br>{{ request.error }}</div>
             {% endif %}
         </div>
     </div>

@@ -59,6 +59,54 @@
     }
 });
 
+
+\Tina4\Post::add("/cms/login/reset", function (\Tina4\Response $response, \Tina4\Request  $request) {
+    $twigNameSpace = (new Content())->getTwigNameSpace();
+    $website = new Site();
+    if ($website->load("id = 0")) {
+
+        if (!empty($website->smtpServer)) {
+            $messengerSettings = new \Tina4\MessengerSettings(true);
+            $messengerSettings->smtpServer = $website->smtpServer;
+            $messengerSettings->smtpUsername = $website->smtpUsername;
+            $messengerSettings->smtpPassword = $website->smtpPassword;
+            $messengerSettings->smtpPort = $website->smtpPort;
+        } else {
+            $messengerSettings = new \Tina4\MessengerSettings(false);
+        }
+
+        $user = new Users(); //use ORM to load a user with email
+        $messenger = new \Tina4\Messenger($messengerSettings);
+        if ($user->load("email = '{$request->params["email"]}' and reset_token = ''")) { //if i can load the user with this email
+            //reset the password
+            $user->resetToken = md5(date("Y-m-d-H-i-s") . "{$user->id}");
+            $user->save();
+
+            $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
+            //send email with token so the user can input a new password!)
+            if ($messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user, "website" => $website]], $website->siteName)) {
+                \Tina4\redirect("/cms/login?error=Please check your email for a reset link");
+            } else {
+                \Tina4\redirect("/cms/login?error=Error could not send user a reset link");
+            }
+        } else {
+            \Tina4\redirect("/cms/login?error=Reset password error, user not found or reset token exists");
+            if ($user->load("email = '{$request->params["email"]}'")) {
+                //resend the reset token ??
+                $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
+                //send email with token so the user can input a new password!)
+                if ($messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user, "website" => $website]], $website->siteName)) {
+                    \Tina4\redirect("/cms/login?error=Please check your email for a reset link, we have resent it to your email address!");
+                }
+            }
+        }
+    } else {
+        \Tina4\redirect("/cms/login?error=No website found");
+    }
+});
+
+
+
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number");
     $twigNameSpace = (new Content())->getTwigNameSpace();
