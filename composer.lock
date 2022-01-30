@@ -865,16 +865,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "ac37e9a37a078d56c0d3370c8d473cb5f8a4669b"
+                "reference": "e3a360977bfdce6101f6c958fe16571fae3faca7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/ac37e9a37a078d56c0d3370c8d473cb5f8a4669b",
-                "reference": "ac37e9a37a078d56c0d3370c8d473cb5f8a4669b",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/e3a360977bfdce6101f6c958fe16571fae3faca7",
+                "reference": "e3a360977bfdce6101f6c958fe16571fae3faca7",
                 "shasum": ""
             },
             "require": {
@@ -941,9 +941,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.1"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.2"
             },
-            "time": "2021-12-27T12:24:39+00:00"
+            "time": "2022-01-12T10:19:51+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
@@ -1392,5 +1392,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

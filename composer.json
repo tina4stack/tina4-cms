@@ -4,7 +4,7 @@
     "license": "MIT",
     "classmap": ["src/*"],
     "autoload": {
-        "files": ["index.php"],
+        "files": ["loadModule.php"],
         "psr-4": {
             "": [
                 "src/",

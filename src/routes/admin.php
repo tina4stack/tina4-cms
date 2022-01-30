@@ -84,7 +84,7 @@
 
             $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
             //send email with token so the user can input a new password!)
-            if ($messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user->asArray(), "website" => $website->asArray()]], $website->siteName, "no-reply@{$website->siteName}")) {
+            if ($messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user->asArray(), "website" => $website->asArray()]], $website->siteName, $website->fromEmail)) {
                 \Tina4\redirect("/cms/login?error=Please check your email for a reset link");
             } else {
                 \Tina4\redirect("/cms/login?error=Error could not send user a reset link");
@@ -95,7 +95,9 @@
                 $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
 
                 //send email with token so the user can input a new password!)
-                if ($messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user->asArray(), "website" => $website->asArray()]], $website->siteName, "no-reply@{$website->siteName}")) {
+                $result = $messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user->asArray(), "website" => $website->asArray()]], $website->siteName, $website->fromEmail);
+
+                if ($result == 1) {
                     \Tina4\redirect("/cms/login?error=Please check your email for a reset link, we have resent it to your email address!");
                 }
             }
@@ -107,6 +109,30 @@
 });
 
 
+\Tina4\Get::add("/cms/login/reset-confirm/{resetToken}", function($resetToken, \Tina4\Response $response, \Tina4\Request  $request) {
+    $user = new Users();
+    if ($user->load("reset_token = '{$resetToken}'")) {
+        $twigNameSpace = (new Content())->getTwigNameSpace();
+        //display reset password screen
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/confirmReset.twig", ["twigNameSpace" => $twigNameSpace, "user" => $user->asArray()]));
+    }
+      else {
+          \Tina4\redirect("/cms/login?error=Token has expired");
+      }
+});
+
+\Tina4\Post::add("/cms/login/reset-confirm/{resetToken}", static function($resetToken, \Tina4\Response $response, \Tina4\Request $request) {
+    $user = new Users();
+    if ($user->load("reset_token = '{$resetToken}'")) {
+        $user->resetToken = "";
+        $user->password = password_hash($request->params["newPassword"], PASSWORD_BCRYPT);
+        $user->save();
+        \Tina4\redirect("/cms/login?error=Password changed successfully");
+    }
+    else {
+        \Tina4\redirect("/cms/login?error=Token has expired");
+    }
+});
 
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number");
@@ -142,10 +168,10 @@
                 $_SESSION["user"] = $user->asArray();
                 \Tina4\redirect("/cms/dashboard");
             } else {
-                \Tina4\redirect("/cms/login?error=true");
+                \Tina4\redirect("/cms/login?error=Invalid password");
             }
         } else {
-            \Tina4\redirect("/cms/login?error=true");
+            \Tina4\redirect("/cms/login?error=Invalid email address or password");
         }
     }
     return null;

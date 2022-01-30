@@ -1,0 +1,1 @@
+alter table site add from_email varchar (255) default '';

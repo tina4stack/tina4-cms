@@ -14,6 +14,7 @@ class Site extends \Tina4\ORM
     public $bing;
     public $twitter;
     public $custom;
+    public $fromEmail;
     public $smtpPort;
     public $smtpUsername;
     public $smtpPassword;
