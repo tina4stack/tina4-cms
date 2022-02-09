@@ -1,28 +1,25 @@
-<table id="articleCategoryTable" class="table table-striped table-bordered table-condensed" style="width:100%">
+<table id="menuGrid" class="table table-striped table-bordered table-condensed" style="width:100%">
     <thead>
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Slug</th>
-        <th>Order</th>
+        <th>Is Active</th>
         <th>Parent Name</th>
-        <th>Active</th>
+        <th>Slug</th>
+        <th>Specific Route</th>
         <th>Options</th>
     </tr>
     </thead>
 </table>
 <script>
-    var articleCategoryTable = null;
-
+    var menuGrid = null;
     $(document).ready(function () {
-        articleCategoryTable = $('#articleCategoryTable').DataTable({
+        menuGrid = $('#menuGrid').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '{{ baseUrl }}/api/admin/article-categories',
+            ajax: '/api/admin/menus',
             columns: [
                 {"data": "id"},
                 {"data": "name"},
-                {"data": "slug"},
-                {"data": "displayOrder"},
                 {"data": "parentName", "searchable": false},
                 {
                     "mRender": function (data, type, row) {
@@ -33,13 +30,15 @@
                         }
                     }
                 },
+                {"data": "slug"},
+                {"data": "specificRoute"},
                 {
                     "mRender": function (data, type, row) {
                         if (row.id == 0) return "";
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'{{ baseUrl }}/api/admin/article-categories/' + row.id + '\')">Edit</button>';
-                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete article category ?\')) { showForm(\'delete\',\'{{ baseUrl }}/api/admin/article-categories/' + row.id + '?formToken={{ formToken }}\');}">Del</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/menus/' + row.id + '\')">Edit</button>';
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/menus/' + row.id + '?formToken={{ formToken }}\');}">Del</button>';
                         return html;
 
                     },
@@ -56,9 +55,10 @@
                     text: 'Create',
                     action: function (e, dt, node, config) {
                         let data = {};
-                        showForm('create', '{{ baseUrl }}/api/admin/article-categories/form');
+                        showForm('create', '/api/admin/menus/form');
                     }
-                }, 'copy', 'excel', 'pdf', 'print'
+                },
+                'copy', 'excel', 'pdf', 'print'
 
             ]
         });

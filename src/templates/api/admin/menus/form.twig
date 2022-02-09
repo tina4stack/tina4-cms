@@ -1,0 +1,53 @@
+<form id="menuForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+          <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input class="form-control" type="text" id="name"
+                       name="name" placeholder="Name"
+                       value="{{ data.name }}">
+            </div>
+        <div class="form-group col-md-2">
+            <label for="isActive">Active</label>
+            <input class="form-control" type="checkbox" name="isActive"  value="1" {% if (data.isActive == 1) %} checked {% endif %}>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label>Choose Parent Category</label>
+            <select class="form-control" name="parentId">
+
+                {% set groupName = "" %}
+                {% for category in categories %}
+                {% if (groupName != category.parentName ) %}
+                {% if (groupName != "") %}
+                    </optgroup>
+                {%  endif %}
+                <optgroup label="{{ category.parentName }}">
+                    {%  set groupName =  category.parentName %}
+                    {% endif %}
+                    <option value="{{ category.id }}"  {% if category.id == data.parentId %} selected {% endif %}  >{{ category.name }} </option>
+                    {% endfor %}
+                </optgroup>
+            </select>
+        </div>
+                    <div class="form-group col-md-6">
+                <label for="slug">Slug</label>
+                <input class="form-control" type="text" id="slug"
+                       name="slug" placeholder="Slug"
+                       value="{{ data.slug }}">
+            </div>
+                    <div class="form-group col-md-6">
+                <label for="specificRoute">Specific Route</label>
+                <input class="form-control" type="text" id="specificRoute"
+                       name="specificRoute" placeholder="Specific Route"
+                       value="{{ data.specificRoute }}">
+            </div>
+                    <div class="form-group col-md-6">
+                <label for="displayOrder">Display Order</label>
+                <input class="form-control" type="text" id="displayOrder"
+                       name="displayOrder" placeholder="Display Order"
+                       value="{{ data.displayOrder }}">
+            </div>
+
+            </div>
+    {{"menuForm" | formToken | raw }}
+</form>
