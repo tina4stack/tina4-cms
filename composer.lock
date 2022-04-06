@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3335eb6c5775bcb75bb716175703d8de",
+    "content-hash": "ec2824125f2f7fbdbad097e5975ef30c",
     "packages": [
         {
             "name": "coyl/git",
@@ -129,37 +129,38 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.10.2",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220"
+                "reference": "14daed4296fae74d9e3201d2c4925d1acb7aa614"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/776f831124e9c62e1a2c601ecc52e776d8bb7220",
-                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/14daed4296fae74d9e3201d2c4925d1acb7aa614",
+                "reference": "14daed4296fae74d9e3201d2c4925d1acb7aa614",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
-            "replace": {
-                "myclabs/deep-copy": "self.version"
+            "conflict": {
+                "doctrine/collections": "<1.6.8",
+                "doctrine/common": "<2.13.3 || >=3,<3.2.2"
             },
             "require-dev": {
-                "doctrine/collections": "^1.0",
-                "doctrine/common": "^2.6",
-                "phpunit/phpunit": "^7.1"
+                "doctrine/collections": "^1.6.8",
+                "doctrine/common": "^2.13.3 || ^3.2.2",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.23 || ^9.5.13"
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "DeepCopy\\": "src/DeepCopy/"
-                },
                 "files": [
                     "src/DeepCopy/deep_copy.php"
-                ]
+                ],
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -175,7 +176,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.10.2"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.11.0"
             },
             "funding": [
                 {
@@ -183,7 +184,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-13T09:40:50+00:00"
+            "time": "2022-03-03T13:19:32+00:00"
         },
         {
             "name": "nowakowskir/php-jwt",
@@ -286,16 +287,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "8.1.0",
+            "version": "8.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "20f802ea9e54dfa08a72b51736265177c71ff6e0"
+                "reference": "c328625bdf35376278819075e3b72b3b2702f775"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/20f802ea9e54dfa08a72b51736265177c71ff6e0",
-                "reference": "20f802ea9e54dfa08a72b51736265177c71ff6e0",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/c328625bdf35376278819075e3b72b3b2702f775",
+                "reference": "c328625bdf35376278819075e3b72b3b2702f775",
                 "shasum": ""
             },
             "require": {
@@ -388,7 +389,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPSocialNetwork/phpfastcache/issues",
-                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.1.0"
+                "source": "https://github.com/PHPSocialNetwork/phpfastcache/tree/8.1.2"
             },
             "funding": [
                 {
@@ -400,7 +401,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-01-05T21:08:59+00:00"
+            "time": "2022-03-04T21:35:40+00:00"
         },
         {
             "name": "psr/cache",
@@ -554,16 +555,16 @@
         },
         {
             "name": "scssphp/scssphp",
-            "version": "v1.10.0",
+            "version": "v1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scssphp/scssphp.git",
-                "reference": "9699a52a862da4efb43985943afa17150155dd3d"
+                "reference": "387f4f4abf5d99f16be16314c5ab856f81c82f46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/9699a52a862da4efb43985943afa17150155dd3d",
-                "reference": "9699a52a862da4efb43985943afa17150155dd3d",
+                "url": "https://api.github.com/repos/scssphp/scssphp/zipball/387f4f4abf5d99f16be16314c5ab856f81c82f46",
+                "reference": "387f4f4abf5d99f16be16314c5ab856f81c82f46",
                 "shasum": ""
             },
             "require": {
@@ -622,9 +623,9 @@
             ],
             "support": {
                 "issues": "https://github.com/scssphp/scssphp/issues",
-                "source": "https://github.com/scssphp/scssphp/tree/v1.10.0"
+                "source": "https://github.com/scssphp/scssphp/tree/v1.10.2"
             },
-            "time": "2022-01-06T18:16:18+00:00"
+            "time": "2022-03-02T21:15:09+00:00"
         },
         {
             "name": "setasign/fpdi",
@@ -700,7 +701,7 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.24.0",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
@@ -732,12 +733,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -762,7 +763,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.24.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.25.0"
             },
             "funding": [
                 {
@@ -782,7 +783,7 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.24.0",
+            "version": "v1.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
@@ -814,12 +815,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -845,7 +846,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.24.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.25.0"
             },
             "funding": [
                 {
@@ -865,16 +866,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.2",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "e3a360977bfdce6101f6c958fe16571fae3faca7"
+                "reference": "3278aa36bfa3d3fca0cf880ab51bccef30d05aea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/e3a360977bfdce6101f6c958fe16571fae3faca7",
-                "reference": "e3a360977bfdce6101f6c958fe16571fae3faca7",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/3278aa36bfa3d3fca0cf880ab51bccef30d05aea",
+                "reference": "3278aa36bfa3d3fca0cf880ab51bccef30d05aea",
                 "shasum": ""
             },
             "require": {
@@ -886,18 +887,17 @@
                 "phpfastcache/phpfastcache": "^8.0.5",
                 "psr/log": "^1.1.4",
                 "scssphp/scssphp": "^1.5.2",
-                "tina4stack/tina4php-database": "^1.0",
+                "tina4stack/tina4php-database": "^2.0",
                 "tina4stack/tina4php-debug": "^2.0",
                 "tina4stack/tina4php-env": "^2.0",
-                "tina4stack/tina4php-orm": "^1.0",
+                "tina4stack/tina4php-orm": "^2.0",
                 "tina4stack/tina4php-shape": "^2.0",
-                "twig/twig": "^3.3.2"
+                "twig/twig": "^3.3.8"
             },
             "require-dev": {
                 "overtrue/phplint": "^2.0",
                 "phpunit/phpunit": "^9",
-                "roave/security-advisories": "dev-latest",
-                "tina4stack/tina4php-sqlite3": "^v1.0.1"
+                "roave/security-advisories": "dev-latest"
             },
             "bin": [
                 "bin/tina4",
@@ -907,11 +907,6 @@
             "autoload": {
                 "files": [
                     "Tina4/Functions.php"
-                ],
-                "classmap": [
-                    "Helpers/",
-                    "Tina4/",
-                    "src/"
                 ],
                 "psr-4": {
                     "\\": [
@@ -932,7 +927,12 @@
                         "Tina4/Security/",
                         "Tina4/Service/"
                     ]
-                }
+                },
+                "classmap": [
+                    "Helpers/",
+                    "Tina4/",
+                    "src/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -941,22 +941,22 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.2"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.4"
             },
-            "time": "2022-01-12T10:19:51+00:00"
+            "time": "2022-04-06T13:04:23+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
-            "version": "v1.0.10",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-database.git",
-                "reference": "f6fa48522b0f21833ceecbcf86ab53875cfa9bff"
+                "reference": "5d1167f79f782beec2a1b4357ac1b3b4b045b8b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-database/zipball/f6fa48522b0f21833ceecbcf86ab53875cfa9bff",
-                "reference": "f6fa48522b0f21833ceecbcf86ab53875cfa9bff",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-database/zipball/5d1167f79f782beec2a1b4357ac1b3b4b045b8b5",
+                "reference": "5d1167f79f782beec2a1b4357ac1b3b4b045b8b5",
                 "shasum": ""
             },
             "require": {
@@ -981,14 +981,14 @@
                     "Tina4/DataResult.php",
                     "Tina4/SQL.php"
                 ],
-                "classmap": [
-                    "Tina4/"
-                ],
                 "psr-4": {
                     "Tina4\\": [
                         "Tina4/"
                     ]
-                }
+                },
+                "classmap": [
+                    "Tina4/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -997,9 +997,9 @@
             "description": "Tina4 PHP Database Module",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-database/issues",
-                "source": "https://github.com/tina4stack/tina4php-database/tree/v1.0.10"
+                "source": "https://github.com/tina4stack/tina4php-database/tree/v2.0.1"
             },
-            "time": "2021-11-23T10:06:26+00:00"
+            "time": "2022-04-06T12:58:00+00:00"
         },
         {
             "name": "tina4stack/tina4php-debug",
@@ -1029,14 +1029,14 @@
                 "files": [
                     "Tina4/Initialize.php"
                 ],
-                "classmap": [
-                    "Tina4/"
-                ],
                 "psr-4": {
                     "Tina4\\": [
                         "Tina4/"
                     ]
-                }
+                },
+                "classmap": [
+                    "Tina4/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1073,14 +1073,14 @@
                 "files": [
                     "Tina4/Initialize.php"
                 ],
-                "classmap": [
-                    "Tina4/"
-                ],
                 "psr-4": {
                     "Tina4\\": [
                         "Tina4/"
                     ]
-                }
+                },
+                "classmap": [
+                    "Tina4/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1095,37 +1095,34 @@
         },
         {
             "name": "tina4stack/tina4php-orm",
-            "version": "v1.0.7",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-orm.git",
-                "reference": "dcf2c8b263a25c0e8497daf2d1d605cb24bf72fa"
+                "reference": "f44480dbdf0920c37988d41a59b3e400a8d07f31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/dcf2c8b263a25c0e8497daf2d1d605cb24bf72fa",
-                "reference": "dcf2c8b263a25c0e8497daf2d1d605cb24bf72fa",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/f44480dbdf0920c37988d41a59b3e400a8d07f31",
+                "reference": "f44480dbdf0920c37988d41a59b3e400a8d07f31",
                 "shasum": ""
-            },
-            "require": {
-                "tina4stack/tina4php-database": "^1.0"
             },
             "require-dev": {
                 "overtrue/phplint": "^2.0",
                 "phpunit/phpunit": "^9",
                 "roave/security-advisories": "dev-latest",
-                "tina4stack/tina4php-firebird": "^1.0.1"
+                "tina4stack/tina4php-firebird": "^2.0"
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "Tina4/"
-                ],
                 "psr-4": {
                     "Tina4\\": [
                         "Tina4/"
                     ]
-                }
+                },
+                "classmap": [
+                    "Tina4/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1134,9 +1131,9 @@
             "description": "Tina4 ORM Module",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-orm/issues",
-                "source": "https://github.com/tina4stack/tina4php-orm/tree/v1.0.7"
+                "source": "https://github.com/tina4stack/tina4php-orm/tree/v2.0.0"
             },
-            "time": "2022-01-06T11:38:34+00:00"
+            "time": "2022-02-10T07:33:05+00:00"
         },
         {
             "name": "tina4stack/tina4php-shape",
@@ -1163,14 +1160,14 @@
                     "Tina4/HTMLElement.php",
                     "Tina4/Initialize.php"
                 ],
-                "classmap": [
-                    "Tina4/"
-                ],
                 "psr-4": {
                     "Tina4\\": [
                         "Tina4/"
                     ]
-                }
+                },
+                "classmap": [
+                    "Tina4/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1185,21 +1182,21 @@
         },
         {
             "name": "tina4stack/tina4php-sqlite3",
-            "version": "v1.0.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-sqlite3.git",
-                "reference": "ce99823ee4368548ca5608126f2169f49d430698"
+                "reference": "df48bd7b40fc1ea5850607c20dbab535151bd4a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-sqlite3/zipball/ce99823ee4368548ca5608126f2169f49d430698",
-                "reference": "ce99823ee4368548ca5608126f2169f49d430698",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-sqlite3/zipball/df48bd7b40fc1ea5850607c20dbab535151bd4a3",
+                "reference": "df48bd7b40fc1ea5850607c20dbab535151bd4a3",
                 "shasum": ""
             },
             "require": {
                 "ext-sqlite3": "*",
-                "tina4stack/tina4php-database": "^1.0"
+                "tina4stack/tina4php-database": "^2.0"
             },
             "require-dev": {
                 "overtrue/phplint": "^2.0",
@@ -1208,14 +1205,14 @@
             },
             "type": "library",
             "autoload": {
-                "classmap": [
-                    "Tina4/"
-                ],
                 "psr-4": {
                     "Tina4\\": [
                         "Tina4/"
                     ]
-                }
+                },
+                "classmap": [
+                    "Tina4/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1224,22 +1221,22 @@
             "description": "Tina4 PHP Sqlite3 Database Driver",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-sqlite3/issues",
-                "source": "https://github.com/tina4stack/tina4php-sqlite3/tree/v1.0.1"
+                "source": "https://github.com/tina4stack/tina4php-sqlite3/tree/v2.0.0"
             },
-            "time": "2021-12-06T20:11:41+00:00"
+            "time": "2022-02-10T05:57:28+00:00"
         },
         {
             "name": "twig/twig",
-            "version": "v3.3.7",
+            "version": "v3.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b"
+                "reference": "8442df056c51b706793adf80a9fd363406dd3674"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
-                "reference": "8f168c6ffa3ce76d1786b3cd52275424a3fc675b",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/8442df056c51b706793adf80a9fd363406dd3674",
+                "reference": "8442df056c51b706793adf80a9fd363406dd3674",
                 "shasum": ""
             },
             "require": {
@@ -1290,7 +1287,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.3.7"
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.10"
             },
             "funding": [
                 {
@@ -1302,22 +1299,22 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-03T21:15:37+00:00"
+            "time": "2022-04-06T06:47:41+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.5.3",
+            "version": "v6.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "baeb7cde6b60b1286912690ab0693c7789a31e71"
+                "reference": "e43bac82edc26ca04b36143a48bde1c051cfd5b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/baeb7cde6b60b1286912690ab0693c7789a31e71",
-                "reference": "baeb7cde6b60b1286912690ab0693c7789a31e71",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/e43bac82edc26ca04b36143a48bde1c051cfd5b1",
+                "reference": "e43bac82edc26ca04b36143a48bde1c051cfd5b1",
                 "shasum": ""
             },
             "require": {
@@ -1330,10 +1327,10 @@
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
                 "doctrine/annotations": "^1.2",
                 "php-parallel-lint/php-console-highlighter": "^0.5.0",
-                "php-parallel-lint/php-parallel-lint": "^1.3",
+                "php-parallel-lint/php-parallel-lint": "^1.3.1",
                 "phpcompatibility/php-compatibility": "^9.3.5",
                 "roave/security-advisories": "dev-latest",
-                "squizlabs/php_codesniffer": "^3.6.0",
+                "squizlabs/php_codesniffer": "^3.6.2",
                 "yoast/phpunit-polyfills": "^1.0.0"
             },
             "suggest": {
@@ -1374,7 +1371,7 @@
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.5.3"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.6.0"
             },
             "funding": [
                 {
@@ -1382,7 +1379,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-25T16:34:11+00:00"
+            "time": "2022-02-28T15:31:21+00:00"
         }
     ],
     "aliases": [],
@@ -1392,5 +1389,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
