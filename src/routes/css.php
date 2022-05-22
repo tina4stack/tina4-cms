@@ -46,7 +46,11 @@
             break;
         case "afterCreate":
             //add to scss folder
-            file_put_contents("./src/scss/".(new Content())->getSlug($css->name).".scss", $request->params["content"]);
+            if ($css->isActive == 1) {
+                file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $request->params["content"]);
+            } else {
+                unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
+            }
             $css->saveBlob("content", $request->params["content"]);
             //return needed
             return (object)["httpCode" => 200, "message" => "<script>cssGrid.ajax.reload(null, false); showMessage ('Css Created');</script>"];
@@ -56,7 +60,11 @@
             break;
         case "afterUpdate":
             //return needed
-            file_put_contents("./src/scss/".(new Content())->getSlug($css->name).".scss", $request->params["content"]);
+            if ($css->isActive == 1) {
+                file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $request->params["content"]);
+            } else {
+                unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
+            }
             $css->saveBlob("content", $request->params["content"]);
 
             return (object)["httpCode" => 200, "message" => "<script>cssGrid.ajax.reload(null, false); showMessage ('Css Updated');</script>"];
