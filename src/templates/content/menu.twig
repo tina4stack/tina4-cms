@@ -16,7 +16,7 @@
     $(document).ready(function () {
         menuGrid = $('#menuGrid').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '/api/admin/menus',
+            ajax: '/api/admin/menus?formToken={{ formToken('/api/admin/menus') }}',
             columns: [
                 {"data": "id"},
                 {"data": "name"},
@@ -37,8 +37,8 @@
                         if (row.id == 0) return "";
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/menus/' + row.id + '\')">Edit</button>';
-                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/menus/' + row.id + '?formToken={{ formToken }}\');}">Del</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/menus/' + row.id + '?formToken={{ formToken('/api/admin/menus') }}\')">Edit</button>';
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/menus/' + row.id + '?formToken={{ formToken('/api/admin/menus') }}\');}">Del</button>';
                         return html;
 
                     },
@@ -55,7 +55,7 @@
                     text: 'Create',
                     action: function (e, dt, node, config) {
                         let data = {};
-                        showForm('create', '/api/admin/menus/form');
+                        showForm('create', '/api/admin/menus/form?formToken={{ formToken('/api/admin/menus') }}');
                     }
                 },
                 'copy', 'excel', 'pdf', 'print'

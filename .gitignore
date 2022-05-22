@@ -16,3 +16,6 @@ composer.phar
 /.env.test
 /log/
 /messenger/
+/cms.db
+/cms.db-shm
+/cms.db-wal

@@ -279,11 +279,11 @@ class Content extends \Tina4\Data
      */
     public function getMenu($parentId="",  $level=0) {
         if (!empty($parentId)) {
-            $filter = "where parent_id = {$parentId} and is_active = 1 and is_menu = 1 ";
+            $filter = "where parent_id = {$parentId} and is_active = 1 ";
         } else {
-            $filter = "where parent_id = 0 and is_active = 1 and is_menu = 1 ";
+            $filter = "where parent_id = 0 and is_active = 1 ";
         }
-        $sql = "select a.*,(select count(id) from article_category where parent_id = a.id) as has_children from article_category a {$filter} order by display_order asc";
+        $sql = "select a.*,(select count(id) from menu where parent_id = a.id) as has_children from menu a {$filter} order by display_order asc";
 
         if ($this->DBA->tableExists("article_category")) {
             $menus = $this->DBA->fetch($sql, 1000)->asObject();
@@ -297,7 +297,12 @@ class Content extends \Tina4\Data
                 {
                     $menu->slug = $this->getSlug($menu->name);
                 }
-                $menu->url = "/content/{$menu->slug}";
+
+                if (!empty($menu->specificRoute)) {
+                    $menu->url = $menu->specificRoute;
+                } else {
+                    $menu->url = "/content/{$menu->slug}";
+                }
 
             }
 

@@ -12,7 +12,7 @@
             POST @ /path, /path/{id} - create & update
             DELETE @ /path/{id} - delete for single
  */
-\Tina4\Crud::route ("/api/admin/emailTemplates", new EmailTemplate(), function ($action, EmailTemplate $emailTemplate, $filter, \Tina4\Request $request) {
+\Tina4\Crud::route ("/api/admin/email-templates", new EmailTemplate(), function ($action, EmailTemplate $emailTemplate, $filter, \Tina4\Request $request) {
     switch ($action) {
        case "form":
        case "fetch":
@@ -20,11 +20,11 @@
              
             if ($action == "form") {
                 $title = "Add Email Template";
-                $savePath =  TINA4_BASE_URL . "/api/admin/emailTemplates";
+                $savePath =  TINA4_BASE_URL . "/api/admin/email-templates";
                 $content = \Tina4\renderTemplate("/api/admin/emailTemplates/form.twig", []);
             } else {
                 $title = "Edit Email Template";
-                $savePath =  TINA4_BASE_URL . "/api/admin/emailTemplates/".$emailTemplate->id;
+                $savePath =  TINA4_BASE_URL . "/api/admin/email-templates/".$emailTemplate->id;
                 $content = \Tina4\renderTemplate("/api/admin/emailTemplates/form.twig", ["data" => $emailTemplate]);
             }
 
@@ -43,16 +43,20 @@
                 ->asResult();
         break;
         case "create":
+            $emailTemplate->dateCreated = date($emailTemplate->DBA->dateFormat." H:i:s");
+            break;
+        case "update":
             //Manipulate the $object here
-        break;
+
+
+            $emailTemplate->dateModified = date($emailTemplate->DBA->dateFormat." H:i:s");
+            break;
         case "afterCreate":
            //return needed
             $emailTemplate->saveBlob("content", $request->params["content"]);
            return (object)["httpCode" => 200, "message" => "<script>emailtemplateGrid.ajax.reload(null, false); showMessage ('Email Template Created');</script>"];
         break;
-        case "update":
-            //Manipulate the $object here
-        break;    
+
         case "afterUpdate":
            //return needed
             $emailTemplate->saveBlob("content", $request->params["content"]);

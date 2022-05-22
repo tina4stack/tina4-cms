@@ -54,15 +54,16 @@
                 ->orderBy($filter["orderBy"])
                 ->asResult();
         break;
-        case "create":
-            //Manipulate the $object here
-        break;
         case "afterCreate":
            //return needed 
            return (object)["httpCode" => 200, "message" => "<script>menuGrid.ajax.reload(null, false); showMessage ('Menu Created');</script>"];
         break;
+        case "create":
         case "update":
             //Manipulate the $object here
+            if ($menu->slug !== "") {
+                $menu->slug = (new Content())->getSlug($menu->slug);
+            }
         break;    
         case "afterUpdate":
            //return needed 
