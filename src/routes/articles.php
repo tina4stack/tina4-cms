@@ -70,7 +70,10 @@
             $article->slug = (new Content())->getSlug($request->data->title);
         break;
         case "update":
+
+
             if (!empty($request->params["article_categories"])) {
+
                 $article->DBA->exec("delete from article_article_category where article_id = {$article->id}");
                 foreach ($request->params["article_categories"] as $id => $value) {
                     if ($value != 0) {

@@ -975,16 +975,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.8",
+            "version": "v2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "d002ad1f69ff8752edd451ceb9c667867025e6ed"
+                "reference": "5cba69f9d80ea09f08d27776998dd8840284b697"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/d002ad1f69ff8752edd451ceb9c667867025e6ed",
-                "reference": "d002ad1f69ff8752edd451ceb9c667867025e6ed",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/5cba69f9d80ea09f08d27776998dd8840284b697",
+                "reference": "5cba69f9d80ea09f08d27776998dd8840284b697",
                 "shasum": ""
             },
             "require": {
@@ -1051,9 +1051,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.8"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.9"
             },
-            "time": "2022-05-22T09:02:58+00:00"
+            "time": "2022-05-22T13:06:05+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",

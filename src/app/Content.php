@@ -249,14 +249,14 @@ class Content extends \Tina4\Data
                 $childrenMenus = $this->getCategories($articleId,   $category["id"]);
                 $children = _ul($childrenMenus );
                 if ($category["isSelected"] > 0) {
-                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]", "" => "checked"])," ", $category["name"], $children);
+                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]", "checked"])," ", $category["name"], $children);
                 } else {
                     $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name"=>"article_categories[{$category["id"]}]"])," ", $category["name"], $children);
                 }
 
             } else {
                 if ($category["isSelected"] > 0) {
-                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]", "" => "checked"]), " ", $category["name"]);
+                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]",  "checked"]), " ", $category["name"]);
                 } else {
                     $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]"]), " ", $category["name"]);
                 }

@@ -3,10 +3,10 @@
     <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Is Active</th>
         <th>Parent Name</th>
         <th>Slug</th>
         <th>Specific Route</th>
+        <th>Is Active</th>
         <th>Options</th>
     </tr>
     </thead>
@@ -21,6 +21,8 @@
                 {"data": "id"},
                 {"data": "name"},
                 {"data": "parentName", "searchable": false},
+                {"data": "slug"},
+                {"data": "specificRoute"},
                 {
                     "mRender": function (data, type, row) {
                         if (row.isActive == 1) {
@@ -30,8 +32,6 @@
                         }
                     }
                 },
-                {"data": "slug"},
-                {"data": "specificRoute"},
                 {
                     "mRender": function (data, type, row) {
                         if (row.id == 0) return "";

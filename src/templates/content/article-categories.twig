@@ -3,9 +3,9 @@
     <tr>
         <th>Id</th>
         <th>Name</th>
+        <th>Parent Name</th>
         <th>Slug</th>
         <th>Order</th>
-        <th>Parent Name</th>
         <th>Active</th>
         <th>Options</th>
     </tr>
@@ -21,9 +21,9 @@
             columns: [
                 {"data": "id"},
                 {"data": "name"},
+                {"data": "parentName", "searchable": false},
                 {"data": "slug"},
                 {"data": "displayOrder"},
-                {"data": "parentName", "searchable": false},
                 {
                     "mRender": function (data, type, row) {
                         if (row.isActive == 1) {

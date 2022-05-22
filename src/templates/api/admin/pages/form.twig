@@ -40,7 +40,7 @@
                         'searchreplace visualblocks code fullscreen',
                         'insertdatetime media table paste imagetools wordcount emoticons'
                     ],
-                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets ',
+                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets | menuArticles ',
                     images_upload_url: '/cms/upload?formToken={{ formToken | raw }}',
                     images_upload_base_path: '/uploads/',
                     images_upload_credentials: true,
@@ -54,11 +54,12 @@
                         editor.on('change', function(e) {
                             saveContent(editor)
                         });
+                        console.log('Adding snippets ');
                         editor.ui.registry.addMenuButton('menuSnippets', {
                             text: 'Snippets',
                             fetch: function (callback) {
                                 var items = [
-                                {% for snippet in snippets %}
+                                    {% for snippet in snippets %}
                                     {
                                         type: 'menuitem',
                                         text: '{{ snippet.name }}',
@@ -66,9 +67,27 @@
                                             editor.insertContent('\n\{\{ include( getSnippet("{{ snippet.name }}") ) \}\}');
                                         }
                                     },
-                                {% endfor %}
+                                    {% endfor %}
                                 ];
                                 callback(items);
+                            }
+                        });
+                        console.log('Adding articles ');
+                        editor.ui.registry.addMenuButton('menuArticles', {
+                            text: 'Articles',
+                            fetch: function (callback) {
+                                var itemsA = [
+                                    {% for articleCategory in articleCategories %}
+                                    {
+                                        type: 'menuitem',
+                                        text: '{{ articleCategory.name }}',
+                                        onAction: function (_) {
+                                            editor.insertContent("\{\% set articles = Content.getArticles (\"{{ articleCategory.name }}\", 8) \%\}\n\{\% for article in articles \%\}\n\{\% include \"snippets/medium.twig\" with {\"article\": article} \%\}\n\{\% endfor \%\}\{\% set params = {\"tag\": \"all\", \"skip\": 0, \"limit\": 4, \"template\": \"medium.twig\"} \%\}\{\% include \"load-more.twig\" with params \%\}");
+                                        }
+                                    },
+                                    {% endfor %}
+                                ];
+                                callback(itemsA);
                             }
                         });
                     }

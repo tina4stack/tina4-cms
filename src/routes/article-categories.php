@@ -53,9 +53,9 @@ DELETE @ /path/{id} - delete for single
         case "create":
         case "update":
             //no return needed
-            if ($articleCategory->isMenu && $articleCategory->slug === "") {
-                $articleCategory->slug = (new Content())->getSlug($articleCategory->name);
-            }
+
+            $articleCategory->slug = (new Content())->getSlug($articleCategory->name);
+
         break;
         case "afterCreate":
             //no return needed

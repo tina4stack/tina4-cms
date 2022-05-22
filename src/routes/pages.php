@@ -22,14 +22,16 @@
 
             $snippets = (new Snippet())->select("id,name", 1000)->orderBy("name")->asArray();
 
+            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id <> 0 and is_active = 1")->orderBy("name")->asArray();
+
             if ($action == "form") {
                 $title = "Add Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages";
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["snippets" => $snippets]);
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["snippets" => $snippets, "articleCategories" => $articleCategories]);
             } else {
                 $title = "Edit Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages/".$page->id;
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets]);
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets, "articleCategories" => $articleCategories]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#pageForm').valid() ) { saveForm('pageForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
