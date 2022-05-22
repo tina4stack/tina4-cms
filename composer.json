@@ -20,16 +20,21 @@
     },
     "scripts": {
         "tina4": "tina4",
+        "phplint": "vendor/bin/phplint",
         "tina4service": "tina4service",
         "test": "@tina4 tests:run",
         "initialize": "@tina4 initialize:run",
         "start": "@tina4 webservice:run",
-        "start-service": "@tina4service"
+        "start-service": "@tina4service",
+        "lint": "@phplint --exclude=vendor"
     },
     "config": {
         "process-timeout": 0
     },
     "require-dev": {
-        "phpmailer/phpmailer": "^6.5"
+        "phpmailer/phpmailer": "^6.5",
+        "roave/security-advisories": "dev-latest",
+        "phpunit/phpunit": "^9",
+        "overtrue/phplint": "^2.0"
     }
 }

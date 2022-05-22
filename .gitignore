@@ -19,3 +19,5 @@ composer.phar
 /cms.db
 /cms.db-shm
 /cms.db-wal
+/.phplint-cache
+/build/
