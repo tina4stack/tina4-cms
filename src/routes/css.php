@@ -51,7 +51,7 @@
             } else {
                 unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
             }
-            $css->saveBlob("content", $request->params["content"]);
+            $css->saveBlob("content", $_REQUEST["content"]);
             //return needed
             return (object)["httpCode" => 200, "message" => "<script>cssGrid.ajax.reload(null, false); showMessage ('Css Created');</script>"];
             break;
@@ -65,7 +65,7 @@
             } else {
                 unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
             }
-            $css->saveBlob("content", $request->params["content"]);
+            $css->saveBlob("content", $_REQUEST["content"]);
 
             return (object)["httpCode" => 200, "message" => "<script>cssGrid.ajax.reload(null, false); showMessage ('Css Updated');</script>"];
             break;

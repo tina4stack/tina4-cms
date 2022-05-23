@@ -64,13 +64,13 @@
         case "afterCreate":
 
            //return needed
-           $page->saveBlob("content", $request->params["content"]);
+           $page->saveBlob("content", $_REQUEST["content"]);
            $page->saveFile("image", "image"); //$_FILES["image"]
            return (object)["httpCode" => 200, "message" => "<script>pageGrid.ajax.reload(null, false); showMessage ('Page Created');</script>"];
         break;
         case "afterUpdate":
            //return needed
-           $page->saveBlob("content", $request->params["content"]);
+           $page->saveBlob("content", $_REQUEST["content"]);
            $page->saveFile("image", "image");
            return (object)["httpCode" => 200, "message" => "<script>pageGrid.ajax.reload(null, false); showMessage ('Page Updated');</script>"];
         break;

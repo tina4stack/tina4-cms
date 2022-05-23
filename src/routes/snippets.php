@@ -52,14 +52,14 @@
             $snippet->dateModified = date($snippet->DBA->dateFormat." H:i:s");
         break;
         case "afterCreate":
-            $snippet->saveBlob("content", $request->params["content"]);
+            $snippet->saveBlob("content", $_REQUEST["content"]);
            //return needed 
            return (object)["httpCode" => 200, "message" => "<script>snippetGrid.ajax.reload(null, false); showMessage ('Snippet Created');</script>"];
         break;    
         case "afterUpdate":
 
            //return needed 
-           $snippet->saveBlob("content", $request->params["content"]);
+           $snippet->saveBlob("content", $_REQUEST["content"]);
            return (object)["httpCode" => 200, "message" => "<script>snippetGrid.ajax.reload(null, false); showMessage ('Snippet Updated');</script>"];
         break;   
         case "delete":

@@ -94,7 +94,7 @@
 
             break;
         case "afterCreate":
-            $article->saveBlob("content", $request->params["content"]);
+            $article->saveBlob("content", $_REQUEST["content"]);
             $article->saveFile("image", "image");
             //return needed
 
@@ -110,7 +110,7 @@
             return (object)["httpCode" => 200, "message" => "<script>articleGrid.ajax.reload(null, false); showMessage ('Article Created');</script>"];
         break;
         case "afterUpdate":
-           $article->saveBlob("content", $request->params["content"]);
+           $article->saveBlob("content", $_REQUEST["content"]);
             //return needed
            $article->saveFile("image", "image");
            return (object)["httpCode" => 200, "message" => "<script>articleGrid.ajax.reload(null, false); showMessage ('Article Updated');</script>"];

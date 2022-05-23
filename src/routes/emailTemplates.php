@@ -53,13 +53,13 @@
             break;
         case "afterCreate":
            //return needed
-            $emailTemplate->saveBlob("content", $request->params["content"]);
+            $emailTemplate->saveBlob("content", $_REQUEST["content"]);
            return (object)["httpCode" => 200, "message" => "<script>emailtemplateGrid.ajax.reload(null, false); showMessage ('Email Template Created');</script>"];
         break;
 
         case "afterUpdate":
            //return needed
-            $emailTemplate->saveBlob("content", $request->params["content"]);
+            $emailTemplate->saveBlob("content", $_REQUEST["content"]);
            return (object)["httpCode" => 200, "message" => "<script>emailtemplateGrid.ajax.reload(null, false); showMessage ('Email Template Updated');</script>"];
         break;   
         case "delete":
