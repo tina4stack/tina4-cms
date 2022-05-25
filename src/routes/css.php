@@ -47,7 +47,7 @@
         case "afterCreate":
             //add to scss folder
             if ($css->isActive == 1) {
-                file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $request->params["content"]);
+                file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $_REQUEST["content"]);
             } else {
                 unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
             }
@@ -61,7 +61,7 @@
         case "afterUpdate":
             //return needed
             if ($css->isActive == 1) {
-                file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $request->params["content"]);
+                file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $_REQUEST["content"]);
             } else {
                 unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
             }

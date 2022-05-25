@@ -431,7 +431,7 @@ class Content extends \Tina4\Data
         global $DBA;
 
         if ($DBA === null) {
-            die("Please create a database for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
+            die("Please create a database global for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
         }
 
         if (!$DBA->tableExists("article")) {
