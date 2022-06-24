@@ -63,7 +63,9 @@
             if ($css->isActive == 1) {
                 file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $_REQUEST["content"]);
             } else {
-                unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
+                if (file_exists("./src/scss/" . (new Content())->getSlug($css->name) . ".scss")) {
+                    unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
+                }
             }
             $css->saveBlob("content", $_REQUEST["content"]);
 
