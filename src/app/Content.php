@@ -122,7 +122,7 @@ class Content extends \Tina4\Data
             ))");
         }
 
-        $articles->and("id <> 0 and is_published = 1");
+        $articles->and("id != 0 and is_published = 1");
         $articles = $articles->orderBy("published_date desc")->asObject();
 
         foreach ($articles as $id => $article) {
@@ -154,7 +154,7 @@ class Content extends \Tina4\Data
     public function getArticleList($category, $className="", $limit=0)
     {
         $articles = (new Article())->select("title, description, image, slug, date_created", $limit)
-          ->where("id <> 0 and is_published = 1");
+          ->where("id != 0 and is_published = 1");
         if ($category) {
           $articles->and("article_category_id in (select id from article_category where upper(name) = upper('{$category}'))");
         }
@@ -229,13 +229,13 @@ class Content extends \Tina4\Data
      * @param string $parentId
      * @return string
      */
-    public function getCategories($articleId=0, $parentId="") {
-        if (empty($articleId)) $articleId = 0;
+    public function getCategories($articleId=1, $parentId="") {
+        if (empty($articleId)) $articleId = 1;
         $html = "";
         if (!empty($parentId)) {
             $filter = "where parent_id = {$parentId} and is_active = 1 ";
         } else {
-            $filter = "where parent_id = 0 and is_active = 1 ";
+            $filter = "where parent_id = 1 and is_active = 1 ";
         }
         $sql = "select a.*,
                        (select count(id) from article_category where parent_id = a.id) as has_children,
@@ -281,7 +281,7 @@ class Content extends \Tina4\Data
         if (!empty($parentId)) {
             $filter = "where parent_id = {$parentId} and is_active = 1 ";
         } else {
-            $filter = "where parent_id = 0 and is_active = 1 ";
+            $filter = "where parent_id = 1 and is_active = 1 ";
         }
         $sql = "select a.*,(select count(id) from menu where parent_id = a.id) as has_children from menu a {$filter} order by display_order asc";
 
@@ -321,7 +321,7 @@ class Content extends \Tina4\Data
      */
     public function getEmailTemplate($name) {
         $template = (new EmailTemplate())->select("*", 5)
-            ->where("id <> 0")
+            ->where("id != 0")
         ->orderBy("id desc")->asArray();
 
         return $template[0];
@@ -339,7 +339,7 @@ class Content extends \Tina4\Data
         foreach ($keywords as $id => $keyword) {
             $likes[] = "instr(keywords, '".trim($keyword)."')";
         }
-        $filter = "id <> {$article->id} and ( ".join(" or ", $likes)." )";
+        $filter = "id != {$article->id} and ( ".join(" or ", $likes)." )";
         $related = (new Article())->select("id,title,description,slug,image,author,published_date", 4)->where($filter)->orderBy("published_date desc");
         $article->relatedArticles = $related->asObject();
         $article->url = "/content/article/".$this->getSlug($article->title);
@@ -387,7 +387,7 @@ class Content extends \Tina4\Data
     public function getArticlesByTag($category, $limit=1, $skip=0)
     {
         $articles = (new Article())->select("*", $limit, $skip)
-            ->where("id <> 0 and is_published = 1");
+            ->where("id != 0 and is_published = 1");
 
         if (!empty($category) && $category !== "all") {
             $articles->and("(id in (select article_id from article_article_category aac join article_category ac on ac.id = aac.article_category_id and upper(ac.name) = upper('{$category}')) or INSTR(keywords, '{$category}') ) ");

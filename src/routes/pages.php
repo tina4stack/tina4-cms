@@ -22,7 +22,7 @@
 
             $snippets = (new Snippet())->select("id,name", 1000)->orderBy("name")->asArray();
 
-            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id <> 0 and is_active = 1")->orderBy("name")->asArray();
+            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id != 1 and is_active = 1")->orderBy("name")->asArray();
 
             if ($action == "form") {
                 $title = "Add Page";

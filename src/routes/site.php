@@ -14,11 +14,11 @@
 \Tina4\Crud::route ("/api/admin/site", new Site(), function ($action, Site $site, $filter, \Tina4\Request $request) {
 
     $checkSite = new Site();
-    if (!$checkSite->load("id = 0")) {
-        $checkSite->id = 0;
+    if (!$checkSite->load("id = 1")) {
+        $checkSite->id = 1;
         $checkSite->siteName = "Tina4 CMS";
         $checkSite->description = "My first CMS";
-        $checkSite->siteUrl = "http://".$_SERVER["HTTP_HOST"];
+        $checkSite->siteUrl = "https://".$_SERVER["HTTP_HOST"];
         $checkSite->save();
     }
 

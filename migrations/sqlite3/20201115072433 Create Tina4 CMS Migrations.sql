@@ -37,7 +37,7 @@ CREATE TABLE article_category (
   primary key (id)
 );
 
-insert into article_category(id, name, is_active) values(0, 'Root', 0);
+insert into article_category(id, name, is_active) values(1, 'Root', 0);
 
 CREATE TABLE page (
   id integer,
