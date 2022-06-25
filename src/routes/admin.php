@@ -63,7 +63,7 @@
 \Tina4\Post::add("/cms/login/reset", function (\Tina4\Response $response, \Tina4\Request  $request) {
     $twigNameSpace = (new Content())->getTwigNameSpace();
     $website = new Site();
-    if ($website->load("id = 0")) {
+    if ($website->load("id = 1")) {
 
         if (!empty($website->smtpServer)) {
             $messengerSettings = new \Tina4\MessengerSettings(true);

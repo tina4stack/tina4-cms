@@ -17,7 +17,7 @@
             //Return back a form to be submitted to the create
             $articleCategories = (new ArticleCategory())
                 ->select('id,name,parent_id,is_menu,display_order', 100)
-                ->where("id = 0")
+                ->where("id = 1")
                 ->filter(function($record){
                     $article = new ArticleCategory();
                     $article->load("id = {$record->parentId}");

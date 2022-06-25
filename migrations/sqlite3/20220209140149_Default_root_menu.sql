@@ -1,1 +1,1 @@
-insert into menu(id, name, is_active) values(0, 'Root', 0);
+insert into menu(id, name, is_active) values(1, 'Root', 0);
