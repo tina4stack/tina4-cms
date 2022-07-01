@@ -24,7 +24,6 @@
             <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
         </div>
         <div class="form-group col-md-12">
-            <label for="contentEditor">Content</label>
             <div id="contentEditor" class="form-control" style="height:500px">{{ data.content | raw }}</div>
             <script>
                 function saveContent(editor) {
@@ -40,7 +39,7 @@
                         'searchreplace visualblocks code fullscreen',
                         'insertdatetime media table paste imagetools wordcount emoticons'
                     ],
-                    toolbar: 'undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets | menuArticles ',
+                    toolbar: 'undo redo | styleselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets | menuArticles | fullscreen ',
                     images_upload_url: '/cms/upload?formToken={{ formToken | raw }}',
                     images_upload_base_path: '/uploads/',
                     images_upload_credentials: true,
