@@ -11,6 +11,4 @@ $config = new \Tina4\Config(function($config) {
 
 \Tina4\Initialize();
 
-(new Content())->getCSSSelectors();
-
 echo new \Tina4\Tina4Php($config);
