@@ -93,14 +93,17 @@ class Content extends \Tina4\Data
      * Get Pages
      * @param $slug
      * @return string
-     * @throws \Twig\Error\LoaderError
      */
     public function getPage($slug): string
     {
         $page = (new Page());
         $page->load("slug = '{$slug}'");
 
-        return \Tina4\renderTemplate( html_entity_decode($page->content, ENT_QUOTES ) , ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
+        if (!empty($page->content)) {
+            return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
+        } else {
+            return "";
+        }
     }
 
     /**
@@ -398,8 +401,6 @@ class Content extends \Tina4\Data
 
 
         $articles = $articles->asObject();
-
-
 
         foreach ($articles as $id => $article) {
             $articles[$id]->content = $this->parseContent($article->content);
