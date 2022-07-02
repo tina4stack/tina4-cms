@@ -26,7 +26,7 @@
     }
 
     // Verify extension
-    if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
+    if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png", "jpeg", "svg"))) {
         header("HTTP/1.1 400 Invalid extension.");
         return null;
     }
