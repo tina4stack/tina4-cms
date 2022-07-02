@@ -46,6 +46,10 @@
             break;
         case "afterCreate":
             //add to scss folder
+            if (file_exists("./src/public/css/default.css")) {
+                unlink("./src/public/css/default.css");
+            }
+
             if ($css->isActive == 1) {
                 file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $_REQUEST["content"]);
             } else {
@@ -60,6 +64,10 @@
             break;
         case "afterUpdate":
             //return needed
+            if (file_exists("./src/public/css/default.css")) {
+                unlink("./src/public/css/default.css");
+            }
+
             if ($css->isActive == 1) {
                 file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $_REQUEST["content"]);
             } else {
