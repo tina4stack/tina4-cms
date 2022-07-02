@@ -370,7 +370,9 @@ class Content extends \Tina4\Data
      * @return string
      */
     public function parseContent ($content) {
-        $content = html_entity_decode($content);
+        if (!empty($content)) {
+            $content = html_entity_decode($content);
+        }
         return $content;
     }
 
