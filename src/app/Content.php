@@ -499,30 +499,5 @@ class Content extends \Tina4\Data
         return  str_replace($documentRoot, "", $contentPath);
     }
 
-    function getCSSSelectors() {
-        $parser = new \Sabberworm\CSS\Parser(file_get_contents('src/public/css/default.css'));
-        $cssDocument = $parser->parse();
-
-        $selectors = [];
-        foreach ($cssDocument->getAllDeclarationBlocks() as $block) {
-            foreach ($block->getSelectors() as $selector) {
-                // Loop over all selector parts (the comma-separated strings in a
-                // selector) and prepend the ID.
-
-
-                //{ title: 'Major Padding', selector: 'p,div',  classes: 'myClass' }
-                $tag = explode(".", str_replace(" ", "", $selector->getSelector()));
-
-                if (count($tag) > 1) {
-                    $selector = $tag[0];
-                    $title = $tag[1];
-
-                    $selectors[$selector] = ["title" => $title, "selector" => $selector, "classes" => $title];
-                }
-
-            }
-        }
-
-    }
 
 }
