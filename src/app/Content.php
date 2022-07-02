@@ -229,7 +229,8 @@ class Content extends \Tina4\Data
      * @param string $parentId
      * @return string
      */
-    public function getCategories($articleId=1, $parentId="") {
+    public function getCategories($articleId=1, $parentId="")
+    {
         if (empty($articleId)) $articleId = 1;
         $html = "";
         if (!empty($parentId)) {
@@ -443,6 +444,18 @@ class Content extends \Tina4\Data
         $config->addTwigGlobal("Snippet", new Content());
         $config->addTwigGlobal("Article", new Content());
 
+        if (!file_exists("./uploads")) {
+            mkdir("./uploads");
+        }
+
+
+        if (!file_exists("./cache")) {
+            mkdir("./cache");
+        }
+
+        if (!file_exists("./cache/images")) {
+            mkdir("./cache/images");
+        }
 
         $config->addTwigFunction("redirect", function ($url, $code = 301) {
             \Tina4\redirect($url, $code);
@@ -481,6 +494,32 @@ class Content extends \Tina4\Data
         $contentPath = realpath(__DIR__."/../../"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
 
         return  str_replace($documentRoot, "", $contentPath);
+    }
+
+    function getCSSSelectors() {
+        $parser = new \Sabberworm\CSS\Parser(file_get_contents('src/public/css/default.css'));
+        $cssDocument = $parser->parse();
+
+        $selectors = [];
+        foreach ($cssDocument->getAllDeclarationBlocks() as $block) {
+            foreach ($block->getSelectors() as $selector) {
+                // Loop over all selector parts (the comma-separated strings in a
+                // selector) and prepend the ID.
+
+
+                //{ title: 'Major Padding', selector: 'p,div',  classes: 'myClass' }
+                $tag = explode(".", str_replace(" ", "", $selector->getSelector()));
+
+                if (count($tag) > 1) {
+                    $selector = $tag[0];
+                    $title = $tag[1];
+
+                    $selectors[$selector] = ["title" => $title, "selector" => $selector, "classes" => $title];
+                }
+
+            }
+        }
+
     }
 
 }
