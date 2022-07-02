@@ -12,4 +12,5 @@ class Snippet extends \Tina4\ORM
 	public $content;
 	public $dateCreated;
 	public $dateModified;
+    public $snippetType;
 }
