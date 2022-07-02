@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c4cb01b1be8de3d595560f103a9ce12",
+    "content-hash": "b00fc27b6cd3b541f2e004a18ff5e270",
     "packages": [
         {
             "name": "coyl/git",
@@ -1028,16 +1028,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.17",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "df937600b30ab314f121b23624307009a5218c51"
+                "reference": "1ad82795f4b7b091ffd9b011a3b3a9cebfdec142"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/df937600b30ab314f121b23624307009a5218c51",
-                "reference": "df937600b30ab314f121b23624307009a5218c51",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/1ad82795f4b7b091ffd9b011a3b3a9cebfdec142",
+                "reference": "1ad82795f4b7b091ffd9b011a3b3a9cebfdec142",
                 "shasum": ""
             },
             "require": {
@@ -1064,6 +1064,7 @@
                 "roave/security-advisories": "dev-latest",
                 "tina4stack/tina4php-sqlite3": "^2.0"
             },
+            "default-branch": true,
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -1106,9 +1107,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.17"
+                "source": "https://github.com/tina4stack/tina4-php/tree/master"
             },
-            "time": "2022-07-02T01:58:17+00:00"
+            "time": "2022-07-02T11:24:44+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
@@ -5038,6 +5039,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "tina4stack/tina4php": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": false,
