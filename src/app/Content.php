@@ -5,6 +5,57 @@ class Content extends \Tina4\Data
     private $twigNamespace = "@tina4cms";
 
     /**
+     * Set security attribute
+     * @param $name
+     * @param $options
+     * @param $category
+     * @param $roleId
+     * @return void
+     * @throws Exception
+     */
+    public function setSecurityAttribute($name, $options, $category="Default", $roleId=1)
+    {
+        $role = new Role();
+        if ($role->load("id = {$roleId}"))
+        {
+            $roleData = unserialize($role->roleInfo);
+            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
+            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
+            $role->roleInfo = serialize($roleData);
+            $role->save();
+        } else {
+            $roleData = [];
+            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
+            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
+            $role->id = $roleId;
+            $role->name = "Default";
+            $role->roleInfo = serialize($roleData);
+            $role->save();
+        }
+    }
+
+    /**
+     * Get security attribute
+     * @param string $name
+     * @param int $roleId
+     * @return mixed|void
+     */
+    public function getSecurityAttribute($name="", $roleId=1)
+    {
+        $role = new Role();
+        if ($role->load("id = {$roleId}"))
+        {
+            $roles = unserialize($role->roleInfo);
+            if (!empty($name))
+            {
+                return $roles["roles"][$name];
+            } else {
+                return $roles["category"];
+            }
+        }
+    }
+
+    /**
      * Get a different twig name space for changing dashboard and other screens
      * @return string
      */
@@ -393,6 +444,14 @@ class Content extends \Tina4\Data
         }
     }
 
+    /**
+     * Gets articles by tag
+     * @param $category
+     * @param $limit
+     * @param $skip
+     * @return array|mixed|string[]
+     * @throws ReflectionException
+     */
     public function getArticlesByTag($category, $limit=1, $skip=0)
     {
         $articles = (new Article())->select("*", $limit, $skip)
@@ -559,6 +618,4 @@ class Content extends \Tina4\Data
 
         return ['urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' => $urls ];
     }
-
-
 }

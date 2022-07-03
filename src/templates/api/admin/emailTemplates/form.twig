@@ -13,7 +13,6 @@
             <textarea id="saveContent" style="display:none" name="content">{{ data.content | raw }}</textarea>
             <div id="contentEditor" style="height:400px" >{{ data.content }}</div>
             <script>
-
                 window.editorACE = ace.edit("contentEditor");
                 window.editorACE.getSession().setUseWorker(false);
                 window.editorACE.setTheme("ace/theme/sqlserver");
