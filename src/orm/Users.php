@@ -16,4 +16,5 @@ class Users extends \Tina4\ORM
     public $resetToken;
     public $dateCreated;
     public $dateModified;
+    public $roleId;
 }

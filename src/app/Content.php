@@ -48,9 +48,17 @@ class Content extends \Tina4\Data
             $roles = unserialize($role->roleInfo);
             if (!empty($name))
             {
-                return $roles["roles"][$name];
+                if (isset($roles["roles"])) {
+                    return $roles["roles"][$name];
+                } else {
+                    return $roles[$name];
+                }
             } else {
-                return $roles["category"];
+                if (isset($roles["category"])) {
+                    return $roles["category"];
+                } else {
+                    return $roles;
+                }
             }
         }
     }
