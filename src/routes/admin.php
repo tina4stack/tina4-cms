@@ -2,7 +2,6 @@
 
 /**
  * File browser
- *
  */
 \Tina4\Get::add("/cms/file-browser",function (\Tina4\Response $response, \Tina4\Request $request) {
     $files = \Tina4\Utilities::iterateDirectory("./uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");

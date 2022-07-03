@@ -1,6 +1,7 @@
 <?php
 
-\Tina4\Get::add("/", function (\Tina4\Response $response, \Tina4\Request $request) {
+\Tina4\Get::add("/", function (\Tina4\Response $response, \Tina4\Request $request)
+{
     $pageName = "home";
     $content = (new Content())->getPage($pageName);
 
@@ -20,13 +21,24 @@
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
+\Tina4\Get::add("robots.txt",  function (\Tina4\Response $response, \Tina4\Request $request){
+    $robotText = "User-agent: *\nDisallow: /\n";
+    $site = new Site();
+    if ($site->load("id = 1")) {
+        if ($site->allowCrawlers) {
+            $robotText = "User-agent: *\nDisallow: /cms/\nSitemap: /sitemap.xml";
+        }
+    }
 
-\Tina4\Get::add("/content/{pageName}", function ($pageName, \Tina4\Response $response, \Tina4\Request $request) {
+    return $response($robotText, HTTP_OK, TEXT_PLAIN);
+});
 
+
+\Tina4\Get::add("/content/{pageName}", function ($pageName, \Tina4\Response $response, \Tina4\Request $request)
+{
     $content = (new Content())->getPage($pageName);
-
-
     $pageMeta = (new Content())->getPageMeta($pageName);
+
     if (!file_exists("./cache/images/og-{$pageName}.png")) {
         if (!empty($pageMeta->image)) {
             $image = "https://".$_SERVER["HTTP_HOST"]."/cache/images/og-{$pageName}.png";
@@ -37,11 +49,13 @@
     } else {
         $image = "https://".$_SERVER["HTTP_HOST"]."/cache/images/og-{$pageName}.png";
     }
+
     $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image , "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
-\Tina4\Get::add("/content/article/{slug}", function ($slug, \Tina4\Response $response, \Tina4\Request $request) {
+\Tina4\Get::add("/content/article/{slug}", function ($slug, \Tina4\Response $response, \Tina4\Request $request)
+{
   $content = (new Content())->getArticle($slug);
   $articleMeta = (new Content())->getArticleMeta($slug);
 
@@ -55,11 +69,13 @@
   } else {
       $image = "https://".$_SERVER["HTTP_HOST"]."/cache/images/og-{$slug}.png";
   }
+
   $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "article" => $articleMeta, "pageName" => $articleMeta->title, "title" => $articleMeta->title, "image" => $image , "description" => $articleMeta->description, "keywords" => $articleMeta->keywords]);
   return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
-\Tina4\Get::add("/content/tags/{tag}", function ($tag, \Tina4\Response $response, \Tina4\Request $request) {
+\Tina4\Get::add("/content/tags/{tag}", function ($tag, \Tina4\Response $response, \Tina4\Request $request)
+{
 
     if (!isset($request->params["limit"])) {
         $limit = 4;
@@ -103,15 +119,14 @@
         return $response ($content, HTTP_OK, TEXT_HTML);
     }
 
-
     $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => "Articles tagged with {$tag}", "title" => "Articles tagged with {$tag}", "description" => "Articles tagged with {$tag}", "keywords" => $tag]);
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
-\Tina4\Get::add("/content/categories/{category}", function ($category, \Tina4\Response $response, \Tina4\Request $request) {
+\Tina4\Get::add("/content/categories/{category}", function ($category, \Tina4\Response $response, \Tina4\Request $request)
+{
     $content = (new Content())->getArticlesByCategory($category);
-
-    $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => "Articles tagged with {$tag}", "title" => "Articles tagged with {$tag}", "description" => "Articles tagged with {$tag}", "keywords" => $tag]);
+    $html = \Tina4\renderTemplate("content.twig", ["content" => $content, "pageName" => "Articles tagged with {$category}", "title" => "Articles tagged with {$category}", "description" => "Articles tagged with {$category}", "keywords" => $category]);
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
