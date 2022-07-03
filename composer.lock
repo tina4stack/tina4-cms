@@ -1208,16 +1208,16 @@
         },
         {
             "name": "tina4stack/tina4php-orm",
-            "version": "v2.0.5",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-orm.git",
-                "reference": "380b0fefae835b47e981946395025493c0421053"
+                "reference": "8bdd0bc75a4dc725c78f1db172ed3db1509035ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/380b0fefae835b47e981946395025493c0421053",
-                "reference": "380b0fefae835b47e981946395025493c0421053",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-orm/zipball/8bdd0bc75a4dc725c78f1db172ed3db1509035ac",
+                "reference": "8bdd0bc75a4dc725c78f1db172ed3db1509035ac",
                 "shasum": ""
             },
             "require-dev": {
@@ -1244,9 +1244,9 @@
             "description": "Tina4 ORM Module",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-orm/issues",
-                "source": "https://github.com/tina4stack/tina4php-orm/tree/v2.0.5"
+                "source": "https://github.com/tina4stack/tina4php-orm/tree/v2.0.6"
             },
-            "time": "2022-07-01T15:59:17+00:00"
+            "time": "2022-07-03T12:20:53+00:00"
         },
         {
             "name": "tina4stack/tina4php-shape",

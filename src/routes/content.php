@@ -33,6 +33,18 @@
     return $response($robotText, HTTP_OK, TEXT_PLAIN);
 });
 
+\Tina4\Get::add("sitemap.xml",  function (\Tina4\Response $response, \Tina4\Request $request){
+    $siteMap = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></sitemapindex>';
+    $site = new Site();
+    if ($site->load("id = 1")) {
+        if ($site->allowCrawlers) {
+            $siteMap = (new Content())->getSiteMap();
+        }
+    }
+
+    return $response($siteMap, HTTP_OK, APPLICATION_XML);
+});
+
 
 \Tina4\Get::add("/content/{pageName}", function ($pageName, \Tina4\Response $response, \Tina4\Request $request)
 {
