@@ -1,0 +1,1 @@
+alter table site add allow_crawlers integer default 0;
