@@ -236,53 +236,72 @@
         {% if not session.user %}
             {% do redirect('/cms/login') %}
         {% endif %}
+        {% set userRoles = Content.getSecurityAttribute('', session.user.roleId) %}
         <div class="col-md-12">
             <h3>Content</h3>
             <ul class="nav nav-tabs" role="tablist">
+                {% if (not userRoles.Pages or userRoles.Pages.visible) %}
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
                 </li>
+                {%endif%}
+                {% if (not userRoles.Snippets or userRoles.Snippets.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Articles or userRoles.Articles.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles['Article Categories'] or userRoles['Article Categories'].visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
                 </li>
+                {%endif%}
+                {% if (not userRoles.Menus or userRoles.Menus.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/menus', 'sub-content')">Menus</a>
                 </li>
-
+                {% endif %}
+                {% if (not userRoles.CSS or userRoles.CSS.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/css', 'sub-content')">CSS</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles['Email Templates'] or userRoles['Email Templates'].visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/email-templates', 'sub-content')">Templates</a>
+                       onclick="loadPage('/cms/email-templates', 'sub-content')">Email Templates</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Users or userRoles.Users.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/users', 'sub-content')">Users</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Roles or userRoles.Roles.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/roles', 'sub-content')">Roles</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Site or userRoles.Site.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/site', 'sub-content')">Site</a>
                 </li>
+                {% endif %}
             </ul>
             <div id="sub-content">
-
             </div>
             <script>
                 loadPage('/cms/pages', 'sub-content');
