@@ -46,7 +46,7 @@ CREATE TABLE page (
                       description varchar(1000) DEFAULT '',
                       keywords varchar(1000) DEFAULT '',
                       image text,
-                      content text,
+                      content longblob,
                       is_published integer DEFAULT 1,
                       author varchar(200) DEFAULT '',
                       slug varchar(200) DEFAULT '',
