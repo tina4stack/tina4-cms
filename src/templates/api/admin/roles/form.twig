@@ -9,18 +9,18 @@
         <div class="form-group col-md-12">
             {% set roles = Content.getSecurityAttribute() %}
             {% for category, roleData in roles %}
-            <h5>{{category}} Permissions</h5>
-            <div class="row">
-            {% for roleName, role in roleData %}
-                <div class="col-md-3">
-                    <div class="alert alert-info">{{roleName|capitalize}}<br>
-                        {% for option in role.options %}
-                            <input type="checkbox" value="1" name="roleInfo[{{roleName}}][{{option}}]" {% if data.roleInfo[roleName][option] == 1 %} checked {%endif%} > {{option |capitalize }}
-                        {% endfor %}
-                    </div>
+                <h5>{{category}} Permissions</h5>
+                <div class="row">
+                    {% for roleName, role in roleData %}
+                        <div class="col-md-3">
+                            <div class="alert alert-info">{{roleName|capitalize}}<br>
+                                {% for option in role.options %}
+                                    <input type="checkbox" value="1" name="roleInfo[{{ role.category }}][{{roleName}}][{{option}}]" {% if data.roleInfo[role.category][roleName][option] == 1 %} checked {%endif%} > {{option |capitalize }}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-            </div>
             {% endfor %}
         </div>
 

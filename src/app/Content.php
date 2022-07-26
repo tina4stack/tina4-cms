@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Tina4CMS - CMS Module
+ * Copy-right 2007 - current Tina4
+ * License: MIT https://opensource.org/licenses/MIT
+ */
+
+
 class Content extends \Tina4\Data
 {
     private $twigNamespace = "@tina4cms";
