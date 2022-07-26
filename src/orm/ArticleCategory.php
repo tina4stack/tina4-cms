@@ -1,9 +1,16 @@
 <?php
+
+/**
+ * Tina4CMS - CMS Module
+ * Copy-right 2007 - current Tina4
+ * License: MIT https://opensource.org/licenses/MIT
+ */
+
+
 class ArticleCategory extends \Tina4\ORM
 {
     public $tableName="article_category";
     public $primaryKey="id"; //set for primary key
-    //public $softDelete=true; //uncomment for soft deletes in crud
     public $genPrimaryKey = true;
     
 	public $id;

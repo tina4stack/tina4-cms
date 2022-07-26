@@ -236,53 +236,72 @@
         {% if not session.user %}
             {% do redirect('/cms/login') %}
         {% endif %}
+        {% set userRoles = Content.getSecurityAttribute('', session.user.roleId) %}
         <div class="col-md-12">
             <h3>Content</h3>
             <ul class="nav nav-tabs" role="tablist">
+                {% if (not userRoles.Content.Pages or userRoles.Content.Pages.visible) %}
                 <li class="nav-item">
                     <a class="nav-link active" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
                 </li>
+                {%endif%}
+                {% if (not userRoles.Content.Snippets or userRoles.Content.Snippets.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Content.Articles or userRoles.Content.Articles.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Content['Article Categories'] or userRoles.Content['Article Categories'].visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
                 </li>
+                {%endif%}
+                {% if (not userRoles.Content.Menus or userRoles.Content.Menus.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/menus', 'sub-content')">Menus</a>
                 </li>
-
+                {% endif %}
+                {% if (not userRoles.Content.CSS or userRoles.Content.CSS.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/css', 'sub-content')">CSS</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Content['Email Templates'] or userRoles.Content['Email Templates'].visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/email-templates', 'sub-content')">Templates</a>
+                       onclick="loadPage('/cms/email-templates', 'sub-content')">Email Templates</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Content.Users or userRoles.Content.Users.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/users', 'sub-content')">Users</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Content.Roles or userRoles.Content.Roles.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/roles', 'sub-content')">Roles</a>
                 </li>
+                {% endif %}
+                {% if (not userRoles.Content.Site or userRoles.Content.Site.visible) %}
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" role="tab" href="#"
                        onclick="loadPage('/cms/site', 'sub-content')">Site</a>
                 </li>
+                {% endif %}
             </ul>
             <div id="sub-content">
-
             </div>
             <script>
                 loadPage('/cms/pages', 'sub-content');

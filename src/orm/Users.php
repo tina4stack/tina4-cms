@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Tina4CMS - CMS Module
+ * Copy-right 2007 - current Tina4
+ * License: MIT https://opensource.org/licenses/MIT
+ */
+
 
 class Users extends \Tina4\ORM
 {
@@ -16,4 +22,5 @@ class Users extends \Tina4\ORM
     public $resetToken;
     public $dateCreated;
     public $dateModified;
+    public $roleId;
 }

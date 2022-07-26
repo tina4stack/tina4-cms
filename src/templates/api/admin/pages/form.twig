@@ -4,101 +4,27 @@
             <label for="title">Name</label>
             <input class="form-control" type="text" name="name" placeholder="Name" value="{{ data.name }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="title">Title</label>
             <input class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
             <label for="description">Description</label>
             <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
         </div>
         <div class="form-group col-md-1">
             <img class="img-thumbnail" src="data:image/png;base64,{{ data.image }}">
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-2">
             <label for="image">Image</label>
             <input class="form-control" type="file" name="image" placeholder="Image" value="">
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-1">
             <label for="playerKey">Published</label>
             <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
         </div>
         <div class="form-group col-md-12">
-            <label for="contentEditor">Content</label>
-            <div id="contentEditor" class="form-control" style="height:300px">{{ data.content | raw }}</div>
-            <script>
-                function saveContent(editor) {
-                    $('#saveContent').val(editor.getContent());
-                }
-
-                tinyMCE.execCommand('mceRemoveEditor', false, 'contentEditor');
-
-                tinymce.init({
-                    selector: '#contentEditor',
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste imagetools wordcount emoticons'
-                    ],
-                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets | menuArticles ',
-                    images_upload_url: '/cms/upload?formToken={{ formToken | raw }}',
-                    images_upload_base_path: '/uploads/',
-                    images_upload_credentials: true,
-                    force_p_newlines : false,
-                    convert_urls: false,
-                    file_picker_callback:   function(callback, url, type, win) {
-                        myWindow = popupCenter({url: "/cms/file-browser?formToken={{ formToken | raw }}", title: 'Tina4CMS - File Browser', w: 900, h: 500});
-                        myWindow.tinymceCallback = callback;
-                    },
-                    setup:function(editor) {
-                        editor.on('change', function(e) {
-                            saveContent(editor)
-                        });
-                        console.log('Adding snippets ');
-                        editor.ui.registry.addMenuButton('menuSnippets', {
-                            text: 'Snippets',
-                            fetch: function (callback) {
-                                var items = [
-                                    {% for snippet in snippets %}
-                                    {
-                                        type: 'menuitem',
-                                        text: '{{ snippet.name }}',
-                                        onAction: function (_) {
-                                            editor.insertContent('\n\{\{ include( getSnippet("{{ snippet.name }}") ) \}\}');
-                                        }
-                                    },
-                                    {% endfor %}
-                                ];
-                                callback(items);
-                            }
-                        });
-                        console.log('Adding articles ');
-                        editor.ui.registry.addMenuButton('menuArticles', {
-                            text: 'Articles',
-                            fetch: function (callback) {
-                                var itemsA = [
-                                    {% for articleCategory in articleCategories %}
-                                    {
-                                        type: 'menuitem',
-                                        text: '{{ articleCategory.name }}',
-                                        onAction: function (_) {
-                                            editor.insertContent("\{\% set articles = Content.getArticles (\"{{ articleCategory.name }}\", 8) \%\}\n\{\% for article in articles \%\}\n\{\% include \"snippets/medium.twig\" with {\"article\": article} \%\}\n\{\% endfor \%\}\{\% set params = {\"tag\": \"all\", \"skip\": 0, \"limit\": 4, \"template\": \"medium.twig\"} \%\}\{\% include \"load-more.twig\" with params \%\}");
-                                        }
-                                    },
-                                    {% endfor %}
-                                ];
-                                callback(itemsA);
-                            }
-                        });
-                    }
-                });
-                $(document).on('focusin', function(e) {
-                    if ($(e.target).closest(".tox").length) {
-                        e.stopImmediatePropagation();
-                    }
-                });
-            </script>
-            <textarea id="saveContent" class="form-control" style="display:none; height: 300px" name="content">{{ data.content | raw }}</textarea>
+            {% include "snippets/content-editor.twig" %}
         </div>
 
         <div class="form-group col-md-12">

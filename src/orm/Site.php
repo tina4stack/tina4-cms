@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Tina4CMS - CMS Module
+ * Copy-right 2007 - current Tina4
+ * License: MIT https://opensource.org/licenses/MIT
+ */
+
 
 class Site extends \Tina4\ORM
 {
@@ -21,4 +27,5 @@ class Site extends \Tina4\ORM
     public $smtpServer;
     public $dateCreated;
     public $dateModified;
+    public $allowCrawlers;
 }

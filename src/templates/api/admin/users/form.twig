@@ -18,10 +18,17 @@
             <input class="form-control" type="password" name="password" placeholder="Password" value="">
         </div>
         <div class="form-group col-md-6">
+            <label for="roleId">Default Role</label>
+            <select class="form-control" name="roleId">
+                {% for role in roles %}
+                    <option {%if data.roleId == role.id %} selected {% endif %} value="{{role.id}}">{{role.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group col-md-6">
             <label for="isActive">Active</label>
             <input class="form-control" type="checkbox" name="isActive" value="1" {%  if (data.isActive == 1 ) %} checked {% endif%} >
         </div>
-
     </div>
     {{ "usersForm" | formToken | raw }}
 </form>

@@ -21,3 +21,6 @@ composer.phar
 /cms.db-wal
 /.phplint-cache
 /build/
+/src/scss/
+/src/public/css/
+/uploads/
