@@ -16,7 +16,6 @@
         case "form":
         case "fetch":
             //Return back a form to be submitted to the create
-
             if ($action == "form") {
                 $title = "Add Css";
                 $savePath = TINA4_SUB_FOLDER . "/api/admin/css";
@@ -46,6 +45,10 @@
             break;
         case "afterCreate":
             //add to scss folder
+            if (file_exists("./src/public/css/default.css")) {
+                unlink("./src/public/css/default.css");
+            }
+
             if ($css->isActive == 1) {
                 file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $_REQUEST["content"]);
             } else {
@@ -60,6 +63,10 @@
             break;
         case "afterUpdate":
             //return needed
+            if (file_exists("./src/public/css/default.css")) {
+                unlink("./src/public/css/default.css");
+            }
+
             if ($css->isActive == 1) {
                 file_put_contents("./src/scss/" . (new Content())->getSlug($css->name) . ".scss", $_REQUEST["content"]);
             } else {
@@ -67,6 +74,7 @@
                     unlink("./src/scss/" . (new Content())->getSlug($css->name) . ".scss");
                 }
             }
+
             $css->saveBlob("content", $_REQUEST["content"]);
 
             return (object)["httpCode" => 200, "message" => "<script>cssGrid.ajax.reload(null, false); showMessage ('Css Updated');</script>"];

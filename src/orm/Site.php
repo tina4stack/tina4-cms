@@ -21,4 +21,5 @@ class Site extends \Tina4\ORM
     public $smtpServer;
     public $dateCreated;
     public $dateModified;
+    public $allowCrawlers;
 }

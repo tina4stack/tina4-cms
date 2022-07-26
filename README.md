@@ -47,6 +47,7 @@ Make a  *base.twig* file in your */src/templates* folder, it needs the following
     <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
 {% block headers %}
+    <link rel="stylesheet" type="text/css" href="/src/public/css/default.css">
 {% endblock %}
 </head>
 {% block body %}

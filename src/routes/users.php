@@ -16,15 +16,15 @@
        case "form":
        case "fetch":
             //Return back a form to be submitted to the create
-             
+            $roles = (new Role())->select('id,name', 1000)->asArray();
             if ($action == "form") {
                 $title = "Add Users";
                 $savePath =  TINA4_BASE_URL . "/api/admin/users";
-                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", []);
+                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", ["roles" => $roles]);
             } else {
                 $title = "Edit Users";
                 $savePath =  TINA4_BASE_URL . "/api/admin/users/".$users->id;
-                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", ["data" => $users]);
+                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", ["data" => $users, "roles" => $roles]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#usersForm').valid() ) { saveForm('usersForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);

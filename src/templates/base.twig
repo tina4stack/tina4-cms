@@ -6,12 +6,13 @@
     <meta prefix="og: https://ogp.me/ns#" property="og:type" content="website"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:url" content="{{ url }}"/>
     {% if image %}
-        <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
     {% endif %}
     {% if description %}
-        <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
     {% endif %}
     {% block headers %}
+    <link rel="stylesheet" type="text/css" href="/src/public/css/default.css">
     {% endblock %}
 </head>
 {% block body %}

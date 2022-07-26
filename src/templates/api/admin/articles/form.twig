@@ -1,10 +1,10 @@
 <form id="articleForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-2">
             <label for="title">Title</label>
             <input class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
             <label for="description">Description</label>
             <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
         </div>
@@ -23,17 +23,15 @@
         <div class="form-group col-md-1">
             <img class="img-thumbnail" src="data:image/png;base64,{{ data.image }}">
         </div>
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-2">
             <label for="image">Image</label>
             <input class="form-control" type="file" name="image" placeholder="Image" value="">
         </div>
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-1">
             <label for="playerKey">Published</label>
             <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
         </div>
         <div class="form-group col-md-9">
-            <label for="contentEditor">Content</label>
-
             <div id="contentEditor" class="form-control" style="height:300px">{{ data.content | raw }}</div>
             <script>
                 function saveContent(editor) {
@@ -44,17 +42,21 @@
 
                 tinymce.init({
                     selector: '#contentEditor',
-                    plugins: [
-                        'advlist autolink lists link image charmap print preview anchor',
-                        'searchreplace visualblocks code fullscreen',
-                        'insertdatetime media table paste imagetools wordcount emoticons'
-                    ],
-                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | image media emoticons | menuSnippets ',
+                    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+                    //toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
+                    toolbar_sticky: true,
+                    toolbar: 'undo redo fontsize bold italic forecolor backcolor styles alignleft aligncenter alignright alignjustify numlist bullist outdent indent image media emoticons menuSnippets menuArticles | fullscreen ',
                     images_upload_url: '/cms/upload?formToken={{ formToken | raw }}',
                     images_upload_base_path: '/uploads/',
                     images_upload_credentials: true,
-                    force_p_newlines : false,
+                    forced_root_block: 'p',
+                    visualblocks_default_state: true,
                     convert_urls: false,
+                    height: 500,
+                    importcss_append: true,
+                    content_css: '/src/public/css/default.css',
+                    style_formats_merge: true,
+                    style_formats_autohide: true,
                     file_picker_callback:   function(callback, url, type, win) {
                         myWindow = popupCenter({url: "/cms/file-browser?formToken={{ formToken | raw }}", title: 'Tina4CMS - File Browser', w: 900, h: 500});
                         myWindow.tinymceCallback = callback;
@@ -63,7 +65,7 @@
                         editor.on('change', function(e) {
                             saveContent(editor)
                         });
-
+                        console.log('Adding snippets ');
                         editor.ui.registry.addMenuButton('menuSnippets', {
                             text: 'Snippets',
                             fetch: function (callback) {
@@ -81,6 +83,24 @@
                                 callback(items);
                             }
                         });
+                        console.log('Adding articles ');
+                        editor.ui.registry.addMenuButton('menuArticles', {
+                            text: 'Articles',
+                            fetch: function (callback) {
+                                var itemsA = [
+                                    {% for articleCategory in articleCategories %}
+                                    {
+                                        type: 'menuitem',
+                                        text: '{{ articleCategory.name }}',
+                                        onAction: function (_) {
+                                            editor.insertContent("\{\% set articles = Content.getArticles (\"{{ articleCategory.name }}\", 8) \%\}\n\{\% for article in articles \%\}\n\{\% include \"snippets/medium.twig\" with {\"article\": article} \%\}\n\{\% endfor \%\}\{\% set params = {\"tag\": \"all\", \"skip\": 0, \"limit\": 4, \"template\": \"medium.twig\"} \%\}\{\% include \"load-more.twig\" with params \%\}");
+                                        }
+                                    },
+                                    {% endfor %}
+                                ];
+                                callback(itemsA);
+                            }
+                        });
                     }
                 });
 
@@ -93,7 +113,7 @@
             <textarea id="saveContent" class="form-control" style="display:none; height: 300px" name="content">{{ data.content | raw }}</textarea>
         </div>
         <div class="form-group col-md-3">
-                <label>Choose Categories</label>
+                <label>Choose Article Categories</label>
                 {% set categories = Tina4.call('Content', 'getCategories', [data.id]) %}
                 <ul class="tree" style="border:1px solid black">
                     {{ categories | raw }}

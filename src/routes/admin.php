@@ -2,10 +2,9 @@
 
 /**
  * File browser
- *
  */
 \Tina4\Get::add("/cms/file-browser",function (\Tina4\Response $response, \Tina4\Request $request) {
-    $files = \Tina4\Utility::iterateDirectory("./uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
+    $files = \Tina4\Utilities::iterateDirectory("./uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
     return $response(\Tina4\renderTemplate("admin/file-browser.twig", ["files" => $files]));
 });
 
@@ -26,7 +25,7 @@
     }
 
     // Verify extension
-    if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png"))) {
+    if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png", "jpeg", "svg"))) {
         header("HTTP/1.1 400 Invalid extension.");
         return null;
     }

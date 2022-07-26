@@ -34,7 +34,8 @@
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/pages/' + row.id + '?formToken={{ formToken("/api/admin/pages") }}\')">Edit</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="window.open(\'/cms/editor?formToken={{ formToken("/api/admin/editor") }}\', \'_blank\')">Build</button>';
+                        html += ' <button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/pages/' + row.id + '?formToken={{ formToken("/api/admin/pages") }}\')">Edit</button>';
                         html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/pages/' + row.id + '?formToken={{ formToken("/api/admin/pages") }}\');}">Del</button>';
                         return html;
 

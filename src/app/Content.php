@@ -5,6 +5,65 @@ class Content extends \Tina4\Data
     private $twigNamespace = "@tina4cms";
 
     /**
+     * Set security attribute
+     * @param $name
+     * @param $options
+     * @param $category
+     * @param $roleId
+     * @return void
+     * @throws Exception
+     */
+    public function setSecurityAttribute($name, $options, $category="Default", $roleId=1)
+    {
+        $role = new Role();
+        if ($role->load("id = {$roleId}"))
+        {
+            $roleData = unserialize($role->roleInfo);
+            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
+            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
+            $role->roleInfo = serialize($roleData);
+            $role->save();
+        } else {
+            $roleData = [];
+            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
+            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
+            $role->id = $roleId;
+            $role->name = "Default";
+            $role->roleInfo = serialize($roleData);
+            $role->save();
+        }
+    }
+
+    /**
+     * Get security attribute
+     * @param string $name
+     * @param int $roleId
+     * @return mixed|void
+     */
+    public function getSecurityAttribute($name="", $roleId=1)
+    {
+        $role = new Role();
+        if ($role->load("id = {$roleId}"))
+        {
+            $roles = unserialize($role->roleInfo);
+            if (!empty($name))
+            {
+                if (isset($roles["roles"])) {
+                    return $roles["roles"][$name];
+                } else {
+                    return $roles[$name];
+                }
+            } else {
+                if (isset($roles["category"])) {
+                    return $roles["category"];
+                } else {
+                    return $roles;
+                }
+            }
+        }
+    }
+
+    /**
      * Get a different twig name space for changing dashboard and other screens
      * @return string
      */
@@ -54,6 +113,9 @@ class Content extends \Tina4\Data
      */
     public function getSlug($title, $separator = '-'): string
     {
+        if (empty($title)) {
+            return "";
+        }
         // lower string
         $title = strtolower($title);
 
@@ -93,14 +155,17 @@ class Content extends \Tina4\Data
      * Get Pages
      * @param $slug
      * @return string
-     * @throws \Twig\Error\LoaderError
      */
     public function getPage($slug): string
     {
         $page = (new Page());
         $page->load("slug = '{$slug}'");
 
-        return \Tina4\renderTemplate( html_entity_decode($page->content, ENT_QUOTES ) , ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
+        if (!empty($page->content)) {
+            return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
+        } else {
+            return "";
+        }
     }
 
     /**
@@ -229,7 +294,8 @@ class Content extends \Tina4\Data
      * @param string $parentId
      * @return string
      */
-    public function getCategories($articleId=1, $parentId="") {
+    public function getCategories($articleId=1, $parentId="")
+    {
         if (empty($articleId)) $articleId = 1;
         $html = "";
         if (!empty($parentId)) {
@@ -366,7 +432,9 @@ class Content extends \Tina4\Data
      * @return string
      */
     public function parseContent ($content) {
-        $content = html_entity_decode($content);
+        if (!empty($content)) {
+            $content = html_entity_decode($content);
+        }
         return $content;
     }
 
@@ -384,6 +452,14 @@ class Content extends \Tina4\Data
         }
     }
 
+    /**
+     * Gets articles by tag
+     * @param $category
+     * @param $limit
+     * @param $skip
+     * @return array|mixed|string[]
+     * @throws ReflectionException
+     */
     public function getArticlesByTag($category, $limit=1, $skip=0)
     {
         $articles = (new Article())->select("*", $limit, $skip)
@@ -397,8 +473,6 @@ class Content extends \Tina4\Data
 
 
         $articles = $articles->asObject();
-
-
 
         foreach ($articles as $id => $article) {
             $articles[$id]->content = $this->parseContent($article->content);
@@ -443,6 +517,18 @@ class Content extends \Tina4\Data
         $config->addTwigGlobal("Snippet", new Content());
         $config->addTwigGlobal("Article", new Content());
 
+        if (!file_exists("./uploads")) {
+            mkdir("./uploads");
+        }
+
+
+        if (!file_exists("./cache")) {
+            mkdir("./cache");
+        }
+
+        if (!file_exists("./cache/images")) {
+            mkdir("./cache/images");
+        }
 
         $config->addTwigFunction("redirect", function ($url, $code = 301) {
             \Tina4\redirect($url, $code);
@@ -483,4 +569,61 @@ class Content extends \Tina4\Data
         return  str_replace($documentRoot, "", $contentPath);
     }
 
+
+    /**
+     * Returns a site map array
+     * @return array[]
+     * @throws ReflectionException
+     */
+    public function getSiteMap() {
+        $urls = [];
+
+        $site = new Site();
+        if ($site->load("id = 1")) {
+            $pages = (new Page())->select("*", 10000)->where("is_published = 1")->asObject();
+
+            /**
+             * @var Page $page
+             */
+            foreach ($pages as $pId => $page) {
+                $locs = ["loc" => $site->siteUrl."/content/".$page->slug, "lastmod" => str_replace(" ", "T", $page->dateModified)."+00:00"];
+
+                if (!empty($page->image)) {
+                    if (!file_exists("./cache/images/og-{$page->slug}.png")) {
+                        if (!empty($page->image)) {
+                            $image = $site->siteUrl . "/cache/images/og-{$page->slug}.png";
+                            file_put_contents("./cache/images/og-{$page->slug}.png", base64_decode($page->image));
+                        }
+                    }
+                    $image = $site->siteUrl . "/cache/images/og-{$page->slug}.png";
+                    $locs["image:image"] = ["image:loc" => $image];
+                }
+
+                $urls[] = ["url" => $locs];
+            }
+
+            $articles = (new Article())->select("*", 10000)->where("is_published = 1")->asObject();
+            /**
+             * @var Article $article
+             */
+            foreach ($articles as $aId => $article) {
+                $locs = ["loc" => $site->siteUrl."/content/article/".$article->slug, "lastmod" => str_replace(" ", "T", $article->publishedDate)."+00:00"];
+                if (!empty($article->image)) {
+                    if (!file_exists("./cache/images/article-{$article->slug}.png")) {
+                        if (!empty($article->image)) {
+                            $image = $site->siteUrl. "/cache/images/article-{$article->slug}.png";
+                            file_put_contents("./cache/images/article-{$article->slug}.png", base64_decode($article->image));
+                        }
+                    }
+                    $image = $site->siteUrl . "/cache/images/article-{$article->slug}.png";
+                    $locs["image:image"] = ["image:loc" => $image];
+                }
+
+                $urls[] = ["url" => $locs];
+            }
+
+        }
+
+        return ['urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' => $urls ];
+    }
 }

@@ -34,7 +34,7 @@
                 },
                 {
                     "mRender": function (data, type, row) {
-                        if (row.id == 0) return "";
+                        if (row.id == 1) return "";
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
                         html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/menus/' + row.id + '?formToken={{ formToken('/api/admin/menus') }}\')">Edit</button>';
