@@ -24,7 +24,7 @@
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/site/' + row.id + '?formToken={{ formToken("/api/admin/site/") }}\')">Edit</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/site/' + row.id + '?formToken={{ formToken("/api/admin/site") }}\')">Edit</button>';
                         return html;
 
                     },
