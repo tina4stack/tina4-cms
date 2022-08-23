@@ -77,7 +77,11 @@ class Content extends \Tina4\Data
     public function getTwigNameSpace(): string
     {
         if (defined("CMS_TWIG_NAMESPACE")) {
-            return CMS_TWIG_NAMESPACE;
+            if (!empty(CMS_TWIG_NAMESPACE)) {
+                return CMS_TWIG_NAMESPACE;
+            } else {
+                return "@__main__";
+            }
         } else {
             return $this->twigNamespace;
         }

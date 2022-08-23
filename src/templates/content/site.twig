@@ -14,7 +14,7 @@
     $(document).ready(function () {
         siteGrid = $('#siteGrid').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '/api/admin/site?formToken={{ formToken("/api/admin/site/") }}',
+            ajax: '/api/admin/site?formToken={{ formToken("/api/admin/site") }}',
             columns: [
                 {"data": "id"},
                 {"data": "description"},
