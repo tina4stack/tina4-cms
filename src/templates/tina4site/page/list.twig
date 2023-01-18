@@ -1,0 +1,22 @@
+<div class="modal hide" id="page-list-modal" tabindex="-1" role="dialog" aria-labelledby="page-list-modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Pages
+                    <i class="fa fa-globe"></i>
+                </h5>
+                <button id="header_close" type="button" class="close btn btn-danger" hidden data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-close" onclick='$("#page-list-modal").modal("hide")'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="page-listing-grid"></div>
+            <div class="modal-footer">
+                <button id="footer_close" type="button" hidden class="btn btn-secondary" onclick='$("#page-list-modal").modal("hide");'>Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,47 @@
+<form id="tina4sitedatasetForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="datasetTable">Dataset Table</label>
+            <input class="form-control" type="text" id="datasetTable"
+                   name="datasetTable" placeholder="Dataset Table"
+                   value="{{ data.datasetTable }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="dataset_columns">Columns</label>
+            <input class="form-control" type="text" id="dataset_columns"
+                   name="datasetColumns" placeholder="Columns"
+                   value="{{ data.datasetColumns }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="dataset_conditions">Conditions</label>
+            <input class="form-control" type="text" id="dataset_conditions"
+                   name="datasetConditions" placeholder="Conditions"
+                   value="{{ data.datasetConditions }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="code">Code</label>
+            <input class="form-control" type="text" id="code"
+                   name="code" placeholder="Code"
+                   value="{{ data.code }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="class">Class</label>
+            <input class="form-control" type="text" id="class"
+                   name="class" placeholder="Class"
+                   value="{{ data.class }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="type">Type</label>
+            <input class="form-control" type="text" id="type"
+                   name="type" placeholder="Type"
+                   value="{{ data.type }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="created_at">Created_at</label>
+            <input class="form-control" type="text" id="created_at"
+                   name="created_at" placeholder="Created_at"
+                   value="{{ data.created_at }}">
+        </div>
+    </div>
+    {{ "tina4sitedatasetForm" | formToken | raw }}
+</form>

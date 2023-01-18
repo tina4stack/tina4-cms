@@ -1,0 +1,25 @@
+<div class='modal fade' id='addPageModal' tabindex='-1' aria-labelledby='addPageModalLabel' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false'>
+    <div class='modal-dialog'>
+        <div class='modal-content'>
+            <form id='create-page' onsubmit='return validatForm(event)' novalidate>
+                <div class='modal-header'>
+                    <h5 class='modal-title' id='addPageModalLabel'>Create Page</h5>
+                    <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+                <div class='modal-body'>
+                    <div class='col-auto'>
+                        <label for='name' class='form-label'>Name</label>
+                        <input type='text' class='form-control form-control-sm' id='name' name='name' placeholder='Name of Page' required/>
+                        <div class='invalid-feedback'>
+                            Please provide a valid name.
+                        </div>
+                    </div>
+                </div>
+                <div class='modal-footer'>
+                    <button type='button' class='btn btn-secondary btn-sm' data-bs-dismiss='modal' onclick='clearForm()'>Close</button>
+                    <button type='submit' class='btn btn-primary btn-sm'>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

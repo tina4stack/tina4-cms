@@ -1,0 +1,64 @@
+<div id='sidebar' class='sidenav d-flex flex-column overflow-scroll'>
+    <nav class='navbar navbar-light'>
+        <div class='container-fluid'>
+            <div style="text-align: center">
+                <img src="/tina4site/images/anime-girl-peace.png" style="border-radius: 50%; width:120px"/>
+                <span class='navbar-brand mb-0 h3 logo'>Tina4 Component Builder</span>
+            </div>
+        </div>
+    </nav>
+    <div class='my-2 d-flex flex-column'>
+        <button type='button' class='btn btn-outline-secondary btn-sm mb-2 mx-2' onclick="window.location.replace('/tina4site/component-group/landing')">
+            <i class='fa fa-arrow-left'></i>
+            Back to Component Manager
+        </button>
+        <ul class='list-group pages'>
+            <li class='list-group-item d-flex justify-content-between align-items-center'>
+                <label id="page-title"></label>
+                <div class='m-2'>
+                    <a id="editOnCMSTitleButton" href="/tina4site/component-group" class='btn btn-sm btn-outline-primary' hidden>
+                        <i class='fa fa-pencil'></i>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class=''>
+        <ul class='nav nav-tabs' id='myTab' role='tablist'>
+            <li class='nav-item' role='presentation'>
+                <button class='nav-link active' id='block-tab' data-bs-toggle='tab' data-bs-target='#block' type='button' role='tab' aria-controls='block' aria-selected='true'>
+                    <i class='fa fa-cubes'></i>
+                </button>
+            </li>
+            <li class='nav-item' role='presentation'>
+                <button class='nav-link' id='layer-tab' data-bs-toggle='tab' data-bs-target='#layer' type='button' role='tab' aria-controls='layer' aria-selected='false'>
+                    <i class='fa fa-tasks'></i>
+                </button>
+            </li>
+            <li class='nav-item' role='presentation'>
+                <button class='nav-link' id='style-tab' data-bs-toggle='tab' data-bs-target='#style' type='button' role='tab' aria-controls='style' aria-selected='false'>
+                    <i class='fa fa-paint-brush'></i>
+                </button>
+            </li>
+            <li class='nav-item' role='presentation'>
+                <button class='nav-link' id='trait-tab' data-bs-toggle='tab' data-bs-target='#trait' type='button' role='tab' aria-controls='trait' aria-selected='false'>
+                    <i class='fa fa-cog'></i>
+                </button>
+            </li>
+        </ul>
+        <div class='tab-content'>
+            <div class='tab-pane fade show active' id='block' role='tabpanel' aria-labelledby='block-tab'>
+                <div id='blocks'></div>
+            </div>
+            <div class='tab-pane fade' id='layer' role='tabpanel' aria-labelledby='layer-tab'>
+                <div id='layers-container'></div>
+            </div>
+            <div class='tab-pane fade' id='style' role='tabpanel' aria-labelledby='style-tab'>
+                <div id='styles-container'></div>
+            </div>
+            <div class='tab-pane fade' id='trait' role='tabpanel' aria-labelledby='trait-tab'>
+                <div id='trait-container'></div>
+            </div>
+        </div>
+    </div>
+</div>

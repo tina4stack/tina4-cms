@@ -1,0 +1,29 @@
+<div class="modal fade" id="revision-modal" tabindex="-1" role="dialog" aria-labelledby="revision-modal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Page History / Revision
+                    <i class="fa fa-history"></i>
+                </h5>
+                <button type="button" class="close btn btn-secondary">
+                    <i class="fa fa-close" onclick='$("#revision-modal").modal("hide")'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="revision-grid"></div>
+            <div class="modal-footer">
+                <button type="button" class="close btn btn-danger pull-right" onclick='tina4revisionManager.clearRevisionHistory($("#tina4site-page-id").val())'>
+                    Clear all revisions related to this Page
+                    <i class="fa fa-trash"></i>
+                </button>
+                <button type="button" class="btn btn-secondary" onclick='$("#revision-modal").modal("hide");'>
+                    Close
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="modal hide" id="component-list-modal" data-backdrop="static" data-keyboard="false" data-toggle='modal'>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    &nbsp; <i class="fa fa-compass" style="color:blue"></i>
+                    Components
+                </h5>
+                <button type="button" id="header_close" class="close btn btn-danger" hidden data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-close" onclick='$("#component-list-modal").modal("hide")'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="component-list-grid"></div>
+                <div class="modal-footer">
+                    <button type="button" id="footer_close" hidden class="btn btn-secondary" onclick='$("#component-list-modal").modal("hide");'>Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
