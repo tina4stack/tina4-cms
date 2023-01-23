@@ -161,6 +161,11 @@ editor.Commands.add('show-revision-modal', {
   }
 });
 
+editor.Commands.add('render-twig-template', {
+  run : function () {
+    tina4pageManager.renderTwigTemplate($("#tina4site-page-id").val());
+  }
+});
 //On editor initialization
 editor.on('load', (editor) => {
 //Initialize custom blocks

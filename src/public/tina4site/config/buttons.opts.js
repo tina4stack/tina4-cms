@@ -120,6 +120,15 @@ const rightPanelButtonOpts = [
         command: 'save-page',
         togglable: false,
     },
+        {
+            id: 'publish-page',
+            attributes: {
+                title: 'Publish Page'
+            },
+            label: '<i class="fa fa-upload"></i>',
+            command: 'render-twig-template',
+            togglable: false,
+        },
     {
         id: 'load',
         label: '<i class="fa fa-folder"></i>',

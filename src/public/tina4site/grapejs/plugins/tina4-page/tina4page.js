@@ -66,6 +66,21 @@
         };
 
         //Public context
+        this.renderTwigTemplate = function(id){
+             $.ajax({
+                url: '/api/tina4site/pages/render-as-twig/' + id,
+                type: "GET",
+                success: function (data) {
+                 $.MessageBox({
+                      buttonDone: "Ok",
+                      message: data
+                  }).done(function () {
+                      loadPageData(id)
+                  });
+                }
+            })
+           };
+
         this.savePage = function (id) {
             //Check if a page is loaded
             if (typeof(id) == 'undefined' || id == '') {

@@ -181,5 +181,5 @@
     fwrite($template,$html);
     fclose($template);
     //Return response
-    return $response ('Successfully saved', HTTP_OK, TEXT_HTML);
+    return $response ('Successfully Published', HTTP_OK, TEXT_HTML);
 });
