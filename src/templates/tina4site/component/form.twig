@@ -1,0 +1,48 @@
+<form id="tina4sitecomponentForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="name">Name</label>
+            <input class="form-control" type="text" id="name" name="name" placeholder="Name" value="{{ data.name }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="icon">Icon (Font Awesome)</label>
+            {{ include('/tina4site/icon-select.twig') }}
+        </div>
+        <div class="form-group col-md-6">
+          <label for="group_id">Group</label>
+          <select id="group_id" class="form-control" name="group_id" required {% if(data.groups|length == 0) %} readonly disabled {% endif %}>
+              <option value=""></option>
+              <!--Check if editing or creating-->
+              {% if data.groups|length != 0 %}
+                  {% set groups = data.groups %}
+              {% endif %}
+
+              {% for group in groups %}
+                  {% if(group.id == data.group_id) %}
+                  <option value="{{ group.id }}" selected>{{ group.name }}</option>
+                  {% else %}
+                  <option value="{{ group.id }}">{{ group.name }}</option>
+                  {% endif %}
+              {% endfor %}
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="enabled">Enabled</label>
+            <input class="form-control" type="checkbox" id="enabled" name="enabled"  {% if (data.enabled == 'on') %} checked {% endif %}>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="created_at">Created_at</label>
+            <input class="form-control" type="text" id="created_at" name="created_at" placeholder="Created_at" value="{{ data.created_at }}" readonly>
+        </div>
+    </div>
+    {{ "tina4sitecomponentForm" | formToken | raw }}
+</form>
+
+<script>
+    $(document).ready(function () {
+        document.getElementById('icon').value="{{ data.icon ?? '' }}";
+        document.getElementById('group_id').value="{{ request.group_id }}";
+        displayIconPreview("{{ data.icon ?? 'fa-plus' }}")
+
+    });
+</script>

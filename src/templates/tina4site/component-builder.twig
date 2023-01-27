@@ -1,0 +1,30 @@
+<html lang='en'>
+
+<!-- tina4-site inclusions-->
+{{ include('/tina4site/nav/head.twig') }}
+<body>
+<div id="main-body" class='main-content'>
+    {{ include('/tina4site/nav/builder-sidebar.twig') }}
+    {{ include('/tina4site/nav/nav.twig') }}
+    <!-- Hidden inputs to maintain a 'copy available' dataset of the webpage -->
+    <input id="project-html" type="hidden"/>
+    <input id="project-data" type="hidden" value='{"pages": [{"component": "<div></div>"}]}'/>
+    <!--Page ID-->
+    <input id="tina4site-component-id" hidden value=""/>
+
+    <!--Target editor DIV-->
+    <div id='editor'></div>
+    <!--Page listing -->
+    {{ include('/tina4site/component/list.twig') }}
+</div>
+
+<script type="text/javascript">
+    //Define global form tokens for endpoints utilized
+    const formToken = "{{ formToken ("/api/*") }} }";
+</script>
+<!--Initialize the editor-->
+<script type='text/javascript' src='/tina4site/tina4site-component-builder.js'></script >
+<script type='text/javascript' src='/tina4site/test.js'></script >
+
+</body>
+</html>

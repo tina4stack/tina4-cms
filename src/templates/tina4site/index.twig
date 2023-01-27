@@ -1,0 +1,28 @@
+<html lang='en'>
+<!-- tina4-site inclusions-->
+{{ include('/tina4site/nav/head.twig') }}
+<body>
+<div id="main-body" class='main-content'>
+  {{ include('/tina4site/nav/sidebar.twig') }}
+  {{ include('/tina4site/nav/nav.twig') }}
+  <!-- Hidden inputs to maintain a 'copy available' dataset of the webpage -->
+  <input id="project-html" type="hidden"/>
+  <input id="project-data" type="hidden" value='{"pages": [{"component": "<div>Build your next hit with the Tina4 Website builder! (Load a page to begin)</div>"}]}'/>
+  <!--Page ID-->
+  <input id="tina4site-page-id" hidden value=""/>
+  <!--Target editor DIV-->
+  <div id='editor'></div>
+  <!--Page listing -->
+  {{ include('/tina4site/page/list.twig') }}
+  <!--Add Page modal-->
+  {{ include('/tina4site/revision/list.twig') }}
+
+</div>
+<script type="text/javascript">
+  //Define global form tokens for endpoints utilized
+  const formToken = "{{ formToken ("/api/*") }} }";
+</script>
+<!--Initialize the editor-->
+<script type='text/javascript' src='/tina4site/tina4site.js'></script >
+</body>
+</html>

@@ -1,0 +1,25 @@
+<form id="tina4siteassetForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label for="type">Type</label>
+            <select id="type" name="type" class="form-control" required>
+                <option value=""></option>
+                <option value="CSS" {% if (data.type == 'CSS') %} selected {% endif %}>CSS</option>
+                <option value="Javascript" {% if (data.type == 'Javascript') %} selected {% endif %}>Javascript</option>
+            </select>
+        </div>
+        <div class="form-group col-md-9">
+            <label for="url">Url</label>
+            <input class="form-control" type="text" id="url" name="url" placeholder="Url" value="{{ data.url }}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="enabled">Enabled</label>
+            <input class="form-control" type="checkbox" id="enabled" name="enabled"  {% if (data.enabled == 'on') %} checked {% endif %}>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="created_at">Created_at</label>
+            <input class="form-control" type="text" id="created_at" name="created_at" placeholder="Created_at" value="{{ data.created_at }}" readonly>
+        </div>
+    </div>
+    {{ "tina4siteassetForm" | formToken | raw }}
+</form>

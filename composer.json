@@ -2,9 +2,13 @@
     "name": "tina4stack/tina4cms",
     "description": "Tina4 CMS Module",
     "license": "MIT",
-    "classmap": ["src/*"],
+    "classmap": [
+        "src/*"
+    ],
     "autoload": {
-        "files": ["loadModule.php"],
+        "files": [
+            "loadModule.php"
+        ],
         "psr-4": {
             "": [
                 "src/",

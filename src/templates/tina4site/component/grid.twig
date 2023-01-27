@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap CSS & font-awesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js" integrity="sha256-xLhce0FUawd11QSwrvXSwST0oHhOolNoH9cUXAcsIAg=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js" integrity="sha256-NdDw7k+fJewgwI1XmH9NMR6OILvTX+3arqb/OgFicoM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.js" integrity="sha256-UzGjnR1p5Tnl9uHyGcbtthS4cULTf5z28PXVxHVElSQ=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/b-html5-1.5.6/b-print-1.5.6/r-2.2.2/sl-1.3.0/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/b-1.5.6/b-html5-1.5.6/b-print-1.5.6/r-2.2.2/sl-1.3.0/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.20/api/sum().js"></script>
+
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+    <script src="/src/public/js/tina4helper.js"></script>
+    <link rel="stylesheet" href="/src/public/css/default.css">
+    <title>Tina4Site Components</title>
+</head>
+
+<body>
+<h3>
+    &nbsp; <span class="fa fa-compass" style="color:blue;"></span>
+    {{ groupInContext.name }} Components
+</h3>
+<table id="tina4sitecomponentGrid" class="table table-striped table-bordered table-condensed" style="width:100%">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Icon</th>
+        <th>Enabled</th>
+        <th>Created_at</th>
+        <th>Options</th>
+    </tr>
+    </thead>
+</table>
+<script>
+    var tina4sitecomponentGrid = null;
+    $(document).ready(function () {
+        tina4sitecomponentGrid = $('#tina4sitecomponentGrid').DataTable({
+            dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
+            ajax: '/tina4site/component?group_id={{ groupInContext.id }}&formToken={{ formToken ("/tina4site/component") }}',
+            columns: [
+                {"data": "id"},
+                {"data": "name"},
+                {
+                    "mRender": function (data, type, row) {
+                        let html = '';
+                        html += '<span class="fa '+row.icon+'" style="color:blue"><label hidden>'+row.icon+'</label></span>';
+                        return html;
+
+                    },
+                    "sClass": "text-center",
+                    "searchable": false,
+                    data:"icon"
+                },
+                {
+                    "mRender": function (data, type, row) {
+                        let html = '';
+                        if(row.enabled == 'on'){
+                            html = '<span class="fa fa-check" style="color:green;"><label hidden>'+row.enabled+'</label></span>';
+                        } else {
+                            html = '<span class="fa fa-close" style="color:red;"><label hidden>'+row.enabled+'</label></span>';
+                        }
+                        return html;
+                    },
+                    "sClass": "text-center",
+                    "searchable": false,
+                    data:"enabled"
+                },
+                {"data": "created_at"},
+                {
+                    "mRender": function (data, type, row) {
+                        let html = '';
+                        //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/tina4site/component/' + row.id + '?group_id={{ groupInContext.id }}&formToken={{ formToken ("/tina4site/component") }}\')">Edit</button>';
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/tina4site/component/' + row.id + '?formToken={{ formToken ("/tina4site/component") }}\');}">Del</button>';
+                        return html;
+
+                    },
+                    "sClass": "text-right",
+                    "searchable": false
+                }
+
+            ],
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            buttons: [
+                {
+                    text: 'CMS Dashboard',
+                    action: function (e, dt, node, config) {
+                        window.location.replace('/cms/dashboard')
+                    }
+                },
+                {
+                    text: 'Create',
+                    action: function (e, dt, node, config) {
+                        let data = {};
+                        showForm('create', '/tina4site/component/form?group_id={{ groupInContext.id }}&formToken={{ formToken ("/tina4site/component") }}');
+                    }
+                },
+                {
+                    text: 'Component Builder',
+                    action: function (e, dt, node, config) {
+                        window.location.replace('/tina4site/component-builder')
+                    }
+                },
+                {
+                    text: 'Back to Groups',
+                    action: function (e, dt, node, config) {
+                        window.location.replace("/tina4site/component-group/landing")
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    footer: true,
+                    exportOptions: {
+                        columns: [1,2,3]
+                    }
+                },
+                {
+                    extend: 'csv',
+                    footer: false,
+                    exportOptions: {
+                        columns: [1,2,3]
+                    }
+
+                },
+                {
+                    extend: 'excel',
+                    footer: false,
+                    exportOptions: {
+                        columns: [1,2,3]
+                    }
+                },
+                {
+                    extend: 'print',
+                    footer: false,
+                    exportOptions: {
+                        columns: [1,2,3]
+                    }
+                }
+
+            ]
+        });
+    });
+</script>
+<div id="form"></div>
+<div id="message"></div>
+</body>
+</html>
