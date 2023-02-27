@@ -2,9 +2,13 @@
     "name": "tina4stack/tina4cms",
     "description": "Tina4 CMS Module",
     "license": "MIT",
-    "classmap": ["src/*"],
+    "classmap": [
+        "src/*"
+    ],
     "autoload": {
-        "files": ["loadModule.php"],
+        "files": [
+            "loadModule.php"
+        ],
         "psr-4": {
             "": [
                 "src/",
@@ -17,8 +21,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "tina4stack/tina4php": "dev-master",
-        "tina4stack/tina4php-sqlite3": "^2.0"
+        "tina4stack/tina4php": "^2.0"
     },
     "scripts": {
         "tina4": "tina4",
