@@ -15,7 +15,7 @@
 
         <div class="form-group col-md-12">
             {% if (data.snippetType == "" or data.snippetType == 1) %}
-                {% include "snippets/content-editor.twig" %}
+                {% include "content-editor.twig" %}
             {%  else %}
                 <div id="contentEditor" style="height:400px" >{{ data.content }}</div>
                 <script>
