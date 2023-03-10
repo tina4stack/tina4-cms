@@ -1,5 +1,7 @@
+<div style="height: 500px">
 <div id="gjs">
     {{ data.content | raw }}
+</div>
 </div>
 <textarea id="saveContent" hidden name="content" class="form-control">{{ data.content | raw }}</textarea>
 <script>
@@ -20,7 +22,7 @@
     ];
 
     var editor = grapesjs.init({
-        height: '500px',
+        height: '100%',
         container: '#gjs',
         fromElement: true,
         showOffsets: true,
