@@ -4,7 +4,7 @@ CREATE TABLE article (
                          title varchar(500) DEFAULT '',
                          description varchar(1000) DEFAULT '',
                          keywords varchar(1000) DEFAULT '',
-                         image text,
+                         image mediumblob,
                          content longblob,
                          author varchar(200) DEFAULT '',
                          is_published integer DEFAULT 0,
