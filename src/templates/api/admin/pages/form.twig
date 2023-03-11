@@ -23,10 +23,9 @@
             <label for="playerKey">Published</label>
             <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
         </div>
-        <div class="form-group col-md-12">
-            {% include "snippets/content-editor.twig" %}
+        <div class="form-group col-md-12 editPage">
+            {% include "content-editor.twig" %}
         </div>
-
         <div class="form-group col-md-12">
             <label>Keywords/Tags</label>
             {% include "tagLookup.twig" %}
