@@ -291,10 +291,12 @@ class Content extends \Tina4\Data
     public function getSnippet($name): string
     {
         $snippet = new Snippet();
-        $snippet->load("name = '{$name}'");
-
-        $fileName = "snippet".$this->getSlug($name);
-        file_put_contents("./cache".DIRECTORY_SEPARATOR.$fileName, html_entity_decode($snippet->content, ENT_QUOTES));
+        if ($snippet->load("name = '{$name}'")) {
+            $fileName = "snippet" . $this->getSlug($name);
+            file_put_contents("./cache" . DIRECTORY_SEPARATOR . $fileName, html_entity_decode($snippet->content, ENT_QUOTES));
+        } else {
+            $fileName = "";
+        }
         return $fileName;
     }
 
