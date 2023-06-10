@@ -40,6 +40,7 @@
         "phpmailer/phpmailer": "^6.5",
         "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^9",
-        "overtrue/phplint": "^2.0"
+        "overtrue/phplint": "^2.0",
+        "tina4stack/tina4php-sqlite3": "^2.0"
     }
 }

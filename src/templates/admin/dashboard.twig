@@ -219,6 +219,7 @@
             <ul class="navbar-nav">
                 {% if session.user is not null %}
                     <li class="nav-item"><a class="nav-link" href="/cms/dashboard">Content</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cms/page-builder">Page Builder</a></li>
                     {% for menuItem in menuItems %}
                         <li class="nav-item"><a class="nav-link" href="#"
                                                 onclick="loadPage('{{ menuItem.href }}', 'content')">{{ menuItem.caption }}</a>
