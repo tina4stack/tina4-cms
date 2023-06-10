@@ -14,8 +14,11 @@
                     {% for roleName, role in roleData %}
                         <div class="col-md-3">
                             <div class="alert alert-info">{{roleName|capitalize}}<br>
-                                {% for option in role.options %}
-                                    <input type="checkbox" value="1" name="roleInfo[{{ role.category }}][{{roleName}}][{{option}}]" {% if data.roleInfo[role.category][roleName][option] == 1 %} checked {%endif%} > {{option |capitalize }}
+                                {% for option,value in role %}
+                                    {%  if (option != 'category') %}
+
+                                    <input type="checkbox" value="1" name="roleInfo[{{ role.category }}][{{roleName}}][{{option}}]" {% if ( data.roleInfo[role.category][roleName][option] == 1) %} checked {%endif%} > {{option | capitalize }}
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                         </div>

@@ -15,30 +15,30 @@ class Content extends \Tina4\Data
      * Set security attribute
      * @param $name
      * @param $options
-     * @param $category
-     * @param $roleId
+     * @param string $category
+     * @param int $roleId
      * @return void
      * @throws Exception
      */
-    public function setSecurityAttribute($name, $options, $category="Default", $roleId=1)
+    public function setSecurityAttribute($name, $options, string $category="Default", int $roleId=1)
     {
         $role = new Role();
         if ($role->load("id = {$roleId}"))
         {
             $roleData = unserialize($role->roleInfo);
-            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
-            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
-            $role->roleInfo = serialize($roleData);
-            $role->save();
+            $roleData["roles"][$name] = array_merge($options, ["category" => $category]);
+            $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
         } else {
+
             $roleData = [];
-            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
-            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
+            $roleData["roles"][$name] = array_merge($options, ["category" => $category]);
+            $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
+
             $role->id = $roleId;
             $role->name = "Default";
-            $role->roleInfo = serialize($roleData);
-            $role->save();
         }
+        $role->roleInfo = serialize($roleData);
+        $role->save();
     }
 
     /**
@@ -47,12 +47,13 @@ class Content extends \Tina4\Data
      * @param int $roleId
      * @return mixed|void
      */
-    public function getSecurityAttribute($name="", $roleId=1)
+    public function getSecurityAttribute(string $name="", int $roleId=1)
     {
         $role = new Role();
         if ($role->load("id = {$roleId}"))
         {
             $roles = unserialize($role->roleInfo);
+
             if (!empty($name))
             {
                 if (isset($roles["roles"])) {
@@ -118,11 +119,11 @@ class Content extends \Tina4\Data
 
     /**
      * Create a slug from the title
-     * @param $title
-     * @param $separator
+     * @param string $title
+     * @param string $separator
      * @return String
      */
-    public function getSlug($title, $separator = '-'): string
+    public function getSlug(string $title, string $separator = '-'): string
     {
         if (empty($title)) {
             return "";
@@ -581,6 +582,9 @@ class Content extends \Tina4\Data
             return (new Content())->getSlug($name);
         });
 
+        //Add the theme component
+        $config->addTwigGlobal("Theme", new Theme());
+
         $snippets = $this->getSnippets();
 
         foreach ($snippets as $id => $snippet) {
@@ -656,5 +660,19 @@ class Content extends \Tina4\Data
         }
 
         return ['urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' => $urls ];
+    }
+
+    /**
+     * Gets the data for the current site
+     * @return Site|null
+     */
+    public function getSite(): ?Site
+    {
+        $site = new Site();
+        if ($site->load("id = 1")) {
+            return $site;
+        }
+
+        return null;
     }
 }

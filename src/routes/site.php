@@ -26,16 +26,17 @@
        case "form":
        case "fetch":
             //Return back a form to be submitted to the create
+            $themes = (new Theme())->getThemes();
+
             if ($action == "form") {
                 $title = "Add Site";
                 $savePath =  TINA4_BASE_URL . "/api/admin/site";
-                $content = \Tina4\renderTemplate("/api/admin/site/form.twig", []);
+                $content = \Tina4\renderTemplate("/api/admin/site/form.twig", ["themes" => $themes]);
             } else {
                 $title = "Edit Site";
                 $savePath =  TINA4_BASE_URL . "/api/admin/site/".$site->id;
-                $content = \Tina4\renderTemplate("/api/admin/site/form.twig", ["data" => $site]);
+                $content = \Tina4\renderTemplate("/api/admin/site/form.twig", ["data" => $site, "themes" => $themes]);
             }
-
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#siteForm').valid() ) { saveForm('siteForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":

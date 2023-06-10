@@ -1,7 +1,9 @@
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
+    <link rel="stylesheet" type="text/css" href="/css/default.css">
     <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js" ></script>
     <script src="https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js"></script>
+    <script src="https://unpkg.com/grapesjs-plugin-forms@2.0.5/dist/index.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css" integrity="sha512-teZVIvNgTrmIIFs77Fs03dArj3HsJbQ6QMFRE5nAnt7etwO3wTgW2Z/1l6uvd1/TAycO68STs2QitYKzE2BqCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
 
@@ -51,9 +53,8 @@
             white-space: nowrap;
             margin-bottom: 10px;
         }
-
-
     </style>
+    {{ baseUrl }}
     <div class="app-wrap">
         <div class="pages-wrp">
             <div class="cms-back"><a href="/cms/dashboard">Back</a></div>
@@ -72,7 +73,11 @@
             const editor = grapesjs.init({
                 container: '#gjs',
                 storageManager: false,
-                plugins: ['gjs-blocks-basic'],
+                canvas: {
+                    scripts: {{ Theme.Scripts() | raw }},
+                    styles: {{ Theme.Styles() | raw }},
+                },
+                plugins: ['gjs-blocks-basic', 'grapesjs-plugin-forms'],
                 pageManager: {
                     pages: [{
                         id: 'page-1',

@@ -19,7 +19,7 @@ class Theme
 
     private function deployCss()
     {
-
+        \Tina4\Utilities::getFiles();
     }
 
     /**
@@ -47,6 +47,36 @@ class Theme
      */
     public function deployThemes($path)
     {
-        echo $path;
+        \Tina4\Utilities::recurseCopy($path.DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."themes", TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes");
+    }
+
+    public function getThemes(): array
+    {
+        $themes = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes");
+
+        $finalThemes = [];
+        foreach ($themes as $key => $value) {
+            if ($value === "." || $value === ".." || is_file($value)) {
+                unset($themes[$key]);
+            } else {
+                $finalThemes[] = $value;
+            }
+        }
+
+        return array_values($finalThemes);
+
+    }
+
+
+    public function getScripts() {
+        $scripts = ['hello.js'];
+        return json_encode($scripts);
+    }
+
+    public function getStyles() {
+
+
+        $scripts = ['/css/default.css'];
+        return json_encode($scripts);
     }
 }

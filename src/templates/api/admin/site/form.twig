@@ -4,29 +4,38 @@
             <label for="siteName">Site Name</label>
             <input class="form-control" type="text" name="siteName" placeholder="Site Name" value="{{ data.siteName }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="description">Description</label>
             <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="siteUrl">Site Url</label>
             <input class="form-control" type="text" name="siteUrl" placeholder="Site Url" value="{{ data.siteUrl }}">
         </div>
-        <div class="form-group col-md-1">
-            <label for="playerKey">Allow Crawlers</label>
-            <input class="form-control" type="checkbox" name="allowCrawlers" value="1" {%  if (data.allowCrawlers == 1 ) %} checked {% endif%} >
+        <div class="form-group col-md-3">
+            <label for="roleId">Default Theme </label>
+            <select class="form-control" name="theme">
+                {% for id, theme in themes %}
+                    <option {%if data.theme == theme %} selected {% endif %} value="{{theme}}">{{theme}}</option>
+                {% endfor %}
+            </select>
         </div>
-        <div class="form-group col-md-4">
+
+        <div class="form-group col-md-3">
             <label for="google">Google</label>
             <input class="form-control" type="text" name="google" placeholder="Google" value="{{ data.google }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="bing">Bing</label>
             <input class="form-control" type="text" name="bing" placeholder="Bing" value="{{ data.bing }}">
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="twitter">Twitter</label>
             <input class="form-control" type="text" name="twitter" placeholder="Twitter" value="{{ data.twitter }}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="playerKey">Allow Crawlers</label>
+            <input class="form-control" type="checkbox" name="allowCrawlers" value="1" {%  if (data.allowCrawlers == 1 ) %} checked {% endif%} >
         </div>
         <div class="form-group col-md-12">
             <h6>Custom Scripts (Header)</h6>

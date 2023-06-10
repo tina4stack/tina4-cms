@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66d37c49752859970dc967a96b5a30d5",
+    "content-hash": "41ca5639bbac008498b68d1b6833a404",
     "packages": [
         {
             "name": "coyl/git",
@@ -971,16 +971,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.40",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "84e70f0aaea1e4fe92e07c903723b9569162768f"
+                "reference": "b20f5914a8df0f80b9f446bdb86ae57ff6575103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/84e70f0aaea1e4fe92e07c903723b9569162768f",
-                "reference": "84e70f0aaea1e4fe92e07c903723b9569162768f",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/b20f5914a8df0f80b9f446bdb86ae57ff6575103",
+                "reference": "b20f5914a8df0f80b9f446bdb86ae57ff6575103",
                 "shasum": ""
             },
             "require": {
@@ -1009,6 +1009,7 @@
                 "roave/security-advisories": "dev-latest",
                 "tina4stack/tina4php-sqlite3": "^2.0"
             },
+            "default-branch": true,
             "bin": [
                 "bin/tina4",
                 "bin/tina4service"
@@ -1051,9 +1052,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.40"
+                "source": "https://github.com/tina4stack/tina4-php/tree/master"
             },
-            "time": "2023-06-09T14:18:59+00:00"
+            "time": "2023-06-10T14:19:19+00:00"
         },
         {
             "name": "tina4stack/tina4php-database",
@@ -4750,16 +4751,16 @@
         },
         {
             "name": "tina4stack/tina4php-sqlite3",
-            "version": "v2.0.2",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4php-sqlite3.git",
-                "reference": "5b3774b5726160bd2e98041bf6754eeca0e37979"
+                "reference": "bf806f66da973b440feb02d65eb8d30b085e3879"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4php-sqlite3/zipball/5b3774b5726160bd2e98041bf6754eeca0e37979",
-                "reference": "5b3774b5726160bd2e98041bf6754eeca0e37979",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-sqlite3/zipball/bf806f66da973b440feb02d65eb8d30b085e3879",
+                "reference": "bf806f66da973b440feb02d65eb8d30b085e3879",
                 "shasum": ""
             },
             "require": {
@@ -4789,14 +4790,15 @@
             "description": "Tina4 PHP Sqlite3 Database Driver",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4php-sqlite3/issues",
-                "source": "https://github.com/tina4stack/tina4php-sqlite3/tree/v2.0.2"
+                "source": "https://github.com/tina4stack/tina4php-sqlite3/tree/v2.0.4"
             },
-            "time": "2023-05-17T11:06:14+00:00"
+            "time": "2023-06-10T16:22:03+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "tina4stack/tina4php": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,
