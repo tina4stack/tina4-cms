@@ -19,6 +19,7 @@
         $checkSite->siteName = "Tina4 CMS";
         $checkSite->description = "My first CMS";
         $checkSite->siteUrl = "https://".$_SERVER["HTTP_HOST"];
+        $checkSite->theme = "default";
         $checkSite->save();
     }
 

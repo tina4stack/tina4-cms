@@ -6,16 +6,14 @@
     <script src="https://unpkg.com/grapesjs-plugin-forms@2.0.5/dist/index.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css" integrity="sha512-teZVIvNgTrmIIFs77Fs03dArj3HsJbQ6QMFRE5nAnt7etwO3wTgW2Z/1l6uvd1/TAycO68STs2QitYKzE2BqCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {% endblock %}
-
 {% block navigation %}
-
 {% endblock %}
 {% block content %}
     <style>
         body, html {
             height: 100%;
             margin: 0;
-            background: #444444;
+            background: #ffffff;
             font-family: Helvetica,sans-serif;
         }
         .app-wrap {
@@ -24,7 +22,8 @@
             display: flex;
         }
         .editor-wrap  {
-            widtH: 100%;
+            background: #ffffff;
+            width: 100%;
             height: 100%;
         }
         .pages-wrp, .pages {
@@ -32,34 +31,52 @@
             flex-direction: column
         }
         .pages-wrp {
-            background: #333;
-            padding: 5px;
+            background: #ffffff;
+            width: 200px;
         }
-        .add-page {
-            background: #444444;
-            color: white;
-            padding: 5px;
-            border-radius: 2px;
-            cursor: pointer;
-            white-space: nowrap;
-            margin-bottom: 10px;
-        }
+
         .cms-back {
             background: #ffffff;
             color: #444444;
-            padding: 5px;
+
             border-radius: 2px;
             cursor: pointer;
             white-space: nowrap;
             margin-bottom: 10px;
         }
+
+        .gjs-two-color {
+            color: #ffffff !important;
+        }
+        .gjs-one-bg {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));
+            background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+        }
+
+        .gjs-pn-btn.gjs-pn-active {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));
+            background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+            box-shadow: none;
+        }
+
+        .exit-builder {
+            display: block;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));
+            background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+            color: #ffffff;
+            padding: 5px;
+            height: 30px;
+            text-align: center;
+        }
     </style>
-    {{ baseUrl }}
     <div class="app-wrap">
         <div class="pages-wrp">
-            <div class="cms-back"><a href="/cms/dashboard">Back</a></div>
-            <div class="add-page" @click="addPage">Add new page</div>
+            <a class="exit-builder" href="/cms/dashboard">Back to CMS</a>
+            <b>Choose Page</b>
             <div class="pages">
+                {% for page in pages %}
+                <a href="#">{{ page.title }}</a>
+                {% endfor %}
             </div>
         </div>
         <div class="editor-wrap">

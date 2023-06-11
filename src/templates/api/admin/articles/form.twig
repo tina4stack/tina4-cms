@@ -31,10 +31,10 @@
             <label for="playerKey">Published</label>
             <input class="form-control" type="checkbox" name="isPublished" value="1" {%  if (data.isPublished == 1 ) %} checked {% endif%} >
         </div>
-        <div class="form-group col-md-9">
+        <div class="form-group col-md-10">
             {% include "snippets/content-editor.twig" %}
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-2">
                 <label>Choose Article Categories</label>
                 {% set categories = Tina4.call('Content', 'getCategories', [data.id]) %}
                 <ul class="tree" style="border:1px solid black">
