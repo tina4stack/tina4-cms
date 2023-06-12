@@ -1,3 +1,4 @@
+{% set userRoles = Content.getSecurityAttribute('', session.user.roleId) %}
 <table id="siteGrid" class="table table-striped table-bordered table-condensed" style="width:100%">
     <thead>
     <tr>

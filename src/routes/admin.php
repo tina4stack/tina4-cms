@@ -140,10 +140,26 @@
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
     } else {
         $menuItems = (new Content())->getCmsMenus();
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace]));
+        $themes = (new Theme())->getThemes();
+        $site = (new Content())->getSite();
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "themes" => $themes]));
     }
 });
 
+\Tina4\Get::add("/cms/page-builder", function (\Tina4\Response $response) {
+    $users = (new Users())->select("count(id) as number");
+    $twigNameSpace = (new Content())->getTwigNameSpace();
+    if (empty($users)) {
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
+    } else {
+        $menuItems = (new Content())->getCmsMenus();
+        $pages = (new Content())->getAllPages();
+        $snippets = (new Content())->getAllSnippets();
+        $themes = (new Theme())->getThemes();
+        $site = (new Content())->getSite();
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/page-builder.twig", ["menuItems" => $menuItems , "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "themes" => $themes]));
+    }
+});
 
 
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {
@@ -161,8 +177,9 @@
         }
     } else {
         $user = new Users();
+
         //perform login
-        if ($user->load("email = '{$request->params["email"]}'")) {
+        if ($user->load("email = ?", [$request->params["email"]])) {
             if (password_verify($request->params["password"],$user->password)) {
                 $_SESSION["user"] = $user->asArray();
                 \Tina4\redirect("/cms/dashboard");

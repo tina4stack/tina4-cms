@@ -153,3 +153,31 @@ Overwriting the default CMS twig namespace - your own namespace
 ```
 CMS_TWIG_NAMESPACE=""
 ```
+
+## Page Builder
+
+The page builder should implement GrapeJS and allow you to build pages using blocks and components. The blocks and components should be simple to load.
+We need to flag off pages that have been edited by the Page builder so the generic CMS does not try to render them.
+
+## Themes
+
+Use with care, this is currently experimental but will be introduced into the CMS at some point as a base for the pages
+Current thoughts are as follows:
+
+### Theme Structure
+
+```
+src
+    templates
+        themes
+            theme-name
+                blocks
+                    block-name-1.json
+                    block-name-2.json
+                components
+                    component-name-1.json
+                    component-name-2.json
+                theme.twig
+``` 
+
+The default theme can be cloned to make other themes.

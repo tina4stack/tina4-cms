@@ -16,8 +16,7 @@
 
 {{ render(content) | raw }}
 
-
-            {% set keywords = article.keywords|split(',') %}
+{% set keywords = article.keywords|split(',') %}
 
 <a href="#">TAGS</a>
 {% for keyword in keywords %}

@@ -15,30 +15,30 @@ class Content extends \Tina4\Data
      * Set security attribute
      * @param $name
      * @param $options
-     * @param $category
-     * @param $roleId
+     * @param string $category
+     * @param int $roleId
      * @return void
      * @throws Exception
      */
-    public function setSecurityAttribute($name, $options, $category="Default", $roleId=1)
+    public function setSecurityAttribute($name, $options, string $category="Default", int $roleId=1)
     {
         $role = new Role();
         if ($role->load("id = {$roleId}"))
         {
             $roleData = unserialize($role->roleInfo);
-            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
-            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
-            $role->roleInfo = serialize($roleData);
-            $role->save();
+            $roleData["roles"][$name] = array_merge($options, ["category" => $category]);
+            $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
         } else {
+
             $roleData = [];
-            $roleData["roles"][$name] = ["options" => $options, "category" => $category];
-            $roleData["category"][$category][$name] = ["options" => $options, "category" => $category];
+            $roleData["roles"][$name] = array_merge($options, ["category" => $category]);
+            $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
+
             $role->id = $roleId;
             $role->name = "Default";
-            $role->roleInfo = serialize($roleData);
-            $role->save();
         }
+        $role->roleInfo = serialize($roleData);
+        $role->save();
     }
 
     /**
@@ -47,12 +47,13 @@ class Content extends \Tina4\Data
      * @param int $roleId
      * @return mixed|void
      */
-    public function getSecurityAttribute($name="", $roleId=1)
+    public function getSecurityAttribute(string $name="", int $roleId=1)
     {
         $role = new Role();
         if ($role->load("id = {$roleId}"))
         {
             $roles = unserialize($role->roleInfo);
+
             if (!empty($name))
             {
                 if (isset($roles["roles"])) {
@@ -118,11 +119,11 @@ class Content extends \Tina4\Data
 
     /**
      * Create a slug from the title
-     * @param $title
-     * @param $separator
+     * @param string $title
+     * @param string $separator
      * @return String
      */
-    public function getSlug($title, $separator = '-'): string
+    public function getSlug(string $title, string $separator = '-'): string
     {
         if (empty($title)) {
             return "";
@@ -180,14 +181,38 @@ class Content extends \Tina4\Data
     }
 
     /**
+     * Gets all the pages
+     * @throws ReflectionException
+     */
+    public function getAllPages(): array
+    {
+        $page = (new Page());
+        $pages = $page->select("*", 10000)->asObject();
+
+        return $pages;
+    }
+
+    /**
+     * Gets all the snippets
+     */
+    public function getAllSnippets(): array
+    {
+        $snippet = (new Snippet());
+        $snippets = $snippet->select("*", 10000)->asObject();
+
+        return $snippets;
+    }
+
+    /**
      * Get Articles
-     * @param $category
+     * @param string $category
      * @param int $limit
      * @param int $skip
      * @param string $template
      * @return array
+     * @throws ReflectionException
      */
-    public function getArticles($category, $limit=10, $skip=0, $template="article.twig")
+    public function getArticles(string $category, int $limit=10, int $skip=0, string $template="article.twig"): array
     {
 
         $articles = (new Article())->select("*", $limit, $skip)->where("1 = 1");
@@ -221,13 +246,13 @@ class Content extends \Tina4\Data
 
     /**
      * Get Article List
-     * @param $category
+     * @param string $category
      * @param string $className
      * @param int $limit
      * @return string
-     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\LoaderError|ReflectionException
      */
-    public function getArticleList($category, $className="", $limit=0)
+    public function getArticleList(string $category, string $className="", int $limit=0): string
     {
         $articles = (new Article())->select("title, description, image, slug, date_created", $limit)
           ->where("id != 0 and is_published = 1");
@@ -246,12 +271,10 @@ class Content extends \Tina4\Data
      * @param $article
      * @param string $template
      * @return string
-     * @throws \Twig\Error\LoaderError
      */
-    public function renderArticle($title, $content, $image, $article, $template="article.twig"): string
+    public function renderArticle($title, $content, $image, $article, string $template="article.twig"): string
     {
-        $content = \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
-        return $content;
+        return \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
     }
 
     /**
@@ -259,14 +282,14 @@ class Content extends \Tina4\Data
      * @param $slug
      * @param string $template
      * @return string
-     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\LoaderError|ReflectionException
      */
-    public function getArticle($slug, $template="article.twig") {
+    public function getArticle($slug, $template="article.twig"): string
+    {
         $article = new Article();
         $article->load("slug = '{$slug}'");
         $this->enhanceArticle($article);
-        $html = $this->renderArticle($article->title, $article->content, $article->image, $article, $template);
-        return $html;
+        return $this->renderArticle($article->title, $article->content, $article->image, $article, $template);
     }
 
     /**
@@ -275,7 +298,8 @@ class Content extends \Tina4\Data
      * @return string
      * @throws Exception
      */
-    public function getArticleMeta($slug) {
+    public function getArticleMeta($slug): string
+    {
         $article = new Article();
         $article->load("slug = '{$slug}'");
 
@@ -286,7 +310,6 @@ class Content extends \Tina4\Data
      * Get Snippets
      * @param $name
      * @return string
-     * @throws \Twig\Error\LoaderError
      */
     public function getSnippet($name): string
     {
@@ -307,7 +330,7 @@ class Content extends \Tina4\Data
      * @param string $parentId
      * @return string
      */
-    public function getCategories($articleId=1, $parentId="")
+    public function getCategories($articleId=1, $parentId=""): string
     {
         if (empty($articleId)) $articleId = 1;
         $html = "";
@@ -351,8 +374,6 @@ class Content extends \Tina4\Data
     /**
      * Gets a menu
      * @param string $parentId
-     * @param string $liClass
-     * @param string $aClass
      * @param int $level
      * @return string
      */
@@ -394,7 +415,6 @@ class Content extends \Tina4\Data
     /**
      * Gets the email template by it's name, order of website preference
      * @param $name
-     * @param $websiteId
      * @return mixed|string
      * @throws ReflectionException
      */
@@ -409,6 +429,7 @@ class Content extends \Tina4\Data
     /**
      * Get next and previous articles
      * @param $article
+     * @throws ReflectionException
      */
     public function enhanceArticle ($article)
     {
@@ -518,7 +539,7 @@ class Content extends \Tina4\Data
         global $DBA;
 
         if ($DBA === null) {
-            die("Please create a database global for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
+            die("Please install the composer dependency for SQLite3\n'composer install tina4stack/tina4php-sqlite3'\n and create a database global for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
         }
 
         if (!$DBA->tableExists("article")) {
@@ -562,6 +583,9 @@ class Content extends \Tina4\Data
         $config->addTwigFilter("getSlug", function ($name) {
             return (new Content())->getSlug($name);
         });
+
+        //Add the theme component
+        $config->addTwigGlobal("Theme", new Theme());
 
         $snippets = $this->getSnippets();
 
@@ -638,5 +662,19 @@ class Content extends \Tina4\Data
         }
 
         return ['urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' => $urls ];
+    }
+
+    /**
+     * Gets the data for the current site
+     * @return Site|null
+     */
+    public function getSite(): ?Site
+    {
+        $site = new Site();
+        if ($site->load("id = 1")) {
+            return $site;
+        }
+
+        return null;
     }
 }

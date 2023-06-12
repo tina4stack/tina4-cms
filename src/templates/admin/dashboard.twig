@@ -207,10 +207,9 @@
         }
     </style>
 {% endblock %}
-
 {% block navigation %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/"><img src="{{ baseUrl }}/src/public/images/logo.png" height="30"></a>
+        <a class="navbar-brand" href="/"><img src="{{ baseUrl }}/src/public/images/logo.png" height="24"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -219,6 +218,7 @@
             <ul class="navbar-nav">
                 {% if session.user is not null %}
                     <li class="nav-item"><a class="nav-link" href="/cms/dashboard">Content</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cms/page-builder">Page Builder</a></li>
                     {% for menuItem in menuItems %}
                         <li class="nav-item"><a class="nav-link" href="#"
                                                 onclick="loadPage('{{ menuItem.href }}', 'content')">{{ menuItem.caption }}</a>

@@ -1,0 +1,148 @@
+{% extends twigNameSpace ~ '/base.twig' %}
+{% block headers %}
+    <link rel="stylesheet" type="text/css" href="/css/default.css">
+    <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js" ></script>
+    <script src="https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js"></script>
+    <script src="https://unpkg.com/grapesjs-plugin-forms@2.0.5/dist/index.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css" integrity="sha512-teZVIvNgTrmIIFs77Fs03dArj3HsJbQ6QMFRE5nAnt7etwO3wTgW2Z/1l6uvd1/TAycO68STs2QitYKzE2BqCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+{% block navigation %}
+{% endblock %}
+{% block content %}
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background: #ffffff;
+            font-family: Helvetica,sans-serif;
+        }
+        .app-wrap {
+            height: 100%;
+            width: 100%;
+            display: flex;
+        }
+        .editor-wrap  {
+            background: #ffffff;
+            width: 100%;
+            height: 100%;
+        }
+        .pages-wrp, .pages {
+            display: flex;
+            flex-direction: column
+        }
+        .pages-wrp {
+            background: #ffffff;
+            width: 200px;
+        }
+
+        .cms-back {
+            background: #ffffff;
+            color: #444444;
+
+            border-radius: 2px;
+            cursor: pointer;
+            white-space: nowrap;
+            margin-bottom: 10px;
+        }
+
+        .gjs-two-color {
+            color: #ffffff !important;
+        }
+        .gjs-one-bg {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));
+            background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+        }
+
+        .gjs-pn-btn.gjs-pn-active {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));
+            background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+            box-shadow: none;
+        }
+
+        .exit-builder {
+            display: block;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));
+            background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+            color: #ffffff;
+            padding: 5px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+    <div class="app-wrap">
+        <div class="pages-wrp">
+            <a class="exit-builder" href="/cms/dashboard">Back to CMS</a>
+            <b>Choose Page</b>
+            <div class="pages">
+                {% for page in pages %}
+                <a href="#">{{ page.title }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="editor-wrap">
+            <div id="gjs"></div>
+        </div>
+    </div>
+    {% if not session.user %}
+        {% do redirect('/cms/login') %}
+    {% endif %}
+        <script>
+            const editor = grapesjs.init({
+                container: '#gjs',
+                storageManager: false,
+                canvas: {
+                    scripts: {{ Theme.Scripts() | raw }},
+                    styles: {{ Theme.Styles() | raw }},
+                },
+                plugins: ['gjs-blocks-basic', 'grapesjs-plugin-forms'],
+                pageManager: {
+                    pages: [{
+                        id: 'page-1',
+                        name: 'Page 1',
+                        component: '<div id="comp1">Page 1</div>',
+                        styles: '#comp1 { color: red }',
+                    }, {
+                        id: 'page-2',
+                        name: 'Page 2',
+                        component: '<div id="comp2">Page 2</div>',
+                        styles: '#comp2 { color: green }',
+                    }, {
+                        id: 'page-3',
+                        name: 'Page 3',
+                        component: '<div id="comp3">Page 3</div>',
+                        styles: '#comp3 { color: blue }',
+                    }]
+                },
+            });
+
+            const pm = editor.Pages;
+
+            editor.on('page', () => {
+                console.log('Page changed');
+            });
+
+            pm.select('page-1');
+
+            const newPage = pm.add({
+                id: 'new-page-id',
+                styles: '.my-class { color: red }',
+                component: '<div class="my-class">My element</div>',
+            });
+
+            // Get the BlockManager module first
+            const bm = editor.Blocks; // `Blocks` is an alias of `BlockManager`
+
+            // Add a new Block
+            const block = bm.add('BLOCK-ID', {
+                // Your block properties...
+                label: 'My block',
+                content: '\{\{ addSnippet(\'hello\') \}\}',
+                category: 'Snippets'
+            });
+
+
+        </script>
+
+
+
+{% endblock %}

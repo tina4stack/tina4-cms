@@ -28,4 +28,6 @@ class Site extends \Tina4\ORM
     public $dateCreated;
     public $dateModified;
     public $allowCrawlers;
+
+    public $theme;
 }
