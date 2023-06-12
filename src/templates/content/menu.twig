@@ -8,7 +8,9 @@
         <th>Slug</th>
         <th>Specific Route</th>
         <th>Is Active</th>
+        {% if (not userRoles.Content.Menus or userRoles.Content.Menus.edit) or  (not userRoles.Content.Menus or userRoles.Content.Menus.delete) %}
         <th>Options</th>
+        {% endif %}
     </tr>
     </thead>
 </table>
@@ -33,25 +35,32 @@
                         }
                     }
                 },
+                {% if (not userRoles.Content.Menus or userRoles.Content.Menus.edit) or  (not userRoles.Content.Menus or userRoles.Content.Menus.delete) %}
                 {
                     "mRender": function (data, type, row) {
                         if (row.id == 1) return "";
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
+                        {% if (not userRoles.Content.Menus or userRoles.Content.Menus.edit) %}
                         html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/menus/' + row.id + '?formToken={{ formToken('/api/admin/menus') }}\')">Edit</button>';
+                        {% endif %}
+                        {% if (not userRoles.Content.Menus or userRoles.Content.Menus.delete) %}
                         html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/menus/' + row.id + '?formToken={{ formToken('/api/admin/menus') }}\');}">Del</button>';
+                        {% endif %}
                         return html;
 
                     },
                     "sClass": "text-right",
                     "searchable": false
                 }
+                {% endif %}
 
             ],
             processing: true,
             serverSide: true,
             responsive: true,
             buttons: [
+                {% if (not userRoles.Content.Menus or userRoles.Content.Menus.create) %}
                 {
                     text: 'Create',
                     action: function (e, dt, node, config) {
@@ -59,6 +68,7 @@
                         showForm('create', '/api/admin/menus/form?formToken={{ formToken('/api/admin/menus') }}');
                     }
                 },
+                {%  endif %}
                 'copy', 'excel', 'pdf', 'print'
 
             ]

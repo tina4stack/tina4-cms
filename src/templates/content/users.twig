@@ -8,7 +8,9 @@
         <th>Email</th>
         <th>Date Created</th>
         <th>Date Modified</th>
+        {% if (not userRoles.Content.Users or userRoles.Content.Users.edit) or  (not userRoles.Content.Users or userRoles.Content.Users.delete) %}
         <th>Options</th>
+        {%  endif %}
     </tr>
     </thead>
 </table>
@@ -25,24 +27,30 @@
                 {"data": "email"},
                 {"data": "dateCreated"},
                 {"data": "dateModified"},
+                {% if (not userRoles.Content.Users or userRoles.Content.Users.edit) or  (not userRoles.Content.Users or userRoles.Content.Users.delete) %}
                 {
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
+                        {% if (not userRoles.Content.Users or userRoles.Content.Users.edit) %}
                         html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/users/' + row.id + '?formToken={{ formToken("/api/admin/users") }}\')">Edit</button>';
+                        {% endif %}
+                        {% if (not userRoles.Content.Users or userRoles.Content.Users.delete) %}
                         html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/users/' + row.id + '?formToken={{ formToken("/api/admin/users") }}\');}">Del</button>';
+                        {% endif %}
                         return html;
 
                     },
                     "sClass": "text-right",
                     "searchable": false
                 }
-
+                {% endif %}
             ],
             processing: true,
             serverSide: true,
             responsive: true,
             buttons: [
+                {% if (not userRoles.Content.Users or userRoles.Content.Users.create) %}
                 {
                     text: 'Create',
                     action: function (e, dt, node, config) {
@@ -50,6 +58,7 @@
                         showForm('create', '/api/admin/users/form?formToken={{ formToken("/api/admin/users") }}');
                     }
                 },
+                {% endif %}
                 'copy', 'excel', 'pdf', 'print'
 
             ]
