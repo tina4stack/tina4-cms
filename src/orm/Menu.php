@@ -25,5 +25,6 @@ class Menu extends \Tina4\ORM
 
     public $parentName;
 
+    public $siteId;
     public $virtualFields = ["parentName"];
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+    <meta prefix="og: https://ogp.me/ns#" property="og:title" content="{{ title }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:type" content="website"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:url" content="{{ url }}"/>
+    {% if image %}
+        <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
+    {% endif %}
+    {% if description %}
+        <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
+    {% endif %}
+    {% block headers %}
+        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-utilities.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/default.css">
+
+        <script src="{{ Theme.Dir(site.theme) }}/js/jquery.min.js"></script>
+        <script src="{{ Theme.Dir(site.theme) }}/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ Theme.Dir(site.theme) }}/js/bootstrap.esm.min.js"></script>
+    {% endblock %}
+</head>
+{% block body %}
+    {% block content %}
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
+{% endblock %}
+</html>

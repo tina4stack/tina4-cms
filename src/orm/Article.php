@@ -23,4 +23,5 @@ class Article extends \Tina4\ORM
     public $isPublished;
     public $userId;
     public $slug;
+    public $siteId;
 }

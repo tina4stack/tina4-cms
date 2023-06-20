@@ -23,4 +23,5 @@ class Users extends \Tina4\ORM
     public $dateCreated;
     public $dateModified;
     public $roleId;
+    public $siteId;
 }

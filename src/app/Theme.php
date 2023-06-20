@@ -64,19 +64,69 @@ class Theme
         }
 
         return array_values($finalThemes);
-
     }
 
+    public function getComponents(string $themeName): array
+    {
+        $components = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."components");
 
-    public function getScripts() {
-        $scripts = ['hello.js'];
-        return json_encode($scripts);
+        $finalComponents = [];
+        foreach ($components as $key => $value) {
+            if (strpos($value,'.js') !== false && $value !== "." && $value !== ".." && is_file(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."components".DIRECTORY_SEPARATOR.$value)) {
+               $finalComponents[] =  "/themes/".$themeName."/components/".$value;
+            }
+        }
+
+        return $finalComponents;
     }
 
-    public function getStyles() {
+    public function getBlocks(string $themeName): array
+    {
+        $blocks = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."blocks");
 
+        $finalBlocks = [];
+        foreach ($blocks as $key => $value) {
+            if (strpos($value,'.js') !== false && $value !== "." && $value !== ".." && is_file(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."blocks".DIRECTORY_SEPARATOR.$value)) {
+                $finalBlocks[] =  "/themes/".$themeName."/blocks/".$value;
+            }
+        }
 
-        $scripts = ['/css/default.css'];
-        return json_encode($scripts);
+        return $finalBlocks;
     }
+
+    public function getScripts(string $themeName): string
+    {
+        $scripts = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."js");
+
+        $finalScripts = [];
+        foreach ($scripts as $key => $value) {
+            if (strpos($value,'.js') !== false && $value !== "." && $value !== ".." && is_file($value)) {
+                $finalScripts[] =  "/themes/".$themeName."/js/".$value;
+            }
+        }
+
+        return json_encode($finalScripts);
+    }
+
+    public function getStyles(string $themeName) : string
+    {
+        $css = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."css");
+
+        $finalCss = [];
+        foreach ($css as $key => $value) {
+            if (strpos($value,'.css') !== false && $value !== "." && $value !== ".." && is_file($value)) {
+                $finalCss[] =  "/themes/".$themeName."/css/".$value;
+            }
+        }
+
+        $finalCss[] = '/css/default.css';
+
+        return json_encode($finalCss);
+    }
+
+    public function getDir(string $themeName): string
+    {
+        return "/themes/".$themeName;
+    }
+
 }

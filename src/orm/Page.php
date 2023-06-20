@@ -24,4 +24,8 @@ class Page extends \Tina4\ORM
 	public $dateCreated;
 	public $dateModified;
 	public $slug;
+    public $isPageBuilder;
+
+    public $siteId;
+    public $pageBuilderContent;
 }

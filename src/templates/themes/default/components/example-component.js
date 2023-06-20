@@ -1,7 +1,3 @@
-This folder is where all your components will be stored
-https://grapesjs.com/docs/modules/Components.html
-### Component example
-```json
 const script = function() {
     alert('Hi');
     // `this` is bound to the component element
@@ -29,5 +25,3 @@ editor.Blocks.add('test-block', {
     attributes: { class: 'fa fa-text' },
     content: { type: 'example-component' },
 });
-
-```

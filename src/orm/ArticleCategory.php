@@ -14,7 +14,7 @@ class ArticleCategory extends \Tina4\ORM
     public $genPrimaryKey = true;
     
 	public $id;
-	public $name;
+    public $name;
 	public $isActive;
 	public $isMenu;
 	public $dateCreated;
@@ -25,6 +25,8 @@ class ArticleCategory extends \Tina4\ORM
 
 
     public $parentName;
+
+    public $siteId;
 
     public $virtualFields = ["parentName"];
 }

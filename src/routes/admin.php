@@ -146,20 +146,7 @@
     }
 });
 
-\Tina4\Get::add("/cms/page-builder", function (\Tina4\Response $response) {
-    $users = (new Users())->select("count(id) as number");
-    $twigNameSpace = (new Content())->getTwigNameSpace();
-    if (empty($users)) {
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
-    } else {
-        $menuItems = (new Content())->getCmsMenus();
-        $pages = (new Content())->getAllPages();
-        $snippets = (new Content())->getAllSnippets();
-        $themes = (new Theme())->getThemes();
-        $site = (new Content())->getSite();
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/page-builder.twig", ["menuItems" => $menuItems , "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "themes" => $themes]));
-    }
-});
+
 
 
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {

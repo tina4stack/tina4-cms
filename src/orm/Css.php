@@ -17,6 +17,7 @@ class Css extends \Tina4\ORM
 	public $name;
 	public $content;
 	public $isActive;
+    public $siteId;
 	public $dateCreated;
 	public $dateModified;
 }

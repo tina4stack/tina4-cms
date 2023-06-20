@@ -19,5 +19,6 @@ class EmailTemplate extends \Tina4\ORM
     public $content;
     public $dateCreated;
     public $dateModified;
+    public $siteId;
 
 }
