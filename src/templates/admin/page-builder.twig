@@ -14,6 +14,7 @@
             <a class="exit-builder" href="/cms/dashboard">Back to CMS</a>
             <b>Choose Page</b>
             <div class="pages">
+                <a href="#" onclick="loadPage('layout')">Page Layout</a>
                 {% for page in pages %}
                 <a href="#" onclick="loadPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
@@ -46,9 +47,9 @@
                     storeCss: true,
                     options: {
                         remote: {
-                            urlLoad: "/cms/page-builder/pages",
+                            urlLoad: "/cms/page-builder/pages?siteId={{ site.id }}",
                             urlStore: "/cms/page-builder/pages?formToken={{ formToken }}",
-                            onStore: data => ({pageId: pageManager.getSelected().id, html: editor.getHtml(), data: data})
+                            onStore: data => ({pageId: pageManager.getSelected().id, html: editor.getHtml(), css: editor.getCss(), data: data})
                         }
                     }
                 }
@@ -57,25 +58,33 @@
 
             let pageManager = editor.Pages;
             let storageManager = editor.Storage;
+            let panelManager = editor.Panels;
+
+            //console.log('Panels', panelManager.getPanels());
+
+            editor.Panels.addButton('options', [
+                { id: 'undo', className: 'fa fa-undo', command: 'core:undo' },
+                { id: 'redo', className: 'fa fa-repeat', command: 'core:redo' },
+                { id: 'delete', className: 'fa fa-trash', command: 'core:canvas-clear' }
+            ]);
 
             async function loadPage(pageId) {
                 const data = editor.getProjectData();
                 await storageManager.store(data);
-                console.log('Page Saved', data);
-                pageManager.select(pageId)
+                pageManager.select(pageId);
             }
 
-            editor.on('page', (event) => {
-                console.log('Page changed', event);
-            });
+            //editor.on('page', (event) => {
+            //    console.log('Page changed', event);
+            //});
 
-            editor.on('load', (event) => {
-                console.log('Page loading', event);
-            });
+            //editor.on('load', (event) => {
+            //    console.log('Page loading', event);
+            //});
 
-            editor.on('save', (event) => {
-                console.log('Page loading', event, event.page.getHtml());
-            });
+            // editor.on('save', (event) => {
+            //    console.log('Page loading', event, event.page.getHtml());
+            //});
 
 
             // Get the BlockManager module first

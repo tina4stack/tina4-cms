@@ -8,6 +8,12 @@ composer require tina4stack/tina4cms
 composer exec tina4 initialize:run
 ```
 
+Sqlite is recommended for small to medium websites
+
+```bash
+composer require tina4stack/tina4php-sqlite3
+```
+
 Add the database connection to your index.php file which would have been created
 
 ```

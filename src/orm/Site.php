@@ -30,4 +30,7 @@ class Site extends \Tina4\ORM
     public $allowCrawlers;
 
     public $theme;
+    public $pageBuilderStyles;
+    public $pageBuilderAssets;
+    public $pageLayout;
 }

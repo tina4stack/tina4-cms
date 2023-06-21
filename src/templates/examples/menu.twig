@@ -1,0 +1,5 @@
+{% set menus = Menu.select("*").where("id <> 1").asArray() %}
+
+{% for menu in menus %}
+    <a href="/">{{ menu.name }}</a>
+{% endfor %}

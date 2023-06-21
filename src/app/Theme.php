@@ -9,8 +9,59 @@ class Theme
 {
     private $themeName = "";
     private $themePath = "";
-
     private $deployPath = "";
+    private $twigViews = [];
+
+    /**
+     * Adds twig views
+     * @param string $id
+     * @param string $title
+     * @param string $twigTemplate
+     * @return void
+     */
+    public function addTwigView(string $id, string $title, string $twigTemplate): void
+    {
+        if (isset($_SESSION["tina4-cms:twigViews"])) {
+            $this->twigViews = $_SESSION["tina4-cms:twigViews"];
+        }
+        $this->twigViews[$id] = ["id" => $id, "title" => $title, "template" => $twigTemplate];
+        $_SESSION["tina4-cms:twigViews"] = $this->twigViews;
+    }
+
+    public function getTwigViews(): array
+    {
+        if (isset($_SESSION["tina4-cms:twigViews"])) {
+            $this->twigViews = $_SESSION["tina4-cms:twigViews"];
+        }
+        $results = [];
+        foreach ($this->twigViews as $view) {
+            $results[] = $view;
+        }
+
+        return $results;
+    }
+
+    public function injectIncludes(string $content)
+    {
+        $templates = [];
+        if (isset($_SESSION["tina4-cms:twigViews"])) {
+            $templates = $_SESSION["tina4-cms:twigViews"];
+        }
+
+        $re = '/twig-view="(.*)"(.*)Twig Template<\/div>/mUs';;
+
+        preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
+        foreach ($matches as $id => $match) {
+            $matchText = $match[0];
+            $id = trim($match[1]);
+            $matchText = str_replace("Twig Template", '{% include "'.$templates[$id]["template"].'" %}', $matchText);
+
+            $content = str_replace($match[0], $matchText, $content);
+        }
+
+
+        return $content;
+    }
 
     private function deployAssets()
     {
@@ -66,6 +117,11 @@ class Theme
         return array_values($finalThemes);
     }
 
+    /**
+     * Gets all the component script files
+     * @param string $themeName
+     * @return array
+     */
     public function getComponents(string $themeName): array
     {
         $components = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."components");
@@ -80,6 +136,10 @@ class Theme
         return $finalComponents;
     }
 
+    /**
+     * @param string $themeName
+     * @return array
+     */
     public function getBlocks(string $themeName): array
     {
         $blocks = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."blocks");
@@ -114,7 +174,7 @@ class Theme
 
         $finalCss = [];
         foreach ($css as $key => $value) {
-            if (strpos($value,'.css') !== false && $value !== "." && $value !== ".." && is_file($value)) {
+            if (strpos($value,'.css') !== false && $value !== "." && $value !== ".." ) {
                 $finalCss[] =  "/themes/".$themeName."/css/".$value;
             }
         }

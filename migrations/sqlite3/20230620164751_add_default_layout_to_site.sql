@@ -1,0 +1,1 @@
+alter table site add page_layout blob default null;
