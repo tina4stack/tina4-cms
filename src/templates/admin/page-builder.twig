@@ -1,9 +1,11 @@
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
     <link rel="stylesheet" type="text/css" href="/css/default.css">
-    <script src="https://unpkg.com/grapesjs-navbar"></script>
-    <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js" ></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css" integrity="sha512-teZVIvNgTrmIIFs77Fs03dArj3HsJbQ6QMFRE5nAnt7etwO3wTgW2Z/1l6uvd1/TAycO68STs2QitYKzE2BqCg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://unpkg.com/grapesjs-custom-code"></script>
+    <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css"
+          integrity="sha512-teZVIvNgTrmIIFs77Fs03dArj3HsJbQ6QMFRE5nAnt7etwO3wTgW2Z/1l6uvd1/TAycO68STs2QitYKzE2BqCg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="/css/page-builder.css">
 {% endblock %}
 {% block navigation %}
@@ -16,7 +18,7 @@
             <div class="pages">
                 <a href="#" onclick="loadPage('layout')">Page Layout</a>
                 {% for page in pages %}
-                <a href="#" onclick="loadPage('{{ page.id }}')">{{ page.title }}</a>
+                    <a href="#" onclick="loadPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
         </div>
@@ -27,72 +29,79 @@
     {% if not session.user %}
         {% do redirect('/cms/login') %}
     {% endif %}
-        <script>
-            const editor = grapesjs.init({
-                container: '#gjs',
-                canvas: {
-                    scripts: {{ Theme.Scripts(site.theme) | raw }},
-                    styles: {{ Theme.Styles(site.theme) | raw }},
-                },
-                plugins: ['grapesjs-navbar'],
-                storageManager: {
-                    type: 'remote',
-                    stepsBeforeSave: 3,
-                    autosave: true,
-                    autoload: true,
-                    contentTypeJson: true,
-                    storeComponents: true,
-                    storeStyles: true,
-                    storeHtml: true,
-                    storeCss: true,
-                    options: {
-                        remote: {
-                            urlLoad: "/cms/page-builder/pages?siteId={{ site.id }}",
-                            urlStore: "/cms/page-builder/pages?formToken={{ formToken }}",
-                            onStore: data => ({pageId: pageManager.getSelected().id, html: editor.getHtml(), css: editor.getCss(), data: data})
-                        }
+    <script>
+        const editor = grapesjs.init({
+            container: '#gjs',
+            canvas: {
+                scripts: {{ Theme.Scripts(site.theme) | raw }},
+                styles: {{ Theme.Styles(site.theme) | raw }},
+            },
+            plugins: ['grapesjs-custom-code'],
+            storageManager: {
+                type: 'remote',
+                stepsBeforeSave: 3,
+                autosave: true,
+                autoload: true,
+                contentTypeJson: true,
+                storeComponents: true,
+                storeStyles: true,
+                storeHtml: true,
+                storeCss: true,
+                options: {
+                    remote: {
+                        urlLoad: "/cms/page-builder/pages?siteId={{ site.id }}",
+                        urlStore: "/cms/page-builder/pages?siteId={{ site.id }}&formToken={{ formToken }}",
+                        onStore: data => ({
+                            pageId: pageManager.getSelected().id,
+                            html: editor.getHtml(),
+                            css: editor.getCss(),
+                            data: data
+                        })
                     }
                 }
-
-            });
-
-            let pageManager = editor.Pages;
-            let storageManager = editor.Storage;
-            let panelManager = editor.Panels;
-
-            //console.log('Panels', panelManager.getPanels());
-
-            editor.Panels.addButton('options', [
-                { id: 'undo', className: 'fa fa-undo', command: 'core:undo' },
-                { id: 'redo', className: 'fa fa-repeat', command: 'core:redo' },
-                { id: 'delete', className: 'fa fa-trash', command: 'core:canvas-clear' }
-            ]);
-
-            async function loadPage(pageId) {
-                const data = editor.getProjectData();
-                await storageManager.store(data);
-                pageManager.select(pageId);
             }
 
-            //editor.on('page', (event) => {
-            //    console.log('Page changed', event);
-            //});
+        });
 
-            //editor.on('load', (event) => {
-            //    console.log('Page loading', event);
-            //});
+        let pageManager = editor.Pages;
+        let storageManager = editor.Storage;
+        let panelManager = editor.Panels;
 
-            // editor.on('save', (event) => {
-            //    console.log('Page loading', event, event.page.getHtml());
-            //});
+        //console.log('Panels', panelManager.getPanels());
+
+        editor.Panels.addButton('options', [
+            {id: 'undo', className: 'fa fa-undo', command: 'core:undo'},
+            {id: 'redo', className: 'fa fa-repeat', command: 'core:redo'},
+            {id: 'delete', className: 'fa fa-trash', command: 'core:canvas-clear'}
+        ]);
+
+        async function loadPage(pageId) {
+            const data = editor.getProjectData();
+            await storageManager.store(data);
+            pageManager.select(pageId);
+        }
+
+        //editor.on('page', (event) => {
+        //    console.log('Page changed', event);
+        //});
+
+        editor.on('load', (event) => {
+
+                //const blockBtn = editor.Panels.getButton('views', 'open-blocks');
+                //blockBtn.set('active', 1);
+                //editor.runCommand('core:open-blocks');
+        });
+
+        // editor.on('save', (event) => {
+        //    console.log('Page loading', event, event.page.getHtml());
+        //});
 
 
-            // Get the BlockManager module first
-            const blockManager = editor.Blocks; // `Blocks` is an alias of `BlockManager`
-
-        </script>
+        // Get the BlockManager module first
+        const blockManager = editor.Blocks; // `Blocks` is an alias of `BlockManager`
 
 
+    </script>
     <!-- Add components -->
     {% set components = Theme.Components(site.theme) %}
     {% for component in components %}

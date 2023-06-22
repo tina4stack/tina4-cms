@@ -21,12 +21,15 @@
 
     $site = new Site();
     $site->id = $request->params["siteId"];
+    $site->load();
     if (!empty($site->pageLayout)) {
-        $pages[] = ["id" => "layout", "component" => json_decode($site->pageLayout)];
+        $pageBuilderContent = json_decode($site->pageLayout);
+        $components = $pageBuilderContent->frames[0]->component;
+        $pages[] = ["id" => "layout", "component" => $components];
     } else {
         $pages[] = ["id" => "layout"];
     }
-    $site->load();
+
 
     foreach ($pagesData as $page) {
 
@@ -55,24 +58,37 @@
 
     if ($request->data->pageId !== "layout") {
         $page = new Page();
-        $page->load("id = ?", [$request->data->pageId]);
-        $page->content = (new Theme())->injectIncludes($request->data->html);
-        $page->isPageBuilder = 1;
-        $page->pageBuilderContent = json_encode($pageData); //makes all the twig includes work
-        $page->save();
+        if ($page->load("id = ?", [$request->data->pageId])) {
+            $page->content = (new Theme())->injectIncludes($request->data->html);
+            $page->isPageBuilder = 1;
+            $page->pageBuilderContent = json_encode($pageData); //makes all the twig includes work
+            $page->save();
 
-        //Save CSS to SCSS folder for compilation
-        if (!empty($request->data->css)) {
-            file_put_contents("./src/scss/page-{$page->id}.scss", $request->data->css);
+            //Save CSS to SCSS folder for compilation
+            if (!empty($request->data->css)) {
+                file_put_contents("./src/scss/page-{$page->id}.scss", $request->data->css);
+            }
+
+            $site = new Site();
+            $site->id = $page->siteId;
+            $site->load();
+            $site->pageBuilderStyles =  json_encode($request->data->data->styles);
+            $site->pageBuilderAssets =  json_encode($request->data->data->assets);
+            $site->save();
         }
+    }
 
+    if ($request->data->pageId === "layout") {
         $site = new Site();
-        $site->id = $page->siteId;
+        $site->id = $request->params["siteId"];
         $site->load();
+        $site->pageLayout = json_encode($pageData);
         $site->pageBuilderStyles =  json_encode($request->data->data->styles);
         $site->pageBuilderAssets =  json_encode($request->data->data->assets);
         $site->save();
     }
+
+
     return $response([], HTTP_OK, APPLICATION_JSON);
 });
 
