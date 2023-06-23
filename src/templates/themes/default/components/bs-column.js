@@ -9,6 +9,8 @@ editor.Components.addType('bs-column', {
             this.view.onRender({el: component.getEl()});
         },
         defaults: {
+            style: { padding: '10px', border: '1px solid green', float: 'left' },
+            isComponent: el => {return 'text'},
             traits: [
                 {
                     type: 'select', // Type of the trait
@@ -42,6 +44,6 @@ editor.Blocks.add('bs-column', {
     media: `
     <svg fill="#000000" viewBox="0 0 32 32" ><defs><style>.cls-1{fill:none;}</style></defs><title>column</title><rect x="24" y="4" width="2" height="24"/><path d="M18,6V26H14V6h4m0-2H14a2,2,0,0,0-2,2V26a2,2,0,0,0,2,2h4a2,2,0,0,0,2-2V6a2,2,0,0,0-2-2Z"/><rect x="6" y="4" width="2" height="24"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
     `,
-    content: { type: 'bs-column', content: ''},
+    content: { type: 'bs-column', content: `<div></div>`, },
     activate: true,
 });

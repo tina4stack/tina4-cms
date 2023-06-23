@@ -551,8 +551,8 @@ class Content extends \Tina4\Data
         $config->addTwigGlobal("Snippet", new Content());
         $config->addTwigGlobal("Article", new Content());
 
-        if (!file_exists("./uploads")) {
-            mkdir("./uploads");
+        if (!file_exists("./src/public/uploads")) {
+            mkdir("./src/public/uploads");
         }
 
 

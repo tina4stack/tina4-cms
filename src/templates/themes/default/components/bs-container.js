@@ -9,21 +9,23 @@ editor.Components.addType('bs-container', {
             this.view.onRender({el: component.getEl()});
         },
         defaults: {
+            isComponent: el => {return 'text'},
+            draggable: 'body, body *',
             traits: [
                 {
                     type: 'select', // Type of the trait
                     label: 'Class', // The label you will see in Settings
                     name: 'class', // The name of the attribute/property to use on component
                     options: [
-                        {id:"container", name:"Container"},
                         {id:"container-fluid", name:"Container Fluid"},
+                        {id:"container", name:"Container"},
                         {id:"container-sm", name:"Container Sm"},
                         {id:"container-md", name:"Container Md"},
                         {id:"container-lg", name:"Container Lg"},
                         {id:"container-xl", name:"Container Xl"},
                         {id:"container-xxl", name:"Container Xxl"},
                     ],
-                    value: 'container'
+                    value: 'container-fluid'
                 }
             ]
         }
@@ -39,6 +41,6 @@ editor.Blocks.add('bs-container', {
     <rect x="0" y="0" width="36" height="36" fill-opacity="0"/>
     </svg>
     `,
-    content: { type: 'bs-container', content: ''},
+    content: { type: 'bs-container', content: `<div></div>`, style: { padding: '10px', border: '1px solid red' },},
     activate: true,
 });

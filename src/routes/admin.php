@@ -4,14 +4,13 @@
  * File browser
  */
 \Tina4\Get::add("/cms/file-browser",function (\Tina4\Response $response, \Tina4\Request $request) {
-    $files = \Tina4\Utilities::iterateDirectory("./uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
+    $files = \Tina4\Utilities::iterateDirectory("./src/public/uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
     return $response(\Tina4\renderTemplate("admin/file-browser.twig", ["files" => $files]));
 });
 
 \Tina4\Post::add("/cms/upload", function (\Tina4\Response $response, \Tina4\Request $request) {
-
     //Add the image to a nice path
-    $imageFolder = "./uploads/".date("Y")."/".date("F");
+    $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
     if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
         //throw new \RuntimeException(sprintf('Directory "%s" was not created', $imageFolder));
         return $response(["location" => "error creating folder"]);
@@ -33,7 +32,7 @@
     // Accept upload if there was no origin, or if it is an accepted origin
     $fileToWrite = $imageFolder . "/". $temp['name'];
     move_uploaded_file($temp['tmp_name'], $fileToWrite);
-    return $response (["location" => str_replace("./uploads", "", $fileToWrite)]);
+    return $response (["location" => str_replace("./src/public/uploads", "", $fileToWrite)]);
 });
 
 

@@ -111,3 +111,31 @@
     }
     return $response($html);
 });
+
+\Tina4\Post::add("/cms/page-builder/assets/upload", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    //Add the image to a nice path
+    $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
+    if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
+        //throw new \RuntimeException(sprintf('Directory "%s" was not created', $imageFolder));
+        return $response(["location" => "error creating folder"]);
+    }
+    $temp = current($_FILES);
+
+    // Sanitize input
+    if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $temp['name'])) {
+        header("HTTP/1.1 400 Invalid file name.");
+        return null;
+    }
+
+    // Verify extension
+    if (!in_array(strtolower(pathinfo($temp['name'], PATHINFO_EXTENSION)), array("gif", "jpg", "png", "jpeg", "svg"))) {
+        header("HTTP/1.1 400 Invalid extension.");
+        return null;
+    }
+
+    // Accept upload if there was no origin, or if it is an accepted origin
+    $fileToWrite = $imageFolder . "/". $temp['name'];
+    move_uploaded_file($temp['tmp_name'], $fileToWrite);
+
+
+});
