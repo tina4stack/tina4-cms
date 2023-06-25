@@ -1,15 +1,18 @@
 editor.Components.addType('bs-container', {
+    tagName: 'div',
     model: {
         init() {
             this.on('change:attributes', this.handleEvent);
         },
-        handleEvent() {
+        handleEvent(component) {
             //Render the component when attributes get changed
-            const component = editor.getSelected();
-            this.view.onRender({el: component.getEl()});
+            this.view.onRender({el: component});
         },
         defaults: {
             isComponent: el => {return 'text'},
+            script: function() {
+                this.style = 'border:2px dashed blue; height: 100vh; padding: 5px; margin: 5px;';
+            },
             draggable: 'body, body *',
             traits: [
                 {
@@ -29,18 +32,25 @@ editor.Components.addType('bs-container', {
                 }
             ]
         }
+    },
+    view: {
+        onRender({el}) {
+            if (el.ccid) {
+                throw('No render');
+            }
+        }
     }
 });
 
 editor.Blocks.add('bs-container', {
     label: 'Container',
-    category: 'Bootstrap',
+    category: 'Bootstrap - Layout',
     media: `
     <svg fill="#000000" viewBox="0 0 36 36">
     <path d="M32,30H4a2,2,0,0,1-2-2V8A2,2,0,0,1,4,6H32a2,2,0,0,1,2,2V28A2,2,0,0,1,32,30ZM4,8V28H32V8Z" class="clr-i-outline clr-i-outline-path-1"></path><path d="M9,25.3a.8.8,0,0,1-.8-.8v-13a.8.8,0,0,1,1.6,0v13A.8.8,0,0,1,9,25.3Z" class="clr-i-outline clr-i-outline-path-2"></path><path d="M14.92,25.3a.8.8,0,0,1-.8-.8v-13a.8.8,0,0,1,1.6,0v13A.8.8,0,0,1,14.92,25.3Z" class="clr-i-outline clr-i-outline-path-3"></path><path d="M21,25.3a.8.8,0,0,1-.8-.8v-13a.8.8,0,0,1,1.6,0v13A.8.8,0,0,1,21,25.3Z" class="clr-i-outline clr-i-outline-path-4"></path><path d="M27,25.3a.8.8,0,0,1-.8-.8v-13a.8.8,0,0,1,1.6,0v13A.8.8,0,0,1,27,25.3Z" class="clr-i-outline clr-i-outline-path-5"></path>
     <rect x="0" y="0" width="36" height="36" fill-opacity="0"/>
     </svg>
     `,
-    content: { type: 'bs-container', content: `<div></div>`, style: { padding: '10px', border: '1px solid red' },},
+    content: { type: 'bs-container'},
     activate: true,
 });

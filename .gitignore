@@ -25,3 +25,4 @@ composer.phar
 /src/public/css/
 /uploads/
 /src/public/themes/
+/phpmetrics/

@@ -57,5 +57,5 @@ editor.Blocks.add('twig-component', {
     <path d="M21.975,21.323a1.753,1.753,0,1,1-.513-1.24A1.748,1.748,0,0,1,21.975,21.323Z" style="fill:#fff"/>
     </svg>
     `,
-    content: '<div data-gjs-type="twig-component">Twig Template</div>',
+    content: '<span data-gjs-type="twig-component">Twig Template</span>',
 });

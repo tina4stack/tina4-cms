@@ -48,7 +48,7 @@ class Theme
             $templates = $_SESSION["tina4-cms:twigViews"];
         }
 
-        $re = '/twig-view="(.*)"(.*)Twig Template<\/div>/mUs';;
+        $re = '/twig-view="(.*)"(.*)Twig Template<\/(span|div|ul)>/mUs';;
 
         preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
         foreach ($matches as $id => $match) {

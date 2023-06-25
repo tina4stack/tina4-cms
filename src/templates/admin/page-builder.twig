@@ -34,6 +34,8 @@
     <script>
         const editor = grapesjs.init({
             container: '#gjs',
+            jsInHtml : false,
+            allowScripts: true,
             canvas: {
                 scripts: {{ Theme.Scripts(site.theme) | raw }},
                 styles: {{ Theme.Styles(site.theme) | raw }},
@@ -124,14 +126,15 @@
 
 
     </script>
-    <!-- Add components -->
-    {% set components = Theme.Components(site.theme) %}
-    {% for component in components %}
-        <script src="{{ component }}"></script>
-    {% endfor %}
     <!-- Add blocks -->
     {% set blocks = Theme.Blocks(site.theme) %}
     {% for block in blocks %}
         <script src="{{ block }}"></script>
     {% endfor %}
+    <!-- Add components -->
+    {% set components = Theme.Components(site.theme) %}
+    {% for component in components %}
+        <script src="{{ component }}"></script>
+    {% endfor %}
+
 {% endblock %}

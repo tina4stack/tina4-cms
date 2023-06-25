@@ -1,5 +1,15 @@
-{% set menus = Menu.select("*").where("id <> 1").asArray() %}
-
+{% set menus = Content.getMenu("") %}
 {% for menu in menus %}
-    <a href="/">{{ menu.name }}</a>
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item {% if menu.children %} dropdown {% endif %}">
+    <a {% if menu.children %} id="navbarDropdown{{ menu.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" {% endif %} class="nav-link {% if menu.children %} dropdown-toggle {% endif %}" href="{{ menu.url }}" >{{ menu.name }}</a>
+    {% if menu.children %}
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ menu.id }}">
+        {% for menu in menu.children %}
+            <li><a class="dropdown-item" href="{{ menu.url }}">{{ menu.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</li>
+</ul>
 {% endfor %}

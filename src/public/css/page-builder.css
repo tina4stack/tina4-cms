@@ -4,6 +4,8 @@ body, html {
     background: #ffffff;
     font-family: Helvetica,sans-serif;
 }
+
+
 .app-wrap {
     height: 100%;
     width: 100%;
@@ -13,6 +15,7 @@ body, html {
     background: #ffffff;
     width: 100%;
     height: 100%;
+    display: flex;
 }
 .pages-wrp, .pages {
     display: flex;
@@ -48,7 +51,7 @@ body, html {
 }
 
 .exit-builder {
-    display: block;
+    display: flex;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));
     background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
     color: #ffffff;

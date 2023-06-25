@@ -104,7 +104,7 @@
         $templates = $_SESSION["tina4-cms:twigViews"];
     }
 
-    if (isset($request->params["id"]) && !empty($request->params["id"])) {
+    if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         $html = \Tina4\renderTemplate($templates[$request->params["id"]]["template"]);
     } else {
         $html = "Choose template to render";
