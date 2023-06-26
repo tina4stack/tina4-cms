@@ -179,6 +179,7 @@ class Theme
         }
 
         $finalCss[] = '/css/default.css';
+        $finalCss[] = '/css/page-builder.css';
 
         return json_encode($finalCss);
     }
