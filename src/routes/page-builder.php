@@ -103,7 +103,6 @@
 
 \Tina4\Get::add("/cms/page-builder/twig-templates", static function (\Tina4\Response $response, \Tina4\Request $request) {
     $templates = (new Theme())->getTwigViews();
-
     return $response($templates);
 });
 
@@ -121,11 +120,27 @@
     return $response($html);
 });
 
+\Tina4\Get::add("/cms/page-builder/cms-snippets", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    $templates = (new Theme())->getCMSSnippets();
+    return $response($templates);
+});
+
+\Tina4\Get::add("/cms/page-builder/cms-snippets/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
+
+
+    if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
+        $template = (new Snippet());
+        $template->id = $request->params["id"];
+        $template->load();
+        $html = \Tina4\renderTemplate($template->content);
+    } else {
+        $html = "Choose template to render";
+    }
+    return $response($html);
+});
+
 \Tina4\Post::add("/cms/page-builder/assets/upload", static function (\Tina4\Response $response, \Tina4\Request $request) {
     //Add the image to a nice path
-
-
-
     $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
     if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
         //throw new \RuntimeException(sprintf('Directory "%s" was not created', $imageFolder));
@@ -135,9 +150,6 @@
 
     $fileInfo = [];
     foreach ($temp["name"] as $id => $fileName) {
-
-
-
         // Sanitize input
         if (preg_match("/([^\w\s\d\-_~,;:\[\]\(\).])|([\.]{2,})/", $fileName)) {
             header("HTTP/1.1 400 Invalid file name.");
@@ -157,8 +169,6 @@
             $fileInfo[] = str_replace ("./src/public", "", $imageFolder."/".$fileName);
         }
     }
-
-
 
     $fileData = ["data" => $fileInfo];
     return $response($fileData, HTTP_OK, APPLICATION_JSON);

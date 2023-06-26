@@ -62,6 +62,19 @@ class Theme
         return $content;
     }
 
+    public function getCMSSnippets()
+    {
+        $snippets = [];
+        $snippetData = (new Snippet())->select("id,name", 10000)->asArray();
+
+        foreach ($snippetData as $id => $record) {
+            $snippets[] = ["id" => $record["id"], "title" => $record["name"]];
+        }
+
+        return $snippets;
+
+    }
+
     private function deployAssets()
     {
 
