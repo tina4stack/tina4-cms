@@ -2,17 +2,17 @@ editor.Components.addType('bs-row', {
     tagName: 'div',
     model: {
         init() {
+            this.setStyle('display: flex;');
             this.on('change:attributes', this.handleEvent);
-            this.setStyle('display: flex');
         },
         handleEvent() {
-            console.log('OK!', this);
-            this.getEl().setHTML(`&nbsp;`);
-
+            this.style = 'padding: 10px; border: 1px dashed blue;';
         },
         defaults: {
             isComponent: el => {return 'text'},
             script: function() {
+                // console.log('Script', this);
+                this.style = 'padding: 10px; border: 1px dashed blue;';
             },
             draggable: 'div, div *',
             traits: [

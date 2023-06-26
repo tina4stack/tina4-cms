@@ -9,7 +9,6 @@ editor.Components.addType('bs-container', {
             this.view.onRender({el: component});
         },
         defaults: {
-            isComponent: el => {return 'text'},
             script: function() {
                 this.style = 'border:2px dashed blue; height: 100vh; padding: 5px; margin: 5px;';
             },

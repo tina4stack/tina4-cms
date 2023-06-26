@@ -5,13 +5,12 @@ editor.Components.addType('bs-column', {
             this.on('change:attributes', this.handleEvent);
         },
         handleEvent() {
-            console.log('OK!', this);
-            this.getEl().setHTML(`&nbsp;`);
+            this.getEl().setStyle('padding: 10px; border: 1px dashed blue;');
         },
         defaults: {
             script: function() {
                 // console.log('Script', this);
-                this.innerHTML = '&nbsp;';
+                this.style = 'padding: 10px; border: 1px dashed blue;';
             },
             traits: [
                 {

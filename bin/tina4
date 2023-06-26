@@ -427,20 +427,12 @@ class [CLASS_NAME] extends \Tina4\ORM
 
 addMenu($menus, "webservice", "Runs webservice", static function ($index, $input) use ($argv) {
     $port = $argv[2] ?? "7145";
-
-    if (strpos($port, ":") !== false) {
-        $host = explode(":", $port)[0];
-        $port = explode(":", $port)[1];
-    } else {
-        $host = $host ?? "localhost";
-        if (strpos(php_uname(), "Linux") !== false) {
-            $host = "0.0.0.0";
-        }
-    }
-
     \Tina4\Debug::message("Server running on http://localhost:{$port}");
-
-    `php -S {$host}:{$port} index.php`;
+    if (strpos(php_uname(), "Linux") !== false) {
+        `php -S 0.0.0.0:{$port} index.php`;
+    } else {
+        `php -S localhost:{$port} index.php`;
+    }
 
 }, true,  ["options" => ["run"]]);
 

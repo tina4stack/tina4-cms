@@ -42,6 +42,15 @@
         $pages[] = ["id" => "{$page->id}", "component" => $components];
     }
 
+    if (empty($site->pageBuilderAssets)) {
+        $site->pageBuilderAssets = "[]";
+    }
+
+    if (empty($site->pageBuilderStyles)) {
+        $site->pageBuilderStyles = "[]";
+    }
+
+
     $data = '{"assets": '.$site->pageBuilderAssets.', "styles": '.$site->pageBuilderStyles.', "pages": '.json_encode($pages).'}';
     return $response($data, HTTP_OK, APPLICATION_JSON);
 });

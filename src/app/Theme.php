@@ -51,14 +51,13 @@ class Theme
         $re = '/twig-view="(.*)"(.*)Twig Template<\/(span|div|ul)>/mUs';;
 
         preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
+
         foreach ($matches as $id => $match) {
             $matchText = $match[0];
             $id = trim($match[1]);
             $matchText = str_replace("Twig Template", '{% include "'.$templates[$id]["template"].'" %}', $matchText);
-
             $content = str_replace($match[0], $matchText, $content);
         }
-
 
         return $content;
     }
