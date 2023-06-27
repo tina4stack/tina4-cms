@@ -29,6 +29,8 @@
             //Return back a form to be submitted to the create
             $themes = (new Theme())->getThemes();
 
+            $site->custom = html_entity_decode($site->custom);
+
             if ($action == "form") {
                 $title = "Add Site";
                 $savePath =  TINA4_BASE_URL . "/api/admin/site";

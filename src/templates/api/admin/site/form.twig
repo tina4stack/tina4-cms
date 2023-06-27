@@ -40,8 +40,8 @@
         <div class="form-group col-md-12">
             <h6>Custom Scripts (Header)</h6>
             <hr>
-            <textarea id="customContent" style="display:none" name="custom">{{ data.content | raw }}</textarea>
-            <div id="contentEditor" style="height:200px" >{{ data.content }}</div>
+            <textarea id="customContent" style="display:none" name="custom">{{ data.custom | raw }}</textarea>
+            <div id="contentEditor" style="height:200px" >{{ data.custom }}</div>
             <script>
 
                 window.editorACE = ace.edit("contentEditor");

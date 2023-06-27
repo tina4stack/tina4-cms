@@ -18,9 +18,12 @@
 
     $template = "content.twig";
     $site = new Site();
+
     if ($site->load("id = 1") && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
+
+    $site->custom = html_entity_decode($site->custom);
 
     $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
 
@@ -69,6 +72,7 @@
         $template = "themes/{$site->theme}/page.twig";
     }
 
+    $site->custom = html_entity_decode($site->custom);
     $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
 
     return $response ($html, HTTP_OK, TEXT_HTML);
