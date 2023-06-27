@@ -170,3 +170,16 @@
     $fileData = ["data" => $fileInfo];
     return $response($fileData, HTTP_OK, APPLICATION_JSON);
 });
+
+\Tina4\Get::add("/cms/page-builder/open-ai", static function(\Tina4\Response $response, \Tina4\Request $request) {
+    $text = "";
+    if (!empty($request->params["prompt"])) {
+
+        $apiResponse = (new OpenAi())->getCompletion(strip_tags(html_entity_decode($request->params["prompt"])));
+
+        $text = $apiResponse["choices"][0]["text"];
+    }  else {
+        $text = "Error no prompt";
+    }
+    return $response ($text, HTTP_OK, TEXT_HTML);
+});

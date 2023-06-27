@@ -130,9 +130,14 @@
         rte.add('openai', {
             icon: '<b>C</b>',
             attributes: {title: 'AI Enhance'},
-            result: function (rte) {
-                console.log (rte, rte.selection().toString());
-                rte.el.innerHTML = 'PL';
+            result: async function (rte) {
+                let prompt = await rte.selection().toString();
+                console.log (prompt);
+                fetch('/cms/page-builder/open-ai?prompt='+rte.el.innerHTML)
+                    .then(async function(response) {
+                        const data = await response.text();
+                        rte.el.innerHTML = data;
+                    });
             }
         });
 
