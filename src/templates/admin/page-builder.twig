@@ -19,7 +19,7 @@
             <a class="exit-builder" href="/cms/dashboard">Back to CMS</a>
             <b>Choose Page</b>
             <div class="pages">
-                <a href="#" onclick="loadPage('layout')">Page Layout</a>
+                <!-- <a href="#" onclick="loadPage('layout')">Page Layout</a> -->
                 {% for page in pages %}
                     <a href="#" onclick="loadPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
