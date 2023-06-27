@@ -1,13 +1,14 @@
 <?php
 
+use Tina4\Config;
+use Tina4\Data;
+
 /**
  * Tina4CMS - CMS Module
  * Copy-right 2007 - current Tina4
  * License: MIT https://opensource.org/licenses/MIT
  */
-
-
-class Content extends \Tina4\Data
+class Content extends Data
 {
     private $twigNamespace = "@tina4cms";
 
@@ -18,21 +19,21 @@ class Content extends \Tina4\Data
      * @param string $category
      * @param int $roleId
      * @return void
-     * @throws Exception
+     * @throws Exception|\Psr\Cache\InvalidArgumentException
      */
-    public function setSecurityAttribute($name, $options, string $category="Default", int $roleId=1)
+    public function setSecurityAttribute($name, $options, string $category = null, int $roleId = 1)
     {
+        $category = $category ?? "Default";
         $role = new Role();
-        if ($role->load("id = {$roleId}"))
-        {
+        if ($role->load("id = {$roleId}")) {
             $roleData = unserialize($role->roleInfo);
-            $roleData["roles"][$name] = array_merge($options, ["category" => $category]);
+            $roleData["roles"][$name] = array_merge($options, compact('category'));
             $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
         } else {
 
             $roleData = [];
-            $roleData["roles"][$name] = array_merge($options, ["category" => $category]);
-            $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
+            $roleData["roles"][$name] = array_merge($options, compact('category'));
+            $roleData["category"][$category][$name] = array_merge($options, compact('category'));
 
             $role->id = $roleId;
             $role->name = "Default";
@@ -43,19 +44,18 @@ class Content extends \Tina4\Data
 
     /**
      * Get security attribute
-     * @param string $name
+     * @param string|null $name
      * @param int $roleId
      * @return mixed|void
      */
-    public function getSecurityAttribute(string $name="", int $roleId=1)
+    public function getSecurityAttribute(string $name = null, int $roleId = 1)
     {
+        $name = $name ?? "";
         $role = new Role();
-        if ($role->load("id = {$roleId}"))
-        {
+        if ($role->load("id = {$roleId}")) {
             $roles = unserialize($role->roleInfo);
 
-            if (!empty($name))
-            {
+            if (!empty($name)) {
                 if (isset($roles["roles"])) {
                     return $roles["roles"][$name];
                 } else {
@@ -90,13 +90,14 @@ class Content extends \Tina4\Data
 
     /**
      * Add CMS menu
-     * @param string $href
+     * @param string|null $href
      * @param string $caption
      */
-    public function addCmsMenu($href="", $caption=""): void
+    public function addCmsMenu(string $href = null, string $caption = ""): void
     {
+        $href = $href ?? "";
         global $TINA4_CMS_MENU_ITEMS;
-        $TINA4_CMS_MENU_ITEMS[] = ["href" => $href, "caption" => $caption];
+        $TINA4_CMS_MENU_ITEMS[] = compact('href', 'caption');
     }
 
     /**
@@ -109,8 +110,7 @@ class Content extends \Tina4\Data
     {
         global $TINA4_CMS_MENU_ITEMS;
 
-        if (empty($TINA4_CMS_MENU_ITEMS))
-        {
+        if (empty($TINA4_CMS_MENU_ITEMS)) {
             $TINA4_CMS_MENU_ITEMS = [];
         }
         return $TINA4_CMS_MENU_ITEMS;
@@ -136,16 +136,16 @@ class Content extends \Tina4\Data
 
         $title = str_replace("'", "", $title);
 
-        $title = preg_replace('!['.preg_quote($flip, null).']+!u', $separator, $title);
+        $title = preg_replace('![' . preg_quote($flip, null) . ']+!u', $separator, $title);
 
         // Replace @ with the word 'at'
-        $title = str_replace('@', $separator.'at'.$separator, $title);
+        $title = str_replace('@', $separator . 'at' . $separator, $title);
 
         // Remove all characters that are not the separator, letters, numbers, or whitespace.
-        $title = preg_replace('![^'.preg_quote($separator, null).'\pL\pN\s]+!u', '-', $title);
+        $title = preg_replace('![^' . preg_quote($separator, null) . '\pL\pN\s]+!u', '-', $title);
 
         // Replace all separator characters and whitespace by a single separator
-        $title = preg_replace('!['.preg_quote($separator, null).'\s]+!u', $separator, $title);
+        $title = preg_replace('![' . preg_quote($separator, null) . '\s]+!u', $separator, $title);
 
         return trim($title, $separator);
     }
@@ -155,7 +155,7 @@ class Content extends \Tina4\Data
      * @param $slug
      * @return Page
      */
-    public function getPageMeta($slug)
+    public function getPageMeta($slug): Page
     {
         $page = (new Page());
         $page->load("slug = '{$slug}'");
@@ -198,23 +198,29 @@ class Content extends \Tina4\Data
     public function getAllSnippets(): array
     {
         $snippet = (new Snippet());
-        $snippets = $snippet->select("*", 10000)->asObject();
+        $snippets = $snippet->select("*", 10000);
 
-        return $snippets;
+        if (!empty($snippets)) {
+            return $snippets->asArray();
+        } else {
+            return [];
+        }
     }
 
     /**
      * Get Articles
      * @param string $category
-     * @param int $limit
-     * @param int $skip
+     * @param int|null $limit
+     * @param int|null $skip
      * @param string $template
      * @return array
      * @throws ReflectionException
      */
-    public function getArticles(string $category, int $limit=10, int $skip=0, string $template="article.twig"): array
+    public function getArticles(string $category, int $limit = null, int $skip = null, string $template = "article.twig"): array
     {
 
+        $skip = $skip ?? 0;
+        $limit = $limit ?? 10;
         $articles = (new Article())->select("*", $limit, $skip)->where("1 = 1");
         if ($category) {
             $articles->and("id in (select article_id 
@@ -224,20 +230,20 @@ class Content extends \Tina4\Data
         }
 
         $articles->and("id != 0 and is_published = 1");
-        $articles = $articles->orderBy("published_date desc")->asObject();
+        $articles = $articles->orderBy(["published_date desc"])->asObject();
 
         foreach ($articles as $id => $article) {
             $articles[$id]->url = "/content/article/{$article->slug}";
             $articles[$id]->content = $this->parseContent($article->content);
-            if (!file_exists("./cache/article-".md5($article->id).".png")) {
+            if (!file_exists("./cache/article-" . md5($article->id) . ".png")) {
                 if (!empty($article->image)) {
-                    file_put_contents("./cache/article-".md5($article->id).".png", base64_decode($article->image));
-                    $articles[$id]->image = "/cache/article-".md5($article->id).".png";
+                    file_put_contents("./cache/article-" . md5($article->id) . ".png", base64_decode($article->image));
+                    $articles[$id]->image = "/cache/article-" . md5($article->id) . ".png";
                 } else {
                     $articles[$id]->image = null;
                 }
             } else {
-                $articles[$id]->image = "/cache/article-".md5($article->id).".png";
+                $articles[$id]->image = "/cache/article-" . md5($article->id) . ".png";
             }
         }
 
@@ -247,17 +253,18 @@ class Content extends \Tina4\Data
     /**
      * Get Article List
      * @param string $category
-     * @param string $className
+     * @param string|null $className
      * @param int $limit
      * @return string
-     * @throws \Twig\Error\LoaderError|ReflectionException
+     * @throws ReflectionException
      */
-    public function getArticleList(string $category, string $className="", int $limit=0): string
+    public function getArticleList(string $category, string $className = null, int $limit = 0): string
     {
+        $className = $className ?? "";
         $articles = (new Article())->select("title, description, image, slug, date_created", $limit)
-          ->where("id != 0 and is_published = 1");
+            ->where("id != 0 and is_published = 1");
         if ($category) {
-          $articles->and("article_category_id in (select id from article_category where upper(name) = upper('{$category}'))");
+            $articles->and("article_category_id in (select id from article_category where upper(name) = upper('{$category}'))");
         }
         $articles->orderBy("published_date desc");
         return \Tina4\renderTemplate("article-list.twig", ["articles" => $articles->AsObject(), "className" => $className]);
@@ -272,9 +279,9 @@ class Content extends \Tina4\Data
      * @param string $template
      * @return string
      */
-    public function renderArticle($title, $content, $image, $article, string $template="article.twig"): string
+    public function renderArticle($title, $content, $image, $article, string $template = "article.twig"): string
     {
-        return \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" =>  $content, "image" => $image, "request" => $_REQUEST]);
+        return \Tina4\renderTemplate($template, ["title" => $title, "article" => $article, "content" => $content, "image" => $image, "request" => $_REQUEST]);
     }
 
     /**
@@ -282,9 +289,9 @@ class Content extends \Tina4\Data
      * @param $slug
      * @param string $template
      * @return string
-     * @throws \Twig\Error\LoaderError|ReflectionException
+     * @throws ReflectionException
      */
-    public function getArticle($slug, $template="article.twig"): string
+    public function getArticle($slug, string $template = "article.twig"): string
     {
         $article = new Article();
         $article->load("slug = '{$slug}'");
@@ -294,9 +301,8 @@ class Content extends \Tina4\Data
 
     /**
      * Get Article Meta
-     * @param $title
+     * @param $slug
      * @return string
-     * @throws Exception
      */
     public function getArticleMeta($slug): string
     {
@@ -326,12 +332,13 @@ class Content extends \Tina4\Data
 
     /**
      * Gets articles
-     * @param int $articleId
+     * @param int|null $articleId
      * @param string $parentId
      * @return string
      */
-    public function getCategories($articleId=1, $parentId=""): string
+    public function getCategories(int $articleId = null, string $parentId = ""): string
     {
+        $articleId = $articleId ?? 1;
         if (empty($articleId)) $articleId = 1;
         $html = "";
         if (!empty($parentId)) {
@@ -348,17 +355,17 @@ class Content extends \Tina4\Data
         $lis = [];
         foreach ($categories as $id => $category) {
             if ($category["hasChildren"] > 0) {
-                $childrenMenus = $this->getCategories($articleId,   $category["id"]);
-                $children = _ul($childrenMenus );
+                $childrenMenus = $this->getCategories($articleId, $category["id"]);
+                $children = _ul($childrenMenus);
                 if ($category["isSelected"] > 0) {
-                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]", "checked"])," ", $category["name"], $children);
+                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]", "checked"]), " ", $category["name"], $children);
                 } else {
-                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name"=>"article_categories[{$category["id"]}]"])," ", $category["name"], $children);
+                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]"]), " ", $category["name"], $children);
                 }
 
             } else {
                 if ($category["isSelected"] > 0) {
-                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]",  "checked"]), " ", $category["name"]);
+                    $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]", "checked"]), " ", $category["name"]);
                 } else {
                     $lis[] = _li(_input(["type" => "checkbox", "value" => $category["id"], "name" => "article_categories[{$category["id"]}]"]), " ", $category["name"]);
                 }
@@ -373,11 +380,13 @@ class Content extends \Tina4\Data
 
     /**
      * Gets a menu
-     * @param string $parentId
+     * @param string|null $parentId
      * @param int $level
-     * @return string
+     * @return array
      */
-    public function getMenu($parentId="",  $level=0) {
+    public function getMenu(string $parentId = null, int $level = 0): array
+    {
+        $parentId = $parentId ?? "";
         if (!empty($parentId)) {
             $filter = "where parent_id = {$parentId} and is_active = 1 ";
         } else {
@@ -393,8 +402,7 @@ class Content extends \Tina4\Data
                     $childrenMenus = $this->getMenu($menu->id, ++$level);
                     $menu->children = $childrenMenus;
                 }
-                if ($menu->slug === "")
-                {
+                if ($menu->slug === "") {
                     $menu->slug = $this->getSlug($menu->name);
                 }
 
@@ -418,10 +426,11 @@ class Content extends \Tina4\Data
      * @return mixed|string
      * @throws ReflectionException
      */
-    public function getEmailTemplate($name) {
+    public function getEmailTemplate($name)
+    {
         $template = (new EmailTemplate())->select("*", 5)
             ->where("id != 0")
-        ->orderBy("id desc")->asArray();
+            ->orderBy(["id desc"])->asArray();
 
         return $template[0];
     }
@@ -431,33 +440,33 @@ class Content extends \Tina4\Data
      * @param $article
      * @throws ReflectionException
      */
-    public function enhanceArticle ($article)
+    public function enhanceArticle($article)
     {
         $keywords = explode(",", $article->keywords);
         //fetch articles with these keywords by latest
         $likes = [];
         foreach ($keywords as $id => $keyword) {
-            $likes[] = "instr(keywords, '".trim($keyword)."')";
+            $likes[] = "instr(keywords, '" . trim($keyword) . "')";
         }
-        $filter = "id != {$article->id} and ( ".join(" or ", $likes)." )";
-        $related = (new Article())->select("id,title,description,slug,image,author,published_date", 4)->where($filter)->orderBy("published_date desc");
+        $filter = "id != {$article->id} and ( " . join(" or ", $likes) . " )";
+        $related = (new Article())->select("id,title,description,slug,image,author,published_date", 4)->where($filter)->orderBy(["published_date desc"]);
         $article->relatedArticles = $related->asObject();
-        $article->url = "/content/article/".$this->getSlug($article->title);
-        foreach ( $article->relatedArticles as $id => $articleData) {
-            $article->relatedArticles[$id]->url = "/content/article/".$this->getSlug($article->title);
-            if (!file_exists("./cache/article-".md5($articleData->id).".png")) {
+        $article->url = "/content/article/" . $this->getSlug($article->title);
+        foreach ($article->relatedArticles as $id => $articleData) {
+            $article->relatedArticles[$id]->url = "/content/article/" . $this->getSlug($article->title);
+            if (!file_exists("./cache/article-" . md5($articleData->id) . ".png")) {
                 if (!empty($articleData->image)) {
-                    file_put_contents("./cache/article-".md5($articleData->id).".png", base64_decode($article->image));
-                    $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->id).".png";
+                    file_put_contents("./cache/article-" . md5($articleData->id) . ".png", base64_decode($article->image));
+                    $article->relatedArticles[$id]->image = "/cache/article-" . md5($articleData->id) . ".png";
                 } else {
                     $article->relatedArticles[$id]->image = null;
                 }
             } else {
-                $article->relatedArticles[$id]->image = "/cache/article-".md5($articleData->id).".png";
+                $article->relatedArticles[$id]->image = "/cache/article-" . md5($articleData->id) . ".png";
             }
         }
 
-        $article->categories =  $this->DBA->fetch("select * from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = {$article->id}", 10)->asArray();
+        $article->categories = $this->DBA->fetch("select * from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = {$article->id}", 10)->asArray();
     }
 
     /**
@@ -465,7 +474,8 @@ class Content extends \Tina4\Data
      * @param $content
      * @return string
      */
-    public function parseContent ($content) {
+    public function parseContent($content): string
+    {
         if (!empty($content)) {
             $content = html_entity_decode($content);
         }
@@ -474,13 +484,14 @@ class Content extends \Tina4\Data
 
     /**
      * Get Snippets
-     * @return string|string[]
+     * @return string[]
      * @throws ReflectionException
      */
-    public function getSnippets() {
+    public function getSnippets(): array
+    {
         $snippets = (new Snippet())->select("*", 1000);
         if (!empty($snippets)) {
-            return $snippets->asObject();
+            return $snippets->asArray();
         } else {
             return [];
         }
@@ -494,7 +505,7 @@ class Content extends \Tina4\Data
      * @return array|mixed|string[]
      * @throws ReflectionException
      */
-    public function getArticlesByTag($category, $limit=1, $skip=0)
+    public function getArticlesByTag($category, $limit = 1, $skip = 0)
     {
         $articles = (new Article())->select("*", $limit, $skip)
             ->where("id != 0 and is_published = 1");
@@ -510,18 +521,18 @@ class Content extends \Tina4\Data
 
         foreach ($articles as $id => $article) {
             $articles[$id]->content = $this->parseContent($article->content);
-            $articles[$id]->url = "/content/article/".$this->getSlug($article->title);
-            if (!file_exists("./cache/article-".md5($article->id).".png")) {
+            $articles[$id]->url = "/content/article/" . $this->getSlug($article->title);
+            if (!file_exists("./cache/article-" . md5($article->id) . ".png")) {
                 if (!empty($article->image)) {
-                    file_put_contents("./cache/article-".md5($article->id).".png", base64_decode($article->image));
-                    $articles[$id]->image = "/cache/article-".md5($article->id).".png";
+                    file_put_contents("./cache/article-" . md5($article->id) . ".png", base64_decode($article->image));
+                    $articles[$id]->image = "/cache/article-" . md5($article->id) . ".png";
 
                 } else {
                     $articles[$id]->image = null;
                 }
 
             } else {
-                $articles[$id]->image = "/cache/article-".md5($article->id).".png";
+                $articles[$id]->image = "/cache/article-" . md5($article->id) . ".png";
             }
         }
 
@@ -531,10 +542,9 @@ class Content extends \Tina4\Data
 
     /**
      * Method to add Config methods on the CMS
-     * @param \Tina4\Config $config
-     * @throws ReflectionException
+     * @param Config $config
      */
-    public function addConfigMethods(\Tina4\Config $config): void
+    public function addConfigMethods(Config $config): void
     {
         global $DBA;
 
@@ -543,7 +553,7 @@ class Content extends \Tina4\Data
         }
 
         if (!$DBA->tableExists("article")) {
-            \Tina4\Debug::message("Running migrations...on ".realpath(__DIR__ . "/../../migrations"));
+            \Tina4\Debug::message("Running migrations...on " . realpath(__DIR__ . "/../../migrations"));
             (new \Tina4\Migration(__DIR__ . "/../../migrations"))->doMigration();
         }
 
@@ -568,42 +578,36 @@ class Content extends \Tina4\Data
             \Tina4\redirect($url, $code);
         });
 
-        $config->addTwigFilter("getSnippet", function ($name) {
-            return (new Content())->getSnippet($name);
+        $config->addTwigFilter("getSnippet", static function ($name) {
+            return (new self())->getSnippet($name);
         });
 
-        $config->addTwigFunction("getSnippet", function ($name) {
-            return (new Content())->getSnippet($name);
+        $config->addTwigFunction("getSnippet", static function ($name) {
+            return (new self())->getSnippet($name);
         });
 
-        $config->addTwigFunction("render", function ($content) {
+        $config->addTwigFunction("render", static function ($content) {
             return \Tina4\renderTemplate($content);
         });
 
-        $config->addTwigFilter("getSlug", function ($name) {
-            return (new Content())->getSlug($name);
+        $config->addTwigFilter("getSlug", static function ($name) {
+            return (new self())->getSlug($name);
         });
 
         //Add the theme component
         $config->addTwigGlobal("Theme", new Theme());
-
-        $snippets = $this->getSnippets();
-
-        foreach ($snippets as $id => $snippet) {
-            $config->addTwigGlobal($snippet->name, $this->parseContent($snippet->content));
-        }
     }
 
     /**
      * Get the tiny mce path
      * @return string
      */
-    public function getTinyMCEIncludePath () : string
+    public function getTinyMCEIncludePath(): string
     {
         $documentRoot = realpath("./"); //root path D:/projects/tina4cms
-        $contentPath = realpath(__DIR__."/../../"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
+        $contentPath = realpath(__DIR__ . "/../../"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
 
-        return  str_replace($documentRoot, "", $contentPath);
+        return str_replace($documentRoot, "", $contentPath);
     }
 
 
@@ -612,7 +616,8 @@ class Content extends \Tina4\Data
      * @return array[]
      * @throws ReflectionException
      */
-    public function getSiteMap() {
+    public function getSiteMap(): array
+    {
         $urls = [];
 
         $site = new Site();
@@ -623,14 +628,11 @@ class Content extends \Tina4\Data
              * @var Page $page
              */
             foreach ($pages as $pId => $page) {
-                $locs = ["loc" => $site->siteUrl."/content/".$page->slug, "lastmod" => str_replace(" ", "T", $page->dateModified)."+00:00"];
+                $locs = ["loc" => $site->siteUrl . "/content/" . $page->slug, "lastmod" => str_replace(" ", "T", $page->dateModified) . "+00:00"];
 
                 if (!empty($page->image)) {
                     if (!file_exists("./cache/images/og-{$page->slug}.png")) {
-                        if (!empty($page->image)) {
-                            $image = $site->siteUrl . "/cache/images/og-{$page->slug}.png";
-                            file_put_contents("./cache/images/og-{$page->slug}.png", base64_decode($page->image));
-                        }
+                        file_put_contents("./cache/images/og-{$page->slug}.png", base64_decode($page->image));
                     }
                     $image = $site->siteUrl . "/cache/images/og-{$page->slug}.png";
                     $locs["image:image"] = ["image:loc" => $image];
@@ -644,11 +646,11 @@ class Content extends \Tina4\Data
              * @var Article $article
              */
             foreach ($articles as $aId => $article) {
-                $locs = ["loc" => $site->siteUrl."/content/article/".$article->slug, "lastmod" => str_replace(" ", "T", $article->publishedDate)."+00:00"];
+                $locs = ["loc" => $site->siteUrl . "/content/article/" . $article->slug, "lastmod" => str_replace(" ", "T", $article->publishedDate) . "+00:00"];
                 if (!empty($article->image)) {
                     if (!file_exists("./cache/images/article-{$article->slug}.png")) {
                         if (!empty($article->image)) {
-                            $image = $site->siteUrl. "/cache/images/article-{$article->slug}.png";
+                            $image = $site->siteUrl . "/cache/images/article-{$article->slug}.png";
                             file_put_contents("./cache/images/article-{$article->slug}.png", base64_decode($article->image));
                         }
                     }
@@ -661,7 +663,7 @@ class Content extends \Tina4\Data
 
         }
 
-        return ['urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' => $urls ];
+        return ['urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' => $urls];
     }
 
     /**

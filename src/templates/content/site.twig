@@ -21,23 +21,39 @@
                 {"data": "description"},
                 {"data": "siteName"},
                 {"data": "siteUrl"},
+                {% if (not userRoles.Content.Site or userRoles.Content.Site.edit) or  (not userRoles.Content.Site or userRoles.Content.Site.delete) %}
                 {
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
+                        {% if (not userRoles.Content.Site or userRoles.Content.Site.edit) %}
                         html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/site/' + row.id + '?formToken={{ formToken("/api/admin/site") }}\')">Edit</button>';
+                        {% endif %}
+                        {% if (not userRoles.Content.Site or userRoles.Content.Site.delete) %}
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/site/' + row.id + '?formToken={{ formToken("/api/admin/site") }}\');}">Del</button>';
+                        {% endif %}
                         return html;
 
                     },
                     "sClass": "text-right",
                     "searchable": false
                 }
+                {% endif %}
 
             ],
             processing: true,
             serverSide: true,
             responsive: true,
             buttons: [
+                {% if (not userRoles.Content.Site or userRoles.Content.Site.create) %}
+                {
+                    text: 'Create',
+                    action: function (e, dt, node, config) {
+                        let data = {};
+                        showForm('create', '/api/admin/site/form?formToken={{ formToken("/api/admin/site") }}');
+                    }
+                },
+                {% endif %}
                 'copy', 'excel', 'pdf', 'print'
 
             ]

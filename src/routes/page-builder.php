@@ -126,12 +126,9 @@
 });
 
 \Tina4\Get::add("/cms/page-builder/cms-snippets/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
-
-
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         $template = (new Snippet());
-        $template->id = $request->params["id"];
-        $template->load();
+        $template->load("name = ?", [$request->params["id"]]);
         $html = \Tina4\renderTemplate($template->content);
     } else {
         $html = "Choose template to render";

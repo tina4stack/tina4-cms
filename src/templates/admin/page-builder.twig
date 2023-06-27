@@ -1,3 +1,4 @@
+{% set title = "Page Builder" %}
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
     <link rel="stylesheet" type="text/css" href="/css/default.css">
@@ -119,6 +120,21 @@
         // editor.on('save', (event) => {
         //    console.log('Page loading', event, event.page.getHtml());
         //});
+
+        editor.on('rte:enable', () => {
+
+
+        });
+
+        const rte = editor.RichTextEditor;
+        rte.add('openai', {
+            icon: '<b>C</b>',
+            attributes: {title: 'AI Enhance'},
+            result: function (rte) {
+                console.log (rte, rte.selection().toString());
+                rte.el.innerHTML = 'PL';
+            }
+        });
 
 
         // Get the BlockManager module first

@@ -48,7 +48,7 @@ class Theme
             $templates = $_SESSION["tina4-cms:twigViews"];
         }
 
-        $re = '/twig-view="(.*)"(.*)Twig Template<\/(span|div|ul)>/mUs';;
+        $re = '/twig-view="(.*)"(.*)Twig Template<\/(span|div|ul)>/mUs';
 
         preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
 
@@ -59,16 +59,33 @@ class Theme
             $content = str_replace($match[0], $matchText, $content);
         }
 
+        $re = '/cms-snippet="(.*)"(.*)Snippet<\/(span|div|ul)>/mUs';
+
+        preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
+
+        foreach ($matches as $id => $match) {
+            $matchText = $match[0];
+            $id = trim($match[1]);
+            $matchText = str_replace("Snippet", '{{ include(getSnippet("'.$id.'")) }}', $matchText);
+            $content = str_replace($match[0], $matchText, $content);
+        }
+
         return $content;
     }
 
-    public function getCMSSnippets()
+
+    /**
+     * Gets all the CMS snippets
+     * @return array
+     * @throws ReflectionException
+     */
+    public function getCMSSnippets(): array
     {
         $snippets = [];
         $snippetData = (new Snippet())->select("id,name", 10000)->asArray();
 
         foreach ($snippetData as $id => $record) {
-            $snippets[] = ["id" => $record["id"], "title" => $record["name"]];
+            $snippets[] = ["id" => $record["name"], "title" => $record["name"]];
         }
 
         return $snippets;
@@ -82,7 +99,7 @@ class Theme
 
     private function deployCss()
     {
-        \Tina4\Utilities::getFiles();
+        (new Tina4\Utilities)->getFiles();
     }
 
     /**

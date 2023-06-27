@@ -1,0 +1,1 @@
+alter table site add open_ai_key varchar(200) default '';

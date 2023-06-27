@@ -3,7 +3,7 @@ blockManager.add('common-div', {
     label: 'Div',
     media: `
     `,
-    content: { type: 'div' , content: ``}
+    content: `<div></div>`
 });
 
 blockManager.add('common-p', {

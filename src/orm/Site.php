@@ -33,4 +33,6 @@ class Site extends \Tina4\ORM
     public $pageBuilderStyles;
     public $pageBuilderAssets;
     public $pageLayout;
+
+    public $openAiKey;
 }

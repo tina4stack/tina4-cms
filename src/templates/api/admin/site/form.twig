@@ -80,6 +80,10 @@
             <label for="smtpPassword">Smtp Password</label>
             <input class="form-control" type="password" name="smtpPassword" placeholder="Smtp Password" value="{{ data.smtpPassword }}">
         </div>
+        <div class="form-group col-md-6">
+            <label for="openAiKey">Open AI Key</label>
+            <input class="form-control" type="password" name="openAiKey" placeholder="Open AI Key" value="{{ data.openAiKey }}">
+        </div>
     </div>
     {{"siteForm" | formToken | raw }}
 </form>
