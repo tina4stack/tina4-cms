@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7368cef81b83639a6cbe5a022ad19c82",
+    "content-hash": "c3c55b85d9c56110ba3fc55e87b8743d",
     "packages": [
         {
             "name": "coyl/git",
@@ -4574,6 +4574,52 @@
                 }
             ],
             "time": "2021-07-28T10:34:58+00:00"
+        },
+        {
+            "name": "tina4stack/tina4php-firebird",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tina4stack/tina4php-firebird.git",
+                "reference": "ce83d0bf4dc143bfe23ae179d69c93a01d610ad5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tina4stack/tina4php-firebird/zipball/ce83d0bf4dc143bfe23ae179d69c93a01d610ad5",
+                "reference": "ce83d0bf4dc143bfe23ae179d69c93a01d610ad5",
+                "shasum": ""
+            },
+            "require": {
+                "ext-interbase": "*",
+                "tina4stack/tina4php-database": "^2.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.2",
+                "overtrue/phplint": "^2.0",
+                "phpunit/phpunit": "^9",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tina4\\": [
+                        "Tina4/"
+                    ]
+                },
+                "classmap": [
+                    "Tina4/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Tina4 PHP Firebird Database Driver",
+            "support": {
+                "issues": "https://github.com/tina4stack/tina4php-firebird/issues",
+                "source": "https://github.com/tina4stack/tina4php-firebird/tree/v2.0.4"
+            },
+            "time": "2022-12-21T09:49:51+00:00"
         },
         {
             "name": "tina4stack/tina4php-sqlite3",

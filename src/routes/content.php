@@ -23,7 +23,9 @@
         $template = "themes/{$site->theme}/page.twig";
     }
 
-    $site->custom = html_entity_decode($site->custom);
+    if (!empty($site->custom)) {
+        $site->custom = html_entity_decode($site->custom);
+    }
 
     $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
 

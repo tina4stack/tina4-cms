@@ -1,6 +1,6 @@
 CREATE TABLE article
 (
-    id             integer ,
+    id             integer default 0 not null,
     published_date date          DEFAULT NULL,
     title          varchar(500)  DEFAULT '',
     description    varchar(1000) DEFAULT '',
@@ -18,7 +18,7 @@ CREATE TABLE article
 
 CREATE TABLE article_article_category
 (
-    id                  integer ,
+    id                  integer default 0 not null,
     article_id          integer   DEFAULT 0,
     article_category_id integer   DEFAULT 0,
     date_created        timestamp default 'now',
@@ -28,7 +28,7 @@ CREATE TABLE article_article_category
 
 CREATE TABLE article_category
 (
-    id            integer ,
+    id            integer default 0 not null ,
     name          varchar(200) DEFAULT '',
     is_active     integer      DEFAULT 1,
     parent_id     integer      DEFAULT 0,
@@ -40,12 +40,11 @@ CREATE TABLE article_category
     primary key (id)
 );
 
-insert into article_category(id, name, is_active)
-values (1, 'Root', 0);
 
-CREATE TABLE page
+
+CREATE TABLE "PAGE"
 (
-    id            integer ,
+    id            integer default 0 not null,
     name          varchar(200)  DEFAULT '',
     title         varchar(500)  DEFAULT '',
     description   varchar(1000) DEFAULT '',
@@ -61,12 +60,10 @@ CREATE TABLE page
     primary key (id)
 );
 
-insert into page (id, name, description, title, content, slug, date_created)
-values (1, 'home', 'Example Home Page', 'Home Page', 'Hello World!', 'home', '2021-01-01 00:00');
 
 create table snippet
 (
-    id            integer ,
+    id            integer default 0 not null,
     name          varchar(200)  DEFAULT '',
     description   varchar(1000) DEFAULT '',
     content       blob sub_type 0,
@@ -77,7 +74,7 @@ create table snippet
 
 create table users
 (
-    id            integer ,
+    id            integer default 0 not null,
     first_name    varchar(100) default '',
     last_name     varchar(100) default '',
     email         varchar(400) default '',
@@ -91,7 +88,7 @@ create table users
 
 create table site
 (
-    id            integer ,
+    id            integer default 1 not null ,
     site_name     varchar(200) default '',
     site_url      varchar(200) default '',
     description   blob sub_type 0,
@@ -113,7 +110,7 @@ create table site
 
 CREATE TABLE menu
 (
-    id             integer ,
+    id             integer default 0 not null,
     name           varchar(200) DEFAULT '',
     is_active      integer      DEFAULT 1,
     parent_id      integer      DEFAULT 0,
@@ -125,12 +122,11 @@ CREATE TABLE menu
     primary key (id)
 );
 
-insert into menu(name, is_active)
-values ('Root', 0);
+
 
 create table role
 (
-    id            integer ,
+    id            integer default 0 not null,
     name          varchar(200) DEFAULT '',
     role_info     blob sub_type 0,
     date_created  timestamp    default 'now',
@@ -140,7 +136,7 @@ create table role
 
 create table email_template
 (
-    id            integer ,
+    id            integer default 0 not null ,
     name          varchar(1000),
     description   varchar(1000),
     content       blob sub_type 0,
@@ -151,7 +147,7 @@ create table email_template
 
 create table css
 (
-    id            integer ,
+    id            integer  default 0 not null,
     name          varchar(200) DEFAULT '',
     content       blob sub_type 0,
     is_active     integer      default 1,
