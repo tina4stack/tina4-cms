@@ -21,7 +21,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "tina4stack/tina4php": "dev-master",
+        "tina4stack/tina4php": "^2.0",
         "ext-json": "*"
     },
     "scripts": {
