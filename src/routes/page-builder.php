@@ -25,9 +25,9 @@
     if (!empty($site->pageLayout)) {
         $pageBuilderContent = json_decode($site->pageLayout);
         $components = $pageBuilderContent->frames[0]->component;
-        $pages[] = ["id" => "layout", "component" => $components];
+        // $pages[] = ["id" => "layout", "component" => $components];
     } else {
-        $pages[] = ["id" => "layout"];
+        // $pages[] = ["id" => "layout"];
     }
 
 
