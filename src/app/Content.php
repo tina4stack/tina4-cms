@@ -45,12 +45,13 @@ class Content extends Data
     /**
      * Get security attribute
      * @param string|null $name
-     * @param int $roleId
+     * @param int|null $roleId
      * @return mixed|void
      */
-    public function getSecurityAttribute(string $name = null, int $roleId = 1)
+    public function getSecurityAttribute(string $name = null, int $roleId = null)
     {
         $name = $name ?? "";
+        $roleId = $roleId ?? 1;
         $role = new Role();
         if ($role->load("id = {$roleId}")) {
             $roles = unserialize($role->roleInfo);
@@ -555,6 +556,16 @@ class Content extends Data
         if (!$DBA->tableExists("article")) {
             \Tina4\Debug::message("Running migrations...on " . realpath(__DIR__ . "/../../migrations"));
             (new \Tina4\Migration(__DIR__ . "/../../migrations"))->doMigration();
+        }
+
+        $checkSite = new Site();
+        if (!$checkSite->load("id = 1")) {
+            $checkSite->id = 1;
+            $checkSite->siteName = "Tina4 CMS";
+            $checkSite->description = "My first CMS";
+            $checkSite->siteUrl = "https://".$_SERVER["HTTP_HOST"];
+            $checkSite->theme = "default";
+            $checkSite->save();
         }
 
         $config->addTwigGlobal("Content", new Content());

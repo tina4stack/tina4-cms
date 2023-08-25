@@ -21,7 +21,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "tina4stack/tina4php": "dev-master",
+        "tina4stack/tina4php": "^2.0",
         "ext-json": "*"
     },
     "scripts": {
@@ -44,6 +44,7 @@
         "phpunit/phpunit": "^9",
         "overtrue/phplint": "^2.0",
         "tina4stack/tina4php-sqlite3": "^2.0",
-        "phpmetrics/phpmetrics": "^2.8"
+        "phpmetrics/phpmetrics": "^2.8",
+        "tina4stack/tina4php-firebird": "^2.0"
     }
 }

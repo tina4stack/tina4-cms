@@ -13,16 +13,6 @@
  */
 \Tina4\Crud::route ("/api/admin/site", new Site(), function ($action, Site $site, $filter, \Tina4\Request $request) {
 
-    $checkSite = new Site();
-    if (!$checkSite->load("id = 1")) {
-        $checkSite->id = 1;
-        $checkSite->siteName = "Tina4 CMS";
-        $checkSite->description = "My first CMS";
-        $checkSite->siteUrl = "https://".$_SERVER["HTTP_HOST"];
-        $checkSite->theme = "default";
-        $checkSite->save();
-    }
-
     switch ($action) {
        case "form":
        case "fetch":
