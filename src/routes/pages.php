@@ -11,8 +11,11 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/pages", new Page(), function ($action, Page $page, $filter, \Tina4\Request $request) {
-    if (isset($request->params["websiteId"])) {
-        $websiteId = $request->params["websiteId"];
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
     }
 
     switch ($action) {
@@ -20,18 +23,18 @@
        case "fetch":
             //Return back a form to be submitted to the create
 
-            $snippets = (new Snippet())->select("id,name", 1000)->orderBy("name")->asArray();
+            $snippets = (new Snippet())->select("id,name", 1000)->where("site_id = $siteId")->orderBy("name")->asArray();
 
-            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id != 1 and is_active = 1")->orderBy("name")->asArray();
+            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id != 1 and is_active = 1 and site_id = {$siteId}")->orderBy("name")->asArray();
 
             if ($action == "form") {
                 $title = "Add Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages";
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["snippets" => $snippets, "articleCategories" => $articleCategories]);
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId]);
             } else {
                 $title = "Edit Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages/".$page->id;
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets, "articleCategories" => $articleCategories]);
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#pageForm').valid() ) { saveForm('pageForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
@@ -43,6 +46,10 @@
                 $where = "{$filter["where"]}";
             } else {
                 $where = "1 = 1";
+            }
+
+            if (!empty($siteId)) {
+                $where .= " and site_id = {$siteId}";
             }
 
             return   $page->select ("*", $filter["length"], $filter["start"])

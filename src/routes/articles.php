@@ -11,13 +11,20 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/articles", new Article(), function ($action, Article $article, $filter, $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     switch ($action) {
        case "form":
        case "fetch":
             //Return back a form to be submitted to the create
             $articleCategories = (new ArticleCategory())
                 ->select('id,name,parent_id,is_menu,display_order', 100)
-                ->where("id = 1")
+                ->where("site_id = {$siteId}")
                 ->filter(function($record){
                     $article = new ArticleCategory();
                     $article->load("id = {$record->parentId}");
@@ -31,11 +38,11 @@
             if ($action == "form") {
                 $title = "Add Article";
                 $savePath =  TINA4_BASE_URL . "/api/admin/articles";
-                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ['categories' => $articleCategories, "snippets" => $snippets]);
+                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ['categories' => $articleCategories, "snippets" => $snippets, "siteId" => $siteId]);
             } else {
                 $title = "Edit Article";
                 $savePath =  TINA4_BASE_URL . "/api/admin/articles/".$article->id;
-                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ["data" => $article, 'categories' => $articleCategories, "snippets" => $snippets]);
+                $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ["data" => $article, 'categories' => $articleCategories, "snippets" => $snippets, "siteId" => $siteId]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#articleForm').valid() ) { saveForm('articleForm', '" .$savePath."', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
@@ -49,7 +56,10 @@
                 $where = " 1 = 1";
             }
 
-          
+
+            if (!empty($siteId)) {
+                $where .= " and site_id = {$siteId}";
+            }
 
             $articles =   $article->select ("id, published_date, title, description, author, is_published", $filter["length"], $filter["start"])
                 ->where("{$where}")

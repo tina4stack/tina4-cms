@@ -30,5 +30,6 @@
             <input class="form-control" type="checkbox" name="isActive" value="1" {%  if (data.isActive == 1 ) %} checked {% endif%} >
         </div>
     </div>
+    <input type="hidden" name="siteId" value="{{ siteId }}">
     {{ "usersForm" | formToken | raw }}
 </form>

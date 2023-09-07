@@ -11,6 +11,13 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/email-templates", new EmailTemplate(), function ($action, EmailTemplate $emailTemplate, $filter, \Tina4\Request $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     switch ($action) {
        case "form":
        case "fetch":
@@ -19,22 +26,23 @@
             if ($action == "form") {
                 $title = "Add Email Template";
                 $savePath =  TINA4_BASE_URL . "/api/admin/email-templates";
-                $content = \Tina4\renderTemplate("/api/admin/emailTemplates/form.twig", []);
+                $content = \Tina4\renderTemplate("/api/admin/emailTemplates/form.twig", ["siteId" => $siteId]);
             } else {
                 $title = "Edit Email Template";
                 $savePath =  TINA4_BASE_URL . "/api/admin/email-templates/".$emailTemplate->id;
-                $content = \Tina4\renderTemplate("/api/admin/emailTemplates/form.twig", ["data" => $emailTemplate]);
+                $content = \Tina4\renderTemplate("/api/admin/emailTemplates/form.twig", ["data" => $emailTemplate, "siteId" => $siteId]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#emailtemplateForm').valid() ) { saveForm('emailtemplateForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "";
+            $where = "site_id = {$siteId}";
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
+                $where .= " and site_id = {$siteId}";
             }
-        
+
             return   $emailTemplate->select ("*", $filter["length"], $filter["start"])
                 ->where("{$where}")
                 ->orderBy($filter["orderBy"])

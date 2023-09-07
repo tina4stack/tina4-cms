@@ -1,6 +1,13 @@
 <?php
 
 
+\Tina4\Post::add("/cms/site/set", function (\Tina4\Response $response, \Tina4\Request $request){
+    $_SESSION["siteId"] = $request->params["siteId"];
+    \Tina4\redirect("/cms/dashboard");
+});
+
+
+
 \Tina4\Get::add("/cms/site", function (\Tina4\Response $response){
     return $response (\Tina4\renderTemplate("/content/site.twig"), HTTP_OK, TEXT_HTML);
 });
@@ -19,7 +26,9 @@
             //Return back a form to be submitted to the create
             $themes = (new Theme())->getThemes();
 
-            $site->custom = html_entity_decode($site->custom);
+            if (!empty($site->custom)) {
+                $site->custom = html_entity_decode($site->custom);
+            }
 
             if ($action == "form") {
                 $title = "Add Site";

@@ -1,6 +1,13 @@
 <?php
 
 \Tina4\Get::add("/", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
+    {
+        $siteId = $request->$request->session["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     $pageName = "home";
     $content = (new Content())->getPage($pageName);
 
@@ -19,7 +26,7 @@
     $template = "content.twig";
     $site = new Site();
 
-    if ($site->load("id = 1") && !empty($site->theme)) {
+    if ($site->load("id = $siteId") && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 
@@ -27,15 +34,22 @@
         $site->custom = html_entity_decode($site->custom);
     }
 
-    $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
+    $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords, "siteId" => $siteId]);
 
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
 \Tina4\Get::add("robots.txt", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
+    {
+        $siteId = $request->$request->session["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     $robotText = "User-agent: *\nDisallow: /\n";
     $site = new Site();
-    if ($site->load("id = 1") && $site->allowCrawlers) {
+    if ($site->load("id = $siteId") && $site->allowCrawlers) {
         $robotText = "User-agent: *\nDisallow: /cms/\nSitemap: /sitemap.xml";
     }
 
@@ -43,9 +57,16 @@
 });
 
 \Tina4\Get::add("sitemap.xml", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
+    {
+        $siteId = $request->$request->session["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     $siteMap = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></sitemapindex>';
     $site = new Site();
-    if ($site->load("id = 1") && $site->allowCrawlers) {
+    if ($site->load("id = $siteId") && $site->allowCrawlers) {
         $siteMap = (new Content())->getSiteMap();
     }
 
@@ -54,6 +75,13 @@
 
 
 \Tina4\Get::add("/content/{pageName}", static function ($pageName, \Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
+    {
+        $siteId = $request->$request->session["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     $content = (new Content())->getPage($pageName);
     $pageMeta = (new Content())->getPageMeta($pageName);
 
@@ -70,17 +98,27 @@
 
     $template = "content.twig";
     $site = new Site();
-    if ($site->load("id = 1") && !empty($site->theme)) {
+    if ($site->load("id = $siteId") && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 
-    $site->custom = html_entity_decode($site->custom);
+    if (!empty($site->custom)) {
+        $site->custom = html_entity_decode($site->custom);
+    }
+
     $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
 
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 
 \Tina4\Get::add("/content/article/{slug}", function ($slug, \Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
+    {
+        $siteId = $request->$request->session["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     $content = (new Content())->getArticle($slug);
     $articleMeta = (new Content())->getArticleMeta($slug);
 
@@ -97,7 +135,7 @@
 
     $template = "content.twig";
     $site = new Site();
-    if ($site->load("id = 1") && !empty($site->theme)) {
+    if ($site->load("id = $siteId") && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 
@@ -106,6 +144,12 @@
 });
 
 \Tina4\Get::add("/content/tags/{tag}", function ($tag, \Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
+    {
+        $siteId = $request->$request->session["siteId"];
+    } else {
+        $siteId = 1;
+    }
 
     if (!isset($request->params["limit"])) {
         $limit = 4;
@@ -151,7 +195,7 @@
 
     $template = "content.twig";
     $site = new Site();
-    if ($site->load("id = 1") && !empty($site->theme)) {
+    if ($site->load("id = $siteId") && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 
@@ -160,11 +204,18 @@
 });
 
 \Tina4\Get::add("/content/categories/{category}", function ($category, \Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
+    {
+        $siteId = $request->$request->session["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     $content = (new Content())->getArticlesByCategory($category);
 
     $template = "content.twig";
     $site = new Site();
-    if ($site->load("id = 1") && !empty($site->theme)) {
+    if ($site->load("id = $siteId") && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 

@@ -12,6 +12,13 @@
  * DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route("/api/admin/css", new Css(), function ($action, Css $css, $filter, \Tina4\Request $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     switch ($action) {
         case "form":
         case "fetch":
@@ -19,21 +26,26 @@
             if ($action == "form") {
                 $title = "Add Css";
                 $savePath = TINA4_SUB_FOLDER . "/api/admin/css";
-                $content = \Tina4\renderTemplate("/api/admin/css/form.twig", []);
+                $content = \Tina4\renderTemplate("/api/admin/css/form.twig", ["siteId" => $siteId]);
             } else {
                 $title = "Edit Css";
                 $savePath = TINA4_SUB_FOLDER . "/api/admin/css/" . $css->id;
-                $content = \Tina4\renderTemplate("/api/admin/css/form.twig", ["data" => $css]);
+                $content = \Tina4\renderTemplate("/api/admin/css/form.twig", ["data" => $css, "siteId" => $siteId]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#cssForm').valid() ) { saveForm('cssForm', '" . $savePath . "', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
             break;
         case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "";
+            $where = "site_id = {$siteId}";
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
+                if (!empty($siteId)) {
+                    $where .= " and site_id = {$siteId}";
+                }
             }
+
+
 
             return $css->select("*", $filter["length"], $filter["start"])
                 ->where("{$where}")

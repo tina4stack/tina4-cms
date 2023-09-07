@@ -12,7 +12,6 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/roles", new Role(), static function ($action, Role $role, $filter, \Tina4\Request $request) {
-
     switch ($action) {
        case "form":
        case "fetch":
@@ -37,7 +36,7 @@
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
             }
-        
+
             return   $role->select ("*", $filter["length"], $filter["start"])
                 ->where("{$where}")
                 ->orderBy($filter["orderBy"])

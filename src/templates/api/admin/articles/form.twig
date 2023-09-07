@@ -47,5 +47,6 @@
             {% include "tagLookup.twig" %}
         </div>
     </div>
+    <input type="hidden" name="siteId" value="{{ siteId }}">
     {{  "articleForm" | formToken | raw }}
 </form>

@@ -11,7 +11,28 @@ POST @ /path, /path/{id} - create & update
 DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/article-categories", new ArticleCategory(), function ($action, ArticleCategory $articleCategory, $filter, $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+
+        //Check for the default Root article category
+        $articleCategoryCheck = new ArticleCategory();
+        if (!$articleCategoryCheck->load("name = 'Root' and site_id = {$siteId}"))
+        {
+            $articleCategoryCheck->name = "Root";
+            $articleCategoryCheck->siteId = $siteId;
+            $articleCategoryCheck->isActive = 0;
+            $articleCategoryCheck->isMenu = 0;
+            $articleCategoryCheck->parentId = 0;
+            $articleCategoryCheck->save();
+        }
+
+    } else {
+        $siteId = 1;
+    }
+
     $categories = (new ArticleCategory())->select("id,name,parent_id,slug,is_menu,is_active,display_order")
+        ->where("site_id = {$siteId}")
         ->filter(function($record){
             $article = new ArticleCategory();
             $article->load("id = {$record->parentId}");
@@ -22,23 +43,25 @@ DELETE @ /path/{id} - delete for single
         case "form":
             //Return back a form to be submitted to the create
 
-            $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig", ["categories" => $categories]);
+            $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig", ["categories" => $categories, "siteId" => $siteId]);
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => "Add Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
             break;
         case "fetch":
             //Return back a form to be submitted to the create
 
-            $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig",["data" => $articleCategory, "categories" => $categories]);
+            $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig",["data" => $articleCategory, "categories" => $categories, "siteId" => $siteId]);
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => "Edit Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories/{$articleCategory->id}', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
             break;
         case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "";
+            $where = "site_id = {$siteId}";
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
+                $where .= " and site_id = {$siteId}";
             }
+
 
             return   $articleCategory->select ("id,name,parent_id,slug,is_menu,is_active,display_order", $filter["length"], $filter["start"])
                 ->where("{$where}")

@@ -10,7 +10,26 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/menus", new Menu(), function ($action, Menu $menu, $filter, \Tina4\Request $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+
+        $menuCheck = new Menu();
+        if (!$menuCheck->load("name = 'Root' and site_id = {$siteId}"))
+        {
+            $menuCheck->name = "Root";
+            $menuCheck->siteId = $siteId;
+            $menuCheck->isActive = 0;
+            $menuCheck->parentId = 0;
+            $menuCheck->save();
+        }
+
+    } else {
+        $siteId = 1;
+    }
+
     $categories = (new Menu())->select("id,name,parent_id,slug,specific_route,is_active,display_order")
+        ->where("site_id = {$siteId}")
         ->filter(function($record){
             $menuItem = new Menu();
             $menuItem->load("id = {$record->parentId}");
@@ -26,20 +45,21 @@
             if ($action == "form") {
                 $title = "Add Menu";
                 $savePath =  TINA4_SUB_FOLDER . "/api/admin/menus";
-                $content = \Tina4\renderTemplate("/api/admin/menus/form.twig",  ["categories" => $categories]);
+                $content = \Tina4\renderTemplate("/api/admin/menus/form.twig",  ["categories" => $categories, "siteId" => $siteId]);
             } else {
                 $title = "Edit Menu";
                 $savePath =  TINA4_SUB_FOLDER . "/api/admin/menus/".$menu->id;
-                $content = \Tina4\renderTemplate("/api/admin/menus/form.twig", ["data" => $menu, "categories" => $categories]);
+                $content = \Tina4\renderTemplate("/api/admin/menus/form.twig", ["data" => $menu, "categories" => $categories, "siteId" => $siteId]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#menuForm').valid() ) { saveForm('menuForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "";
+            $where = "site_id = {$siteId}";
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
+                $where .= " and site_id = {$siteId}";
             }
         
             return   $menu->select ("*", $filter["length"], $filter["start"])

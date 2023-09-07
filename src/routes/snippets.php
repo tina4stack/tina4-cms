@@ -12,6 +12,13 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/snippets", new Snippet(), function ($action, Snippet $snippet, $filter, \Tina4\Request $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     switch ($action) {
        case "form":
        case "fetch":
@@ -20,11 +27,11 @@
             if ($action == "form") {
                 $title = "Add Snippet";
                 $savePath =  TINA4_BASE_URL . "/api/admin/snippets";
-                $content = \Tina4\renderTemplate("/api/admin/snippets/form.twig", []);
+                $content = \Tina4\renderTemplate("/api/admin/snippets/form.twig", ["siteId" => $siteId]);
             } else {
                 $title = "Edit Snippet";
                 $savePath =  TINA4_BASE_URL . "/api/admin/snippets/".$snippet->id;
-                $content = \Tina4\renderTemplate("/api/admin/snippets/form.twig", ["data" => $snippet]);
+                $content = \Tina4\renderTemplate("/api/admin/snippets/form.twig", ["data" => $snippet, "siteId" => $siteId]);
             }
 
 
@@ -32,11 +39,12 @@
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "";
+            $where = "site_id = {$siteId}";
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
+                $where .= " and site_id = {$siteId}";
             }
-        
+
             return   $snippet->select ("*", $filter["length"], $filter["start"])
                 ->where("{$where}")
                 ->orderBy($filter["orderBy"])

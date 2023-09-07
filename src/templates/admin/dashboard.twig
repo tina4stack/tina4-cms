@@ -229,7 +229,22 @@
                     <li class="nav-item"><a class="nav-link" href="/cms/login">Login</a></li>
                 {% endif %}
             </ul>
+
         </div>
+        {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
+            <div id="siteDropDown" style="float: right">
+                <label for="siteId">Choose Site</label>
+                <form id="setSite" action="/cms/site/set" method="post">
+                    <select id="siteId" name="siteId" class="form-control" style=" width: 140px" onchange="document.getElementById('setSite').submit()">
+                        {% for listSite in sites %}
+                            <option value="{{ listSite.id }}" {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
+                </form>
+
+            </div>
+        {% endif %}
     </nav>
 {% endblock %}
 {% block content %}

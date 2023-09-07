@@ -20,7 +20,7 @@
         articleGrid = $('#articleGrid').DataTable({
             order: [[0, "desc"]],
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '/api/admin/articles?formToken={{ formToken("/api/admin/articles") }}',
+            ajax: '/api/admin/articles?formToken={{ formToken("/api/admin/articles") }}&siteId={{ session.siteId }}',
             columns: [
                 {"data": "id"},
                 {"data": "publishedDate"},
@@ -38,10 +38,10 @@
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
                         {% if (not userRoles.Content.Articles or userRoles.Content.Articles.edit) %}
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/articles/' + row.id + '?formToken={{ formToken("/api/admin/articles") }}\')">Edit</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/articles/' + row.id + '?formToken={{ formToken("/api/admin/articles") }}&siteId={{ session.siteId }}\')">Edit</button>';
                         {% endif %}
                         {% if (not userRoles.Content.Articles or userRoles.Content.Articles.delete) %}
-                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/articles/' + row.id + '?formToken={{ formToken("/api/admin/articles") }}\');}">Del</button>';
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/articles/' + row.id + '?formToken={{ formToken("/api/admin/articles") }}&siteId={{ session.siteId }}\');}">Del</button>';
                         {% endif %}
                         return html;
 
@@ -61,7 +61,7 @@
                     text: 'Create',
                     action: function (e, dt, node, config) {
                         let data = {};
-                        showForm('create', '/api/admin/articles/form?formToken={{ formToken("/api/admin/articles") }}');
+                        showForm('create', '/api/admin/articles/form?formToken={{ formToken("/api/admin/articles") }}&siteId={{ session.siteId }}');
                     }
                 },
                 {% endif %}

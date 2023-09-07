@@ -141,7 +141,10 @@
         $menuItems = (new Content())->getCmsMenus();
         $themes = (new Theme())->getThemes();
         $site = (new Content())->getSite();
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "themes" => $themes]));
+        $sites = (new Content())->getSites();
+
+
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes]));
     }
 });
 
@@ -168,6 +171,7 @@
         if ($user->load("email = ?", [$request->params["email"]])) {
             if (password_verify($request->params["password"],$user->password)) {
                 $_SESSION["user"] = $user->asArray();
+                $_SESSION["siteId"] = $user->siteId;
                 \Tina4\redirect("/cms/dashboard");
             } else {
                 \Tina4\redirect("/cms/login?error=Invalid password");

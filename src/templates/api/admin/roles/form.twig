@@ -9,7 +9,7 @@
         <div class="form-group col-md-12">
             {% set roles = Content.getSecurityAttribute() %}
             {% for category, roleData in roles %}
-                <h5>{{category}} Permissions</h5>
+                <h5>{{category}} Permissions  </h5><a href="#" onclick="selectAll()">Select All</a> | <a href="#" onclick="selectNone()">Select None</a>
                 <div class="row">
                     {% for roleName, role in roleData %}
                         <div class="col-md-3">
@@ -26,6 +26,23 @@
                 </div>
             {% endfor %}
         </div>
+        <script type="text/javascript">
+            function selectAll(){
+                let ele=document.getElementsByTagName('input');
+                for(let i=0; i<ele.length; i++){
+                    if(ele[i].type=='checkbox')
+                        ele[i].checked=true;
+                }
+            }
+            function selectNone(){
+                let ele=document.getElementsByTagName('input');
+                for(let i=0; i<ele.length; i++){
+                    if(ele[i].type=='checkbox')
+                        ele[i].checked=false;
+
+                }
+            }
+        </script>
 
     </div>
     {{ "roleForm" | formToken | raw }}

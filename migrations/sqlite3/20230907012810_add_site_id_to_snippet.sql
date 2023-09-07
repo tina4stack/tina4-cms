@@ -1,0 +1,1 @@
+alter table snippet add site_id integer not null default 1 references site(id) on update cascade on delete cascade;

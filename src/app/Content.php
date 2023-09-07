@@ -339,13 +339,20 @@ class Content extends Data
      */
     public function getCategories(int $articleId = null, string $parentId = ""): string
     {
+        if (!empty($_SESSION["siteId"]))
+        {
+            $siteId = $_SESSION["siteId"];
+        } else {
+            $siteId = 1;
+        }
+
         $articleId = $articleId ?? 1;
         if (empty($articleId)) $articleId = 1;
         $html = "";
         if (!empty($parentId)) {
-            $filter = "where parent_id = {$parentId} and is_active = 1 ";
+            $filter = "where parent_id = {$parentId} and is_active = 1  and site_id = {$siteId}";
         } else {
-            $filter = "where parent_id = 1 and is_active = 1 ";
+            $filter = "where parent_id = (select id from article_category where name = 'Root' and site_id = {$siteId}) and is_active = 1 and site_id = {$siteId}";
         }
         $sql = "select a.*,
                        (select count(id) from article_category where parent_id = a.id) as has_children,
@@ -387,11 +394,17 @@ class Content extends Data
      */
     public function getMenu(string $parentId = null, int $level = 0): array
     {
+        if (!empty($_SESSION["siteId"]))
+        {
+            $siteId = $_SESSION["siteId"];
+        } else {
+            $siteId = 1;
+        }
         $parentId = $parentId ?? "";
         if (!empty($parentId)) {
-            $filter = "where parent_id = {$parentId} and is_active = 1 ";
+            $filter = "where parent_id = {$parentId} and is_active = 1 and site_id = {$siteId}";
         } else {
-            $filter = "where parent_id = 1 and is_active = 1 ";
+            $filter = "where parent_id = 1 and is_active = 1 and site_id = {$siteId} ";
         }
         $sql = "select a.*,(select count(id) from menu where parent_id = a.id) as has_children from menu a {$filter} order by display_order asc";
 
@@ -683,11 +696,29 @@ class Content extends Data
      */
     public function getSite(): ?Site
     {
+        if (!empty($_SESSION["siteId"]))
+        {
+            $siteId = $_SESSION["siteId"];
+        } else {
+            $siteId = 1;
+        }
+
         $site = new Site();
-        if ($site->load("id = 1")) {
+        if ($site->load("id = $siteId")) {
             return $site;
         }
 
         return null;
+    }
+
+    /**
+     * Gets all the sites
+     * @return void
+     * @throws ReflectionException
+     */
+    public function getSites()
+    {
+        $site = new Site();
+        return $site->select("*", 10000)->asArray();
     }
 }

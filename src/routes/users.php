@@ -12,6 +12,13 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/users", new Users(), function ($action, Users $users, $filter, \Tina4\Request $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
     switch ($action) {
        case "form":
        case "fetch":
@@ -20,20 +27,21 @@
             if ($action == "form") {
                 $title = "Add Users";
                 $savePath =  TINA4_BASE_URL . "/api/admin/users";
-                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", ["roles" => $roles]);
+                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", ["roles" => $roles, "siteId" => $siteId]);
             } else {
                 $title = "Edit Users";
                 $savePath =  TINA4_BASE_URL . "/api/admin/users/".$users->id;
-                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", ["data" => $users, "roles" => $roles]);
+                $content = \Tina4\renderTemplate("/api/admin/users/form.twig", ["data" => $users, "roles" => $roles, "siteId" => $siteId]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#usersForm').valid() ) { saveForm('usersForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "";
+            $where = "site_id = {$siteId}";
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
+                $where .= " and site_id = {$siteId}";
             }
         
             return   $users->select ("*", $filter["length"], $filter["start"])
