@@ -3,7 +3,7 @@
 \Tina4\Get::add("/", static function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
     {
-        $siteId = $request->$request->session["siteId"];
+        $siteId = $request->session["siteId"];
     } else {
         $siteId = 1;
     }
@@ -36,7 +36,7 @@
 
     $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords, "siteId" => $siteId]);
 
-    return $response ($html, HTTP_OK, TEXT_HTML);
+    return $response($html, HTTP_OK, TEXT_HTML);
 });
 
 \Tina4\Get::add("robots.txt", static function (\Tina4\Response $response, \Tina4\Request $request) {
