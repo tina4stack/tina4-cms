@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3c55b85d9c56110ba3fc55e87b8743d",
+    "content-hash": "7abb27bcaf2c63045c083db6c0a72a2f",
     "packages": [
         {
             "name": "coyl/git",
@@ -616,16 +616,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.44",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "aadc3b545b50a9fefbf60b38dd85e6d790fc5377"
+                "reference": "f1cf483dceb1d57dd723bd3c3bb3b8911849894b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/aadc3b545b50a9fefbf60b38dd85e6d790fc5377",
-                "reference": "aadc3b545b50a9fefbf60b38dd85e6d790fc5377",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/f1cf483dceb1d57dd723bd3c3bb3b8911849894b",
+                "reference": "f1cf483dceb1d57dd723bd3c3bb3b8911849894b",
                 "shasum": ""
             },
             "require": {
@@ -652,9 +652,11 @@
                 "phpmetrics/phpmetrics": "^2.8",
                 "phpunit/phpunit": "^9",
                 "roave/security-advisories": "dev-latest",
+                "tina4stack/tina4-documentation": "dev-main",
                 "tina4stack/tina4php-reports": "dev-main",
                 "tina4stack/tina4php-sqlite3": "^2.0"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -679,6 +681,7 @@
                         "Tina4/Routing/",
                         "Tina4/Security/",
                         "Tina4/Service/",
+                        "Tina4/Slack",
                         "Tina4/Twig"
                     ]
                 },
@@ -695,9 +698,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.44"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.50"
             },
-            "time": "2023-07-10T16:17:43+00:00"
+            "time": "2023-09-20T13:09:13+00:00"
         },
         {
             "name": "tina4stack/tina4php-core",
@@ -4670,6 +4673,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "tina4stack/tina4php": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

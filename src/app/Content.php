@@ -563,7 +563,7 @@ class Content extends Data
         global $DBA;
 
         if ($DBA === null) {
-            die("Please install the composer dependency for SQLite3\n'composer install tina4stack/tina4php-sqlite3'\n and create a database global for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
+            die("Please install the composer dependency for SQLite3\n'composer require tina4stack/tina4php-sqlite3'\n and create a database global for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
         }
 
         if (!$DBA->tableExists("article")) {
