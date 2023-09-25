@@ -580,7 +580,7 @@ class Content extends Data
         $pageBuilderCSS = "./src/public/css/page-builder.css";
         if (!file_exists($pageBuilderCSS))
         {
-            file_put_contents($pageBuilderCSS, file_get_contents(__DIR__ . "/../../public/css/page-builder.css"));
+            file_put_contents($pageBuilderCSS, file_get_contents(__DIR__ . "/../public/css/page-builder.css"));
         }
 
         $checkSite = new Site();
