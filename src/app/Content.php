@@ -557,6 +557,7 @@ class Content extends Data
     /**
      * Method to add Config methods on the CMS
      * @param Config $config
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function addConfigMethods(Config $config): void
     {
@@ -566,9 +567,20 @@ class Content extends Data
             die("Please install the composer dependency for SQLite3\n'composer require tina4stack/tina4php-sqlite3'\n and create a database global for using the CMS in your index.php file\nThe default code you can copy from the next 2 lines:\nglobal \$DBA;\n\$DBA = new \Tina4\DataSQLite3(\"cms.db\");\n");
         }
 
-        if (!$DBA->tableExists("article")) {
+        $migration = new \Tina4\Migration(__DIR__ . "/../../migrations");
+
+        //We need to do a version check here instead of a table check
+        if ($migration->getVersion('tina4cms') !== "1.0.1") {
             \Tina4\Debug::message("Running migrations...on " . realpath(__DIR__ . "/../../migrations"));
-            (new \Tina4\Migration(__DIR__ . "/../../migrations"))->doMigration();
+            $migration->doMigration();
+            $migration->setVersion("1.0.1", "Latest changes", 'tina4cms');
+        }
+
+        //Copy over the page builder css
+        $pageBuilderCSS = "./src/public/css/page-builder.css";
+        if (!file_exists($pageBuilderCSS))
+        {
+            file_put_contents($pageBuilderCSS, file_get_contents(__DIR__ . "/../../public/css/page-builder.css"));
         }
 
         $checkSite = new Site();
@@ -588,7 +600,6 @@ class Content extends Data
         if (!file_exists("./src/public/uploads")) {
             mkdir("./src/public/uploads");
         }
-
 
         if (!file_exists("./cache")) {
             mkdir("./cache");
