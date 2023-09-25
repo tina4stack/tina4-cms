@@ -83,6 +83,7 @@ class Theme
             $content = str_replace($match[0], $matchText, $content);
         }
 
+        $content = str_replace('Â ', '&nbsp;', $content);
 
         return $content;
     }
