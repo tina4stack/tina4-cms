@@ -801,6 +801,8 @@ class Content extends Data
 
             if (!empty($layoutHtml)) {
                 $content = str_replace("[TINA4CMS_PAGE_CONTENT]", $content, $layoutHtml);
+                $re = '/<body(.*)>|<\/body>/mUs';
+                $content = '<body>'.preg_replace($re, "", $content).'</body>';
             }
         }
 
