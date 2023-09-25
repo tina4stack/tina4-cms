@@ -43,6 +43,8 @@ class Theme
 
     public function injectIncludes(string $content)
     {
+
+
         $templates = [];
         if (isset($_SESSION["tina4-cms:twigViews"])) {
             $templates = $_SESSION["tina4-cms:twigViews"];
@@ -70,12 +72,17 @@ class Theme
             $content = str_replace($match[0], $matchText, $content);
         }
 
-        $re = '/<span id="(.*)" cms-content="(.*)">(.*)<\/span>/mUs';
+        $re = '/cms-content="(.*)"(.*)Page Content<\/(span|div|ul)>/mUs';
 
         preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
         foreach ($matches as $id => $match) {
-            $content = str_replace($match[0], '[TINA4CMS_PAGE_CONTENT]', $content);
+            $matchText = $match[0];
+            $id = trim($match[1]);
+            $matchText = str_replace("Page Content", '[TINA4CMS_PAGE_CONTENT]', $matchText);
+
+            $content = str_replace($match[0], $matchText, $content);
         }
+
 
         return $content;
     }
@@ -166,7 +173,7 @@ class Theme
         $finalComponents = [];
         foreach ($components as $key => $value) {
             if (strpos($value,'.js') !== false && $value !== "." && $value !== ".." && is_file(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."components".DIRECTORY_SEPARATOR.$value)) {
-               $finalComponents[] =  "/themes/".$themeName."/components/".$value;
+                $finalComponents[] =  "/themes/".$themeName."/components/".$value;
             }
         }
 
