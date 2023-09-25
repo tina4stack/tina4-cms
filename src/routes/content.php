@@ -42,7 +42,7 @@
 \Tina4\Get::add("robots.txt", static function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
     {
-        $siteId = $request->$request->session["siteId"];
+        $siteId = $request->session["siteId"];
     } else {
         $siteId = 1;
     }
@@ -59,7 +59,7 @@
 \Tina4\Get::add("sitemap.xml", static function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
     {
-        $siteId = $request->$request->session["siteId"];
+        $siteId = $request->session["siteId"];
     } else {
         $siteId = 1;
     }
@@ -77,7 +77,7 @@
 \Tina4\Get::add("/content/{pageName}", static function ($pageName, \Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
     {
-        $siteId = $request->$request->session["siteId"];
+        $siteId = $request->session["siteId"];
     } else {
         $siteId = 1;
     }
@@ -114,7 +114,7 @@
 \Tina4\Get::add("/content/article/{slug}", function ($slug, \Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
     {
-        $siteId = $request->$request->session["siteId"];
+        $siteId = $request->session["siteId"];
     } else {
         $siteId = 1;
     }
@@ -146,7 +146,7 @@
 \Tina4\Get::add("/content/tags/{tag}", function ($tag, \Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
     {
-        $siteId = $request->$request->session["siteId"];
+        $siteId = $request->session["siteId"];
     } else {
         $siteId = 1;
     }
@@ -206,7 +206,7 @@
 \Tina4\Get::add("/content/categories/{category}", function ($category, \Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->session["siteId"]) && !empty($request->session["siteId"]))
     {
-        $siteId = $request->$request->session["siteId"];
+        $siteId = $request->session["siteId"];
     } else {
         $siteId = 1;
     }
