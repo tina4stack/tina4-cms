@@ -84,6 +84,7 @@ class Theme
         }
 
         $content = str_replace('Â ', '&nbsp;', $content);
+        $content = str_replace('\u00e2\u0080\u0099', '&rsquo;', $content);
 
         return $content;
     }

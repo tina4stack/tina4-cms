@@ -16,6 +16,8 @@ class OpenAi extends Api
         $authHeader = "";
         if ($site->load() && !empty($site->openAiKey)) {
             $authHeader = "Authorization: Bearer " . $site->openAiKey;
+        } else {
+            throw new \Exception("OpenAI Key not set");
         }
         $baseURL = 'https://api.openai.com';
         parent::__construct($baseURL, $authHeader);

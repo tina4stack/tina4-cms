@@ -198,9 +198,13 @@
     $text = "";
     if (!empty($request->params["prompt"])) {
 
-        $apiResponse = (new OpenAi())->getCompletion(strip_tags(html_entity_decode($request->params["prompt"])));
+        try {
+            $apiResponse = (new OpenAi())->getCompletion(strip_tags(html_entity_decode($request->params["prompt"])));
 
-        $text = $apiResponse["choices"][0]["text"];
+            $text = $apiResponse["choices"][0]["text"];
+        } catch (\Exception $e) {
+            $text = "Error: " . $e->getMessage();
+        }
     }  else {
         $text = "Error no prompt";
     }
