@@ -55,7 +55,11 @@
         break;
         case "update":
             //Manipulate the $object here
-
+            $fileName = "snippet" . $this->getSlug($snippet->name);
+            if (file_exists("./cache" . DIRECTORY_SEPARATOR . $fileName))
+            {
+                unlink("./cache" . DIRECTORY_SEPARATOR . $fileName);
+            }
 
             $snippet->dateModified = date($snippet->DBA->dateFormat." H:i:s");
         break;

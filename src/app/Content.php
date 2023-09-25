@@ -330,6 +330,26 @@ class Content extends Data
         return $fileName;
     }
 
+    /**
+     * Gets the snippet content
+     * @param $name
+     * @return false|string|void
+     */
+    public function getSnippetContent($name)
+    {
+        $fileName = "snippet" . $this->getSlug($name);
+        if (file_exists("./cache" . DIRECTORY_SEPARATOR . $fileName))
+        {
+            return new \Twig\Markup(file_get_contents("./cache" . DIRECTORY_SEPARATOR . $fileName), 'UTF-8');
+        } else {
+            if ($this->getSnippet($name) !== "")
+            {
+                return new \Twig\Markup(file_get_contents("./cache" . DIRECTORY_SEPARATOR . $fileName), 'UTF-8');
+            }
+        }
+
+    }
+
 
     /**
      * Gets articles
@@ -628,6 +648,13 @@ class Content extends Data
         $config->addTwigFilter("getSlug", static function ($name) {
             return (new self())->getSlug($name);
         });
+
+        $snippets = $this->getSnippets();
+        foreach ($snippets as $id => $snippet) {
+            $config->addTwigFunction('get'.ucfirst($snippet["name"]), static function () use ($snippet) {
+                return (new self())->getSnippetContent($snippet["name"]);
+            });
+        }
 
         //Add the theme component
         $config->addTwigGlobal("Theme", new Theme());
