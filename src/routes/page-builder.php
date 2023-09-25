@@ -25,9 +25,9 @@
     if (!empty($site->pageLayout)) {
         $pageBuilderContent = json_decode($site->pageLayout);
         $components = $pageBuilderContent->frames[0]->component;
-        // $pages[] = ["id" => "layout", "component" => $components];
+        $pages[] = ["id" => "layout", "component" => $components];
     } else {
-        // $pages[] = ["id" => "layout"];
+        $pages[] = ["id" => "layout"];
     }
 
 
@@ -92,6 +92,7 @@
         $site->id = $request->params["siteId"];
         $site->load();
         $site->pageLayout = json_encode($pageData);
+        $site->pageLayoutHtml = (new Theme())->injectIncludes($request->data->html);
         $site->pageBuilderStyles =  json_encode($request->data->data->styles);
         $site->pageBuilderAssets =  json_encode($request->data->data->assets);
         $site->save();
@@ -135,6 +136,28 @@
     }
     return $response($html);
 });
+
+\Tina4\Get::add("/cms/page-builder/cms-content", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    $pages = (new Content())->getAllPages();
+
+    $pageNames = [];
+    foreach ($pages as $id => $record) {
+        $pageNames[] = ["id" => $record->name, "title" => $record->name];
+    }
+    return $response($pageNames);
+});
+
+\Tina4\Get::add("/cms/page-builder/cms-content/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
+        $page = (new Page());
+        $page->load("name = ?", [$request->params["id"]]);
+        $html = \Tina4\renderTemplate($page->content);
+    } else {
+        $html = "Choose page to render";
+    }
+    return $response($html);
+});
+
 
 \Tina4\Post::add("/cms/page-builder/assets/upload", static function (\Tina4\Response $response, \Tina4\Request $request) {
     //Add the image to a nice path

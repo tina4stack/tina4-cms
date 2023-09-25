@@ -9,33 +9,7 @@
     }
 
     $pageName = "home";
-    $content = (new Content())->getPage($pageName);
-
-    $pageMeta = (new Content())->getPageMeta($pageName);
-    if (!file_exists("./cache/images/og-{$pageName}.png")) {
-        if (!empty($pageMeta->image)) {
-            $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
-            file_put_contents("./cache/images/og-{$pageName}.png", base64_decode($pageMeta->image));
-        } else {
-            $image = null;
-        }
-    } else {
-        $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
-    }
-
-    $template = "content.twig";
-    $site = new Site();
-
-    if ($site->load("id = $siteId") && !empty($site->theme)) {
-        $template = "themes/{$site->theme}/page.twig";
-    }
-
-    if (!empty($site->custom)) {
-        $site->custom = html_entity_decode($site->custom);
-    }
-
-    $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords, "siteId" => $siteId]);
-
+    $html = (new Content())->renderPage($pageName, $siteId);
     return $response($html, HTTP_OK, TEXT_HTML);
 });
 
@@ -82,32 +56,8 @@
         $siteId = 1;
     }
 
-    $content = (new Content())->getPage($pageName);
-    $pageMeta = (new Content())->getPageMeta($pageName);
 
-    if (!file_exists("./cache/images/og-{$pageName}.png")) {
-        if (!empty($pageMeta->image)) {
-            $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
-            file_put_contents("./cache/images/og-{$pageName}.png", base64_decode($pageMeta->image));
-        } else {
-            $image = null;
-        }
-    } else {
-        $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
-    }
-
-    $template = "content.twig";
-    $site = new Site();
-    if ($site->load("id = $siteId") && !empty($site->theme)) {
-        $template = "themes/{$site->theme}/page.twig";
-    }
-
-    if (!empty($site->custom)) {
-        $site->custom = html_entity_decode($site->custom);
-    }
-
-    $html = \Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]);
-
+    $html = (new Content())->renderPage($pageName, $siteId);
     return $response ($html, HTTP_OK, TEXT_HTML);
 });
 

@@ -70,6 +70,13 @@ class Theme
             $content = str_replace($match[0], $matchText, $content);
         }
 
+        $re = '/<span id="(.*)" cms-content="(.*)">(.*)<\/span>/mUs';
+
+        preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
+        foreach ($matches as $id => $match) {
+            $content = str_replace($match[0], '[TINA4CMS_PAGE_CONTENT]', $content);
+        }
+
         return $content;
     }
 
@@ -123,11 +130,12 @@ class Theme
     /**
      * Deploys whatever themes are in the CMS master to the current project
      * @param $path
+     * @param $force
      * @return void
      */
-    public function deployThemes($path)
+    public function deployThemes($path, $force=false)
     {
-        \Tina4\Utilities::recurseCopy($path.DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."themes", TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes", false);
+        \Tina4\Utilities::recurseCopy($path.DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."themes", TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes", $force);
     }
 
     public function getThemes(): array

@@ -334,6 +334,7 @@ class Content extends Data
      * Gets the snippet content
      * @param $name
      * @return false|string|void
+     * @throws \Twig\Error\LoaderError
      */
     public function getSnippetContent($name)
     {
@@ -590,10 +591,10 @@ class Content extends Data
         $migration = new \Tina4\Migration(__DIR__ . "/../../migrations");
 
         //We need to do a version check here instead of a table check
-        if ($migration->getVersion('tina4cms') !== "1.0.1") {
+        if ($migration->getVersion('tina4cms') !== "1.0.2") {
             \Tina4\Debug::message("Running migrations...on " . realpath(__DIR__ . "/../../migrations"));
             $migration->doMigration();
-            $migration->setVersion("1.0.1", "Latest changes", 'tina4cms');
+            $migration->setVersion("1.0.2", "Latest changes", 'tina4cms');
         }
 
         //Copy over the page builder css
@@ -655,6 +656,15 @@ class Content extends Data
                 return (new self())->getSnippetContent($snippet["name"]);
             });
         }
+
+        $config->addTwigFunction("getPageContent", function($pageName){
+            $pageContent = (new Page())->select("content")->where("slug = '{$pageName}'")->asArray();
+            if (!empty($pageContent)) {
+                return new \Twig\Markup($pageContent[0]["content"], 'UTF-8');
+            } else {
+                return "";
+            }
+        });
 
         //Add the theme component
         $config->addTwigGlobal("Theme", new Theme());
@@ -758,5 +768,46 @@ class Content extends Data
     {
         $site = new Site();
         return $site->select("*", 10000)->asArray();
+    }
+
+    /**
+     * Renders a page with a layout
+     * @param $pageName
+     * @param $siteId
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     */
+    public function renderPage($pageName, $siteId): string
+    {
+        $content = (new Content())->getPage($pageName);
+        $pageMeta = (new Content())->getPageMeta($pageName);
+
+        if (!file_exists("./cache/images/og-{$pageName}.png")) {
+            if (!empty($pageMeta->image)) {
+                $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
+                file_put_contents("./cache/images/og-{$pageName}.png", base64_decode($pageMeta->image));
+            } else {
+                $image = null;
+            }
+        } else {
+            $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
+        }
+
+        $template = "content.twig";
+        $site = new Site();
+        if ($site->load("id = $siteId") && !empty($site->theme)) {
+            $template = "themes/{$site->theme}/page.twig";
+            $layoutHtml = $site->pageLayoutHtml;
+
+            if (!empty($layoutHtml)) {
+                $content = str_replace("[TINA4CMS_PAGE_CONTENT]", $content, $layoutHtml);
+            }
+        }
+
+        if (!empty($site->custom)) {
+            $site->custom = html_entity_decode($site->custom);
+        }
+
+        return \Tina4\renderTemplate(\Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]));
     }
 }

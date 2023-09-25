@@ -1,5 +1,6 @@
 <?php
 require_once "vendor/autoload.php";
+\Tina4\Initialize();
 
 global $DBA;
 $DBA = new \Tina4\DataSQLite3("cms.db");
@@ -16,6 +17,6 @@ $config = new \Tina4\Config(function(\Tina4\Config $config) {
     (new Theme())->addTwigView("menu", "Menu", "examples/menu.twig");
 });
 
-\Tina4\Initialize();
 
+(new Theme(""))->deployThemes(__dir__, true);
 echo new \Tina4\Tina4Php($config);
