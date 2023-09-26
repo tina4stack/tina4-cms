@@ -27,6 +27,7 @@
                 {"data": "dateModified"},
                 {% if (not userRoles.Content['Email Templates'] or userRoles.Content['Email Templates'].edit) or  (not userRoles.Content['Email Templates'] or userRoles.Content['Email Templates'].delete) %}
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
@@ -39,7 +40,9 @@
                         return html;
                     },
                     "sClass": "text-right",
-                    "searchable": false
+                    "searchable": false,
+                    "orderable": false
+
                 }
                 {% endif %}
 

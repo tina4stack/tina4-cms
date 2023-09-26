@@ -27,6 +27,7 @@
                 {"data": "slug"},
                 {"data": "specificRoute"},
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         if (row.isActive == 1) {
                             return 'Yes'
@@ -37,6 +38,7 @@
                 },
                 {% if (not userRoles.Content.Menus or userRoles.Content.Menus.edit) or  (not userRoles.Content.Menus or userRoles.Content.Menus.delete) %}
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         if (row.name == 'Root') return "";
                         let html = '';

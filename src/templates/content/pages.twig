@@ -27,6 +27,7 @@
                 {"data": "title"},
                 {"data": "keywords"},
                 {
+                    "data": "isPublished",
                     "mRender": function (data, type, row) {
                         return (row.isPublished == 1) ? 'Yes' : 'No';
                     }
@@ -35,6 +36,7 @@
                 {"data": "dateModified"},
                 {% if (not userRoles.Content.Pages or userRoles.Content.Pages.edit) or  (not userRoles.Content.Pages or userRoles.Content.Pages.delete) %}
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
@@ -47,7 +49,8 @@
                         return html;
                     },
                     "sClass": "text-right",
-                    "searchable": false
+                    "searchable": false,
+                    "orderable": false
                 }
                 {% endif %}
 

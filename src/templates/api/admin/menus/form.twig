@@ -7,15 +7,14 @@
                    value="{{ data.name }}">
         </div>
         <div class="form-group col-md-2">
-            <label for="isActive">Active</label>
-            <input class="form-control" type="checkbox" name="isActive"
-                   value="1" {% if (data.isActive == 1) %} checked {% endif %}>
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="isActive" value="1" type="checkbox" id="isActive" {%  if (data.isActive == 1 ) %} checked {% endif%}>
+                <label class="form-check-label" for="isActive">Active</label>
+            </div>
         </div>
-
         <div class="form-group col-md-6">
             <label>Choose Parent Category</label>
             <select class="form-control" name="parentId">
-
                 {% set groupName = "" %}
                 {% for category in categories %}
                 {% if (groupName != category.parentName ) %}

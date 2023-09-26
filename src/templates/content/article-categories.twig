@@ -28,6 +28,7 @@
                 {"data": "slug"},
                 {"data": "displayOrder"},
                 {
+                    "data": "isActive",
                     "mRender": function (data, type, row) {
                         if (row.isActive == 1) {
                             return 'Yes'
@@ -38,6 +39,7 @@
                 },
                 {% if (not userRoles.Content['Article Categories'] or userRoles.Content['Article Categories'].edit) or  (not userRoles.Content['Article Categories'] or userRoles.Content['Article Categories'].delete) %}
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         if (row.name == 'Root') return "";
                         let html = '';
@@ -52,7 +54,8 @@
 
                     },
                     "sClass": "text-right",
-                    "searchable": false
+                    "searchable": false,
+                    "orderable": false
                 }
                 {% endif %}
             ],

@@ -28,12 +28,14 @@
                 {"data": "description"},
                 {"data": "author"},
                 {
+                    "data": "isPublished",
                     "mRender": function (data, type, row) {
                         return (row.isPublished == 1) ? 'Yes' : 'No';
                     }
                 },
                 {% if (not userRoles.Content.Articles or userRoles.Content.Articles.edit) or  (not userRoles.Content.Articles or userRoles.Content.Articles.delete) %}
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
@@ -47,7 +49,8 @@
 
                     },
                     "sClass": "text-right",
-                    "searchable": false
+                    "searchable": false,
+                    "orderable": false
                 }
                 {% endif %}
 

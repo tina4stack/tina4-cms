@@ -23,6 +23,7 @@
                 {"data": "id"},
                 {"data": "name"},
                 {
+                    "data": "isActive",
                     "mRender": function (data, type, row) {
                         return (row.isActive == 1) ? 'Yes' : 'No';
                     }
@@ -31,6 +32,7 @@
                 {"data": "dateModified"},
                 {% if (not userRoles.Content.CSS or userRoles.Content.CSS.edit) or  (not userRoles.Content.CSS or userRoles.Content.CSS.delete) %}
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
@@ -44,7 +46,8 @@
 
                     },
                     "sClass": "text-right",
-                    "searchable": false
+                    "searchable": false,
+                    "orderable": false
                 }
                 {% endif %}
             ],

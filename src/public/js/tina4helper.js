@@ -85,9 +85,10 @@ function getFormData(formName) {
  */
 function handleHtmlData(data, targetElement) {
     //Strip out the scripts
+    if (data === "") return '';
     const parser = new DOMParser();
-    const htmlData = parser.parseFromString(data, 'text/html');
-    const body = htmlData.querySelector('*');
+    const htmlData = parser.parseFromString(data.includes('<html>') ? data : '<body>'+data+'</body></html>', 'text/html');
+    const body = htmlData.querySelector('body');
     const scripts = body.querySelectorAll('script');
     // remove the script tags
     body.querySelectorAll('script').forEach(script => script.remove());
@@ -111,6 +112,7 @@ function handleHtmlData(data, targetElement) {
                 newScript.async = true;
                 newScript.textContent = script.innerText;
                 document.body.append(newScript);
+                console.log(newScript);
             });
         }
 
@@ -132,7 +134,7 @@ function loadPage(loadURL, targetElement) {
         if (document.getElementById(targetElement) !== null) {
             handleHtmlData (data, targetElement);
         } else {
-            console.log('TINA4 - define targetElement for postUrl', data);
+            console.log('TINA4 - define targetElement for loadPage', data);
         }
     });
 }
@@ -144,7 +146,6 @@ function loadPage(loadURL, targetElement) {
  * @param targetElement
  */
 function showForm(action, loadURL, targetElement) {
-    console.log(action, loadURL, targetElement);
     if (targetElement === undefined) targetElement = 'form';
 
     if (action === 'create') action = 'GET';
@@ -203,7 +204,7 @@ function saveForm(formName, targetURL, targetElement) {
  * @param message
  */
 function showMessage(message) {
-    document.getElementById('message').innerHTML = '<div class="alert alert-info alert-dismissible fade show"><strong>Info</strong> ' + message + '</div>';
+    document.getElementById('message').innerHTML = '<div class="alert alert-info alert-dismissible fade show"><strong>Info</strong> ' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 }
 
 /**

@@ -20,7 +20,6 @@
                 {% endfor %}
             </select>
         </div>
-
         <div class="form-group col-md-3">
             <label for="google">Google</label>
             <input class="form-control" type="text" name="google" placeholder="Google" value="{{ data.google }}">
@@ -34,8 +33,10 @@
             <input class="form-control" type="text" name="twitter" placeholder="Twitter" value="{{ data.twitter }}">
         </div>
         <div class="form-group col-md-3">
-            <label for="playerKey">Allow Crawlers</label>
-            <input class="form-control" type="checkbox" name="allowCrawlers" value="1" {%  if (data.allowCrawlers == 1 ) %} checked {% endif%} >
+            <div class="form-check form-switch">
+                <input class="form-check-input" name="allowCrawlers" value="1" type="checkbox" id="allowCrawlers" {%  if (data.allowCrawlers == 1 ) %} checked {% endif%}>
+                <label class="form-check-label" for="allowCrawlers">Allow Crawlers</label>
+            </div>
         </div>
         <div class="form-group col-md-12">
             <h6>Custom Scripts (Header)</h6>

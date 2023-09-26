@@ -148,9 +148,6 @@
     }
 });
 
-
-
-
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {
     if (!empty($request->params["confirmPassword"])) {
         $user = new Users($request->params);
@@ -159,7 +156,7 @@
             $user->isActive = 1;
             $user->password = password_hash($user->password, PASSWORD_BCRYPT);
             $user->save();
-            \Tina4\redirect("/cms/dashboard");
+            \Tina4\redirect("/cms/page-builder");
         } else {
 
             \Tina4\redirect("/cms/login");
@@ -172,7 +169,7 @@
             if (password_verify($request->params["password"],$user->password)) {
                 $_SESSION["user"] = $user->asArray();
                 $_SESSION["siteId"] = $user->siteId;
-                \Tina4\redirect("/cms/dashboard");
+                \Tina4\redirect("/cms/page-builder");
             } else {
                 \Tina4\redirect("/cms/login?error=Invalid password");
             }

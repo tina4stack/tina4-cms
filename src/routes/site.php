@@ -3,7 +3,7 @@
 
 \Tina4\Post::add("/cms/site/set", function (\Tina4\Response $response, \Tina4\Request $request){
     $_SESSION["siteId"] = $request->params["siteId"];
-    \Tina4\redirect("/cms/dashboard");
+    \Tina4\redirect("/cms/page-builder");
 });
 
 

@@ -31,6 +31,7 @@
                 {"data": "dateCreated"},
                 {"data": "dateModified"},
                 {
+                    "data": null,
                     "mRender": function (data, type, row) {
                         if (row.id == 1) return "";
                         let html = '';
@@ -41,7 +42,8 @@
 
                     },
                     "sClass": "text-right",
-                    "searchable": false
+                    "searchable": false,
+                    "orderable": false
                 }
 
             ],
