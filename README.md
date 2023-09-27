@@ -187,3 +187,16 @@ src
 ``` 
 
 The default theme can be cloned to make other themes.
+
+### Examples of extending the CMS Page Builder
+
+In your index.php file where your config is initialized you can define the following.
+
+```php
+$config = new \Tina4\Config(function(\Tina4\Config $config) {
+    (new Content())->addCmsMenu("/backend/program", "Products"); //Menu example
+    $config->addTwigGlobal("Menu", new Menu()); //Adding a twig global class
+    (new Theme())->addTwigView("product", "Products", "examples/products.twig"); //Adding different snippets for use in CMS views
+    (new Theme())->addTwigView("menu", "Menu", "examples/menu.twig");
+}
+```

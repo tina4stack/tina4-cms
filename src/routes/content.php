@@ -24,7 +24,7 @@
     $robotText = "User-agent: *\nDisallow: /\n";
     $site = new Site();
     if ($site->load("id = $siteId") && $site->allowCrawlers) {
-        $robotText = "User-agent: *\nDisallow: /cms/\nSitemap: /sitemap.xml";
+        $robotText = "User-agent: *\nDisallow: /cms/\nSitemap: {$site->siteUrl}/sitemap.xml";
     }
 
     return $response($robotText, HTTP_OK, TEXT_PLAIN);
