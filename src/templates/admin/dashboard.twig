@@ -25,7 +25,6 @@
         {% endif %}
         {% set userRoles = Content.getSecurityAttribute('', session.user.roleId) %}
         <div class="col-md-12">
-            <h3>Content</h3>
             <ul class="nav nav-tabs" role="tablist">
                 {% if (not userRoles.Content.Pages or userRoles.Content.Pages.visible) %}
                 <li class="nav-item">
