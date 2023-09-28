@@ -1,0 +1,231 @@
+:root {
+  --color-dark-blue: #1E245C;
+  --color-bright-blue: #2A3382;
+  --color-dark-gray: #515962;
+  --color-medium-gray: #EBEBEB;
+  --color-light-gray: #FAFAFA;
+}
+
+/* Let's highlight canvas boundaries */
+#gjs {
+  height: 100vh !important;
+}
+
+/* Reset some default styling */
+.gjs-cv-canvas {
+  /*top: 0;*/
+  /*width: 100%;*/
+  /*height: 100%;*/
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  background: #ffffff;
+}
+
+body:not(.gjs-dashed) {
+  font-family: 'Arimo', sans-serif;
+}
+
+.tina-logo {
+  background: var(--color-dark-blue);
+  display: block;
+  padding: 8px;
+}
+
+.tina-logo img {
+  width: 60px;
+}
+
+.nav-sidebar {
+  background: var(--color-medium-gray);
+  position: relative;
+}
+
+.editor-wrap  {
+  background: #ffffff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.app-wrap {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+}
+
+.pages-wrap, .pages {
+  display: flex;
+  flex-direction: column
+}
+
+.pages-wrap {
+  background: var(--color-light-gray);
+}
+
+
+.exit-builder-container {
+  display: flex;
+  background: var(--color-bright-blue);
+  color: #ffffff;
+  padding: 5px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  justify-content: start;
+}
+
+.exit-builder {
+  border: 1px solid #fff;
+  padding: 8px 13px;
+  line-height: 1;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0);
+  transition: background .3s ease-in-out;
+}
+
+.exit-builder:hover {
+  background: rgba(255, 255, 255, .15);
+  transition: background .3s ease-in-out;
+}
+
+
+.pages-heading, .pages-link {
+  height: 50px;
+  border-left: 0 solid transparent;
+  padding-left: 15px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.pages-heading {
+  background: var(--color-medium-gray);
+  color: var(--color-dark-gray);
+  font-weight: 700;
+  margin: 0;
+  border-top: 2px solid var(--color-dark-blue);
+}
+
+.pages-link {
+  background: var(--color-light-gray);
+  color: var(--color-dark-blue);
+  font-weight: 400;
+  transition: border-left .1s ease-in-out;
+}
+
+.pages-link:hover {
+  border-left: 5px solid var(--color-dark-blue);
+  transition: border-left .1s ease-in-out;
+}
+
+.pages-link.active {
+  color: var(--color-dark-blue);
+  border-left: 5px solid var(--color-dark-blue);
+  font-weight: 700;
+}
+
+.pages-link--logout {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.cms-back {
+  background: #ffffff;
+  color: #444444;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  margin-bottom: 10px;
+}
+
+/* GrapeJS Overrides */
+
+/*.gjs-one-bg {*/
+/*    background: var(--color-light-gray);*/
+/*}*/
+
+/*.gjs-pn-views {*/
+/*    background: var(--color-bright-blue);*/
+/*}*/
+
+/*.gjs-blocks-cs {*/
+/*    background: var(--color-light-gray);*/
+/*}*/
+
+.gjs-one-bg.gjs-pn-commands, .gjs-one-bg.gjs-pn-devices-c {
+  box-shadow: none;
+  background-image: none;
+  background: var(--color-dark-blue);
+}
+
+.gjs-devices-c .gjs-device-label {
+  display: none;
+}
+
+.gjs-devices-c .gjs-field {
+  background: transparent;
+}
+
+.gjs-devices-c:before {
+  content: "Resonsive View";
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.gjs-two-color {
+  color: #ffffff !important;
+}
+.gjs-one-bg {
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));*/
+  /*background-image: linear-gradient(#04519b, #033c73 60%, #02325f);*/
+}
+
+.gjs-pn-btn.gjs-pn-active {
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#04519b), color-stop(60%, #033c73), to(#02325f));*/
+  /*background-image: linear-gradient(#04519b, #033c73 60%, #02325f);*/
+  /*box-shadow: none;*/
+}
+
+
+[data-gjs-highlightable~="true"]:empty {
+  outline: 2px solid #6f42c1 !important;
+  padding: 20px;
+}
+
+.gjs-pn-panel.gjs-pn-devices-c {
+  height: 40px;
+}
+
+.gjs-pn-views-container {
+  padding: 50px 0 0;
+}
+
+.scalable-col {
+  flex-grow: 1;
+  border: 1px dashed #ccc;
+  position: relative;
+  overflow: hidden;
+}
+
+.scalable-col:after {
+  content: '||';
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  cursor: ew-resize;
+}
+
+
+.flex-row {
+  display: flex;
+}
