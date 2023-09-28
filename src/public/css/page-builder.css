@@ -8,7 +8,7 @@
 
 /* Let's highlight canvas boundaries */
 #gjs {
-    /*border: 3px solid #444;*/
+    height: 100vh !important;
 }
 
 /* Reset some default styling */
@@ -30,6 +30,7 @@ body:not(.gjs-dashed) {
 
 .nav-sidebar {
     background: var(--color-medium-gray);
+    position: relative;
 }
 
 .editor-wrap  {
@@ -99,6 +100,8 @@ body:not(.gjs-dashed) {
     background: var(--color-medium-gray);
     color: var(--color-dark-gray);
     font-weight: 700;
+    margin: 0;
+    border-top: 2px solid var(--color-dark-blue);
 }
 
 .pages-link {
@@ -117,6 +120,13 @@ body:not(.gjs-dashed) {
     color: var(--color-dark-blue);
     border-left: 5px solid var(--color-dark-blue);
     font-weight: 700;
+}
+
+.pages-link--logout {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .cms-back {

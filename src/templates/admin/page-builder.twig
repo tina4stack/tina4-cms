@@ -59,22 +59,19 @@
     <div class="app-wrap">
         <div class="nav-sidebar">
             <a href="/"><img src="{{ baseUrl }}/images/logo.png" width="100%"></a>
-            <a href="#" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Content</a>
-            <a href="#" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')">Page Layout</a>
-            <a href="#" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')">Article Layout</a>
-            <hr>
+            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Content</a>
+            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')">Page Layout</a>
+            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')">Article Layout</a>
             <h3 class="pages-heading">Pages</h3>
-            <hr>
             <div class="pages">
                 {% for page in pages %}
-                    <a href="#" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
+                    <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
-            <hr>
-            <a href="/cms/logout">Logout</a>
+            <a href="/cms/logout" class="pages-link pages-link--logout">Logout</a>
         </div>
         <div class="main-content">
-            <div class="cms" style="width: 90vw" id="cms"></div>
+            <div class="cms container-fluid" style="" id="cms"></div>
             <div style="display:none" id="gjs"></div>
         </div>
     </div>
