@@ -185,10 +185,10 @@ class Content extends Data
      * Gets all the pages
      * @throws ReflectionException
      */
-    public function getAllPages(): array
+    public function getAllPages($siteId=1): array
     {
         $page = (new Page());
-        $pages = $page->select("*", 10000)->asObject();
+        $pages = $page->select("*", 10000)->where("site_id = {$siteId}")->asObject();
 
         return $pages;
     }
@@ -196,10 +196,10 @@ class Content extends Data
     /**
      * Gets all the snippets
      */
-    public function getAllSnippets(): array
+    public function getAllSnippets($siteId=1): array
     {
         $snippet = (new Snippet());
-        $snippets = $snippet->select("*", 10000);
+        $snippets = $snippet->select("*", 10000)->where("site_id = {$siteId}");
 
         if (!empty($snippets)) {
             return $snippets->asArray();

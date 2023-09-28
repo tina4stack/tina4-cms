@@ -58,7 +58,21 @@
 {% block content %}
     <div class="app-wrap">
         <div class="nav-sidebar">
-            <a href="/" class="tina-logo"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%"></a>
+            <div href="/" class="tina-logo"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%">
+                {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
+                    <div id="siteDropDown" style="float: right">
+                        <label for="siteId">Choose Site</label>
+                        <form id="setSite" action="/cms/site/set" method="post">
+                            <select id="siteId" name="siteId" class="form-control" style=" width: 140px" onchange="document.getElementById('setSite').submit()">
+                                {% for listSite in sites %}
+                                    <option value="{{ listSite.id }}" {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
             <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Content</a>
             <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')">Page Layout</a>
             <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')">Article Layout</a>
