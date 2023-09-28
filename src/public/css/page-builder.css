@@ -28,6 +28,16 @@ body:not(.gjs-dashed) {
     font-family: 'Arimo', sans-serif;
 }
 
+.tina-logo {
+   background: var(--color-dark-blue);
+    display: block;
+    padding: 8px;
+}
+
+.tina-logo img {
+    width: 60px;
+}
+
 .nav-sidebar {
     background: var(--color-medium-gray);
     position: relative;
@@ -178,8 +188,8 @@ body:not(.gjs-dashed) {
     padding: 20px;
 }
 
-.gjs-pn-panel:not(.gjs-pn-views-container) {
-    height: 50px;
+.gjs-pn-panel.gjs-pn-devices-c {
+    height: 40px;
 }
 
 .gjs-pn-views-container {
