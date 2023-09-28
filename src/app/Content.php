@@ -591,10 +591,10 @@ class Content extends Data
         $migration = new \Tina4\Migration(__DIR__ . "/../../migrations");
 
         //We need to do a version check here instead of a table check
-        if ($migration->getVersion('tina4cms') !== "1.0.2") {
+        if ($migration->getVersion('tina4cms') !== "1.0.3") {
             \Tina4\Debug::message("Running migrations...on " . realpath(__DIR__ . "/../../migrations"));
             $migration->doMigration();
-            $migration->setVersion("1.0.2", "Latest changes", 'tina4cms');
+            $migration->setVersion("1.0.3", "Added article layouts", 'tina4cms');
         }
 
         //Copy over the page builder css

@@ -30,6 +30,14 @@
         $pages[] = ["id" => "layout"];
     }
 
+    if (!empty($site->pageLayoutArticle)) {
+        $pageBuilderContent = json_decode($site->pageLayoutArticle);
+        $components = $pageBuilderContent->frames[0]->component;
+        $pages[] = ["id" => "layoutArticle", "component" => $components];
+    } else {
+        $pages[] = ["id" => "layoutArticle"];
+    }
+
 
     foreach ($pagesData as $page) {
 
@@ -95,6 +103,16 @@
         $site->pageLayoutHtml = (new Theme())->injectIncludes($request->data->html);
         $site->pageBuilderStyles =  json_encode($request->data->data->styles);
         $site->pageBuilderAssets =  json_encode($request->data->data->assets);
+        $site->save();
+    }
+
+    if ($request->data->pageId === "layoutArticle") {
+        $site = new Site();
+        $site->id = $request->params["siteId"];
+        $site->load();
+
+        $site->pageLayoutArticle = json_encode($pageData);
+        $site->pageLayoutArticleHtml = (new Theme())->injectIncludes($request->data->html);
         $site->save();
     }
 

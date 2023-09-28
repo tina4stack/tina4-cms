@@ -59,15 +59,15 @@
     <div class="app-wrap">
         <div class="pages-wrp" style="width: 10vw">
             <a href="/"><img src="{{ baseUrl }}/images/logo.png" width="100%"></a>
-            <a href="#" onclick="$('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Content</a>
-            <a href="#" onclick="$('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')">Page Layout</a>
-            <a href="#" onclick="$('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')">Article Layout</a>
+            <a href="#" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Content</a>
+            <a href="#" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')">Page Layout</a>
+            <a href="#" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')">Article Layout</a>
             <hr>
             <strong>Pages</strong>
             <hr>
             <div class="pages">
                 {% for page in pages %}
-                    <a href="#" onclick="$('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
+                    <a href="#" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
             <hr>
@@ -153,6 +153,18 @@
             const data = editor.getProjectData();
             await storageManager.store(data);
             pageManager.select(pageId);
+        }
+
+        /**
+         * Adds an active class to the selected menu and removes from the others
+         * @param a
+         */
+        function setActive(a) {
+            let otherAnchors = a.parentNode.getElementsByTagName('a')
+            for (let i = 0; i < otherAnchors.length; i++) {
+                otherAnchors[i].classList.remove('active');
+            }
+            a.classList.add('active');
         }
 
         //editor.on('page', (event) => {
