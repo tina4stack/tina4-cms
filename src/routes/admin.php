@@ -143,7 +143,6 @@
         $site = (new Content())->getSite();
         $sites = (new Content())->getSites();
 
-
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes]));
     }
 });

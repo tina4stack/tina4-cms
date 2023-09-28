@@ -7,21 +7,30 @@
         return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
     } else {
         $menuItems = (new Content())->getCmsMenus();
-        $pages = (new Content())->getAllPages();
-        $snippets = (new Content())->getAllSnippets();
         $themes = (new Theme())->getThemes();
         $site = (new Content())->getSite();
-        return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/page-builder.twig", ["menuItems" => $menuItems, "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "themes" => $themes]));
+        $sites = (new Content())->getSites();
+        $pages = (new Content())->getAllPages($site->id);
+        $snippets = (new Content())->getAllSnippets($site->id);
+        return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/page-builder.twig", ["menuItems" => $menuItems, "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes]));
     }
 });
 
 \Tina4\Get::add("/cms/page-builder/pages", function (\Tina4\Response $response, \Tina4\Request $request) {
-    $pagesData = (new Content())->getAllPages();
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
+    $pagesData = (new Content())->getAllPages($siteId);
     $pages = [];
 
     $site = new Site();
-    $site->id = $request->params["siteId"];
+    $site->id = $siteId;
     $site->load();
+
     if (!empty($site->pageLayout)) {
         $pageBuilderContent = json_decode($site->pageLayout);
         $components = $pageBuilderContent->frames[0]->component;
@@ -37,7 +46,6 @@
     } else {
         $pages[] = ["id" => "layoutArticle"];
     }
-
 
     foreach ($pagesData as $page) {
 
@@ -73,7 +81,7 @@
         }
     }
 
-    if ($request->data->pageId !== "layout") {
+    if ($request->data->pageId !== "layout"  && $request->data->pageId !== "layoutArticle") {
         $page = new Page();
         if ($page->load("id = ?", [$request->data->pageId])) {
             $page->content = (new Theme())->injectIncludes($request->data->html);
@@ -115,7 +123,6 @@
         $site->pageLayoutArticleHtml = (new Theme())->injectIncludes($request->data->html);
         $site->save();
     }
-
 
     return $response([], HTTP_OK, APPLICATION_JSON);
 });
