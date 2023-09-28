@@ -142,8 +142,9 @@
         $themes = (new Theme())->getThemes();
         $site = (new Content())->getSite();
         $sites = (new Content())->getSites();
+        $version = (new \Tina4\Migration)->getVersion();
 
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes]));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes,"version" => $version]));
     }
 });
 
