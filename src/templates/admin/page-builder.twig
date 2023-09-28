@@ -73,7 +73,7 @@
                     </div>
                 {% endif %}
             </div>
-            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Content</a>
+            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Site Settings</a>
             <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')">Page Layout</a>
             <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')">Article Layout</a>
             <h3 class="pages-heading">Pages</h3>
@@ -83,7 +83,6 @@
                 {% endfor %}
             </div>
             <a href="/cms/logout" class="pages-link pages-link--logout">Logout</a>
-            <div class="cms-version">{{ version }}</div>
         </div>
         <div class="main-content">
             <div class="cms container-fluid" style="" id="cms"></div>
