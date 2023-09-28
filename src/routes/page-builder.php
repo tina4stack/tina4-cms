@@ -12,7 +12,7 @@
         $sites = (new Content())->getSites();
         $pages = (new Content())->getAllPages($site->id);
         $snippets = (new Content())->getAllSnippets($site->id);
-        $version = (new \Tina4\Migration)->getVersion();
+        $version = (new \Tina4\Migration)->getVersion('tina4cms');
         return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/page-builder.twig", ["menuItems" => $menuItems, "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes, "version"  => $version]));
     }
 });
