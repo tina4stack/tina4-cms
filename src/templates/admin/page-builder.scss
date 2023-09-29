@@ -225,7 +225,16 @@ body:not(.gjs-dashed) {
   cursor: ew-resize;
 }
 
-
 .flex-row {
   display: flex;
+}
+
+.navbar {
+  background: var(--color-dark-blue);
+}
+
+.cms-version {
+  float: right;
+  color: #ffffff;
+  margin: 5px;
 }
