@@ -164,12 +164,20 @@
 });
 
 \Tina4\Get::add("/cms/page-builder/cms-content", static function (\Tina4\Response $response, \Tina4\Request $request) {
-    $pages = (new Content())->getAllPages();
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
+    $pages = (new Content())->getAllPages($siteId);
 
     $pageNames = [];
     foreach ($pages as $id => $record) {
         $pageNames[] = ["id" => $record->name, "title" => $record->name];
     }
+
     return $response($pageNames);
 });
 
@@ -180,6 +188,36 @@
         $html = \Tina4\renderTemplate($page->content);
     } else {
         $html = "Choose page to render";
+    }
+    return $response($html);
+});
+
+
+\Tina4\Get::add("/cms/page-builder/cms-articles", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
+    {
+        $siteId = $request->params["siteId"];
+    } else {
+        $siteId = 1;
+    }
+
+    $articles = (new Content())->getAllArticles($siteId);
+
+    $articleContent = [];
+    foreach ($articles as $id => $record) {
+        $articleContent[] = ["id" => $record["id"], "title" => $record["title"]];
+    }
+    return $response($articleContent);
+});
+
+
+\Tina4\Get::add("/cms/page-builder/cms-articles/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
+        $article = (new Article());
+        $article->load("id = ?", [$request->params["id"]]);
+        $html = \Tina4\renderTemplate($article->content);
+    } else {
+        $html = "Choose an article to render";
     }
     return $response($html);
 });

@@ -26,7 +26,7 @@ editor.Components.addType('cms-content', {
             traits: [
                 {
                     type: 'select', // Type of the trait
-                    label: 'pageName', // The label you will see in Settings
+                    label: 'Page Name', // The label you will see in Settings
                     name: 'cms-content', // The name of the attribute/property to use on component
                 }
             ]

@@ -61,9 +61,9 @@
             <div href="/" class="tina-logo"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%">
                 {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
                     <div id="siteDropDown" style="float: right">
-                        <label for="siteId">Choose Site</label>
+                        <label for="siteId" style="color:#ffffff">Choose Site</label>
                         <form id="setSite" action="/cms/site/set" method="post">
-                            <select id="siteId" name="siteId" class="form-control" style=" width: 140px" onchange="document.getElementById('setSite').submit()">
+                            <select id="siteId" name="siteId" class="form-select" style=" width: 140px" onchange="document.getElementById('setSite').submit()">
                                 {% for listSite in sites %}
                                     <option value="{{ listSite.id }}" {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
                                 {% endfor %}

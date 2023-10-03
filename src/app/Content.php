@@ -812,4 +812,22 @@ class Content extends Data
 
         return \Tina4\renderTemplate(\Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]));
     }
+
+    /**
+     * Gets all the articles
+     * @param $siteId
+     * @return array|string[]
+     * @throws ReflectionException
+     */
+    public function getAllArticles($siteId): array
+    {
+        $article = (new Article());
+        $articles = $article->select("*", 10000)->where("site_id = {$siteId}");
+
+        if (!empty($articles)) {
+            return $articles->asArray();
+        } else {
+            return [];
+        }
+    }
 }
