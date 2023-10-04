@@ -3,13 +3,14 @@
     <link rel="stylesheet" href="/css/page-builder.css">
 {% endblock %}
 {% block navigation %}
-    <nav class="navbar navbar-expand-lg">
+    <nav class="top-bar">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav">
+                <li class="nav-item">
                 {% if session.user is not null %}
                     {% for menuItem in menuItems %}
                         <li class="nav-item">
@@ -25,7 +26,7 @@
     </nav>
 {% endblock %}
 {% block content %}
-    <div class="cms container-fluid"   id="content">
+    <div class="cms-container" id="content">
         {% if not session.user %}
             {% do redirect('/cms/login') %}
         {% endif %}
@@ -93,7 +94,7 @@
                 </li>
                 {% endif %}
             </ul>
-            <div id="sub-content">
+            <div id="sub-content" class="cms-container-content">
             </div>
             <script>
                 loadPage('/cms/pages', 'sub-content');

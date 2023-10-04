@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="nav-icon-pages" transform="translate(-450.3 -246.5)">
+    <rect id="Rectangle_5023" data-name="Rectangle 5023" width="30" height="30" transform="translate(450.3 246.5)" fill="rgba(255,255,255,0)" opacity="0"/>
+    <g id="Group_7167" data-name="Group 7167" transform="translate(0 0.404)">
+      <path id="Path_4119" data-name="Path 4119" d="M107.044,1.094h-7.26L93.366,7.513V20.122a1.719,1.719,0,0,0,1.719,1.718h11.959a1.719,1.719,0,0,0,1.719-1.718V2.814A1.72,1.72,0,0,0,107.044,1.094Z" transform="translate(362 247)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <path id="Path_4120" data-name="Path 4120" d="M96.682,21.84v3.316A1.719,1.719,0,0,0,98.4,26.875h13.678a1.719,1.719,0,0,0,1.718-1.719V6.129a1.718,1.718,0,0,0-1.718-1.718h-3.316" transform="translate(362 247)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <path id="Path_4121" data-name="Path 4121" d="M99.784,1.094,93.366,7.513h6.418Z" transform="translate(362 247)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+    </g>
+  </g>
+</svg>

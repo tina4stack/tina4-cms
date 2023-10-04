@@ -59,30 +59,39 @@
     <div class="app-wrap">
         <div class="nav-sidebar">
             <div href="/" class="tina-logo"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%">
-                {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
-                    <div id="siteDropDown" style="float: right">
-                        <label for="siteId" style="color:#ffffff">Choose Site</label>
-                        <form id="setSite" action="/cms/site/set" method="post">
-                            <select id="siteId" name="siteId" class="form-select" style=" width: 140px" onchange="document.getElementById('setSite').submit()">
-                                {% for listSite in sites %}
-                                    <option value="{{ listSite.id }}" {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
-                                {% endfor %}
-                            </select>
-                            <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
-                        </form>
-                    </div>
-                {% endif %}
+                <a href="#" class="sidebar-toggler-container">
+                    <span class="sidebar-toggler"></span>
+                </a>
             </div>
-            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')">Site Settings</a>
-            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')">Page Layout</a>
-            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')">Article Layout</a>
-            <h3 class="pages-heading">Pages</h3>
+            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-site-settings.svg">Site Settings</a>
+            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-page-layout.svg">Page Layout</a>
+            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-article-layout.svg">Article Layout</a>
+            <h3 class="pages-heading"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Pages</h3>
             <div class="pages">
                 {% for page in pages %}
                     <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
-            <a href="/cms/logout" class="pages-link pages-link--logout">Logout</a>
+
+
+            {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
+                <h3 class="pages-heading"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-sites.svg">Choose Site</h3>
+                <div id="siteDropDown" class="site-selector">
+                    <label for="siteId" class="sr-only">Choose Site</label>
+                    <form id="setSite" action="/cms/site/set" method="post">
+                        <select id="siteId" name="siteId" class="form-select" onchange="document.getElementById('setSite').submit()">
+                            {% for listSite in sites %}
+                                <option value="{{ listSite.id }}" {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
+                    </form>
+                </div>
+            {% endif %}
+            <div class="pages-links--bottom">
+                <a href="/cms/logout" class="pages-link pages-link--logout">Logout<img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-logout.svg"></a>
+            </div>
+
         </div>
         <div class="main-content">
             <div id="cms"></div>
@@ -103,8 +112,8 @@
             },
             plugins: ['grapesjs-custom-code', 'grapesjs-component-code-editor', 'grapesjs-parser-postcss'],
             assetManager: {
-                    // Upload endpoint, set `false` to disable upload, default `false`
-                    upload: '/cms/page-builder/assets/upload?siteId={{ site.id }}&formToken={{ formToken }}'
+                // Upload endpoint, set `false` to disable upload, default `false`
+                upload: '/cms/page-builder/assets/upload?siteId={{ site.id }}&formToken={{ formToken }}'
             },
             storageManager: {
                 type: 'remote',
@@ -184,9 +193,9 @@
 
         editor.on('load', (event) => {
 
-                //const blockBtn = editor.Panels.getButton('views', 'open-blocks');
-                //blockBtn.set('active', 1);
-                //editor.runCommand('core:open-blocks');
+            //const blockBtn = editor.Panels.getButton('views', 'open-blocks');
+            //blockBtn.set('active', 1);
+            //editor.runCommand('core:open-blocks');
         });
 
         // editor.on('save', (event) => {
