@@ -215,10 +215,19 @@
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         $article = (new Article());
         $article->load("id = ?", [$request->params["id"]]);
+
+        //load the article template and render
         $html = \Tina4\renderTemplate($article->content);
+
     } else {
         $html = "Choose an article to render";
     }
+
+    if (!empty($request->params["render"]))
+    {
+
+    }
+
     return $response($html);
 });
 

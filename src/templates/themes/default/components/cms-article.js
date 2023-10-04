@@ -53,3 +53,39 @@ editor.Blocks.add('cms-article', {
     content: '<span data-gjs-type="cms-article">Article Content</span>',
 });
 
+editor.Components.addType('cms-article-title', {
+    model: {
+        init() {
+            const component = this;
+        },
+        handleEvent() {
+            //Render the component when attributes get changed
+            const component = editor.getSelected();
+            this.view.onRender({el: component.getEl()});
+        },
+        defaults: {
+            function() {
+                //any scripts here that need to be run?
+            },
+            traits: [
+                {
+                    type: 'select', // Type of the trait
+                    label: 'Article', // The label you will see in Settings
+                    name: 'cms-article', // The name of the attribute/property to use on component
+                }
+            ]
+        }
+    },
+    view: {
+        onRender({ el }) {
+            const articleId = this.model.getTrait('cms-article').attributes.value;
+            el.innerHTML = '<b>Rendering an article</b>';
+            fetch('/cms/page-builder/cms-articles/render?id='+articleId+'&render=content')
+                .then(async function(response) {
+                    const data = await response.text();
+                    el.innerHTML = data;
+                });
+        },
+    },
+});
+
