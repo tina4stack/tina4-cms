@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="nav-icon-page-layout" transform="translate(-407.3 -246.5)">
+    <rect id="Rectangle_5022" data-name="Rectangle 5022" width="30" height="30" transform="translate(407.3 246.5)" fill="rgba(255,255,255,0)" opacity="0"/>
+    <g id="Group_7168" data-name="Group 7168" transform="translate(0 0.403)">
+      <rect id="Rectangle_5014" data-name="Rectangle 5014" width="4.807" height="4.807" rx="1.378" transform="translate(409.411 248.095)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <rect id="Rectangle_5015" data-name="Rectangle 5015" width="4.805" height="4.807" rx="1.378" transform="translate(409.412 269.068)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <rect id="Rectangle_5016" data-name="Rectangle 5016" width="4.807" height="4.805" rx="1.378" transform="translate(430.384 248.096)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <rect id="Rectangle_5017" data-name="Rectangle 5017" width="4.807" height="4.807" rx="1.378" transform="translate(430.383 269.067)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <line id="Line_436" data-name="Line 436" x2="16.167" transform="translate(414.216 250.498)" fill="none" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <line id="Line_437" data-name="Line 437" x2="16.166" transform="translate(414.217 271.471)" fill="none" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <line id="Line_438" data-name="Line 438" y1="16.166" transform="translate(411.814 252.901)" fill="none" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <line id="Line_439" data-name="Line 439" y1="16.167" transform="translate(432.787 252.901)" fill="none" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <rect id="Rectangle_5018" data-name="Rectangle 5018" width="4.506" height="11.683" rx="0.759" transform="translate(415.593 255.143)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <path id="Rectangle_5019" data-name="Rectangle 5019" d="M.759,0H4.521a.76.76,0,0,1,.76.76v3.6a.759.759,0,0,1-.759.759H.759A.759.759,0,0,1,0,4.356V.759A.759.759,0,0,1,.759,0Z" transform="translate(423.728 255.143)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <path id="Rectangle_5020" data-name="Rectangle 5020" d="M.759,0H4.521a.76.76,0,0,1,.76.76V2.079a.759.759,0,0,1-.759.759H.759A.759.759,0,0,1,0,2.079V.759A.759.759,0,0,1,.759,0Z" transform="translate(423.728 263.988)" fill="rgba(255,255,255,0)" stroke="#1e245c" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+    </g>
+  </g>
+</svg>
