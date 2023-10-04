@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="nav-icon-article-layout" transform="translate(-356.5 -246.5)">
+    <rect id="Rectangle_5021" data-name="Rectangle 5021" width="30" height="30" transform="translate(356.5 246.5)" fill="rgba(255,255,255,0)" opacity="0"/>
+    <g id="Group_7166" data-name="Group 7166" transform="translate(-3.875 1.497)">
+      <path id="Path_4117" data-name="Path 4117" d="M23.611,24.907H3.06A2.185,2.185,0,0,1,.875,22.722V2.593A1.718,1.718,0,0,1,2.593.875H19.707a1.718,1.718,0,0,1,1.719,1.718V16.168" transform="translate(362 247)" fill="rgba(255,255,255,0)" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <path id="Path_4118" data-name="Path 4118" d="M21.426,22.723a2.185,2.185,0,0,0,2.41,2.173,2.27,2.27,0,0,0,1.96-2.3V17.887a1.719,1.719,0,0,0-1.719-1.718H21.426Z" transform="translate(362 247)" fill="rgba(255,255,255,0)" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <path id="Rectangle_5013" data-name="Rectangle 5013" d="M1.719,0h8.375a1.719,1.719,0,0,1,1.719,1.719V4.836a1.718,1.718,0,0,1-1.718,1.718H1.719A1.719,1.719,0,0,1,0,4.835V1.719A1.719,1.719,0,0,1,1.719,0Z" transform="translate(367.244 252.245)" fill="rgba(255,255,255,0)" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <line id="Line_434" data-name="Line 434" x2="13.997" transform="translate(366.152 263.168)" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+      <line id="Line_435" data-name="Line 435" x2="13.997" transform="translate(366.152 267.538)" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"/>
+    </g>
+  </g>
+</svg>
