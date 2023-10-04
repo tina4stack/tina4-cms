@@ -43,10 +43,14 @@ body:not(.gjs-dashed) {
 }
 
 .top-bar {
-  padding: 0;
+  padding: 0 15px;
   height: var(--top-bar-height);
   background: var(--color-dark-blue);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
 }
 
 .sidebar-toggler-container {
@@ -85,14 +89,44 @@ body:not(.gjs-dashed) {
   }
 }
 
+.custom-nav-separator {
+  display: block;
+  height: 30px;
+  width: 1px;
+  background: #ffffff;
+  opacity: .5;
+}
+
+.custom-nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  a {
+    text-decoration: none !important;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: var(--border-radius-base);
+    background: transparent;
+    transition: background .2s ease-in-out;
+
+    &:hover, &.active {
+      background: var(--color-active-blue);
+      transition: background .2s ease-in-out;
+    }
+
+    img {
+      width: 20px;
+    }
+  }
+}
+
 .cms-version {
   color: #ffffff;
   font-size: 12px;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: 19px;
   padding: 6px 8px;
   line-height: 1;
   border-radius: var(--border-radius-base);
@@ -172,7 +206,6 @@ body:not(.gjs-dashed) {
   color: var(--color-dark-gray);
   font-weight: 700;
   margin: 0;
-  border-top: 2px solid var(--color-dark-blue);
 }
 
 .pages-link {
@@ -254,6 +287,10 @@ body:not(.gjs-dashed) {
   top: 1px;
 }
 
+// DataTables Loader Z-Index fix
+div.dataTables_processing {
+  z-index: 2;
+}
 
 //  ------------------------------
 //  Page Builder Layout and Styling

@@ -4,24 +4,19 @@
 {% endblock %}
 {% block navigation %}
     <nav class="top-bar">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                {% if session.user is not null %}
-                    {% for menuItem in menuItems %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="loadPage('{{ menuItem.href }}', 'content')">
-                                {{ menuItem.caption }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-        </div>
+
+        {% if session.user is not null %}
+            <nav class="custom-nav">
+                {% for menuItem in menuItems %}
+                    {# This will need an active class of ".adtive" #}
+                    <a class="" href="#" onclick="loadPage('{{ menuItem.href }}', 'content')" style="color: #ffffff;">
+                        <img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-placeholder.svg">{{ menuItem.caption }}
+                    </a>
+                {% endfor %}
+            </nav>
+            <span class="custom-nav-separator"></span>
+        {% endif %}
+
         <span class="cms-version">Version: {{ version }}</span>
     </nav>
 {% endblock %}
@@ -34,64 +29,64 @@
         <div class="col-md-12">
             <ul class="nav nav-tabs" role="tablist">
                 {% if (not userRoles.Content.Pages or userRoles.Content.Pages.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link active" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/pages', 'sub-content')">Pages</a>
+                    </li>
                 {%endif%}
                 {% if (not userRoles.Content.Snippets or userRoles.Content.Snippets.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/snippets', 'sub-content')">Snippets</a>
+                    </li>
                 {% endif %}
                 {% if (not userRoles.Content.Articles or userRoles.Content.Articles.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/articles', 'sub-content')">Articles</a>
+                    </li>
                 {% endif %}
                 {% if (not userRoles.Content['Article Categories'] or userRoles.Content['Article Categories'].visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/article-categories', 'sub-content')">Article Categories</a>
+                    </li>
                 {%endif%}
                 {% if (not userRoles.Content.Menus or userRoles.Content.Menus.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/menus', 'sub-content')">Menus</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/menus', 'sub-content')">Menus</a>
+                    </li>
                 {% endif %}
                 {% if (not userRoles.Content.CSS or userRoles.Content.CSS.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/css', 'sub-content')">CSS</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/css', 'sub-content')">CSS</a>
+                    </li>
                 {% endif %}
                 {% if (not userRoles.Content['Email Templates'] or userRoles.Content['Email Templates'].visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/email-templates', 'sub-content')">Email Templates</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/email-templates', 'sub-content')">Email Templates</a>
+                    </li>
                 {% endif %}
                 {% if (not userRoles.Content.Users or userRoles.Content.Users.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/users', 'sub-content')">Users</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/users', 'sub-content')">Users</a>
+                    </li>
                 {% endif %}
                 {% if (not userRoles.Content.Roles or userRoles.Content.Roles.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/roles', 'sub-content')">Roles</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/roles', 'sub-content')">Roles</a>
+                    </li>
                 {% endif %}
                 {% if (not userRoles.Content.Site or userRoles.Content.Site.visible) %}
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
-                       onclick="loadPage('/cms/site', 'sub-content')">Site</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" href="#"
+                           onclick="loadPage('/cms/site', 'sub-content')">Site</a>
+                    </li>
                 {% endif %}
             </ul>
             <div id="sub-content" class="cms-container-content">
