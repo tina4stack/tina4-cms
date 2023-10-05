@@ -69,23 +69,31 @@ editor.Components.addType('cms-article-title', {
             },
             traits: [
                 {
-                    type: 'select', // Type of the trait
-                    label: 'Article', // The label you will see in Settings
-                    name: 'cms-article', // The name of the attribute/property to use on component
+                    type: 'text', // Type of the trait
+                    label: 'Title', // The label you will see in Settings
+                    name: 'cms-article-title', // The name of the attribute/property to use on component
                 }
             ]
         }
     },
     view: {
         onRender({ el }) {
-            const articleId = this.model.getTrait('cms-article').attributes.value;
+            const titleText = this.model.getTrait('cms-article-title').attributes.value;
             el.innerHTML = '<b>Rendering an article</b>';
-            fetch('/cms/page-builder/cms-articles/render?id='+articleId+'&render=content')
+            fetch('/cms/page-builder/cms-articles/render?render=title&text='+titleText)
                 .then(async function(response) {
                     const data = await response.text();
                     el.innerHTML = data;
                 });
         },
     },
+});
+
+editor.Blocks.add('cms-article-title', {
+    label: 'Article Title',
+    category: 'Articles',
+    media:`
+     `,
+    content: '<span data-gjs-type="cms-article">Article Title</span>',
 });
 
