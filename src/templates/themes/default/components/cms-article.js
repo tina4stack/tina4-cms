@@ -79,12 +79,7 @@ editor.Components.addType('cms-article-title', {
     view: {
         onRender({ el }) {
             const titleText = this.model.getTrait('cms-article-title').attributes.value;
-            el.innerHTML = '<b>Rendering an article</b>';
-            fetch('/cms/page-builder/cms-articles/render?render=title&text='+titleText)
-                .then(async function(response) {
-                    const data = await response.text();
-                    el.innerHTML = data;
-                });
+            el.innerHTML = titleText;
         },
     },
 });
@@ -94,6 +89,6 @@ editor.Blocks.add('cms-article-title', {
     category: 'Articles',
     media:`
      `,
-    content: '<span data-gjs-type="cms-article">Article Title</span>',
+    content: '<span data-gjs-type="cms-article-title">Article Title</span>',
 });
 
