@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-utilities.min.css">
 
 
-    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.0/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.0/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css"
+          rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.0/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.js"></script>
@@ -43,7 +44,7 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 
-    <script src="/js/bootstrap-tagsinput.js" ></script>
+    <script src="/js/bootstrap-tagsinput.js"></script>
     <script src="/js/tina4helper.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css"
@@ -63,23 +64,37 @@
                     <span class="sidebar-toggler"></span>
                 </a>
             </div>
-            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-site-settings.svg">Site Settings</a>
-            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-page-layout.svg">Page Layout</a>
-            <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-article-layout.svg">Article Layout</a>
-            <h3 class="pages-heading"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Pages</h3>
+            <a href="#" class="pages-link"
+               onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')"><img
+                        class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-site-settings.svg">Site
+                Settings</a>
+            <a href="#" class="pages-link"
+               onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layout')"><img
+                        class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-page-layout.svg">Page
+                Layout</a>
+            <a href="#" class="pages-link"
+               onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('layoutArticle')"><img
+                        class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-article-layout.svg">Article
+                Layout</a>
+            <h3 class="pages-heading"><img class="pages-link-icon"
+                                           src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Pages</h3>
             <div class="pages">
                 {% for page in pages %}
-                    <a href="#" class="pages-link" onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
+                    <a href="#" class="pages-link"
+                       onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
             {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
-                <h3 class="pages-heading"><img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-sites.svg">Choose Site</h3>
+                <h3 class="pages-heading"><img class="pages-link-icon"
+                                               src="{{ baseUrl }}/images/nav-icons/nav-icon-sites.svg">Choose Site</h3>
                 <div id="siteDropDown" class="site-selector">
                     <label for="siteId" class="sr-only">Choose Site</label>
                     <form id="setSite" action="/cms/site/set" method="post">
-                        <select id="siteId" name="siteId" class="form-select" onchange="document.getElementById('setSite').submit()">
+                        <select id="siteId" name="siteId" class="form-select"
+                                onchange="document.getElementById('setSite').submit()">
                             {% for listSite in sites %}
-                                <option value="{{ listSite.id }}" {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
+                                <option value="{{ listSite.id }}"
+                                        {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
                             {% endfor %}
                         </select>
                         <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
@@ -87,7 +102,8 @@
                 </div>
             {% endif %}
             <div class="pages-links--bottom">
-                <a href="/cms/logout" class="pages-link pages-link--logout">Logout<img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-logout.svg"></a>
+                <a href="/cms/logout" class="pages-link pages-link--logout">Logout<img class="pages-link-icon"
+                                                                                       src="{{ baseUrl }}/images/nav-icons/nav-icon-logout.svg"></a>
             </div>
 
         </div>
@@ -102,7 +118,7 @@
     <script>
         const editor = grapesjs.init({
             container: '#gjs',
-            jsInHtml : false,
+            jsInHtml: false,
             allowScripts: true,
             canvas: {
                 scripts: {{ Theme.Scripts(site.theme) | raw }},
@@ -135,8 +151,26 @@
                         })
                     }
                 }
-            }
-
+            },
+            deviceManager: {
+                title: "Test",
+                devices: [
+                    {
+                        name: "Desktop",
+                        width: "",
+                    },
+                    {
+                        name: "Tablet",
+                        width: "768px",
+                        widthMedia: "768px",
+                    },
+                    {
+                        name: "Mobile",
+                        width: "320px",
+                        widthMedia: "480px",
+                    },
+                ],
+            },
         });
 
         let pageManager = editor.Pages;
@@ -146,9 +180,29 @@
         //console.log('Panels', panelManager.getPanels());
 
         editor.Panels.addButton('options', [
-            {id: 'undo', className: 'fa fa-undo', command: 'core:undo'},
-            {id: 'redo', className: 'fa fa-repeat', command: 'core:redo'},
-            {id: 'delete', className: 'fa fa-trash', command: 'core:canvas-clear'}
+            {
+                id: 'undo',
+                attributes: {
+                    title: 'Undo'
+                },
+                label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M0 0h26v26H0z" style="fill:none;stroke-width:0"/><path d="M15.8 8.43H4.94l4.07-4.08a.87.87 0 1 0-1.23-1.23L2.26 8.66a.87.87 0 0 0 0 1.23l5.52 5.54a.87.87 0 1 0 1.23-1.23l-4.02-4.04h10.82c3.1 0 5.62 2.51 5.62 5.62 0 3.1-2.51 5.62-5.62 5.62H5.92a.871.871 0 0 0 0 1.74h9.88c4.06 0 7.36-3.29 7.36-7.35s-3.29-7.36-7.36-7.36" style="fill:#fff;stroke-width:0"/></svg>',
+                command: 'core:undo'
+            },
+            {
+                attributes: {
+                    title: 'Redo'
+                },
+                label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M0 0h26v26H0z" style="fill:none;stroke-width:0"/><path d="M16.15 15.44c.34.34.89.34 1.23 0l5.52-5.55a.87.87 0 0 0 0-1.23l-5.52-5.54a.87.87 0 1 0-1.23 1.23l4.07 4.08H9.36C5.3 8.43 2 11.72 2 15.79s3.29 7.36 7.36 7.36h9.88a.87.87 0 0 0 0-1.74H9.36c-3.1 0-5.62-2.51-5.62-5.62s2.51-5.62 5.62-5.62h10.82l-4.03 4.04a.87.87 0 0 0 0 1.23" style="fill:#fff;stroke-width:0"/></svg>',
+                command: 'core:redo'
+            },
+            {
+                id: 'delete',
+                attributes: {
+                    title: 'Clear Canvas'
+                },
+                label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M0 0h26v26H0z" style="fill:none;stroke-width:0"/><path d="M21.33 5.32h-4.37v-.88c0-1.44-1.17-2.61-2.62-2.62h-3.49c-1.44 0-2.61 1.17-2.61 2.62v.88H3.87a.87.87 0 0 0 0 1.74h.88v14.5c0 1.44 1.17 2.61 2.61 2.61h10.48c1.44 0 2.61-1.17 2.61-2.61V7.06h.88a.87.87 0 0 0 0-1.74M9.98 4.44c0-.48.39-.88.88-.88h3.49c.48 0 .88.39.88.88v.88H9.98v-.88Zm8.74 17.11c0 .48-.39.88-.88.88H7.36c-.48 0-.88-.39-.88-.88V7.06h12.23v14.5Z" style="fill:#fff;stroke-width:0"/><path d="M9.11 10.38a.87.87 0 0 0-.87.87v8.73a.87.87 0 0 0 1.74 0v-8.73a.87.87 0 0 0-.87-.87M12.6 10.38a.87.87 0 0 0-.87.87v8.73a.87.87 0 0 0 1.74 0v-8.73a.87.87 0 0 0-.87-.87M15.22 11.25v8.73a.871.871 0 0 0 1.74.06V11.25a.871.871 0 0 0-1.74-.06v.06" style="fill:#fff;stroke-width:0"/></svg>',
+                command: 'core:canvas-clear'
+            },
         ]);
 
         const panelViews = panelManager.addPanel({
@@ -158,12 +212,12 @@
         panelViews.get("buttons").add([
             {
                 attributes: {
-                    title: "Open Code"
+                    title: 'Open Code'
                 },
-                className: "fa fa-file-code-o",
-                command: "open-code",
-                togglable: false, //do not close when button is clicked again
-                id: "open-code"
+                label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M0 0h26v26H0z" style="fill:none;stroke-width:0"/><path d="M17.19 11.58a.833.833 0 0 0-1.17 0c-.32.32-.32.85 0 1.17l1.94 1.94-1.94 1.94c-.32.33-.31.86.03 1.17.32.31.83.31 1.15 0l2.53-2.53c.32-.32.33-.85 0-1.17l-2.53-2.53ZM14.23 9.75a.842.842 0 0 0-1.01.6l-2.07 8.27c-.11.44.16.89.6 1.01.07.02.13.03.2.02.38 0 .71-.26.81-.63l2.07-8.27a.842.842 0 0 0-.6-1.01" style="fill:#fff;stroke-width:0"/><path d="M20.35 3.38H5.65c-1.7 0-3.08 1.38-3.09 3.09v13.07c0 1.7 1.38 3.08 3.09 3.09h14.7c1.7 0 3.08-1.38 3.09-3.09V6.47c0-1.7-1.38-3.08-3.09-3.09M5.65 5.04h14.7c.79 0 1.43.64 1.43 1.43v.54H4.22v-.54c0-.79.64-1.43 1.43-1.43m14.7 15.92H5.65c-.79 0-1.43-.64-1.43-1.43V8.66h17.56v10.87c0 .79-.64 1.43-1.43 1.43" style="fill:#fff;stroke-width:0"/><path d="M9.99 11.58a.833.833 0 0 0-1.17 0l-2.53 2.53c-.32.32-.33.85 0 1.17l2.53 2.53c.33.32.86.3 1.17-.03.31-.32.31-.83 0-1.15l-1.94-1.94 1.94-1.94c.32-.32.32-.85 0-1.17" style="fill:#fff;stroke-width:0"/></svg>',
+                command: 'open-code',
+                togglable: true, //do not close when button is clicked again
+                id: 'open-code'
             }
         ]);
 
@@ -211,9 +265,9 @@
             attributes: {title: 'AI Enhance'},
             result: async function (rte) {
                 let prompt = await rte.selection().toString();
-                console.log (prompt);
-                fetch('/cms/page-builder/open-ai?prompt='+rte.el.innerHTML)
-                    .then(async function(response) {
+                console.log(prompt);
+                fetch('/cms/page-builder/open-ai?prompt=' + rte.el.innerHTML)
+                    .then(async function (response) {
                         const data = await response.text();
                         rte.el.innerHTML = data;
                     });

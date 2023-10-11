@@ -295,6 +295,70 @@ div.dataTables_processing {
 //  ------------------------------
 //  Page Builder Layout and Styling
 //  ------------------------------
+
+.gjs-cv-canvas {
+  background-color: rgba(0, 0, 0, .15);
+  box-sizing: border-box;
+  width: 85%;
+  height: calc(100% - 50px);
+  bottom: 0;
+  overflow: hidden;
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 50px;
+}
+
+.gjs-pn-panel.gjs-pn-options {
+  background: var(--color-dark-blue);
+}
+
+.gjs-pn-btn {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  width: 36px;
+  padding: 0;
+  border-radius: 5px;
+
+  svg {
+    width: 26px;
+  }
+}
+
+.gjs-pn-btn.gjs-pn-active {
+  background: var(--color-active-blue);
+}
+
+.gjs-pn-buttons {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 6px;
+}
+
+.gjs-one-bg {
+  background-color: var(--color-light-gray);
+}
+
+.gjs-pn-views {
+  background: var(--color-bright-blue);
+  height: var(--top-bar-height);
+}
+
+.gjs-category-title,
+.gjs-layer-title,
+.gjs-block-category .gjs-title,
+.gjs-sm-sector-title {
+  color: var(--color-dark-gray);
+  font-weight: 600;
+  letter-spacing: 0;
+  font-size: 0.8rem;
+  background: var(--color-medium-gray);
+}
+
 .gjs-pn-commands,
 .gjs-pn-options,
 .gjs-pn-devices-c {
@@ -306,6 +370,24 @@ div.dataTables_processing {
     box-shadow: none;
     background-image: none;
     background: var(--color-dark-blue);
+  }
+}
+
+.gjs-block {
+  background: #ffffff;
+  border: 1px solid var(--color-gray);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+
+  svg {
+    width: 44px;
+  }
+
+  &:hover {
+    box-shadow: 0 7px 12px -6px rgba(0, 0, 0, .15);
+
+    svg {
+      opacity: .7;
+    }
   }
 }
 
@@ -326,7 +408,7 @@ div.dataTables_processing {
 }
 
 .gjs-two-color {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
 .gjs-one-bg {
@@ -347,6 +429,24 @@ div.dataTables_processing {
 
 .gjs-pn-panel.gjs-pn-devices-c {
   height: 40px;
+}
+
+.gjs-block-categories * {
+  color: var(--color-dark-gray) !important;
+}
+
+.gjs-block-categories {
+  gap: 8px;
+}
+
+.gjs-category-title,
+.gjs-layer-title,
+.gjs-block-category .gjs-title,
+.gjs-sm-sector-title,
+.gjs-category-open,
+.gjs-block-category.gjs-open,
+.gjs-sm-sector.gjs-sm-open {
+  border-bottom: none;
 }
 
 .gjs-pn-views-container {
