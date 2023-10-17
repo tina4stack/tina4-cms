@@ -60,6 +60,7 @@
     <div class="app-wrap">
         <div class="nav-sidebar">
             <div href="/" class="tina-logo"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%">
+                <span id="siteName"></span>
                 <a href="#" class="sidebar-toggler-container">
                     <span class="sidebar-toggler"></span>
                 </a>
@@ -95,6 +96,9 @@
                             {% for listSite in sites %}
                                 <option value="{{ listSite.id }}"
                                         {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
+                                {% if listSite.id == session.siteId %}
+                                    <script>document.getElementById('siteName').innerText = '{{ listSite.siteName }}';</script>
+                                {% endif %}
                             {% endfor %}
                         </select>
                         <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">

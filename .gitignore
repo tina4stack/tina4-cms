@@ -27,3 +27,4 @@ composer.phar
 /src/public/themes/
 /phpmetrics/
 /src/public/uploads/
+/src/routes/test/
