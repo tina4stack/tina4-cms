@@ -60,7 +60,7 @@
     <div class="app-wrap">
         <div class="nav-sidebar">
             <div href="/" class="tina-logo"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%">
-                <span id="siteName"></span>
+                <span id="siteName" class="selected-site-name"></span>
                 <a href="#" class="sidebar-toggler-container">
                     <span class="sidebar-toggler"></span>
                 </a>
@@ -85,26 +85,28 @@
                        onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
-            {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
-                <h3 class="pages-heading"><img class="pages-link-icon"
-                                               src="{{ baseUrl }}/images/nav-icons/nav-icon-sites.svg">Choose Site</h3>
-                <div id="siteDropDown" class="site-selector">
-                    <label for="siteId" class="sr-only">Choose Site</label>
-                    <form id="setSite" action="/cms/site/set" method="post">
-                        <select id="siteId" name="siteId" class="form-select"
-                                onchange="document.getElementById('setSite').submit()">
-                            {% for listSite in sites %}
-                                <option value="{{ listSite.id }}"
-                                        {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
-                                {% if listSite.id == session.siteId %}
+            <div class="site-selector-container">
+                {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
+                    <h3 class="pages-heading"><img class="pages-link-icon"
+                                                   src="{{ baseUrl }}/images/nav-icons/nav-icon-sites.svg">Choose Site</h3>
+                    <div id="siteDropDown" class="site-selector">
+                        <label for="siteId" class="sr-only">Choose Site</label>
+                        <form id="setSite" action="/cms/site/set" method="post">
+                            <select id="siteId" name="siteId" class="form-select"
+                                    onchange="document.getElementById('setSite').submit()">
+                                {% for listSite in sites %}
+                                    <option value="{{ listSite.id }}"
+                                            {% if listSite.id == session.siteId %}selected{% endif %}>{{ listSite.siteName }}</option>
+                                    {% if listSite.id == session.siteId %}
                                     <script>document.getElementById('siteName').innerText = '{{ listSite.siteName }}';</script>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
-                        <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
-                    </form>
-                </div>
-            {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                            <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
             <div class="pages-links--bottom">
                 <a href="/cms/logout" class="pages-link pages-link--logout">Logout<img class="pages-link-icon"
                                                                                        src="{{ baseUrl }}/images/nav-icons/nav-icon-logout.svg"></a>

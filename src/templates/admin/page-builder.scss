@@ -10,6 +10,10 @@
   --top-bar-height: 50px;
 }
 
+.gjs-field input, .gjs-field select, .gjs-field textarea {
+  appearance: auto !important;
+}
+
 /* Let's highlight canvas boundaries */
 
 #gjs {
@@ -86,6 +90,28 @@ body:not(.gjs-dashed) {
 
   &:after {
     top: 5px;
+  }
+}
+
+.site-selector-container {
+  position: absolute;
+  bottom: 51px;
+  left: 0;
+  right: 0;
+}
+
+.selected-site-name {
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 160px;
+  text-align: center;
+
+  &:before {
+    content: "Site: ";
+    font-weight: 600;
   }
 }
 
@@ -275,6 +301,7 @@ body:not(.gjs-dashed) {
   border-radius: 0;
   color: var(--color-dark-gray);
   border-top: 5px solid transparent;
+  font-size: 15px;
 }
 
 .nav-tabs .nav-item.show .nav-link,
@@ -394,6 +421,7 @@ div.dataTables_processing {
 
 .gjs-sm-field input, .gjs-clm-select input, .gjs-clm-field input, .gjs-sm-field select, .gjs-clm-select select, .gjs-clm-field select {
   background-color: #ffffff;
+  color: var(--color-dark-gray);
 }
 
 .gjs-layer-count:not(:empty) {
@@ -403,6 +431,11 @@ div.dataTables_processing {
   border-radius: 4px;
   font-weight: 600;
   font-size: 11px;
+}
+
+.gjs-sm-clear {
+  position: relative;
+  top: -3px;
 }
 
 .gjs-field {
@@ -428,6 +461,8 @@ div.dataTables_processing {
   background: #ffffff;
   border: 1px solid var(--color-gray);
   box-shadow: 0 2px 4px rgba(0, 0, 0, .04);
+  //width: 31%;
+  //margin: 0;
 
   svg {
     width: 44px;
@@ -442,6 +477,17 @@ div.dataTables_processing {
   }
 }
 
+.gjs-blocks-c {
+  //display: flex;
+  //flex-wrap: wrap;
+  //justify-content: flex-start;
+  //gap: 10px;
+  //margin-top: 10px;
+  //margin-bottom: 5px;
+  //padding-left: 10px;
+  //padding-right: 10px;
+}
+
 .gjs-devices-c {
   .gjs-device-label {
     display: none;
@@ -453,9 +499,16 @@ div.dataTables_processing {
 
   &:before {
     content: "Resonsive View";
-    font-size: 14px;
+    font-size: 13px;
     white-space: nowrap;
+    margin-right: 10px;
+    margin-left: 10px;
   }
+}
+
+.gjs-radio-item input:checked+.gjs-radio-item-label {
+  color: #fff;
+  background-color:var(--color-bright-blue);
 }
 
 .gjs-two-color:not(.gjs-pn-panel), .gjs-traits-label, .gjs-block-categories *, .gjs-clm-tags #gjs-clm-new, .gjs-sm-header, .gjs-trt-header {
@@ -488,7 +541,8 @@ div.dataTables_processing {
 }
 
 .gjs-pn-panel.gjs-pn-devices-c {
-  height: 40px;
+  height: var(--top-bar-height);
+  display: flex;
 }
 
 .gjs-block-categories {
