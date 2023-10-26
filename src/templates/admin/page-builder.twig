@@ -130,12 +130,6 @@
             canvas: {
                 scripts: {{ Theme.Scripts(site.theme) | raw }},
                 styles: {{ Theme.Styles(site.theme) | raw }},
-                // Disable only the hover type spot
-                customSpots: {
-                    hover: false,
-                },
-                // Disable all built-in spots
-                customSpots: false,
             },
             plugins: ['grapesjs-custom-code', 'grapesjs-component-code-editor', 'grapesjs-parser-postcss'],
             assetManager: {
