@@ -25,7 +25,7 @@
     <script src="https://unpkg.com/grapesjs-custom-code"></script>
     <script src="https://unpkg.com/grapesjs-component-code-editor"></script>
     <script src="https://unpkg.com/grapesjs-parser-postcss"></script>
-    <script src="https://unpkg.com/grapesjs@0.21.2/dist/grapes.min.js"></script>
+    <script src="https://unpkg.com/grapesjs@0.21.5/dist/grapes.min.js"></script>
 
 
     <script src="{{ Content.getTinyMCEIncludePath }}/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
@@ -124,11 +124,18 @@
     <script>
         const editor = grapesjs.init({
             container: '#gjs',
+            showOffsets: true,
             jsInHtml: false,
             allowScripts: true,
             canvas: {
                 scripts: {{ Theme.Scripts(site.theme) | raw }},
                 styles: {{ Theme.Styles(site.theme) | raw }},
+                // Disable only the hover type spot
+                customSpots: {
+                    hover: false,
+                },
+                // Disable all built-in spots
+                customSpots: false,
             },
             plugins: ['grapesjs-custom-code', 'grapesjs-component-code-editor', 'grapesjs-parser-postcss'],
             assetManager: {
