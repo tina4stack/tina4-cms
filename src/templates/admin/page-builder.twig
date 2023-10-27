@@ -186,7 +186,11 @@
         let storageManager = editor.Storage;
         let panelManager = editor.Panels;
 
-        //console.log('Panels', panelManager.getPanels());
+        function confirmCanvasClear() {
+            if (window.confirm('Are you sure you want to clear the canvas? This will delete all of your content.')) {
+                editor.Commands.run('core:canvas-clear');
+            }
+        }
 
         editor.Panels.addButton('options', [
             {
@@ -210,7 +214,7 @@
                     title: 'Clear Canvas'
                 },
                 label: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M0 0h26v26H0z" style="fill:none;stroke-width:0"/><path d="M21.33 5.32h-4.37v-.88c0-1.44-1.17-2.61-2.62-2.62h-3.49c-1.44 0-2.61 1.17-2.61 2.62v.88H3.87a.87.87 0 0 0 0 1.74h.88v14.5c0 1.44 1.17 2.61 2.61 2.61h10.48c1.44 0 2.61-1.17 2.61-2.61V7.06h.88a.87.87 0 0 0 0-1.74M9.98 4.44c0-.48.39-.88.88-.88h3.49c.48 0 .88.39.88.88v.88H9.98v-.88Zm8.74 17.11c0 .48-.39.88-.88.88H7.36c-.48 0-.88-.39-.88-.88V7.06h12.23v14.5Z" style="fill:#fff;stroke-width:0"/><path d="M9.11 10.38a.87.87 0 0 0-.87.87v8.73a.87.87 0 0 0 1.74 0v-8.73a.87.87 0 0 0-.87-.87M12.6 10.38a.87.87 0 0 0-.87.87v8.73a.87.87 0 0 0 1.74 0v-8.73a.87.87 0 0 0-.87-.87M15.22 11.25v8.73a.871.871 0 0 0 1.74.06V11.25a.871.871 0 0 0-1.74-.06v.06" style="fill:#fff;stroke-width:0"/></svg>',
-                command: 'core:canvas-clear'
+                command: confirmCanvasClear
             },
         ]);
 
