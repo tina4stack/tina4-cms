@@ -27,7 +27,7 @@
             $themes = (new Theme())->getThemes();
 
             if (!empty($site->custom)) {
-                $site->custom = html_entity_decode($site->custom);
+                $site->custom = html_entity_decode($site->custom ?? '');
             }
 
             if ($action == "form") {
