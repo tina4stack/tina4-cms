@@ -615,10 +615,10 @@ class Content extends Data
         if (!empty($iconFiles))
         {
             foreach ($iconFiles as $iconFile) {
-                if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . $iconFile)) {
+                if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."images" . DIRECTORY_SEPARATOR . $iconFile)) {
                     \Tina4\Utilities::recurseCopy(
                         __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . $iconFile,
-                        TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . $iconFile
+                        TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR . $iconFile
                     );
                 }
             }
