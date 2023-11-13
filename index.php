@@ -15,7 +15,7 @@ $config = new \Tina4\Config(function(\Tina4\Config $config) {
     (new Content())->addCmsMenu("/backend/program", "Products");
     // $config->addTwigGlobal("Menu", new Menu());
     //(new Theme())->addTwigView("product", "Products", "examples/products.twig");
-    //(new Theme())->addTwigView("menu", "Menu", "examples/menu.twig");
+    (new Theme())->addTwigView("menu", "Menu", "examples/menu.twig");
 });
 
 //Hack to build css for documentation
