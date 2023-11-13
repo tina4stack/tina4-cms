@@ -604,6 +604,27 @@ class Content extends Data
             file_put_contents($pageBuilderCSS, file_get_contents(__DIR__ . "/../public/css/page-builder.css"));
         }
 
+        //Copy over the page builder css
+        $grapeJsCss = "./src/public/css/grape.css";
+        if (!file_exists($grapeJsCss))
+        {
+            file_put_contents($grapeJsCss, file_get_contents(__DIR__ . "/../public/css/grape.css"));
+        }
+
+        $iconFiles = ["blocks-icons", "nav-icons", "ui-icons"];
+        if (!empty($iconFiles))
+        {
+            foreach ($iconFiles as $iconFile) {
+                if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . $iconFile)) {
+                    \Tina4\Utilities::recurseCopy(
+                        __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . $iconFile,
+                        TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . $iconFile
+                    );
+                }
+            }
+        }
+
+        //Copy over the page builder css
         $checkSite = new Site();
         if (!$checkSite->load("id = 1")) {
             $checkSite->id = 1;
