@@ -110,8 +110,21 @@ class Theme
 
     public function parseArticleIncludes($html)
     {
-        echo $html;
+        //Get rid of the body bits
+        $re = '/<body(.*)id="(.*)">(.*)<\/body>/mU';
+        $subst = "$3";
+        $html = preg_replace($re, $subst, $html);
 
+        $html = str_replace('Article Block', '{{ article.content }}', $html);
+        $html = str_replace('Article Content', '{{ article.content }}', $html);
+        $html = str_replace('Article Title', '{{ article.title }}', $html);
+        $html = str_replace('Article Tags', '{{ article.keywords }}', $html);
+        $html = str_replace('Publish Date', '{{ article.publishedDate }}', $html);
+        $html = str_replace('Article Link', '{{ article.slug }}', $html);
+        $html = str_replace('Article Navigation', '{{ article.navigation }}', $html);
+        $html = str_replace('Article Author', '{{ article.author }}', $html);
+
+        return $html;
     }
 
     private function deployAssets()

@@ -1,4 +1,4 @@
-editor.Components.addType('cms-article', {
+editor.DomComponents.addType('cms-article', {
     model: {
         init() {
             const component = this;
@@ -55,7 +55,7 @@ editor.Blocks.add('cms-article', {
 });
 
 
-editor.Components.addType('cms-article-content', {
+editor.DomComponents.addType('cms-article-content', {
     model: {
         init() {
             const component = this;
@@ -112,7 +112,7 @@ editor.Blocks.add('cms-article-content', {
 });
 
 
-editor.Components.addType('cms-article-list', {
+editor.DomComponents.addType('cms-article-list', {
     model: {
         defaults: {
             traits: [
@@ -146,7 +146,7 @@ editor.Blocks.add('cms-article-list', {
 });
 
 
-editor.Components.addType('cms-article-title', {
+editor.DomComponents.addType('cms-article-title', {
     model: {
         defaults: {
             traits: [
@@ -182,7 +182,7 @@ editor.Blocks.add('cms-article-title', {
     content: '<h1 data-gjs-type="cms-article-title" class="article-title">Article Title</h1>',
 });
 
-editor.Components.addType('cms-article-image', {
+editor.DomComponents.addType('cms-article-image', {
     model: {
         defaults: {
             traits: [
@@ -215,10 +215,10 @@ editor.Blocks.add('cms-article-image', {
     media:`
     <svg id="b" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.5 44.5"><g id="c"><g id="d"><rect width="44.5" height="44.5" style="fill:none; stroke-width:0px;"/></g><path d="m41.51,17.26l-2.25-2.26c-.7-.71-1.72-.91-2.61-.63v-2.59c0-2.17-1.76-3.93-3.93-3.93H11.78c-2.17,0-3.93,1.76-3.93,3.93v20.93c0,2.17,1.76,3.93,3.93,3.93h20.94c2.17,0,3.93-1.76,3.93-3.93v-6.94l4.86-4.86c1.01-1.01,1.01-2.65,0-3.66Zm-29.73-6.91h20.94c.79,0,1.43.64,1.43,1.43v4.67l-5.51,5.51-.39-.39c-1.36-1.36-3.57-1.36-4.92,0l-3.36,3.36-1.13-1.13c-1.31-1.31-3.61-1.32-4.92,0l-3.56,3.56v-15.58c0-.79.64-1.43,1.43-1.43Zm14.77,18.13l1.34,1.34-1.93.59.59-1.93Zm6.16,5.67H11.78c-.79,0-1.43-.64-1.43-1.43v-1.82l5.33-5.33c.18-.18.43-.29.69-.29s.51.1.69.29l2.02,2.02c.49.49,1.28.49,1.77,0l4.25-4.25c.38-.38,1-.38,1.38,0l.39.39-1.9,1.9c-.15.15-.25.32-.31.52l-1.75,5.77c-.13.44-.01.92.31,1.25.24.24.56.37.88.37.12,0,.24-.02.36-.05l6.16-1.88s.04-.02.07-.03c.03-.01.06-.02.08-.04.14-.06.26-.14.37-.25l1.65-1.65,1.37,1.37v1.7c0,.79-.64,1.43-1.43,1.43Zm1.8-9.77h0l-2.61,2.61s0,0,0,0,0,0,0,0l-1.64,1.64-2.38-2.38,1.64-1.64s0,0,0,0,0,0,0,0l6.76-6.76s0,0,0,0l1.08-1.08s.09-.04.13,0l2.25,2.25s.04.09,0,.13l-5.23,5.23Z" style="fill:#515962; stroke-width:0px;"/><path d="m18.46,19.27c1.92,0,3.48-1.56,3.48-3.48s-1.56-3.48-3.48-3.48-3.48,1.56-3.48,3.48,1.56,3.48,3.48,3.48Zm0-4.46c.54,0,.98.44.98.98s-.44.98-.98.98-.98-.44-.98-.98.44-.98.98-.98Z" style="fill:#515962; stroke-width:0px;"/></g></svg>
      `,
-    content: '<img data-gjs-type="cms-article-image" class="article-image" alt="{{article.description}}">',
+    content: '<img data-gjs-type="cms-article-image" class="article-image" src="{{article.image}}" alt="{{article.description}}">'
 });
 
-editor.Components.addType('cms-article-tags', {
+editor.DomComponents.addType('cms-article-tags', {
     model: {
         defaults: {
             traits: [
@@ -254,7 +254,7 @@ editor.Blocks.add('cms-article-tags', {
     content: '<span data-gjs-type="cms-article-tags" class="article-tags">Article Tags</span>',
 });
 
-editor.Components.addType('cms-article-related', {
+editor.DomComponents.addType('cms-article-related', {
     model: {
         defaults: {
             traits: [
@@ -290,7 +290,7 @@ editor.Blocks.add('cms-article-related', {
     content: '<span data-gjs-type="cms-article-related" class="article-related">Related Articles</span>',
 });
 
-editor.Components.addType('cms-article-author', {
+editor.DomComponents.addType('cms-article-author', {
     model: {
         defaults: {
             traits: [
@@ -326,7 +326,7 @@ editor.Blocks.add('cms-article-author', {
     content: '<span data-gjs-type="cms-article-author" class="article-author">Article Author</span>',
 });
 
-editor.Components.addType('cms-article-publish-date', {
+editor.DomComponents.addType('cms-article-publish-date', {
     model: {
         defaults: {
             traits: [
@@ -362,7 +362,7 @@ editor.Blocks.add('cms-article-publish-date', {
     content: '<span data-gjs-type="cms-article-publish-date" class="article-publish-date">Publish Date</span>',
 });
 
-editor.Components.addType('cms-article-link', {
+editor.DomComponents.addType('cms-article-link', {
     model: {
         defaults: {
             traits: [
@@ -395,11 +395,11 @@ editor.Blocks.add('cms-article-link', {
     media:`
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.5 44.5"><path d="M0 0h44.5v44.5H0z" style="fill:none;stroke-width:0"/><path d="M30.06 38.68a1.25 1.25 0 0 1 0-2.5h3.05c.69 0 1.27.56 1.27 1.25s-.54 1.25-1.23 1.25v-1.25l-.02 1.25h-3.08Zm-5.09 0h-3.05a1.25 1.25 0 0 1 0-2.5h3.05a1.25 1.25 0 0 1 0 2.5Zm-8.14 0h-3.05a1.25 1.25 0 0 1 0-2.5h3.05a1.25 1.25 0 0 1 0 2.5Zm-7.97-.81c-.25 0-.51-.08-.73-.24a5.537 5.537 0 0 1-2.15-3.2c-.16-.67.25-1.35.92-1.51.67-.16 1.35.25 1.51.92.17.71.59 1.33 1.19 1.76.56.4.69 1.19.28 1.75-.24.34-.63.52-1.01.52Zm28.25-1.9a1.254 1.254 0 0 1-1.16-1.71c.14-.36.22-.74.22-1.13v-1.42a1.25 1.25 0 0 1 2.5 0v1.42c0 .71-.13 1.4-.39 2.06-.2.49-.67.79-1.16.79ZM7.07 30.32c-.69 0-1.25-.56-1.25-1.25v-3.05a1.25 1.25 0 0 1 2.5 0v3.05c0 .69-.56 1.25-1.25 1.25Zm30.35-2.45c-.69 0-1.25-.56-1.25-1.25v-3.05a1.25 1.25 0 0 1 2.5 0v3.05c0 .69-.56 1.25-1.25 1.25ZM7.07 22.18c-.69 0-1.25-.56-1.25-1.25v-3.05a1.25 1.25 0 0 1 2.5 0v3.05c0 .69-.56 1.25-1.25 1.25Zm30.35-2.45c-.69 0-1.25-.56-1.25-1.25v-3.05a1.25 1.25 0 0 1 2.5 0v3.05c0 .69-.56 1.25-1.25 1.25Zm-30.34-5.7c-.69 0-1.25-.56-1.25-1.25v-1.39c0-.72.14-1.43.41-2.09a1.252 1.252 0 0 1 2.32.94c-.15.36-.22.75-.22 1.15v1.39c0 .69-.56 1.25-1.25 1.25Zm30.22-2.44c-.56 0-1.07-.38-1.21-.95-.18-.71-.6-1.33-1.2-1.75a1.248 1.248 0 0 1 1.45-2.03 5.57 5.57 0 0 1 2.17 3.18c.17.67-.24 1.35-.91 1.52-.1.03-.2.04-.3.04Zm-6.6-3.27h-3.05a1.25 1.25 0 0 1 0-2.5h3.05a1.25 1.25 0 0 1 0 2.5Zm-8.14 0h-3.05a1.25 1.25 0 0 1 0-2.5h3.05a1.25 1.25 0 0 1 0 2.5Zm-8.14 0h-3.03c-.69 0-1.26-.56-1.26-1.25s.55-1.25 1.24-1.25h3.05a1.25 1.25 0 0 1 0 2.5ZM27.61 25.29c-.32 0-.64-.12-.88-.37a1.25 1.25 0 0 1 0-1.77l2.26-2.26c.72-.72 1.11-1.67 1.11-2.69s-.4-1.97-1.11-2.69c-1.44-1.44-3.94-1.44-5.38 0l-2.26 2.26c-.49.49-1.28.49-1.77 0s-.49-1.28 0-1.77l2.26-2.26c1.19-1.19 2.77-1.85 4.46-1.85s3.27.66 4.46 1.85a6.263 6.263 0 0 1 1.85 4.46c0 1.69-.66 3.27-1.85 4.46l-2.26 2.26c-.24.24-.56.37-.88.37ZM18.2 32.6c-1.61 0-3.23-.61-4.46-1.84-1.19-1.19-1.85-2.77-1.85-4.46s.66-3.27 1.85-4.46L16 19.58c.49-.49 1.28-.49 1.77 0s.49 1.28 0 1.77l-2.26 2.26c-.72.72-1.11 1.67-1.11 2.69s.4 1.97 1.11 2.69a3.815 3.815 0 0 0 5.38 0l2.26-2.26c.49-.49 1.28-.49 1.77 0s.49 1.28 0 1.77l-2.26 2.26a6.274 6.274 0 0 1-4.46 1.84Z" style="fill:#515962;stroke-width:0"/><path d="M19.09 26.66c-.32 0-.64-.12-.88-.37a1.25 1.25 0 0 1 0-1.77l6.32-6.32c.49-.49 1.28-.49 1.77 0s.49 1.28 0 1.77l-6.32 6.32c-.24.24-.56.37-.88.37Z" style="fill:#515962;stroke-width:0"/></svg>
      `,
-    content: '<a data-gjs-type="cms-article-link" class="article-link">{{title}}</a>',
+    content: '<a data-gjs-type="cms-article-link" class="article-link">Article Link</a>',
 });
 
 
-editor.Components.addType('cms-article-category', {
+editor.DomComponents.addType('cms-article-category', {
     model: {
         defaults: {
             traits: [
@@ -435,7 +435,7 @@ editor.Blocks.add('cms-article-category', {
     content: '<span data-gjs-type="cms-article-category" class="article-category">Article Category</span>',
 });
 
-editor.Components.addType('cms-article-navigation', {
+editor.DomComponents.addType('cms-article-navigation', {
     model: {
         defaults: {
             traits: [
@@ -470,7 +470,6 @@ editor.Blocks.add('cms-article-navigation', {
      `,
     content: '<span data-gjs-type="cms-article-navigation" class="article-navigation">Article Navigation</span>',
 });
-
 
 //handle events when the component trait changes
 editor.TraitManager.addType('text', {

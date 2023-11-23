@@ -782,10 +782,10 @@ class Content extends Data
 
     /**
      * Gets all the sites
-     * @return void
+     * @return array
      * @throws ReflectionException
      */
-    public function getSites()
+    public function getSites(): array
     {
         $site = new Site();
         return $site->select("*", 10000)->asArray();
