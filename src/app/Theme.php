@@ -41,7 +41,7 @@ class Theme
         return $results;
     }
 
-    public function injectIncludes(string $content)
+    public function parseContentIncludes(string $content)
     {
 
 
@@ -105,6 +105,12 @@ class Theme
         }
 
         return $snippets;
+
+    }
+
+    public function parseArticleIncludes($html)
+    {
+        echo $html;
 
     }
 

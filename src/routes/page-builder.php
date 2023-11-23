@@ -49,7 +49,6 @@
     }
 
     foreach ($pagesData as $page) {
-
         $components = [];
         if (!empty($page->pageBuilderContent)) {
             $pageBuilderContent = json_decode($page->pageBuilderContent);
@@ -85,7 +84,7 @@
     if ($request->data->pageId !== "layout"  && $request->data->pageId !== "layoutArticle") {
         $page = new Page();
         if ($page->load("id = ?", [$request->data->pageId])) {
-            $page->content = (new Theme())->injectIncludes($request->data->html);
+            $page->content = (new Theme())->parseContentIncludes($request->data->html);
             $page->isPageBuilder = 1;
             $page->pageBuilderContent = json_encode($pageData); //makes all the twig includes work
             $page->save();
@@ -109,7 +108,7 @@
         $site->id = $request->params["siteId"];
         $site->load();
         $site->pageLayout = json_encode($pageData);
-        $site->pageLayoutHtml = (new Theme())->injectIncludes($request->data->html);
+        $site->pageLayoutHtml = (new Theme())->parseContentIncludes($request->data->html);
         $site->pageBuilderStyles =  json_encode($request->data->data->styles);
         $site->pageBuilderAssets =  json_encode($request->data->data->assets);
         $site->save();
@@ -121,7 +120,7 @@
         $site->load();
 
         $site->pageLayoutArticle = json_encode($pageData);
-        $site->pageLayoutArticleHtml = (new Theme())->injectIncludes($request->data->html);
+        $site->pageLayoutArticleHtml = (new Theme())->parseArticleIncludes($request->data->html);
         $site->save();
     }
 
