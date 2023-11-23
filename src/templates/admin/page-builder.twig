@@ -140,7 +140,7 @@
                 type: 'remote',
                 stepsBeforeSave: 1,
                 autosave: true,
-                autoload: true,
+                autoload: false,
                 contentTypeJson: true,
                 storeComponents: true,
                 storeStyles: true,
@@ -183,6 +183,7 @@
         let pageManager = editor.Pages;
         let storageManager = editor.Storage;
         let panelManager = editor.Panels;
+        let data = null;
 
         function confirmCanvasClear() {
             if (window.confirm('Are you sure you want to clear the canvas? This will delete all of your content.')) {
@@ -233,7 +234,14 @@
         ]);
 
         async function loadGrapeJsPage(pageId) {
-            const data = editor.getProjectData();
+            if (data === null) {
+                console.log('Loading data');
+                storageManager.autoload = true;
+                data = await storageManager.load();
+                editor.load(data);
+            }
+
+            data = editor.getProjectData();
             await storageManager.store(data);
             pageManager.select(pageId);
         }
@@ -302,5 +310,6 @@
     {% for component in components %}
         <script src="{{ component }}"></script>
     {% endfor %}
+
 
 {% endblock %}

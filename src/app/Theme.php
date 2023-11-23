@@ -115,6 +115,8 @@ class Theme
         $subst = "$3";
         $html = preg_replace($re, $subst, $html);
 
+
+
         $html = str_replace('Article Block', '{{ article.content }}', $html);
         $html = str_replace('Article Content', '{{ article.content }}', $html);
         $html = str_replace('Article Title', '{{ article.title }}', $html);
