@@ -258,10 +258,6 @@
             a.classList.add('active');
         }
 
-        //editor.on('page', (event) => {
-        //    console.log('Page changed', event);
-        //});
-
         editor.on('load', (event) => {
 
             //const blockBtn = editor.Panels.getButton('views', 'open-blocks');
@@ -269,12 +265,7 @@
             //editor.runCommand('core:open-blocks');
         });
 
-        // editor.on('save', (event) => {
-        //    console.log('Page loading', event, event.page.getHtml());
-        //});
-
         editor.on('rte:enable', () => {
-
 
         });
 
@@ -284,7 +275,7 @@
             attributes: {title: 'AI Enhance'},
             result: async function (rte) {
                 let prompt = await rte.selection().toString();
-                console.log(prompt);
+
                 fetch('/cms/page-builder/open-ai?prompt=' + rte.el.innerHTML)
                     .then(async function (response) {
                         const data = await response.text();
@@ -292,7 +283,6 @@
                     });
             }
         });
-
 
         // Get the BlockManager module first
         const blockManager = editor.Blocks; // `Blocks` is an alias of `BlockManager`
@@ -310,6 +300,4 @@
     {% for component in components %}
         <script src="{{ component }}"></script>
     {% endfor %}
-
-
 {% endblock %}
