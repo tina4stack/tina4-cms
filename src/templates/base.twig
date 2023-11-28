@@ -9,7 +9,12 @@
     <meta prefix="og: https://ogp.me/ns#" property="og:image" content="{{ image }}"/>
 {% endif %}
 {% if description %}
+    <meta name="description" content="{{ description }}"/>
     <meta prefix="og: https://ogp.me/ns#" property="og:description" content="{{ description }}"/>
+{% endif %}
+{% if keywords %}
+    <meta name="keywords" content="{{ keywords }}"/>
+    <meta prefix="og: https://ogp.me/ns#" property="og:keywords" content="{{ keywords }}"/>
 {% endif %}
 {% block headers %}
     <link rel="stylesheet" type="text/css" href="/css/default.css">
