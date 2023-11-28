@@ -15,7 +15,7 @@
         $version = (new \Tina4\Migration)->getVersion('tina4cms');
         return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/page-builder.twig", ["menuItems" => $menuItems, "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes, "version"  => $version]));
     }
-});
+})::noCache();
 
 \Tina4\Get::add("/cms/page-builder/pages", function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
@@ -69,7 +69,7 @@
 
     $data = '{"assets": '.$site->pageBuilderAssets.', "styles": '.$site->pageBuilderStyles.', "pages": '.json_encode($pages).'}';
     return $response($data, HTTP_OK, APPLICATION_JSON);
-});
+})::noCache();
 
 \Tina4\Post::add("/cms/page-builder/pages", static function (\Tina4\Response $response, \Tina4\Request $request) {
     $pages = $request->data->data->pages;
@@ -125,12 +125,12 @@
     }
 
     return $response([], HTTP_OK, APPLICATION_JSON);
-});
+})::noCache();
 
 \Tina4\Get::add("/cms/page-builder/twig-templates", static function (\Tina4\Response $response, \Tina4\Request $request) {
     $templates = (new Theme())->getTwigViews();
     return $response($templates);
-});
+})::noCache();
 
 \Tina4\Get::add("/cms/page-builder/twig-templates/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
     $templates = [];
@@ -144,12 +144,12 @@
         $html = "Choose template to render";
     }
     return $response($html);
-});
+})::noCache();;
 
 \Tina4\Get::add("/cms/page-builder/cms-snippets", static function (\Tina4\Response $response, \Tina4\Request $request) {
     $templates = (new Theme())->getCMSSnippets();
     return $response($templates);
-});
+})::noCache();
 
 \Tina4\Get::add("/cms/page-builder/cms-snippets/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
@@ -160,7 +160,7 @@
         $html = "Choose template to render";
     }
     return $response($html);
-});
+})::noCache();
 
 \Tina4\Get::add("/cms/page-builder/cms-content", static function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
@@ -178,7 +178,7 @@
     }
 
     return $response($pageNames);
-});
+})::noCache();
 
 \Tina4\Get::add("/cms/page-builder/cms-content/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
@@ -189,7 +189,7 @@
         $html = "Choose page to render";
     }
     return $response($html);
-});
+})::noCache();
 
 
 \Tina4\Get::add("/cms/page-builder/cms-articles", static function (\Tina4\Response $response, \Tina4\Request $request) {
@@ -207,7 +207,7 @@
         $articleContent[] = ["id" => $record["id"], "title" => $record["title"]];
     }
     return $response($articleContent);
-});
+})::noCache();
 
 
 \Tina4\Get::add("/cms/page-builder/cms-articles/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
@@ -228,7 +228,7 @@
     }
 
     return $response($html);
-});
+})::noCache();
 
 
 \Tina4\Post::add("/cms/page-builder/assets/upload", static function (\Tina4\Response $response, \Tina4\Request $request) {
@@ -264,7 +264,7 @@
 
     $fileData = ["data" => $fileInfo];
     return $response($fileData, HTTP_OK, APPLICATION_JSON);
-});
+})::noCache();
 
 \Tina4\Get::add("/cms/page-builder/open-ai", static function(\Tina4\Response $response, \Tina4\Request $request) {
     $text = "";
@@ -281,4 +281,4 @@
         $text = "Error no prompt";
     }
     return $response ($text, HTTP_OK, TEXT_HTML);
-});
+})::noCache();
