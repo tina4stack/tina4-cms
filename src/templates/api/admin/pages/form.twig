@@ -6,11 +6,13 @@
         </div>
         <div class="form-group col-md-3">
             <label for="title">Title</label>
-            <input class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
+            <input id="title" class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
+            <pre onclick="$('#title').val('{{ ai.title }}')">{{ ai.title }}</pre>
         </div>
         <div class="form-group col-md-3">
             <label for="description">Description</label>
-            <input class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
+            <input id="description" class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
+            <pre onclick="$('#description').val('{{ ai.description }}')">{{ ai.description }}</pre>
         </div>
         <div class="form-group col-md-1">
             <img class="img-thumbnail" src="data:image/png;base64,{{ data.image }}">
@@ -25,13 +27,15 @@
                 <label class="form-check-label" for="isPublished">Published</label>
             </div>
         </div>
+        {% if (not data.pageBuilderContent) %}
         <div class="form-group col-md-12">
             {% include "snippets/content-editor.twig" %}
         </div>
-
+        {% endif %}
         <div class="form-group col-md-12">
             <label>Keywords/Tags</label>
             {% include "tagLookup.twig" %}
+            <pre onclick="$('#tags').val('{{ ai.keywords }}')">{{ ai.keywords }}</pre>
         </div>
     </div>
     <input type="hidden" name="siteId" value="{{ siteId }}">

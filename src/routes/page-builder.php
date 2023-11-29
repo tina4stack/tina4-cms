@@ -212,11 +212,16 @@
 
 \Tina4\Get::add("/cms/page-builder/cms-articles/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
-        $article = (new Article());
-        $article->load("id = ?", [$request->params["id"]]);
-
-        //load the article template and render
-        $html = \Tina4\renderTemplate($article->content);
+        if (empty($request->params["field"])) {
+            $html = (new Content())->getArticleById($request->params["id"]);
+        } else{
+            $article = new Article();
+            if ($article->load("id = ?", ["id" => $request->params["id"]])) {
+                $html = $article->{$request->params["field"]};
+            } else {
+                $html = "Article not found";
+            }
+        }
 
     } else {
         $html = "Choose an article to render";
@@ -269,11 +274,26 @@
 \Tina4\Get::add("/cms/page-builder/open-ai", static function(\Tina4\Response $response, \Tina4\Request $request) {
     $text = "";
     if (!empty($request->params["prompt"])) {
-
         try {
-            $apiResponse = (new OpenAi())->getCompletion(strip_tags(html_entity_decode($request->params["prompt"])));
+            if (empty($request->params["image"])) {
+                $apiResponse = (new OpenAi())->getCompletion(
+                    strip_tags(html_entity_decode($request->params["prompt"]))
+                );
+                $text = $apiResponse["choices"][0]["message"]["content"];
+            } else {
+                $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
+                if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
+                    //throw new \RuntimeException(sprintf('Directory "%s" was not created', $imageFolder));
+                    return $response(["location" => "error creating folder"]);
+                }
 
-            $text = $apiResponse["choices"][0]["text"];
+                $apiResponse = (new OpenAi())->getImage(strip_tags(html_entity_decode($request->params["prompt"])));
+                $fileName= "open-ai-".date("YmdHis").".png";
+                $content = file_get_contents($apiResponse["data"][0]["url"]);
+                file_put_contents($imageFolder."/".$fileName, $content);
+                $src = str_replace ("./src/public", "", $imageFolder."/".$fileName);
+                $text = "<img src=\"{$src}\" alt=\"{$apiResponse["data"][0]["revised_prompt"]}\">";
+            }
         } catch (\Exception $e) {
             $text = "Error: " . $e->getMessage();
         }

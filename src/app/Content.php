@@ -300,6 +300,22 @@ class Content extends Data
         return $this->renderArticle($article->title, $article->content, $article->image, $article, $template);
     }
 
+
+    public function getArticleById($id): string
+    {
+        $article = new Article();
+        $article->load("id = $id");
+        $this->enhanceArticle($article);
+        $site = new Site();
+        $site->load("id = {$article->siteId}");
+        //Get the article template
+        $articleTemplate = $site->pageLayoutArticleHtml;
+
+        $renderedArticle = \Tina4\renderTemplate($articleTemplate, ["article" => $article]);
+
+        return $renderedArticle;
+    }
+
     /**
      * Get Article Meta
      * @param $slug
@@ -477,7 +493,11 @@ class Content extends Data
      */
     public function enhanceArticle($article)
     {
-        $keywords = explode(",", $article->keywords);
+        if (!empty($article->keywords)) {
+            $keywords = explode(",", $article->keywords);
+        } else {
+            $keywords = [];
+        }
         //fetch articles with these keywords by latest
         $likes = [];
         foreach ($keywords as $id => $keyword) {
@@ -663,6 +683,15 @@ class Content extends Data
             return (new self())->getSnippet($name);
         });
 
+        $config->addTwigFilter("getArticle", static function ($id) {
+            return new \Twig\Markup((new self())->getArticleById($id), 'UTF-8');
+        });
+
+        $config->addTwigFunction("getArticle", static function ($id) {
+            return new \Twig\Markup((new self())->getArticleById($id),'UTF-8');
+        });
+
+
         $config->addTwigFunction("render", static function ($content) {
             return \Tina4\renderTemplate($content);
         });
@@ -698,7 +727,7 @@ class Content extends Data
     public function getTinyMCEIncludePath(): string
     {
         $documentRoot = realpath("./"); //root path D:/projects/tina4cms
-        $contentPath = realpath(__DIR__ . "/../../"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
+        $contentPath = realpath(__DIR__ . "/../../src/public"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
 
         return str_replace($documentRoot, "", $contentPath);
     }

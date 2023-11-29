@@ -66,7 +66,7 @@ editor.DomComponents.addType('cms-article-content', {
                     data.forEach(function(option){
                         options.push({id: option.id, name: option.title});
                     });
-                    component.getTrait('cms-article').set('options', options);
+                    component.getTrait('cms-article-content').set('options', options);
                     component.on('change:attributes', component.handleEvent);
                 });
 
@@ -93,7 +93,7 @@ editor.DomComponents.addType('cms-article-content', {
         onRender({ el }) {
             const articleId = this.model.getTrait('cms-article-content').attributes.value;
             el.innerHTML = '<b>Rendering an article</b>';
-            fetch('/cms/page-builder/cms-articles/render?id='+articleId)
+            fetch('/cms/page-builder/cms-articles/render?id='+articleId+'&field=content')
                 .then(async function(response) {
                     const data = await response.text();
                     el.innerHTML = data;
@@ -215,7 +215,7 @@ editor.Blocks.add('cms-article-image', {
     media:`
     <svg id="b" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.5 44.5"><g id="c"><g id="d"><rect width="44.5" height="44.5" style="fill:none; stroke-width:0px;"/></g><path d="m41.51,17.26l-2.25-2.26c-.7-.71-1.72-.91-2.61-.63v-2.59c0-2.17-1.76-3.93-3.93-3.93H11.78c-2.17,0-3.93,1.76-3.93,3.93v20.93c0,2.17,1.76,3.93,3.93,3.93h20.94c2.17,0,3.93-1.76,3.93-3.93v-6.94l4.86-4.86c1.01-1.01,1.01-2.65,0-3.66Zm-29.73-6.91h20.94c.79,0,1.43.64,1.43,1.43v4.67l-5.51,5.51-.39-.39c-1.36-1.36-3.57-1.36-4.92,0l-3.36,3.36-1.13-1.13c-1.31-1.31-3.61-1.32-4.92,0l-3.56,3.56v-15.58c0-.79.64-1.43,1.43-1.43Zm14.77,18.13l1.34,1.34-1.93.59.59-1.93Zm6.16,5.67H11.78c-.79,0-1.43-.64-1.43-1.43v-1.82l5.33-5.33c.18-.18.43-.29.69-.29s.51.1.69.29l2.02,2.02c.49.49,1.28.49,1.77,0l4.25-4.25c.38-.38,1-.38,1.38,0l.39.39-1.9,1.9c-.15.15-.25.32-.31.52l-1.75,5.77c-.13.44-.01.92.31,1.25.24.24.56.37.88.37.12,0,.24-.02.36-.05l6.16-1.88s.04-.02.07-.03c.03-.01.06-.02.08-.04.14-.06.26-.14.37-.25l1.65-1.65,1.37,1.37v1.7c0,.79-.64,1.43-1.43,1.43Zm1.8-9.77h0l-2.61,2.61s0,0,0,0,0,0,0,0l-1.64,1.64-2.38-2.38,1.64-1.64s0,0,0,0,0,0,0,0l6.76-6.76s0,0,0,0l1.08-1.08s.09-.04.13,0l2.25,2.25s.04.09,0,.13l-5.23,5.23Z" style="fill:#515962; stroke-width:0px;"/><path d="m18.46,19.27c1.92,0,3.48-1.56,3.48-3.48s-1.56-3.48-3.48-3.48-3.48,1.56-3.48,3.48,1.56,3.48,3.48,3.48Zm0-4.46c.54,0,.98.44.98.98s-.44.98-.98.98-.98-.44-.98-.98.44-.98.98-.98Z" style="fill:#515962; stroke-width:0px;"/></g></svg>
      `,
-    content: '<img data-gjs-type="cms-article-image" class="article-image" src="{{ article.image }}" alt="{{article.description}}" >'
+    content: '<img data-gjs-type="cms-article-image" class="article-image" src="data:image/png;base64,{{ article.image }}" alt="{{article.description}}" >'
 });
 
 editor.DomComponents.addType('cms-article-tags', {

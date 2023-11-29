@@ -34,7 +34,15 @@
             } else {
                 $title = "Edit Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages/".$page->id;
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId]);
+
+                $openAI = new OpenAi($siteId);
+                $description = $openAI->getCompletion("summarize this content {$page->content} in 160 chars", 160)["choices"][0]["message"]["content"];
+                $title = $openAI->getCompletion("give a concise page title for this content: {$page->content} in 70 chars", 70)["choices"][0]["message"]["content"];
+                $keywords = $openAI->getCompletion("suggest up to 10 unique comma separated keywords for this content: {$page->content}", 50)["choices"][0]["message"]["content"];
+
+                $ai = ["title" => $title, "description" => $description, "keywords" => $keywords];
+
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId, "ai" => $ai]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#pageForm').valid() ) { saveForm('pageForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
@@ -65,11 +73,8 @@
             $page->slug = (new Content())->getSlug($request->data->name);
             //Manipulate the $object here
             $page->dateModified = date($page->DBA->dateFormat." H:i:s");
-
-
         break;
         case "afterCreate":
-
            //return needed
            $page->saveBlob("content", $_REQUEST["content"]);
            $page->saveFile("image", "image"); //$_FILES["image"]

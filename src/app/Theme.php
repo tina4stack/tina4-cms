@@ -72,6 +72,19 @@ class Theme
             $content = str_replace($match[0], $matchText, $content);
         }
 
+        $re = '/cms-article="(.*)"(.*)Article Block<\/(span|div|ul)>/mUs';
+
+        preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
+
+        foreach ($matches as $id => $match) {
+            $matchText = $match[0];
+            $id = trim($match[1]);
+            $matchText = str_replace("Article Block", '{{ getArticle("'.$id.'") | raw }}', $matchText);
+            $content = str_replace($match[0], $matchText, $content);
+        }
+
+
+
         $re = '/cms-content="(.*)"(.*)Page Content<\/(span|div|ul)>/mUs';
 
         preg_match_all($re, $content, $matches, PREG_SET_ORDER, 0);
@@ -115,10 +128,10 @@ class Theme
         $subst = "$3";
         $html = preg_replace($re, $subst, $html);
 
-        $html = str_replace('Article Block', '{{ article.content }}', $html);
-        $html = str_replace('Article Content', '{{ article.content }}', $html);
+
+        $html = str_replace('Article Content', '{{ render(article.content) | raw }}', $html);
         $html = str_replace('Article Title', '{{ article.title }}', $html);
-        $html = str_replace('Article Tags', '{{ article.keywords }}', $html);
+        $html = str_replace('Article Tags', '{% set keywords = article.keywords|split(",") %}{% for keyword in keywords %}<a href="/content/tags/{{ keyword | getSlug }}">{{ keyword }}</a>{% endfor %}', $html);
         $html = str_replace('Publish Date', '{{ article.publishedDate }}', $html);
         $html = str_replace('Article Link', '{{ article.slug }}', $html);
         $html = str_replace('Article Navigation', '{{ article.navigation }}', $html);

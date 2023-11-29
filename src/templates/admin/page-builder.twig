@@ -271,7 +271,7 @@
 
         const rte = editor.RichTextEditor;
         rte.add('openai', {
-            icon: '<b>C</b>',
+            icon: '<b>AI-T</b>',
             attributes: {title: 'AI Enhance'},
             result: async function (rte) {
                 let prompt = await rte.selection().toString();
@@ -280,6 +280,20 @@
                     .then(async function (response) {
                         const data = await response.text();
                         rte.el.innerHTML = data;
+                    });
+            }
+        });
+
+        rte.add('openai', {
+            icon: '<b>AI-I</b>',
+            attributes: {title: 'AI Enhance'},
+            result: async function (rte) {
+                let prompt = await rte.selection().toString();
+
+                fetch('/cms/page-builder/open-ai?prompt=' + rte.el.innerHTML+'&image=true')
+                    .then(async function (response) {
+                        const data = await response.text();
+                        rte.el.replaceWith(data);
                     });
             }
         });

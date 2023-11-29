@@ -40,15 +40,34 @@ class OpenAi extends Api
     function getCompletion($prompt, $maxTokens= null)
     {
         $maxTokens = $maxTokens ?? 250;
-        $request =  [ "model" => "text-davinci-003", "prompt" => $prompt, "max_tokens" => $maxTokens, "temperature" => 0.25];
+        $request =  [ "model" => "gpt-3.5-turbo", "messages" => [(object)["role" => "user", "content" => $prompt]], "max_tokens" => $maxTokens, "temperature" => 0.25];
 
-        $response = $this->sendRequest("/v1/completions", "POST", $request);
+        $response = $this->sendRequest("/v1/chat/completions", "POST", $request);
 
         if (!empty($response->error)) {
             return $response;
         } else {
             return $response["body"];
         }
+    }
+
+    /**
+     * Gets an image from the API
+     * @param $prompt
+     * @param $noOfImages
+     * @return void
+     */
+    function getImage($prompt, $noOfImages=1)
+    {
+        $request =  [ "model" => "dall-e-3", "prompt" => $prompt, "size" => "1024x1024", "n" => $noOfImages];
+        $response = $this->sendRequest("/v1/images/generations", "POST", $request);
+
+        if (!empty($response->error)) {
+            return $response;
+        } else {
+            return $response["body"];
+        }
+
     }
 
 }
