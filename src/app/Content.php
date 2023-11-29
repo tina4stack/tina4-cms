@@ -735,10 +735,8 @@ class Content extends Data
      */
     public function getTinyMCEIncludePath(): string
     {
-        $documentRoot = realpath("./"); //root path D:/projects/tina4cms
-        $contentPath = realpath(__DIR__ . "/../../"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
-
-        return str_replace($documentRoot, "", $contentPath);
+        //For now returns nothing
+        return "";
     }
 
 
