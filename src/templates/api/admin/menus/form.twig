@@ -14,7 +14,7 @@
         </div>
         <div class="form-group col-md-6">
             <label>Choose Parent Category</label>
-            <select class="form-control" name="parentId">
+            <select class="form-select" name="parentId">
                 {% set groupName = "" %}
                 {% for category in categories %}
                 {% if (groupName != category.parentName ) %}

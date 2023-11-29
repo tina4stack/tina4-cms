@@ -33,7 +33,7 @@
                 $content = \Tina4\renderTemplate("/api/admin/emailTemplates/form.twig", ["data" => $emailTemplate, "siteId" => $siteId]);
             }
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#emailtemplateForm').valid() ) { saveForm('emailtemplateForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => $title, "onclick" => "if ( $('#emailtemplateForm').valid() ) { saveForm('emailtemplateForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter

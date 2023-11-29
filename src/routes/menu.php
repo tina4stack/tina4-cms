@@ -52,7 +52,7 @@
                 $content = \Tina4\renderTemplate("/api/admin/menus/form.twig", ["data" => $menu, "categories" => $categories, "siteId" => $siteId]);
             }
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#menuForm').valid() ) { saveForm('menuForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => $title, "onclick" => "if ( $('#menuForm').valid() ) { saveForm('menuForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter

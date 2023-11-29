@@ -1,0 +1,21 @@
+<div class="modal fade" id="formModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" style="width: 100%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{title}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ content | raw }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="{{ onclick }}">OK</button>
+                <button type="button" class="btn btn-warning"  data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var myModal = new bootstrap.Modal(document.getElementById('formModal'));
+    myModal.show()
+</script>

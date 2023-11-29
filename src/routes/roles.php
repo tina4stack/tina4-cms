@@ -28,7 +28,7 @@
                 $content = \Tina4\renderTemplate("/api/admin/roles/form.twig", ["data" => $role]);
             }
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#roleForm').valid() ) { saveForm('roleForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => $title, "onclick" => "if ( $('#roleForm').valid() ) { saveForm('roleForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter

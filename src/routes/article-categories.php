@@ -52,7 +52,7 @@ DELETE @ /path/{id} - delete for single
 
             $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig",["data" => $articleCategory, "categories" => $categories, "siteId" => $siteId]);
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => "Edit Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories/{$articleCategory->id}', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => "Edit Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories/{$articleCategory->id}', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
             break;
         case "read":
             //Return a dataset to be consumed by the grid with a filter

@@ -14,7 +14,7 @@
         </div>
         <div class="form-group col-md-3">
             <label for="roleId">Default Theme </label>
-            <select class="form-control" name="theme">
+            <select class="form-select" name="theme">
                 {% for id, theme in themes %}
                     <option {%if data.theme == theme %} selected {% endif %} value="{{theme}}">{{theme}}</option>
                 {% endfor %}

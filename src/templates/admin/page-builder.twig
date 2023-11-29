@@ -66,7 +66,7 @@
                 </a>
             </div>
             <a href="#" class="pages-link"
-               onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('/cms/dashboard', 'cms')"><img
+               onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); if ($('cms').innerHTML === '') { loadPage('/cms/dashboard', 'cms') } "><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-site-settings.svg">Site
                 Settings</a>
             <a href="#" class="pages-link"

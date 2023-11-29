@@ -4,6 +4,7 @@
         $('#saveContent').val(editor.getContent());
     }
 
+    var tinyEditor = null;
 
     tinymce.execCommand('mceRemoveEditor', false, 'contentEditor');
 
@@ -19,6 +20,7 @@
 
                         let node = tinymce.activeEditor.selection.getNode();
                         node.innerHTML = data;
+                        saveContent(tinyEditor);
 
                     });
             }
@@ -48,11 +50,14 @@
         content_css: '/css/default.css',
         style_formats_merge: true,
         style_formats_autohide: true,
+        promotion: false,
         file_picker_callback:   function(callback, url, type, win) {
             myWindow = popupCenter({url: "/cms/file-browser?formToken={{ formToken | raw }}", title: 'Tina4CMS - File Browser', w: 900, h: 500});
             myWindow.tinymceCallback = callback;
         },
         setup:function(editor) {
+            tinyEditor = editor;
+
             editor.on('change', function(e) {
                 saveContent(editor)
             });
@@ -94,11 +99,6 @@
             });
         }
     });
-
-    $(document).on('focusin', function(e) {
-        if ($(e.target).closest(".tox").length) {
-            e.stopImmediatePropagation();
-        }
-    });
+    console.log('Initializing editor');
 </script>
 <textarea id="saveContent" class="form-control" style="display:none; height: 300px" name="content">{{ data.content | raw }}</textarea>

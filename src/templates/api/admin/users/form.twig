@@ -19,7 +19,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="roleId">Default Role</label>
-            <select class="form-control" name="roleId">
+            <select class="form-select" name="roleId">
                 {% for role in roles %}
                     <option {%if data.roleId == role.id %} selected {% endif %} value="{{role.id}}">{{role.name}}</option>
                 {% endfor %}

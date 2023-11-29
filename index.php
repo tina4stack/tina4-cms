@@ -1,6 +1,5 @@
 <?php
 require_once "vendor/autoload.php";
-\Tina4\Initialize();
 
 global $DBA;
 $DBA = new \Tina4\DataSQLite3("cms.db");
