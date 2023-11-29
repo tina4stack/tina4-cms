@@ -644,6 +644,15 @@ class Content extends Data
             }
         }
 
+        //Copy over tinymce
+        if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."tinymce")) {
+            \Tina4\Utilities::recurseCopy(
+                __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "tinymce",
+                TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."tinymce"
+            );
+        }
+
+
         //Copy over the page builder css
         $checkSite = new Site();
         if (!$checkSite->load("id = 1")) {
@@ -727,7 +736,7 @@ class Content extends Data
     public function getTinyMCEIncludePath(): string
     {
         $documentRoot = realpath("./"); //root path D:/projects/tina4cms
-        $contentPath = realpath(__DIR__ . "/../../src/public"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
+        $contentPath = realpath(__DIR__ . "/../../"); // D:/projects/tina4cms/vendor/tina4stack/tina4cms
 
         return str_replace($documentRoot, "", $contentPath);
     }
