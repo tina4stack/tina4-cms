@@ -146,6 +146,7 @@
                 storeStyles: true,
                 storeHtml: true,
                 storeCss: true,
+                params: {formToken: formToken},
                 options: {
                     remote: {
                         urlLoad: "/cms/page-builder/pages?siteId={{ site.id }}",
@@ -154,8 +155,12 @@
                             pageId: pageManager.getSelected().id,
                             html: editor.getHtml(),
                             css: editor.getCss(),
-                            data: data
-                        })
+                            data: data,
+                            formToken: formToken
+                        }),
+                        onLoad: data => {
+                            console.log(data)
+                        }
                     }
                 }
             },
