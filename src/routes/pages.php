@@ -35,13 +35,26 @@
                 $title = "Edit Page";
                 $savePath =  TINA4_BASE_URL . "/api/admin/pages/".$page->id;
 
+
                 $openAI = new OpenAi($siteId);
-                $description = $openAI->getCompletion("summarize this content {$page->content} in 160 chars", 160)["choices"][0]["message"]["content"];
-                $title = $openAI->getCompletion("give a concise page title for this content: {$page->content} in 70 chars", 70)["choices"][0]["message"]["content"];
-                $keywords = $openAI->getCompletion("suggest up to 10 unique comma separated keywords for this content: {$page->content}", 50)["choices"][0]["message"]["content"];
+                if ($openAI->active) {
+                    $description = $openAI->getCompletion(
+                        "summarize this content {$page->content} in 160 chars",
+                        160
+                    )["choices"][0]["message"]["content"];
+                    $title = $openAI->getCompletion(
+                        "give a concise page title for this content: {$page->content} in 70 chars",
+                        70
+                    )["choices"][0]["message"]["content"];
+                    $keywords = $openAI->getCompletion(
+                        "suggest up to 10 unique comma separated keywords for this content: {$page->content}",
+                        50
+                    )["choices"][0]["message"]["content"];
 
-                $ai = ["title" => $title, "description" => $description, "keywords" => $keywords];
-
+                    $ai = ["title" => $title, "description" => $description, "keywords" => $keywords];
+                } else {
+                    $ai = [];
+                }
                 $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId, "ai" => $ai]);
             }
 

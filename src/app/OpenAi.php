@@ -6,6 +6,7 @@ class OpenAi extends Api
 {
 
     public $ignoreSSLValidation = true;
+    public $active = true;
 
     function __construct($siteId = null)
     {
@@ -17,7 +18,7 @@ class OpenAi extends Api
         if ($site->load() && !empty($site->openAiKey)) {
             $authHeader = "Authorization: Bearer " . $site->openAiKey;
         } else {
-            throw new \Exception("OpenAI Key not set");
+            $this->active = false;
         }
         $baseURL = 'https://api.openai.com';
         parent::__construct($baseURL, $authHeader);
