@@ -31,6 +31,8 @@
         <div class="form-group col-md-12">
             {% include "snippets/content-editor.twig" %}
         </div>
+        {$else}
+            <div id="contentEditor" class="form-control" style="display:none">{{ data.content | raw }}</div>
         {% endif %}
         <div class="form-group col-md-12">
             <label>Keywords/Tags</label>

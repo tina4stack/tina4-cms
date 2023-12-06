@@ -383,7 +383,7 @@ div.dataTables_processing {
   background: transparent;
 }
 .gjs-devices-c:before {
-  content: "Resonsive View";
+  content: "Responsive View";
   font-size: 13px;
   white-space: nowrap;
   margin-right: 10px;

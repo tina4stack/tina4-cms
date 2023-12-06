@@ -298,7 +298,7 @@
                 fetch('/cms/page-builder/open-ai?prompt=' + rte.el.innerHTML+'&image=true')
                     .then(async function (response) {
                         const data = await response.text();
-                        rte.el.replaceWith(data);
+                        rte.el.innerHTML = data;
                     });
             }
         });

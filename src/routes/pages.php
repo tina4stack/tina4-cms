@@ -37,17 +37,20 @@
 
 
                 $openAI = new OpenAi($siteId);
+
+                $renderedText = strip_tags((new Content())->renderPage($page->slug, $siteId));
+
                 if ($openAI->active) {
                     $description = $openAI->getCompletion(
-                        "summarize this content {$page->content} in 160 chars",
+                        "summarize this content {$renderedText} in 160 chars",
                         160
                     )["choices"][0]["message"]["content"];
                     $title = $openAI->getCompletion(
-                        "give a concise page title for this content: {$page->content} in 70 chars",
+                        "give a concise page title for this content: {$renderedText} in 70 chars",
                         70
                     )["choices"][0]["message"]["content"];
                     $keywords = $openAI->getCompletion(
-                        "suggest up to 10 unique comma separated keywords for this content: {$page->content}",
+                        "suggest up to 10 unique comma separated keywords for this content: {$renderedText}",
                         50
                     )["choices"][0]["message"]["content"];
 
