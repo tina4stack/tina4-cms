@@ -506,9 +506,9 @@ div.dataTables_processing {
   }
 }
 
-.gjs-radio-item input:checked+.gjs-radio-item-label {
+.gjs-radio-item input:checked + .gjs-radio-item-label {
   color: #fff;
-  background-color:var(--color-bright-blue);
+  background-color: var(--color-bright-blue);
 }
 
 .gjs-two-color:not(.gjs-pn-panel), .gjs-traits-label, .gjs-block-categories *, .gjs-clm-tags #gjs-clm-new, .gjs-sm-header, .gjs-trt-header {
@@ -584,4 +584,25 @@ div.dataTables_processing {
 
 .navbar {
   background: var(--color-dark-blue);
+}
+
+// Styling context icons
+.gjs-rte-action {
+  padding: 0;
+  width: 36px;
+  height: 36px;
+}
+
+.gjs-rte-action * {
+  font-size: 16px;
+}
+
+.gjs-rte-action svg {
+  width: 20px;
+}
+
+.gjs-rte-toolbar-ui {
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: 3px;
+  box-shadow: 0 1px 7px rgba(0,0,0,.15);
 }
