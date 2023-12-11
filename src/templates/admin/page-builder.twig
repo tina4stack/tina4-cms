@@ -276,7 +276,7 @@
 
         const rte = editor.RichTextEditor;
         rte.add('openai', {
-            icon: '<b>AI-T</b>',
+            icon: '<svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><polygon points="6.12 1 7.57 4.68 11.25 6.12 7.57 7.57 6.12 11.25 4.68 7.57 1 6.12 4.68 4.68 6.12 1" style="fill:#515962; stroke-width:0px;"/><polygon points="6.7 14.55 5.35 19 10.1 17.55 6.7 14.55" style="fill:#515962; stroke-width:0px;"/><path d="m11.12,16.53l7.58-7.58c.4-.4.4-1.06,0-1.46l-1.74-1.74c-.4-.4-1.06-.4-1.46,0l-7.78,7.78" style="fill:#515962; stroke-width:0px;"/></svg>',
             attributes: {title: 'AI Enhance'},
             result: async function (rte) {
                 let prompt = await rte.selection().toString();
@@ -290,7 +290,7 @@
         });
 
         rte.add('openai', {
-            icon: '<b>AI-I</b>',
+            icon: '<svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="m8.54,9.56v8.47c0,.56.46,1.02,1.02,1.02h8.47c.56,0,1.02-.46,1.02-1.02v-8.47c0-.56-.46-1.02-1.02-1.02h-8.47c-.56,0-1.02.46-1.02,1.02Zm8.79.14c.31,0,.55.25.55.55v3.8l-1.11-.99c-.23-.21-.59-.19-.8.05l-2.66,2.96-1.53-1.57c-.22-.23-.59-.23-.81,0l-1.26,1.26v-5.52c0-.31.25-.55.55-.55h7.08Z" style="fill:#515962; stroke-width:0px;"/><path d="m12.5,12.83c.54,0,.98-.44.98-.98s-.44-.98-.98-.98-.98.44-.98.98.44.98.98.98Z" style="fill:#515962; stroke-width:0px;"/><polygon points="6.12 1 7.57 4.68 11.25 6.12 7.57 7.57 6.12 11.25 4.68 7.57 1 6.12 4.68 4.68 6.12 1" style="fill:#515962; stroke-width:0px;"/></svg>',
             attributes: {title: 'AI Enhance'},
             result: async function (rte) {
                 let prompt = await rte.selection().toString();
