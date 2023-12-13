@@ -93,12 +93,13 @@ class Content extends Data
      * Add CMS menu
      * @param string|null $href
      * @param string $caption
+     * @param string $icon
      */
-    public function addCmsMenu(string $href = null, string $caption = ""): void
+    public function addCmsMenu(?string $href = null, string $caption = "", string $icon="pages-link-icon"): void
     {
         $href = $href ?? "";
         global $TINA4_CMS_MENU_ITEMS;
-        $TINA4_CMS_MENU_ITEMS[] = compact('href', 'caption');
+        $TINA4_CMS_MENU_ITEMS[] = compact('href', 'caption', 'icon');
     }
 
     /**

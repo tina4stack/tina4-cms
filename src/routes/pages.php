@@ -45,20 +45,35 @@
                         "summarize this content {$renderedText} in 160 chars",
                         160
                     )["choices"][0]["message"]["content"];
+
+                    $description = str_replace('"', '', $description);
+                    $description = str_replace("'", "\'", $description);
+
+
                     $title = $openAI->getCompletion(
                         "give a concise page title for this content: {$renderedText} in 70 chars",
                         70
                     )["choices"][0]["message"]["content"];
+
+                    $title = str_replace('"', '', $title);
+                    $title = str_replace("'", "\'", $title);
+
                     $keywords = $openAI->getCompletion(
-                        "suggest up to 10 unique comma separated keywords for this content: {$renderedText}",
+                        "suggest 10 unique keywords in comma separated format for this content: {$renderedText}",
                         50
                     )["choices"][0]["message"]["content"];
 
-                    $ai = ["title" => $title, "description" => $description, "keywords" => $keywords];
+                    $keywords = str_replace("\n", ",", $keywords);
+                    for ($i = 0; $i < 20; $i++) {
+                        $keywords = str_replace("{$i}.", "", $keywords);
+                    }
+
+                    $ai = compact('title', 'description', 'keywords');
+
                 } else {
                     $ai = [];
                 }
-                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId, "ai" => $ai]);
+                $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "renderedText" => $renderedText,  "snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId, "ai" => $ai]);
             }
 
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#pageForm').valid() ) { saveForm('pageForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);

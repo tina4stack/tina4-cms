@@ -10,7 +10,7 @@
                 {% for menuItem in menuItems %}
                     {# This will need an active class of ".adtive" #}
                     <a class="" href="#" onclick="loadPage('{{ menuItem.href }}', 'content')" style="color: #ffffff;">
-                        <img class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-placeholder.svg">{{ menuItem.caption }}
+                        <img class="{{ menuItem.icon}}" src="{{ baseUrl }}/images/nav-icons/nav-icon-placeholder.svg">{{ menuItem.caption }}
                     </a>
                 {% endfor %}
             </nav>

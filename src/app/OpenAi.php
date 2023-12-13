@@ -36,16 +36,16 @@ class OpenAi extends Api
     /**
      * @param $prompt
      * @param null $maxTokens
-     * @return void
+     * @return array
      */
-    function getCompletion($prompt, $maxTokens= null)
+    function getCompletion($prompt, $maxTokens= null): array
     {
         $maxTokens = $maxTokens ?? 250;
         $request =  [ "model" => "gpt-3.5-turbo", "messages" => [(object)["role" => "user", "content" => $prompt]], "max_tokens" => $maxTokens, "temperature" => 0.25];
 
         $response = $this->sendRequest("/v1/chat/completions", "POST", $request);
 
-        if (!empty($response->error)) {
+        if (!empty($response["error"])) {
             return $response;
         } else {
             return $response["body"];
@@ -63,7 +63,7 @@ class OpenAi extends Api
         $request =  [ "model" => "dall-e-3", "prompt" => $prompt, "size" => "1024x1024", "n" => $noOfImages];
         $response = $this->sendRequest("/v1/images/generations", "POST", $request);
 
-        if (!empty($response->error)) {
+        if (!empty($response["error"])) {
             return $response;
         } else {
             return $response["body"];

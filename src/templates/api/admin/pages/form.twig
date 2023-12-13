@@ -31,8 +31,12 @@
         <div class="form-group col-md-12">
             {% include "snippets/content-editor.twig" %}
         </div>
-        {$else}
+        {% else %}
+        <div class="form-group col-md-12" style="overflow:auto; height: 100">
             <div id="contentEditor" class="form-control" style="display:none">{{ data.content | raw }}</div>
+            <label>Content</label><br>
+            {{ renderedText }}
+        </div>
         {% endif %}
         <div class="form-group col-md-12">
             <label>Keywords/Tags</label>
