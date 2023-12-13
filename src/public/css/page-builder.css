@@ -467,3 +467,17 @@ div.dataTables_processing {
 .form-group label {
   font-weight: bold;
 }
+.ai-enhance-container {
+  padding: 10px 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: start;
+  gap: 8px;
+  cursor: pointer;
+}
+.ai-enhance-container:hover {
+  background: #f5f5f5;
+}
+.ai-enhance-container img {
+  width: 24px;
+}

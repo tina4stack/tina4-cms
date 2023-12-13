@@ -6,13 +6,26 @@
         </div>
         <div class="form-group col-md-3">
             <label for="title">Title</label>
-            <input id="title" class="form-control" type="text" name="title" placeholder="Title" value="{{ data.title }}">
-            <pre onclick="$('#title').val('{{ ai.title }}')">{{ ai.title }}</pre>
+            <input id="title" class="form-control" type="text" name="title" placeholder="Title"
+                   value="{{ data.title }}">
+            <div class="ai-enhance-container alert alert-light mt-2" role="alert" title="Click to add content">
+                <img class="ai-enhance-icon" src="{{ baseUrl }}/images/ui-icons/icon-tina-ai.svg" alt="TinaAI Icon">
+                <div>
+                    <span onclick="$('#title').val('{{ ai.title }}')">{{ ai.title }}</span>
+                </div>
+            </div>
         </div>
         <div class="form-group col-md-3">
             <label for="description">Description</label>
-            <input id="description" class="form-control" type="text" name="description" placeholder="Description" value="{{ data.description }}">
-            <pre onclick="$('#description').val('{{ ai.description }}')">{{ ai.description }}</pre>
+            <input id="description" class="form-control" type="text" name="description" placeholder="Description"
+                   value="{{ data.description }}">
+            <div class="ai-enhance-container alert alert-light mt-2" role="alert" title="Click to add content">
+                <img class="ai-enhance-icon" src="{{ baseUrl }}/images/ui-icons/icon-tina-ai.svg" alt="TinaAI Icon">
+                <div>
+                    <span onclick="$('#description').val('{{ ai.description }}')">{{ ai.description }}</span>
+                </div>
+            </div>
+
         </div>
         <div class="form-group col-md-1">
             <img class="img-thumbnail" src="data:image/png;base64,{{ data.image }}">
@@ -23,27 +36,36 @@
         </div>
         <div class="form-group col-md-1">
             <div class="form-check form-switch">
-                <input class="form-check-input" name="isPublished" value="1" type="checkbox" id="isPublished" {%  if (data.isPublished == 1 ) %} checked {% endif%}>
+                <input class="form-check-input" name="isPublished" value="1" type="checkbox"
+                       id="isPublished" {% if (data.isPublished == 1 ) %} checked {% endif %}>
                 <label class="form-check-label" for="isPublished">Published</label>
             </div>
         </div>
         {% if (not data.pageBuilderContent) %}
-        <div class="form-group col-md-12">
-            {% include "snippets/content-editor.twig" %}
-        </div>
+            <div class="form-group col-md-12">
+                {% include "snippets/content-editor.twig" %}
+            </div>
         {% else %}
-        <div class="form-group col-md-12" style="overflow:auto; height: 100">
-            <div id="contentEditor" class="form-control" style="display:none">{{ data.content | raw }}</div>
-            <label>Content</label><br>
-            {{ renderedText }}
-        </div>
+            <div class="form-group col-md-12" style="overflow: auto;">
+                <div class="alert alert-light my-4">
+                    <div id="contentEditor" class="form-control" style="display:none">{{ data.content | raw }}</div>
+                    <label>Content</label><br>
+                    {{ renderedText }}
+                </div>
+            </div>
         {% endif %}
         <div class="form-group col-md-12">
             <label>Keywords/Tags</label>
             {% include "tagLookup.twig" %}
-            <pre onclick="$('#tags').val('{{ ai.keywords }}')">{{ ai.keywords }}</pre>
+            <div class="ai-enhance-container alert alert-light mt-2" role="alert" title="Click to add content">
+                <img class="ai-enhance-icon" src="{{ baseUrl }}/images/ui-icons/icon-tina-ai.svg" alt="TinaAI Icon">
+                <div>
+                    <span onclick="$('#tags').val('{{ ai.keywords }}')">{{ ai.keywords }}</span>
+                </div>
+            </div>
+
         </div>
     </div>
     <input type="hidden" name="siteId" value="{{ siteId }}">
-    {{  "pageForm" | formToken | raw }}
+    {{ "pageForm" | formToken | raw }}
 </form>
