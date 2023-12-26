@@ -31,7 +31,7 @@ Run the CMS
 composer start 8080
 ```
 
-Open up the CMS to setup the admin user
+Open up the CMS to set up the admin user
 
 http://localhost:8080/cms/login -> will get you started
 
