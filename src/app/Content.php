@@ -682,7 +682,7 @@ class Content extends Data
             $checkSite->id = 1;
             $checkSite->siteName = "Tina4 CMS";
             $checkSite->description = "My first CMS";
-            $checkSite->siteUrl = "https://".isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : "localhost";
+            $checkSite->siteUrl = "";
             $checkSite->theme = "default";
             $checkSite->save();
         }
