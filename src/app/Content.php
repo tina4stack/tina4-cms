@@ -659,6 +659,22 @@ class Content extends Data
             );
         }
 
+        //Copy over components
+        if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."components")) {
+            \Tina4\Utilities::recurseCopy(
+                __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "components",
+                TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."components"
+            );
+        }
+
+        //Copy over errors
+        if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."errors")) {
+            \Tina4\Utilities::recurseCopy(
+                __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "errors",
+                TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."errors"
+            );
+        }
+
 
         //Copy over the page builder css
         $checkSite = new Site();
@@ -666,7 +682,7 @@ class Content extends Data
             $checkSite->id = 1;
             $checkSite->siteName = "Tina4 CMS";
             $checkSite->description = "My first CMS";
-            $checkSite->siteUrl = "https://".$_SERVER["HTTP_HOST"];
+            $checkSite->siteUrl = "https://".isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : "localhost";
             $checkSite->theme = "default";
             $checkSite->save();
         }
@@ -718,9 +734,11 @@ class Content extends Data
 
         $snippets = $this->getSnippets();
         foreach ($snippets as $id => $snippet) {
-            $config->addTwigFunction('get'.ucfirst($snippet["name"]), static function () use ($snippet) {
-                return (new self())->getSnippetContent($snippet["name"]);
-            });
+            if (!empty($snippet["name"])) {
+                $config->addTwigFunction('get' . ucfirst($snippet["name"]), static function () use ($snippet) {
+                    return (new self())->getSnippetContent($snippet["name"]);
+                });
+            }
         }
 
         $config->addTwigFunction("getPageContent", function($pageName){
