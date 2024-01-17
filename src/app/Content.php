@@ -752,6 +752,8 @@ class Content extends Data
 
         //Add the theme component
         $config->addTwigGlobal("Theme", new Theme());
+        //Temp
+        (new Theme())->addTwigView("menu", "Menu", "examples/menu.twig");
     }
 
     /**
