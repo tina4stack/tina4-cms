@@ -14,14 +14,13 @@ $config = new \Tina4\Config(function(\Tina4\Config $config) {
     //(new Content())->addCmsMenu("/backend/program", "Products");
     //$config->addTwigGlobal("Menu", new Menu());
     //(new Theme())->addTwigView("product", "Products", "examples/products.twig");
-    (new Theme())->addTwigView("menu", "Menu", "examples/menu.twig");
+
 });
 
 //Hack to build css for documentation
 $scss = new ScssPhp\ScssPhp\Compiler();
 $scssDefault = $scss->compileString(file_get_contents("./src/templates/admin/page-builder.scss"))->getCss();
 file_put_contents("./src/public/css/page-builder.css", $scssDefault);
-
 
 (new Theme(""))->deployThemes(__dir__, true);
 echo new \Tina4\Tina4Php($config);

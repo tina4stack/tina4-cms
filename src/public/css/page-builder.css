@@ -480,4 +480,6 @@ div.dataTables_processing {
 }
 .ai-enhance-container img {
   width: 24px;
+  position: relative;
+  top: 2px;
 }

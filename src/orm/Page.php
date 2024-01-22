@@ -28,4 +28,8 @@ class Page extends \Tina4\ORM
 
     public $siteId;
     public $pageBuilderContent;
+    public $isABTesting;
+    public $layouts;
+    public $trackingId;
+
 }
