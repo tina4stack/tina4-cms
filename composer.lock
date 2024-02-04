@@ -699,16 +699,16 @@
         },
         {
             "name": "tina4stack/tina4php",
-            "version": "v2.0.59",
+            "version": "v2.0.60",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tina4stack/tina4-php.git",
-                "reference": "5d61db9dec67363fad693ad9fd2169d225653bca"
+                "reference": "078cc88663487cc97c28a5f5446757450a761abe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/5d61db9dec67363fad693ad9fd2169d225653bca",
-                "reference": "5d61db9dec67363fad693ad9fd2169d225653bca",
+                "url": "https://api.github.com/repos/tina4stack/tina4-php/zipball/078cc88663487cc97c28a5f5446757450a761abe",
+                "reference": "078cc88663487cc97c28a5f5446757450a761abe",
                 "shasum": ""
             },
             "require": {
@@ -780,9 +780,9 @@
             "description": "Tina4 PHP",
             "support": {
                 "issues": "https://github.com/tina4stack/tina4-php/issues",
-                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.59"
+                "source": "https://github.com/tina4stack/tina4-php/tree/v2.0.60"
             },
-            "time": "2024-01-26T07:58:33+00:00"
+            "time": "2024-02-04T06:57:18+00:00"
         },
         {
             "name": "tina4stack/tina4php-core",

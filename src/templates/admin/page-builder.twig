@@ -122,6 +122,19 @@
         {% do redirect('/cms/login') %}
     {% endif %}
     <script>
+        function getFreshToken() {
+            postUrl('/cms/page-builder/fresh-token?formToken='+formToken, null, null, function(data){
+                console.log('FreshToken', data);
+                formToken = data.formToken;
+            });
+        }
+
+        function refreshToken() {
+            console.log('Refreshing token');
+            getFreshToken();
+            setTimeout(refreshToken, 100000);
+        }
+
         const editor = grapesjs.init({
             container: '#gjs',
             showOffsets: true,
@@ -189,33 +202,23 @@
         editor.on('asset:upload:start', () => {
            let config = editor.AssetManager.getConfig();
            config.upload = '/cms/page-builder/assets/upload?siteId={{ site.id }}&formToken='+formToken;
-           console.log('Upload', config);
         });
 
         editor.on('storage:start:load', () => {
-            console.log('Storage start load');
             let config = editor.StorageManager.getConfig();
             config.options.remote.urlStore = '/cms/page-builder/pages?siteId={{ site.id }}&formToken='+formToken;
-            console.log('Storage', config);
         });
 
         editor.on('storage:end:load', (data) => {
-            console.log('Storage load request ended', data);
             formToken = data.formToken;
         });
 
         editor.on('storage:end:store', (data) => {
-            console.log('Storage store request ended', data);
-            postUrl('/cms/page-builder/fresh-token?formToken='+formToken, null, null, function(data){
-                console.log('FreshToken', data);
-                formToken = data.formToken;
-            });
+            getFreshToken();
         });
 
-        editor.on('storage:end', (type) => {
-            console.log('Storage request ended', type);
-        });
 
+        setTimeout(refreshToken, 100000)
 
 
         let pageManager = editor.Pages;
