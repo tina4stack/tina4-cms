@@ -107,8 +107,11 @@
                     </div>
                 {% endif %}
             </div>
+
             <div class="pages-links--bottom">
-                <a href="/cms/logout" class="pages-link pages-link--logout">Logout<img class="pages-link-icon"
+                <a href="#" onclick="loadPage('/cache/clear', 'cacheClear')" class="pages-link pages-link--logout">Clear Cache<span id="cacheClear"></span><img alt="Clear Cache" class="pages-link-clear-cache"
+                                                                                          src="{{ baseUrl }}/images/nav-icons/nav-icon-clear-cache.svg"></a>
+                <a href="/cms/logout" class="pages-link pages-link--logout">Logout<img alt="Logout CMS" class="pages-link-icon"
                                                                                        src="{{ baseUrl }}/images/nav-icons/nav-icon-logout.svg"></a>
             </div>
 
