@@ -1,17 +1,17 @@
 {% set title = "Page Builder" %}
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
-    <script src="{{ Theme.Dir(site.theme) }}/js/jquery.min.js"></script>
-    <script src="{{ Theme.Dir(site.theme) }}/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-utilities.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-utilities.min.css">
 
 
-    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.0/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.css"
-          rel="stylesheet">
+    <link href="/css/data-tables.css" rel="stylesheet">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-1.13.6/af-2.6.0/b-2.4.2/b-colvis-2.4.2/b-html5-2.4.2/b-print-2.4.2/cr-1.7.0/date-1.5.1/fc-4.3.0/fh-3.4.0/kt-2.10.0/r-2.5.0/rg-1.4.0/rr-1.4.1/sc-2.2.0/sb-1.6.0/sp-2.2.0/sl-1.7.0/sr-1.3.0/datatables.min.js"></script>
@@ -185,6 +185,39 @@
             },
         });
 
+
+        editor.on('asset:upload:start', () => {
+           let config = editor.AssetManager.getConfig();
+           config.upload = '/cms/page-builder/assets/upload?siteId={{ site.id }}&formToken='+formToken;
+           console.log('Upload', config);
+        });
+
+        editor.on('storage:start:load', () => {
+            console.log('Storage start load');
+            let config = editor.StorageManager.getConfig();
+            config.options.remote.urlStore = '/cms/page-builder/pages?siteId={{ site.id }}&formToken='+formToken;
+            console.log('Storage', config);
+        });
+
+        editor.on('storage:end:load', (data) => {
+            console.log('Storage load request ended', data);
+            formToken = data.formToken;
+        });
+
+        editor.on('storage:end:store', (data) => {
+            console.log('Storage store request ended', data);
+            postUrl('/cms/page-builder/fresh-token?formToken='+formToken, null, null, function(data){
+                console.log('FreshToken', data);
+                formToken = data.formToken;
+            });
+        });
+
+        editor.on('storage:end', (type) => {
+            console.log('Storage request ended', type);
+        });
+
+
+
         let pageManager = editor.Pages;
         let storageManager = editor.Storage;
         let panelManager = editor.Panels;
@@ -309,14 +342,12 @@
         //Load tina4cms
         loadPage('/cms/dashboard', 'cms');
     </script>
-    <!-- Add blocks -->
     {% set blocks = Theme.Blocks(site.theme) %}
     {% for block in blocks %}
-        <script src="{{ block }}"></script>
+    <script src="{{ block }}"></script>
     {% endfor %}
-    <!-- Add components -->
     {% set components = Theme.Components(site.theme) %}
     {% for component in components %}
-        <script src="{{ component }}"></script>
+    <script src="{{ component }}"></script>
     {% endfor %}
 {% endblock %}

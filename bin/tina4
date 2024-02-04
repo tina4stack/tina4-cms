@@ -432,13 +432,13 @@ addMenu($menus, "webservice", "Runs webservice", static function ($index, $input
         $host = explode(":", $port)[0];
         $port = explode(":", $port)[1];
     } else {
-        $host = $host ?? "localhost";
+        $host = $host ?? "127.0.0.1";
         if (strpos(php_uname(), "Linux") !== false) {
             $host = "0.0.0.0";
         }
     }
 
-    \Tina4\Debug::message("Server running on http://localhost:{$port}");
+    \Tina4\Debug::message("Server running on http://{$host}:{$port}");
 
     `php -S {$host}:{$port} index.php`;
 

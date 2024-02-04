@@ -67,9 +67,14 @@
     }
 
 
-    $data = '{"assets": '.$site->pageBuilderAssets.', "styles": '.$site->pageBuilderStyles.', "pages": '.json_encode($pages).'}';
+    $data = '{"assets": '.$site->pageBuilderAssets.', "styles": '.$site->pageBuilderStyles.', "pages": '.json_encode($pages).', "formToken": "'.(new Tina4\Auth())->getToken().'"}';
     return $response($data, HTTP_OK, APPLICATION_JSON);
 })::noCache();
+
+
+\Tina4\Post::add("/cms/page-builder/fresh-token",static function (\Tina4\Response $response, \Tina4\Request $request) {
+    return $response(["formToken" => (new \Tina4\Auth())->getToken()]);
+});
 
 \Tina4\Post::add("/cms/page-builder/pages", static function (\Tina4\Response $response, \Tina4\Request $request) {
     $pages = $request->data->data->pages;
@@ -124,7 +129,7 @@
         $site->save();
     }
 
-    return $response([], HTTP_OK, APPLICATION_JSON);
+    return $response(["formToken" => (new Tina4\Auth())->getToken()], HTTP_OK, APPLICATION_JSON);
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/twig-templates", static function (\Tina4\Response $response, \Tina4\Request $request) {

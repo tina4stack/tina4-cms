@@ -20,6 +20,7 @@ function sendRequest (url, request, method, callback) {
 
     //Inject the new token
     if (formToken !== null) {
+        console.log('Injecting new token');
         const regex = /formToken=(.*)/gm;
         const subst = `formToken=${formToken}`;
         url = url.replace(regex, subst);
@@ -30,7 +31,6 @@ function sendRequest (url, request, method, callback) {
 
     xhr.onload = function () {
         let content = xhr.response;
-        console.log('headers', xhr.getResponseHeader('freshToken'));
         formToken = xhr.getResponseHeader('freshToken');
 
         try {
@@ -146,6 +146,7 @@ function handleHtmlData(data, targetElement) {
  * Loads a page to a target html element
  * @param loadURL
  * @param targetElement
+ * @param callback
  * @callback
  */
 function loadPage(loadURL, targetElement, callback = null) {
@@ -156,11 +157,16 @@ function loadPage(loadURL, targetElement, callback = null) {
         if (document.getElementById(targetElement) !== null) {
             processedHTML = handleHtmlData(data, targetElement);
         } else {
-            console.log('TINA4 - define targetElement for loadPage', data);
+            if (callback) {
+                callback(data);
+            } else {
+                console.log('TINA4 - define targetElement or callback for loadPage', data);
+            }
+            return;
         }
 
         if (callback) {
-            callback(processedHTML);
+            callback(processedHTML, data);
         }
     });
 }
@@ -187,7 +193,12 @@ function showForm(action, loadURL, targetElement, callback = null) {
             if (document.getElementById(targetElement) !== null) {
                 processedHTML = handleHtmlData (data, targetElement);
             } else {
-                console.log('TINA4 - define targetElement for showForm', data);
+                if (callback) {
+                    callback(data);
+                } else {
+                    console.log('TINA4 - define targetElement or callback for showForm', data);
+                }
+                return;
             }
         }
 
@@ -202,6 +213,7 @@ function showForm(action, loadURL, targetElement, callback = null) {
  * @param url
  * @param data
  * @param targetElement
+ * @param callback
  */
 function postUrl(url, data, targetElement, callback= null) {
     sendRequest(url, data, 'POST', function(data) {
@@ -212,12 +224,17 @@ function postUrl(url, data, targetElement, callback= null) {
             if (document.getElementById(targetElement) !== null) {
                 processedHTML =  handleHtmlData (data, targetElement);
             } else {
-                console.log('TINA4 - define targetElement for postUrl', data);
+                if (callback) {
+                    callback(data);
+                } else {
+                    console.log('TINA4 - define targetElement or callback for postUrl', data);
+                }
+                return;
             }
         }
 
         if (callback) {
-            callback(processedHTML)
+            callback(processedHTML,data)
         }
     });
 }
