@@ -13,7 +13,7 @@ $config = new \Tina4\Config(function(\Tina4\Config $config) {
     //(new Content())->addCmsMenu("/backend/program", "Something Else");
     //(new Content())->addCmsMenu("/backend/program", "Products");
     //$config->addTwigGlobal("Menu", new Menu());
-    //(new Theme())->addTwigView("product", "Products", "examples/products.twig");
+    //(new Theme())->addTwigView("banner", "Banner 1", "examples/banner.twig");
 
 });
 
