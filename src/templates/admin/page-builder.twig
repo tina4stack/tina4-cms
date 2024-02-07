@@ -166,7 +166,7 @@
                 options: {
                     remote: {
                         urlLoad: "/cms/page-builder/pages?siteId={{ site.id }}",
-                        urlStore: "/cms/page-builder/pages?siteId={{ site.id }}&formToken={{ formToken }}",
+                        urlStore: "/cms/page-builder/pages?siteId={{ site.id }}",
                         onStore: data => ({
                             pageId: pageManager.getSelected().id,
                             html: editor.getHtml(),
