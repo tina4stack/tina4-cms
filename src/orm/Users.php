@@ -24,4 +24,6 @@ class Users extends \Tina4\ORM
     public $dateModified;
     public $roleId;
     public $siteId;
+
+    public $excludeFields = ["password", "resetToken"];
 }
