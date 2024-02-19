@@ -1,4 +1,7 @@
 <?php
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/article-categories", function (\Tina4\Response $response){
     return $response (\Tina4\renderTemplate("/content/article-categories.twig"), HTTP_OK, TEXT_HTML);
 });

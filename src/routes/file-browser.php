@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @secure
+ */
 \Tina4\Get::add("/content/file/browse", function(\Tina4\Response $response, \Tina4\Request $request) {
     $files = Content::iterateDirectory("./uploads");
 

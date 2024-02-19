@@ -1,6 +1,7 @@
 <?php
-
-
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/users", function (\Tina4\Response $response){
     return $response (\Tina4\renderTemplate("/content/users.twig"), HTTP_OK, TEXT_HTML);
 });

@@ -1,13 +1,16 @@
 <?php
-
-
+/**
+ * @secure
+ */
 \Tina4\Post::add("/cms/site/set", function (\Tina4\Response $response, \Tina4\Request $request){
     $_SESSION["siteId"] = $request->params["siteId"];
     \Tina4\redirect("/cms/page-builder");
 });
 
 
-
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/site", function (\Tina4\Response $response){
     return $response (\Tina4\renderTemplate("/content/site.twig"), HTTP_OK, TEXT_HTML);
 });

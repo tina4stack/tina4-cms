@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/email-templates", function (\Tina4\Response $response){
     return $response (\Tina4\renderTemplate("/content/emailTemplates.twig"), HTTP_OK, TEXT_HTML);
 });

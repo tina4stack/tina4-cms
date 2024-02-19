@@ -2,6 +2,7 @@
 
 /**
  * File browser
+ * @secure
  */
 \Tina4\Get::add("/cms/file-browser",function (\Tina4\Response $response, \Tina4\Request $request) {
     $files = \Tina4\Utilities::iterateDirectory("./src/public/uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
@@ -132,6 +133,9 @@
     }
 });
 
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number");
     $twigNameSpace = (new Content())->getTwigNameSpace();

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/menus", function (\Tina4\Response $response){
     return $response (\Tina4\renderTemplate("/content/menu.twig"), HTTP_OK, TEXT_HTML);
 });

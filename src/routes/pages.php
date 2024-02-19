@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/pages", function (\Tina4\Response $response){
     return $response (\Tina4\renderTemplate("/content/pages.twig"), HTTP_OK, TEXT_HTML);
 });

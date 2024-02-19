@@ -346,7 +346,7 @@
         const blockManager = editor.Blocks; // `Blocks` is an alias of `BlockManager`
 
         //Load tina4cms
-        loadPage('/cms/dashboard', 'cms');
+        loadPage('/cms/dashboard?formToken={{formToken}}', 'cms');
     </script>
     {% set blocks = Theme.Blocks(site.theme) %}
     {% for block in blocks %}

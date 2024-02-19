@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/css", function (\Tina4\Response $response) {
     return $response (\Tina4\renderTemplate("/content/css.twig"), HTTP_OK, TEXT_HTML);
 });
