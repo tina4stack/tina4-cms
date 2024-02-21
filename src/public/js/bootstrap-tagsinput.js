@@ -274,4 +274,3 @@
         a("input[data-role=tagsinput], select[multiple][data-role=tagsinput]").tagsinput()
     })
 }(window.jQuery);
-//# sourceMappingURL=bootstrap-tagsinput.min.js.map
