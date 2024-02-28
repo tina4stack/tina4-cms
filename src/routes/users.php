@@ -3,6 +3,10 @@
  * @secure
  */
 \Tina4\Get::add("/cms/users", function (\Tina4\Response $response){
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     return $response (\Tina4\renderTemplate("/content/users.twig"), HTTP_OK, TEXT_HTML);
 });
         
@@ -13,6 +17,10 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/users", new Users(), function ($action, Users $users, $filter, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
+
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];

@@ -4,6 +4,10 @@
  * @secure
  */
 \Tina4\Get::add("/cms/roles", function (\Tina4\Response $response){
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     return $response (\Tina4\renderTemplate("/content/roles.twig"), HTTP_OK, TEXT_HTML);
 });
         
@@ -14,6 +18,10 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/roles", new Role(), static function ($action, Role $role, $filter, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
+
     switch ($action) {
        case "form":
        case "fetch":

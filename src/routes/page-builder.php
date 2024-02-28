@@ -2,6 +2,10 @@
 
 
 \Tina4\Get::add("/cms/page-builder", function (\Tina4\Response $response) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
+
     $users = (new Users())->select("count(id) as number");
     $twigNameSpace = (new Content())->getTwigNameSpace();
     if (empty($users)) {
@@ -19,6 +23,10 @@
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/pages", function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];
@@ -74,10 +82,18 @@
 
 
 \Tina4\Post::add("/cms/page-builder/fresh-token",static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     return $response(["formToken" => (new \Tina4\Auth())->getToken()]);
 });
 
 \Tina4\Post::add("/cms/page-builder/pages", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $pages = $request->data->data->pages;
     $pageData = "";
     foreach ($pages as $page) {
@@ -134,11 +150,19 @@
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/twig-templates", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $templates = (new Theme())->getTwigViews();
     return $response($templates);
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/twig-templates/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $templates = [];
     if (isset($_SESSION["tina4-cms:twigViews"])) {
         $templates = $_SESSION["tina4-cms:twigViews"];
@@ -153,11 +177,19 @@
 })::noCache();;
 
 \Tina4\Get::add("/cms/page-builder/cms-snippets", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $templates = (new Theme())->getCMSSnippets();
     return $response($templates);
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/cms-snippets/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         $template = (new Snippet());
         $template->load("name = ?", [$request->params["id"]]);
@@ -169,6 +201,10 @@
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/cms-content", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];
@@ -187,6 +223,10 @@
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/cms-content/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         $page = (new Page());
         $page->load("name = ?", [$request->params["id"]]);
@@ -199,6 +239,10 @@
 
 
 \Tina4\Get::add("/cms/page-builder/cms-articles", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];
@@ -217,6 +261,10 @@
 
 
 \Tina4\Get::add("/cms/page-builder/cms-articles/render", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         if (empty($request->params["field"])) {
             $html = (new Content())->getArticleById($request->params["id"]);
@@ -243,6 +291,10 @@
 
 
 \Tina4\Post::add("/cms/page-builder/assets/upload", static function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     //Add the image to a nice path
     $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
     if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
@@ -278,6 +330,10 @@
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/open-ai", static function(\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $text = "";
     if (!empty($request->params["prompt"])) {
         try {

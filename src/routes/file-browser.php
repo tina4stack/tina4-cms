@@ -4,6 +4,10 @@
  * @secure
  */
 \Tina4\Get::add("/content/file/browse", function(\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $files = Content::iterateDirectory("./uploads");
 
     $html = \Tina4\renderTemplate("file-browser.twig", ["files" => $files]);
@@ -12,6 +16,10 @@
 });
 
 \Tina4\Post::add("/content/file/upload", function(\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     if (!file_exists('./uploads')) {
         if (!mkdir('./uploads', 0755, true) && !is_dir('./uploads')) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', './uploads'));

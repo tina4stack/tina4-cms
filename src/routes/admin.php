@@ -5,11 +5,19 @@
  * @secure
  */
 \Tina4\Get::add("/cms/file-browser",function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $files = \Tina4\Utilities::iterateDirectory("./src/public/uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
     return $response(\Tina4\renderTemplate("admin/file-browser.twig", ["files" => $files]));
 });
 
 \Tina4\Post::add("/cms/upload", function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     //Add the image to a nice path
     $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
     if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
@@ -38,6 +46,7 @@
 
 
 \Tina4\Get::add("/cms/login", function (\Tina4\Response $response) {
+    unset($_SESSION["user"]);
     $users = (new Users())->select("count(id) as number")->asArray();
     $twigNameSpace = (new Content())->getTwigNameSpace();
 
