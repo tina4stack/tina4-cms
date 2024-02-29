@@ -18,7 +18,7 @@
     $(document).ready(function () {
         emailtemplateGrid = $('#emailtemplateGrid').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '/api/admin/email-templates?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}',
+            ajax: '{{ baseUrl }}/api/admin/email-templates?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}',
             columns: [
                 {"data": "id"},
                 {"data": "name"},
@@ -32,10 +32,10 @@
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
                         {% if (not userRoles.Content['Email Templates'] or userRoles.Content['Email Templates'].edit) %}
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/email-templates/' + row.id + '?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}\')">Edit</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'{{ baseUrl }}/api/admin/email-templates/' + row.id + '?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}\')">Edit</button>';
                         {% endif %}
                         {% if (not userRoles.Content['Email Templates'] or userRoles.Content['Email Templates'].delete) %}
-                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/email-templates/' + row.id + '?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}\');}">Del</button>';
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'{{ baseUrl }}/api/admin/email-templates/' + row.id + '?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}\');}">Del</button>';
                         {% endif %}
                         return html;
                     },
@@ -56,7 +56,7 @@
                     text: 'Create',
                     action: function (e, dt, node, config) {
                         let data = {};
-                        showForm('create', '/api/admin/email-templates/form?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}');
+                        showForm('create', '{{ baseUrl }}/api/admin/email-templates/form?formToken={{ formToken("/api/admin/email-templates") }}&siteId={{ session.siteId }}');
                     }
                 },
                 {% endif %}
