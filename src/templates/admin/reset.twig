@@ -1,23 +1,17 @@
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.min.js"></script>
+    <script src="{{ baseUrl }}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ baseUrl }}/js/underscore.min.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.password-validator.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.validate.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"
-            integrity="sha256-xLhce0FUawd11QSwrvXSwST0oHhOolNoH9cUXAcsIAg=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"
-            integrity="sha256-NdDw7k+fJewgwI1XmH9NMR6OILvTX+3arqb/OgFicoM=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-utilities.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/jquery-password-validator.css">
 
-    <!-- Boostrap 4 CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css"
-          integrity="sha384-3fdgwJw17Bi87e1QQ4fsLn4rUFqWw//KU0g8TvV6quvahISRewev6/EocKNuJmEw" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-
-    <!-- Boostrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
 {%  endblock %}
 {% block content %}
     <div class="col-md-4 offset-md-4">
