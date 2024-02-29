@@ -119,11 +119,11 @@
         </div>
     </div>
     {% if not session.user %}
-        {% do redirect('/cms/login') %}
+        {% do redirect(baseUrl ~ '/cms/login') %}
     {% endif %}
     <script>
         function getFreshToken() {
-            postUrl('/cms/page-builder/fresh-token?formToken='+formToken, null, null, function(data){
+            postUrl('{{ baseUrl }}/cms/page-builder/fresh-token?formToken='+formToken, null, null, function(data){
                 console.log('FreshToken', data);
                 formToken = data.formToken;
             });
