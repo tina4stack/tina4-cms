@@ -1,21 +1,21 @@
 {% set title = "Page Builder" %}
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/underscore.min.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.min.js"></script>
+    <script src="{{ baseUrl }}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ baseUrl }}/js/underscore.min.js"></script>
 
 
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-utilities.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-utilities.min.css">
 
-    <link href="/css/data-tables.css" rel="stylesheet">
+    <link href="{{ baseUrl }}/css/data-tables.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="/js/data-tables.js"></script>
+    <script src="{{ baseUrl }}/js/data-tables.js"></script>
 
     <script src="https://unpkg.com/grapesjs-custom-code"></script>
     <script src="https://unpkg.com/grapesjs-component-code-editor"></script>
@@ -39,14 +39,14 @@
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 
-    <script src="/js/bootstrap-tagsinput.js"></script>
-    <script src="/js/tina4helper.js"></script>
+    <script src="{{ baseUrl }}/js/bootstrap-tagsinput.js"></script>
+    <script src="{{ baseUrl }}/js/tina4helper.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.21.2/css/grapes.min.css"
           integrity="sha512-teZVIvNgTrmIIFs77Fs03dArj3HsJbQ6QMFRE5nAnt7etwO3wTgW2Z/1l6uvd1/TAycO68STs2QitYKzE2BqCg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-    <link rel="stylesheet" href="/css/page-builder.css">
+    <link rel="stylesheet" href="{{ baseUrl }}/css/page-builder.css">
     <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/admin.css">
 {% endblock %}
 {% block navigation %}
