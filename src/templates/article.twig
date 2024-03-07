@@ -20,14 +20,14 @@
 
 <a href="#">TAGS</a>
 {% for keyword in keywords %}
-    <a href="/content/tags/{{ keyword | getSlug }}">{{ keyword }}</a>
+    <a href="{{ baseUrl }}/content/tags/{{ keyword | getSlug }}">{{ keyword }}</a>
 {% endfor %}
 
-<a href="/content/article/{{ article.relatedArticles[0].slug }}">Previous Article<br>
+<a href="{{ baseUrl }}/content/article/{{ article.relatedArticles[0].slug }}">Previous Article<br>
     {{ article.relatedArticles[0].title }}
 </a>
 
-<a href="/content/article/{{ article.relatedArticles[1].slug }}">Next Article<br>
+<a href="{{ baseUrl }}/content/article/{{ article.relatedArticles[1].slug }}">Next Article<br>
     {{ article.relatedArticles[1].title }}
 </a>
 

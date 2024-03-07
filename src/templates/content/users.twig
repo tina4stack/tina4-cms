@@ -19,7 +19,7 @@
     $(document).ready(function () {
         usersGrid = $('#usersGrid').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '/api/admin/users?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}',
+            ajax: '{{ baseUrl }}/api/admin/users?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}',
             columns: [
                 {"data": "id"},
                 {"data": "firstName"},
@@ -34,10 +34,10 @@
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
                         {% if (not userRoles.Content.Users or userRoles.Content.Users.edit) %}
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'/api/admin/users/' + row.id + '?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}\')">Edit</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'{{ baseUrl }}/api/admin/users/' + row.id + '?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}\')">Edit</button>';
                         {% endif %}
                         {% if (not userRoles.Content.Users or userRoles.Content.Users.delete) %}
-                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'/api/admin/users/' + row.id + '?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}\');}">Del</button>';
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'{{ baseUrl }}/api/admin/users/' + row.id + '?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}\');}">Del</button>';
                         {% endif %}
                         return html;
 
@@ -57,7 +57,7 @@
                     text: 'Create',
                     action: function (e, dt, node, config) {
                         let data = {};
-                        showForm('create', '/api/admin/users/form?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}');
+                        showForm('create', '{{ baseUrl }}/api/admin/users/form?formToken={{ formToken("/api/admin/users") }}&siteId={{ session.siteId }}');
                     }
                 },
                 {% endif %}

@@ -19,14 +19,14 @@
         <meta prefix="og: https://ogp.me/ns#" property="og:keywords" content="{{ keywords }}"/>
     {% endif %}
     {% block headers %}
-        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-grid.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-reboot.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/bootstrap-utilities.min.css">
-        <link rel="stylesheet" type="text/css" href="/css/default.css">
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}{{ Theme.Dir(site.theme) }}/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}{{ Theme.Dir(site.theme) }}/css/bootstrap-grid.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}{{ Theme.Dir(site.theme) }}/css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}{{ Theme.Dir(site.theme) }}/css/bootstrap-utilities.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/default.css">
 
-        <script src="{{ Theme.Dir(site.theme) }}/js/jquery.min.js"></script>
-        <script src="{{ Theme.Dir(site.theme) }}/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ baseUrl }}{{ Theme.Dir(site.theme) }}/js/jquery.min.js"></script>
+        <script src="{{ baseUrl }}{{ Theme.Dir(site.theme) }}/js/bootstrap.bundle.min.js"></script>
     {% endblock %}
     {% if site.custom %}
     {{ site.custom | raw }}

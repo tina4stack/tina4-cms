@@ -1,16 +1,16 @@
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/underscore.min.js"></script>
-    <script src="/js/jquery.password-validator.js"></script>
-    <script src="/js/jquery.validate.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.min.js"></script>
+    <script src="{{ baseUrl }}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ baseUrl }}/js/underscore.min.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.password-validator.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.validate.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-grid.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-reboot.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-utilities.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/jquery-password-validator.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-utilities.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/jquery-password-validator.css">
 {%  endblock %}
 {% block content %}
     <div class="col-md-4 offset-md-4">
