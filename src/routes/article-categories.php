@@ -26,7 +26,7 @@ DELETE @ /path/{id} - delete for single
 
         //Check for the default Root article category
         $articleCategoryCheck = new ArticleCategory();
-        if (!$articleCategoryCheck->load("name = 'Root' and site_id = {$siteId}"))
+        if (!$articleCategoryCheck->load("name = ? and site_id = ?", ['Root', $siteId]))
         {
             $articleCategoryCheck->name = "Root";
             $articleCategoryCheck->siteId = $siteId;
@@ -44,7 +44,7 @@ DELETE @ /path/{id} - delete for single
         ->where("site_id = {$siteId}")
         ->filter(function($record){
             $article = new ArticleCategory();
-            $article->load("id = {$record->parentId}");
+            $article->load("id = ?", [$record->parentId]);
             $record->parentName = $article->name; // { "parentName": "test" } record.parentName
         })
         ->asArray();
@@ -76,7 +76,7 @@ DELETE @ /path/{id} - delete for single
                 ->where("{$where}")
                 ->filter(function($record){
                     $article = new ArticleCategory();
-                    $article->load("id = {$record->parentId}");
+                    $article->load("id = ?", [$record->parentId]);
                     $record->parentName = $article->name;
                 })
                 ->orderBy($filter["orderBy"])

@@ -25,7 +25,7 @@ class Content extends Data
     {
         $category = $category ?? "Default";
         $role = new Role();
-        if ($role->load("id = {$roleId}")) {
+        if ($role->load("id = ?", [$roleId])) {
             $roleData = unserialize($role->roleInfo);
             $roleData["roles"][$name] = array_merge($options, compact('category'));
             $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
@@ -53,7 +53,7 @@ class Content extends Data
         $name = $name ?? "";
         $roleId = $roleId ?? 1;
         $role = new Role();
-        if ($role->load("id = {$roleId}")) {
+        if ($role->load("id = ?", [$roleId])) {
             $roles = unserialize($role->roleInfo);
 
             if (!empty($name)) {
@@ -160,7 +160,7 @@ class Content extends Data
     public function getPageMeta($slug): Page
     {
         $page = (new Page());
-        $page->load("slug = '{$slug}'");
+        $page->load("slug = ?", [$slug]);
 
         return $page;
     }
@@ -173,7 +173,7 @@ class Content extends Data
     public function getPage($slug): string
     {
         $page = (new Page());
-        $page->load("slug = '{$slug}'");
+        $page->load("slug = ?", [$slug]);
 
         if (!empty($page->content)) {
             return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
@@ -296,7 +296,7 @@ class Content extends Data
     public function getArticle($slug, string $template = "article.twig"): string
     {
         $article = new Article();
-        $article->load("slug = '{$slug}'");
+        $article->load("slug = ?", [$slug]);
         $this->enhanceArticle($article);
         return $this->renderArticle($article->title, $article->content, $article->image, $article, $template);
     }
@@ -305,10 +305,10 @@ class Content extends Data
     public function getArticleById($id): string
     {
         $article = new Article();
-        $article->load("id = $id");
+        $article->load("id = ?", [$id]);
         $this->enhanceArticle($article);
         $site = new Site();
-        $site->load("id = {$article->siteId}");
+        $site->load("id = ?", [$article->siteId]);
         //Get the article template
         $articleTemplate = $site->pageLayoutArticleHtml;
 
@@ -325,7 +325,7 @@ class Content extends Data
     public function getArticleMeta($slug): string
     {
         $article = new Article();
-        $article->load("slug = '{$slug}'");
+        $article->load("slug = ?", [$slug]);
 
         return $article->asObject();
     }
@@ -338,7 +338,7 @@ class Content extends Data
     public function getSnippet($name): string
     {
         $snippet = new Snippet();
-        if ($snippet->load("name = '{$name}'")) {
+        if ($snippet->load("name = ?", [$name])) {
             $fileName = "snippet" . $this->getSlug($name);
             file_put_contents("./cache" . DIRECTORY_SEPARATOR . $fileName, html_entity_decode($snippet->content, ENT_QUOTES));
         } else {
@@ -836,7 +836,7 @@ class Content extends Data
         }
 
         $site = new Site();
-        if ($site->load("id = $siteId")) {
+        if ($site->load("id = ?", [$siteId])) {
             return $site;
         }
 
@@ -879,7 +879,7 @@ class Content extends Data
 
         $template = "content.twig";
         $site = new Site();
-        if ($site->load("id = $siteId") && !empty($site->theme)) {
+        if ($site->load("id = ?", [$siteId]) && !empty($site->theme)) {
             $template = "themes/{$site->theme}/page.twig";
             $layoutHtml = $site->pageLayoutHtml;
 

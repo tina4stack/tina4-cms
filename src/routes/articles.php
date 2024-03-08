@@ -38,7 +38,7 @@
                 ->where("site_id = {$siteId}")
                 ->filter(function($record){
                     $article = new ArticleCategory();
-                    $article->load("id = {$record->parentId}");
+                    $article->load("id = ?", [$record->parentId]);
                     $record->parentName = $article->name;
                 })
                 ->orderBy("parent_id,name")

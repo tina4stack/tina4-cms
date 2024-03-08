@@ -13,9 +13,8 @@ class OpenAi extends Api
         $siteId = $siteId ?? 1;
 
         $site = new Site();
-        $site->id = $siteId;
         $authHeader = "";
-        if ($site->load() && !empty($site->openAiKey)) {
+        if ($site->load("id = ?", [$siteId]) && !empty($site->openAiKey)) {
             $authHeader = "Authorization: Bearer " . $site->openAiKey;
         } else {
             $this->active = false;

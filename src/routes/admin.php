@@ -85,7 +85,7 @@
 
         $user = new Users(); //use ORM to load a user with email
         $messenger = new \Tina4\Messenger($messengerSettings);
-        if ($user->load("email = '{$request->params["email"]}' and reset_token = ''")) { //if i can load the user with this email
+        if ($user->load("email = ? and reset_token = ?", [$request->params["email"], '']) { //if i can load the user with this email
             //reset the password
             $user->resetToken = md5(date("Y-m-d-H-i-s") . "{$user->id}");
             $user->save();
@@ -98,7 +98,7 @@
                 \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Error could not send user a reset link");
             }
         } else {
-            if ($user->load("email = '{$request->params["email"]}'")) {
+            if ($user->load("email = ?", [$request->params["email"]])) {
                 //resend the reset token ??
                 $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
 
@@ -119,7 +119,7 @@
 
 \Tina4\Get::add(TINA4_SUB_FOLDER."/cms/login/reset-confirm/{resetToken}", function($resetToken, \Tina4\Response $response, \Tina4\Request  $request) {
     $user = new Users();
-    if ($user->load("reset_token = '{$resetToken}'")) {
+    if ($user->load("reset_token = ?", [$resetToken])) {
         $twigNameSpace = (new Content())->getTwigNameSpace();
         //display reset password screen
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/confirmReset.twig", ["twigNameSpace" => $twigNameSpace, "user" => $user->asArray()]));
@@ -131,7 +131,7 @@
 
 \Tina4\Post::add("/cms/login/reset-confirm/{resetToken}", static function($resetToken, \Tina4\Response $response, \Tina4\Request $request) {
     $user = new Users();
-    if ($user->load("reset_token = '{$resetToken}'")) {
+    if ($user->load("reset_token = ?", [$resetToken])) {
         $user->resetToken = "";
         $user->password = password_hash($request->params["newPassword"], PASSWORD_BCRYPT);
         $user->save();
@@ -164,7 +164,7 @@
     if (!empty($request->params["confirmPassword"])) {
         $user = new Users($request->params);
 
-        if (!$user->load("email = '{$request->params["email"]}'")) {
+        if (!$user->load("email = ?", [$request->params["email"]])) {
             $user->isActive = 1;
             $user->password = password_hash($user->password, PASSWORD_BCRYPT);
             $user->save();
