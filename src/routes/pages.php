@@ -33,9 +33,9 @@
        case "fetch":
             //Return back a form to be submitted to the create
 
-            $snippets = (new Snippet())->select("id,name", 1000)->where("site_id = $siteId")->orderBy("name")->asArray();
+            $snippets = (new Snippet())->select("id,name", 1000)->where("site_id = ?", [$siteId])->orderBy("name")->asArray();
 
-            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id != 1 and is_active = 1 and site_id = {$siteId}")->orderBy("name")->asArray();
+            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id != 1 and is_active = 1 and site_id = ?", [$siteId])->orderBy("name")->asArray();
 
             if ($action == "form") {
                 $title = "Add Page";
@@ -90,7 +90,7 @@
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-
+            $whereData = [];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
             } else {
@@ -98,11 +98,12 @@
             }
 
             if (!empty($siteId)) {
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
+                $whereData[] = $siteId;
             }
 
             return   $page->select ("*", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->orderBy($filter["orderBy"])
                 ->asResult();
         break;

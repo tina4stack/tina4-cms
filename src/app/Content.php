@@ -189,7 +189,7 @@ class Content extends Data
     public function getAllPages($siteId=1): array
     {
         $page = (new Page());
-        $pages = $page->select("*", 10000)->where("site_id = {$siteId}")->asObject();
+        $pages = $page->select("*", 10000)->where("site_id = ?", [$siteId])->asObject();
 
         return $pages;
     }
@@ -200,7 +200,7 @@ class Content extends Data
     public function getAllSnippets($siteId=1): array
     {
         $snippet = (new Snippet());
-        $snippets = $snippet->select("*", 10000)->where("site_id = {$siteId}");
+        $snippets = $snippet->select("*", 10000)->where("site_id = ?", [$siteId]);
 
         if (!empty($snippets)) {
             return $snippets->asArray();
@@ -742,7 +742,7 @@ class Content extends Data
         }
 
         $config->addTwigFunction("getPageContent", function($pageName){
-            $pageContent = (new Page())->select("content")->where("slug = '{$pageName}'")->asArray();
+            $pageContent = (new Page())->select("content")->where("slug = ?", [$pageName])->asArray();
             if (!empty($pageContent)) {
                 return new \Twig\Markup($pageContent[0]["content"], 'UTF-8');
             } else {
@@ -906,7 +906,7 @@ class Content extends Data
     public function getAllArticles($siteId): array
     {
         $article = (new Article());
-        $articles = $article->select("*", 10000)->where("site_id = {$siteId}");
+        $articles = $article->select("*", 10000)->where("site_id = ?", [$siteId]);
 
         if (!empty($articles)) {
             return $articles->asArray();
