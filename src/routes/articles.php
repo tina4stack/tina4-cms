@@ -35,10 +35,10 @@
             //Return back a form to be submitted to the create
             $articleCategories = (new ArticleCategory())
                 ->select('id,name,parent_id,is_menu,display_order', 100)
-                ->where("site_id = {$siteId}")
+                ->where("site_id = ?", [$siteId])
                 ->filter(function($record){
                     $article = new ArticleCategory();
-                    $article->load("id = {$record->parentId}");
+                    $article->load("id = ?", [$record->parentId]);
                     $record->parentName = $article->name;
                 })
                 ->orderBy("parent_id,name")
@@ -60,23 +60,21 @@
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-
+            $whereData = [];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
             } else {
                 $where = " 1 = 1";
             }
-
-
             if (!empty($siteId)) {
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
+                $whereData[] = $siteId;
             }
 
             $articles =   $article->select ("id, published_date, title, description, author, is_published", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->orderBy($filter["orderBy"])
                 ->asResult();
-
 
             return $articles;
         break;

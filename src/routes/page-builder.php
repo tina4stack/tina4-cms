@@ -38,8 +38,7 @@
     $pages = [];
 
     $site = new Site();
-    $site->id = $siteId;
-    $site->load();
+    $site->load("id = ?", [$siteId]);
 
     if (!empty($site->pageLayout)) {
         $pageBuilderContent = json_decode($site->pageLayout);
@@ -117,8 +116,7 @@
             }
 
             $site = new Site();
-            $site->id = $page->siteId;
-            $site->load();
+            $site->load("id = ?", [$page->siteId]);
             $site->pageBuilderStyles =  json_encode($request->data->data->styles);
             $site->pageBuilderAssets =  json_encode($request->data->data->assets);
             $site->save();
@@ -127,8 +125,7 @@
 
     if ($request->data->pageId === "layout") {
         $site = new Site();
-        $site->id = $request->params["siteId"];
-        $site->load();
+        $site->load("id = ?", [$request->params["siteId"]]);
         $site->pageLayout = json_encode($pageData);
         $site->pageLayoutHtml = (new Theme())->parseContentIncludes($request->data->html);
         $site->pageBuilderStyles =  json_encode($request->data->data->styles);
@@ -138,8 +135,7 @@
 
     if ($request->data->pageId === "layoutArticle") {
         $site = new Site();
-        $site->id = $request->params["siteId"];
-        $site->load();
+        $site->load("id = ?", [$request->params["siteId"]]);
 
         $site->pageLayoutArticle = json_encode($pageData);
         $site->pageLayoutArticleHtml = (new Theme())->parseArticleIncludes($request->data->html);

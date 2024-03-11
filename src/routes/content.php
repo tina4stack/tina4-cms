@@ -23,7 +23,7 @@
 
     $robotText = "User-agent: *\nDisallow: /\n";
     $site = new Site();
-    if ($site->load("id = $siteId") && $site->allowCrawlers) {
+    if ($site->load("id = ?", [$siteId]) && $site->allowCrawlers) {
         $robotText = "User-agent: *\nDisallow: /cms/\nSitemap: {$site->siteUrl}/sitemap.xml";
     }
 
@@ -40,7 +40,7 @@
 
     $siteMap = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></sitemapindex>';
     $site = new Site();
-    if ($site->load("id = $siteId") && $site->allowCrawlers) {
+    if ($site->load("id = ?", [$siteId]) && $site->allowCrawlers) {
         $siteMap = (new Content())->getSiteMap();
     }
 
@@ -85,7 +85,7 @@
 
     $template = "content.twig";
     $site = new Site();
-    if ($site->load("id = $siteId") && !empty($site->theme)) {
+    if ($site->load("id = ?", [$siteId]) && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 
@@ -145,7 +145,7 @@
 
     $template = "content.twig";
     $site = new Site();
-    if ($site->load("id = $siteId") && !empty($site->theme)) {
+    if ($site->load("id = ?", [$siteId]) && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 
@@ -165,7 +165,7 @@
 
     $template = "content.twig";
     $site = new Site();
-    if ($site->load("id = $siteId") && !empty($site->theme)) {
+    if ($site->load("id = ?", [$siteId]) && !empty($site->theme)) {
         $template = "themes/{$site->theme}/page.twig";
     }
 

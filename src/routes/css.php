@@ -47,18 +47,17 @@
             break;
         case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "site_id = {$siteId}";
+            $where = "site_id = ?";
+            $whereData = [$siteId];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
                 if (!empty($siteId)) {
-                    $where .= " and site_id = {$siteId}";
+                    $where .= " and site_id = ?";
                 }
             }
 
-
-
             return $css->select("*", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->orderBy($filter["orderBy"])
                 ->asResult();
             break;

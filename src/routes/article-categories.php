@@ -26,7 +26,7 @@ DELETE @ /path/{id} - delete for single
 
         //Check for the default Root article category
         $articleCategoryCheck = new ArticleCategory();
-        if (!$articleCategoryCheck->load("name = 'Root' and site_id = {$siteId}"))
+        if (!$articleCategoryCheck->load("name = ? and site_id = ?", ['Root', $siteId]))
         {
             $articleCategoryCheck->name = "Root";
             $articleCategoryCheck->siteId = $siteId;
@@ -41,10 +41,10 @@ DELETE @ /path/{id} - delete for single
     }
 
     $categories = (new ArticleCategory())->select("id,name,parent_id,slug,is_menu,is_active,display_order")
-        ->where("site_id = {$siteId}")
+        ->where("site_id = ?", [$siteId])
         ->filter(function($record){
             $article = new ArticleCategory();
-            $article->load("id = {$record->parentId}");
+            $article->load("id = ?", [$record->parentId]);
             $record->parentName = $article->name; // { "parentName": "test" } record.parentName
         })
         ->asArray();
@@ -65,18 +65,18 @@ DELETE @ /path/{id} - delete for single
             break;
         case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "site_id = {$siteId}";
+            $where = "site_id = ?";
+            $whereData = [$siteId];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
             }
 
-
             return   $articleCategory->select ("id,name,parent_id,slug,is_menu,is_active,display_order", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->filter(function($record){
                     $article = new ArticleCategory();
-                    $article->load("id = {$record->parentId}");
+                    $article->load("id = ?", [$record->parentId]);
                     $record->parentName = $article->name;
                 })
                 ->orderBy($filter["orderBy"])

@@ -25,7 +25,7 @@
         $siteId = $request->params["siteId"];
 
         $menuCheck = new Menu();
-        if (!$menuCheck->load("name = 'Root' and site_id = {$siteId}"))
+        if (!$menuCheck->load("name = ? and site_id = ?", ['Root', $siteId]))
         {
             $menuCheck->name = "Root";
             $menuCheck->siteId = $siteId;
@@ -39,10 +39,10 @@
     }
 
     $categories = (new Menu())->select("id,name,parent_id,slug,specific_route,is_active,display_order")
-        ->where("site_id = {$siteId}")
+        ->where("site_id = ?", [$siteId])
         ->filter(function($record){
             $menuItem = new Menu();
-            $menuItem->load("id = {$record->parentId}");
+            $menuItem->load("id = ?", [$record->parentId]);
             $record->parentName = $menuItem->name;
         })
         ->asArray();
@@ -66,17 +66,18 @@
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "site_id = {$siteId}";
+            $where = "site_id = ?";
+            $whereData = [$siteId];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
             }
         
             return   $menu->select ("*", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->filter(function($record){
                     $menuItem = new Menu();
-                    $menuItem->load("id = {$record->parentId}");
+                    $menuItem->load("id = ?", [$record->parentId]);
                     $record->parentName = $menuItem->name;
                 })
                 ->orderBy($filter["orderBy"])
