@@ -85,7 +85,7 @@
 
         $user = new Users(); //use ORM to load a user with email
         $messenger = new \Tina4\Messenger($messengerSettings);
-        if ($user->load("email = ? and reset_token = ?", [$request->params["email"], '']) { //if i can load the user with this email
+        if ($user->load("email = ? and reset_token = ?", [$request->params["email"], ''])) { //if i can load the user with this email
             //reset the password
             $user->resetToken = md5(date("Y-m-d-H-i-s") . "{$user->id}");
             $user->save();
