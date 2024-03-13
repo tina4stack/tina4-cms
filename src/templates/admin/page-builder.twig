@@ -55,22 +55,22 @@
 {% block content %}
     <div class="app-wrap">
         <div class="nav-sidebar">
-            <div href="{{ baseUrl }}/" class="tina-logo"><a href="#" onclick="$('#cms').show(); $('#custom-cms').hide(); loadPage('{{ baseUrl }}/cms/dashboard', 'cms');"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%"></a>
+            <div href="{{ baseUrl }}/" class="tina-logo"><a href="#" onclick="$('#cms').show(); loadPage('{{ baseUrl }}/cms/dashboard', 'cms');"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%"></a>
                 <span id="siteName" class="selected-site-name"></span>
                 <a href="#" class="sidebar-toggler-container">
                     <span class="sidebar-toggler"></span>
                 </a>
             </div>
             <a href="#" class="pages-link"
-               onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); $('#custom-cms').hide(); if ($('cms').innerHTML === '') { loadPage('{{ baseUrl }}/cms/dashboard', 'cms') } "><img
+               onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('{{ baseUrl }}/cms/dashboard', 'cms'); "><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-site-settings.svg">Site
                 Settings</a>
             <a href="#" class="pages-link"
-               onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); $('#custom-cms').hide(); loadGrapeJsPage('layout')"><img
+               onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layout')"><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-page-layout.svg">Page
                 Layout</a>
             <a href="#" class="pages-link"
-               onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); $('#custom-cms').hide(); loadGrapeJsPage('layoutArticle')"><img
+               onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layoutArticle')"><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-article-layout.svg">Article
                 Layout</a>
             <h3 class="pages-heading"><img class="pages-link-icon"
@@ -78,7 +78,7 @@
             <div class="pages">
                 {% for page in pages %}
                     <a href="#" class="pages-link"
-                       onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); $('#custom-cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
+                       onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
             <div class="site-selector-container">

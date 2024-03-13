@@ -39,7 +39,7 @@ function sendRequest (url, request, method, callback) {
 
     xhr.onload = function () {
         let content = xhr.response;
-        if (xhr.getResponseHeader('freshToken') !== '') {
+        if (xhr.getResponseHeader('freshToken') !== '' && xhr.getResponseHeader('freshToken') !== null) {
             formToken = xhr.getResponseHeader('freshToken');
         }
 

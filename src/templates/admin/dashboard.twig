@@ -9,7 +9,7 @@
             <nav class="custom-nav">
                 {% for menuItem in menuItems %}
                     {# This will need an active class of ".adtive" #}
-                    <a class="" href="#" onclick=" $('#cms').hide(); $('#gjs').hide(); $('#custom-cms').show(); loadPage('{{ baseUrl }}{{ menuItem.href }}', 'custom-cms')" style="color: #ffffff;">
+                    <a class="" href="#" onclick=" $('#gjs').hide(); $('#custom-cms').show(); loadPage('{{ baseUrl }}{{ menuItem.href }}', 'content')" style="color: #ffffff;">
                         <img class="{{ menuItem.icon}}" src="{{ baseUrl }}/images/nav-icons/nav-icon-placeholder.svg">{{ menuItem.caption }}
                     </a>
                 {% endfor %}
