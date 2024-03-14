@@ -56,7 +56,7 @@
                 $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ["data" => $article, 'categories' => $articleCategories, "snippets" => $snippets, "siteId" => $siteId]);
             }
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#articleForm').valid() ) { saveForm('articleForm', '" .$savePath."', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormLarge.twig", ["title" => $title, "onclick" => "if ( $('#articleForm').valid() ) { saveForm('articleForm', '" .$savePath."', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter

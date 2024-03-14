@@ -49,7 +49,7 @@
                 $savePath =  TINA4_BASE_URL . "/api/admin/site/".$site->id;
                 $content = \Tina4\renderTemplate("/api/admin/site/form.twig", ["data" => $site, "themes" => $themes]);
             }
-            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => $title, "onclick" => "if ( $('#siteForm').valid() ) { saveForm('siteForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#siteForm').valid() ) { saveForm('siteForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter

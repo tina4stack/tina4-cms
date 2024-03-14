@@ -22,5 +22,7 @@ $scss = new ScssPhp\ScssPhp\Compiler();
 $scssDefault = $scss->compileString(file_get_contents("./src/templates/admin/page-builder.scss"))->getCss();
 file_put_contents("./src/public/css/page-builder.css", $scssDefault);
 
+
+
 (new Theme(""))->deployThemes(__dir__, true);
 echo new \Tina4\Tina4Php($config);
