@@ -1,5 +1,11 @@
 <?php
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/article-categories", function (\Tina4\Response $response){
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
     return $response (\Tina4\renderTemplate("/content/article-categories.twig"), HTTP_OK, TEXT_HTML);
 });
 
@@ -11,13 +17,16 @@ POST @ /path, /path/{id} - create & update
 DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/article-categories", new ArticleCategory(), function ($action, ArticleCategory $articleCategory, $filter, $request) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];
 
         //Check for the default Root article category
         $articleCategoryCheck = new ArticleCategory();
-        if (!$articleCategoryCheck->load("name = 'Root' and site_id = {$siteId}"))
+        if (!$articleCategoryCheck->load("name = ? and site_id = ?", ['Root', $siteId]))
         {
             $articleCategoryCheck->name = "Root";
             $articleCategoryCheck->siteId = $siteId;
@@ -32,10 +41,10 @@ DELETE @ /path/{id} - delete for single
     }
 
     $categories = (new ArticleCategory())->select("id,name,parent_id,slug,is_menu,is_active,display_order")
-        ->where("site_id = {$siteId}")
+        ->where("site_id = ?", [$siteId])
         ->filter(function($record){
             $article = new ArticleCategory();
-            $article->load("id = {$record->parentId}");
+            $article->load("id = ?", [$record->parentId]);
             $record->parentName = $article->name; // { "parentName": "test" } record.parentName
         })
         ->asArray();
@@ -45,29 +54,29 @@ DELETE @ /path/{id} - delete for single
 
             $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig", ["categories" => $categories, "siteId" => $siteId]);
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => "Add Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormLarge.twig", ["title" => "Add Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
             break;
         case "fetch":
             //Return back a form to be submitted to the create
 
             $content = \Tina4\renderTemplate("api/admin/articleCategories/form.twig",["data" => $articleCategory, "categories" => $categories, "siteId" => $siteId]);
 
-            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => "Edit Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories/{$articleCategory->id}', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => "Edit Article Category", "onclick" => "if ( $('#articleCategory').valid() ) { saveForm('articleCategory', '" . TINA4_BASE_URL . "/api/admin/article-categories/{$articleCategory->id}', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
             break;
         case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "site_id = {$siteId}";
+            $where = "site_id = ?";
+            $whereData = [$siteId];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
             }
 
-
             return   $articleCategory->select ("id,name,parent_id,slug,is_menu,is_active,display_order", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->filter(function($record){
                     $article = new ArticleCategory();
-                    $article->load("id = {$record->parentId}");
+                    $article->load("id = ?", [$record->parentId]);
                     $record->parentName = $article->name;
                 })
                 ->orderBy($filter["orderBy"])

@@ -2,13 +2,22 @@
 
 /**
  * File browser
+ * @secure
  */
 \Tina4\Get::add("/cms/file-browser",function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     $files = \Tina4\Utilities::iterateDirectory("./src/public/uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
     return $response(\Tina4\renderTemplate("admin/file-browser.twig", ["files" => $files]));
 });
 
 \Tina4\Post::add("/cms/upload", function (\Tina4\Response $response, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     //Add the image to a nice path
     $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
     if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {
@@ -37,6 +46,7 @@
 
 
 \Tina4\Get::add("/cms/login", function (\Tina4\Response $response) {
+    unset($_SESSION["user"]);
     $users = (new Users())->select("count(id) as number")->asArray();
     $twigNameSpace = (new Content())->getTwigNameSpace();
 
@@ -75,7 +85,7 @@
 
         $user = new Users(); //use ORM to load a user with email
         $messenger = new \Tina4\Messenger($messengerSettings);
-        if ($user->load("email = '{$request->params["email"]}' and reset_token = ''")) { //if i can load the user with this email
+        if ($user->load("email = ? and reset_token = ?", [$request->params["email"], ''])) { //if i can load the user with this email
             //reset the password
             $user->resetToken = md5(date("Y-m-d-H-i-s") . "{$user->id}");
             $user->save();
@@ -83,12 +93,12 @@
             $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
             //send email with token so the user can input a new password!)
             if ($messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user->asArray(), "website" => $website->asArray()]], $website->siteName, $website->fromEmail)) {
-                \Tina4\redirect("/cms/login?error=Please check your email for a reset link");
+                \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Please check your email for a reset link");
             } else {
-                \Tina4\redirect("/cms/login?error=Error could not send user a reset link");
+                \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Error could not send user a reset link");
             }
         } else {
-            if ($user->load("email = '{$request->params["email"]}'")) {
+            if ($user->load("email = ?", [$request->params["email"]])) {
                 //resend the reset token ??
                 $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
 
@@ -96,42 +106,45 @@
                 $result = $messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user->asArray(), "website" => $website->asArray()]], $website->siteName, $website->fromEmail);
 
                 if ($result == 1) {
-                    \Tina4\redirect("/cms/login?error=Please check your email for a reset link, we have resent it to your email address!");
+                    \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Please check your email for a reset link, we have resent it to your email address!");
                 }
             }
-            \Tina4\redirect("/cms/login?error=Reset password error, user not found or reset token exists");
+            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Reset password error, user not found or reset token exists");
         }
     } else {
-        \Tina4\redirect("/cms/login?error=No website found");
+        \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=No website found");
     }
 });
 
 
-\Tina4\Get::add("/cms/login/reset-confirm/{resetToken}", function($resetToken, \Tina4\Response $response, \Tina4\Request  $request) {
+\Tina4\Get::add(TINA4_SUB_FOLDER."/cms/login/reset-confirm/{resetToken}", function($resetToken, \Tina4\Response $response, \Tina4\Request  $request) {
     $user = new Users();
-    if ($user->load("reset_token = '{$resetToken}'")) {
+    if ($user->load("reset_token = ?", [$resetToken])) {
         $twigNameSpace = (new Content())->getTwigNameSpace();
         //display reset password screen
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/confirmReset.twig", ["twigNameSpace" => $twigNameSpace, "user" => $user->asArray()]));
     }
       else {
-          \Tina4\redirect("/cms/login?error=Token has expired");
+          \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Token has expired");
       }
 });
 
 \Tina4\Post::add("/cms/login/reset-confirm/{resetToken}", static function($resetToken, \Tina4\Response $response, \Tina4\Request $request) {
     $user = new Users();
-    if ($user->load("reset_token = '{$resetToken}'")) {
+    if ($user->load("reset_token = ?", [$resetToken])) {
         $user->resetToken = "";
         $user->password = password_hash($request->params["newPassword"], PASSWORD_BCRYPT);
         $user->save();
-        \Tina4\redirect("/cms/login?error=Password changed successfully");
+        \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Password changed successfully");
     }
     else {
-        \Tina4\redirect("/cms/login?error=Token has expired");
+        \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Token has expired");
     }
 });
 
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/dashboard", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number");
     $twigNameSpace = (new Content())->getTwigNameSpace();
@@ -151,14 +164,14 @@
     if (!empty($request->params["confirmPassword"])) {
         $user = new Users($request->params);
 
-        if (!$user->load("email = '{$request->params["email"]}'")) {
+        if (!$user->load("email = ?", [$request->params["email"]])) {
             $user->isActive = 1;
             $user->password = password_hash($user->password, PASSWORD_BCRYPT);
             $user->save();
-            \Tina4\redirect("/cms/page-builder");
+            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
         } else {
 
-            \Tina4\redirect("/cms/login");
+            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login");
         }
     } else {
         $user = new Users();
@@ -168,12 +181,12 @@
             if (password_verify($request->params["password"],$user->password)) {
                 $_SESSION["user"] = $user->asArray();
                 $_SESSION["siteId"] = $user->siteId;
-                \Tina4\redirect("/cms/page-builder");
+                \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
             } else {
-                \Tina4\redirect("/cms/login?error=Invalid password");
+                \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Invalid password");
             }
         } else {
-            \Tina4\redirect("/cms/login?error=Invalid email address or password");
+            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Invalid email address or password");
         }
     }
     return null;
@@ -183,7 +196,7 @@
     session_destroy();
     session_write_close();
 
-    \Tina4\redirect("/cms/login");
+    \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login");
 
     return null;
 });

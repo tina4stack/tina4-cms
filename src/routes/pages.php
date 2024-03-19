@@ -1,6 +1,12 @@
 <?php
-
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/pages", function (\Tina4\Response $response){
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     return $response (\Tina4\renderTemplate("/content/pages.twig"), HTTP_OK, TEXT_HTML);
 });
 
@@ -11,6 +17,10 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/pages", new Page(), function ($action, Page $page, $filter, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
+
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];
@@ -23,9 +33,9 @@
        case "fetch":
             //Return back a form to be submitted to the create
 
-            $snippets = (new Snippet())->select("id,name", 1000)->where("site_id = $siteId")->orderBy("name")->asArray();
+            $snippets = (new Snippet())->select("id,name", 1000)->where("site_id = ?", [$siteId])->orderBy("name")->asArray();
 
-            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id != 1 and is_active = 1 and site_id = {$siteId}")->orderBy("name")->asArray();
+            $articleCategories = (new ArticleCategory())->select("id,name", 1000)->where("id != 1 and is_active = 1 and site_id = ?", [$siteId])->orderBy("name")->asArray();
 
             if ($action == "form") {
                 $title = "Add Page";
@@ -76,11 +86,11 @@
                 $content = \Tina4\renderTemplate("/api/admin/pages/form.twig", ["data" => $page, "renderedText" => $renderedText,  "snippets" => $snippets, "articleCategories" => $articleCategories, "siteId" => $siteId, "ai" => $ai]);
             }
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#pageForm').valid() ) { saveForm('pageForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormLarge.twig", ["title" => $title, "onclick" => "if ( $('#pageForm').valid() ) { saveForm('pageForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-
+            $whereData = [];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
             } else {
@@ -88,11 +98,12 @@
             }
 
             if (!empty($siteId)) {
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
+                $whereData[] = $siteId;
             }
 
             return   $page->select ("*", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->orderBy($filter["orderBy"])
                 ->asResult();
         break;

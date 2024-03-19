@@ -207,7 +207,7 @@ class Theme
         $finalComponents = [];
         foreach ($components as $key => $value) {
             if (strpos($value,'.js') !== false && $value !== "." && $value !== ".." && is_file(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."components".DIRECTORY_SEPARATOR.$value)) {
-                $finalComponents[] =  "/themes/".$themeName."/components/".$value;
+                $finalComponents[] =  TINA4_BASE_URL."/themes/".$themeName."/components/".$value;
             }
         }
 
@@ -225,7 +225,7 @@ class Theme
         $finalBlocks = [];
         foreach ($blocks as $key => $value) {
             if (strpos($value,'.js') !== false && $value !== "." && $value !== ".." && is_file(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."blocks".DIRECTORY_SEPARATOR.$value)) {
-                $finalBlocks[] =  "/themes/".$themeName."/blocks/".$value;
+                $finalBlocks[] =  TINA4_BASE_URL."/themes/".$themeName."/blocks/".$value;
             }
         }
 
@@ -239,7 +239,7 @@ class Theme
         $finalScripts = [];
         foreach ($scripts as $key => $value) {
             if (strpos($value,'.js') !== false && $value !== "." && $value !== ".." && is_file($value)) {
-                $finalScripts[] =  "/themes/".$themeName."/js/".$value;
+                $finalScripts[] =  TINA4_BASE_URL."/themes/".$themeName."/js/".$value;
             }
         }
 
@@ -253,12 +253,12 @@ class Theme
         $finalCss = [];
         foreach ($css as $key => $value) {
             if (strpos($value,'.css') !== false && $value !== "." && $value !== ".." ) {
-                $finalCss[] =  "/themes/".$themeName."/css/".$value;
+                $finalCss[] =  TINA4_BASE_URL."/themes/".$themeName."/css/".$value;
             }
         }
 
-        $finalCss[] = '/css/default.css';
-        $finalCss[] = '/css/page-builder.css';
+        $finalCss[] = TINA4_BASE_URL.'/css/default.css';
+        $finalCss[] = TINA4_BASE_URL.'/css/page-builder.css';
 
         return json_encode($finalCss);
     }

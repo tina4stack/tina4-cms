@@ -1,14 +1,21 @@
 <?php
-
-
+/**
+ * @secure
+ */
 \Tina4\Post::add("/cms/site/set", function (\Tina4\Response $response, \Tina4\Request $request){
     $_SESSION["siteId"] = $request->params["siteId"];
-    \Tina4\redirect("/cms/page-builder");
+    \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
 });
 
 
-
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/site", function (\Tina4\Response $response){
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     return $response (\Tina4\renderTemplate("/content/site.twig"), HTTP_OK, TEXT_HTML);
 });
         
@@ -19,6 +26,9 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/site", new Site(), function ($action, Site $site, $filter, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
 
     switch ($action) {
        case "form":
@@ -39,7 +49,7 @@
                 $savePath =  TINA4_BASE_URL . "/api/admin/site/".$site->id;
                 $content = \Tina4\renderTemplate("/api/admin/site/form.twig", ["data" => $site, "themes" => $themes]);
             }
-            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => $title, "onclick" => "if ( $('#siteForm').valid() ) { saveForm('siteForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#siteForm').valid() ) { saveForm('siteForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter

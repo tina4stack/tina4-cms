@@ -1,6 +1,13 @@
 <?php
 
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/articles", function (\Tina4\Response $response){
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
+
     return $response (\Tina4\renderTemplate("/content/articles.twig"), HTTP_OK, TEXT_HTML);
 });
 
@@ -11,6 +18,10 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/articles", new Article(), function ($action, Article $article, $filter, $request) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
+
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];
@@ -24,10 +35,10 @@
             //Return back a form to be submitted to the create
             $articleCategories = (new ArticleCategory())
                 ->select('id,name,parent_id,is_menu,display_order', 100)
-                ->where("site_id = {$siteId}")
+                ->where("site_id = ?", [$siteId])
                 ->filter(function($record){
                     $article = new ArticleCategory();
-                    $article->load("id = {$record->parentId}");
+                    $article->load("id = ?", [$record->parentId]);
                     $record->parentName = $article->name;
                 })
                 ->orderBy("parent_id,name")
@@ -45,27 +56,25 @@
                 $content = \Tina4\renderTemplate("/api/admin/articles/form.twig", ["data" => $article, 'categories' => $articleCategories, "snippets" => $snippets, "siteId" => $siteId]);
             }
 
-            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#articleForm').valid() ) { saveForm('articleForm', '" .$savePath."', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalFormLarge.twig", ["title" => $title, "onclick" => "if ( $('#articleForm').valid() ) { saveForm('articleForm', '" .$savePath."', 'message'); $('#formModal').modal('hide'); }", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-
+            $whereData = [];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
             } else {
                 $where = " 1 = 1";
             }
-
-
             if (!empty($siteId)) {
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
+                $whereData[] = $siteId;
             }
 
             $articles =   $article->select ("id, published_date, title, description, author, is_published", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->orderBy($filter["orderBy"])
                 ->asResult();
-
 
             return $articles;
         break;

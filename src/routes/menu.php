@@ -1,5 +1,11 @@
 <?php
+/**
+ * @secure
+ */
 \Tina4\Get::add("/cms/menus", function (\Tina4\Response $response){
+    if (empty($_SESSION["user"])) {
+        return $response("No Auth", HTTP_UNAUTHORIZED);
+    }
     return $response (\Tina4\renderTemplate("/content/menu.twig"), HTTP_OK, TEXT_HTML);
 });
         
@@ -10,12 +16,16 @@
             DELETE @ /path/{id} - delete for single
  */
 \Tina4\Crud::route ("/api/admin/menus", new Menu(), function ($action, Menu $menu, $filter, \Tina4\Request $request) {
+    if (empty($_SESSION["user"])) {
+        return (object)["httpCode" => 403, "message" => "No auth"];
+    }
+
     if (isset($request->params["siteId"]) && !empty($request->params["siteId"]))
     {
         $siteId = $request->params["siteId"];
 
         $menuCheck = new Menu();
-        if (!$menuCheck->load("name = 'Root' and site_id = {$siteId}"))
+        if (!$menuCheck->load("name = ? and site_id = ?", ['Root', $siteId]))
         {
             $menuCheck->name = "Root";
             $menuCheck->siteId = $siteId;
@@ -29,10 +39,10 @@
     }
 
     $categories = (new Menu())->select("id,name,parent_id,slug,specific_route,is_active,display_order")
-        ->where("site_id = {$siteId}")
+        ->where("site_id = ?", [$siteId])
         ->filter(function($record){
             $menuItem = new Menu();
-            $menuItem->load("id = {$record->parentId}");
+            $menuItem->load("id = ?", [$record->parentId]);
             $record->parentName = $menuItem->name;
         })
         ->asArray();
@@ -52,21 +62,22 @@
                 $content = \Tina4\renderTemplate("/api/admin/menus/form.twig", ["data" => $menu, "categories" => $categories, "siteId" => $siteId]);
             }
 
-            return \Tina4\renderTemplate("components/modalFormNormal.twig", ["title" => $title, "onclick" => "if ( $('#menuForm').valid() ) { saveForm('menuForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
+            return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#menuForm').valid() ) { saveForm('menuForm', '" .$savePath."', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
        break;
        case "read":
             //Return a dataset to be consumed by the grid with a filter
-            $where = "site_id = {$siteId}";
+            $where = "site_id = ?";
+            $whereData = [$siteId];
             if (!empty($filter["where"])) {
                 $where = "{$filter["where"]}";
-                $where .= " and site_id = {$siteId}";
+                $where .= " and site_id = ?";
             }
         
             return   $menu->select ("*", $filter["length"], $filter["start"])
-                ->where("{$where}")
+                ->where("{$where}", $whereData)
                 ->filter(function($record){
                     $menuItem = new Menu();
-                    $menuItem->load("id = {$record->parentId}");
+                    $menuItem->load("id = ?", [$record->parentId]);
                     $record->parentName = $menuItem->name;
                 })
                 ->orderBy($filter["orderBy"])

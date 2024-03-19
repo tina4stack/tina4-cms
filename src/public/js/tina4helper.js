@@ -24,6 +24,14 @@ function sendRequest (url, request, method, callback) {
         const regex = /formToken=(.*)/gm;
         const subst = `formToken=${formToken}`;
         url = url.replace(regex, subst);
+
+        if (url.indexOf('formToken') === -1) {
+            if (url.indexOf('?') === -1) {
+                url += '?formToken='+formToken;
+            } else {
+                url += '&formToken='+formToken;
+            }
+        }
     }
 
     const xhr = new XMLHttpRequest();
@@ -31,7 +39,10 @@ function sendRequest (url, request, method, callback) {
 
     xhr.onload = function () {
         let content = xhr.response;
-        formToken = xhr.getResponseHeader('freshToken');
+        if (xhr.getResponseHeader('freshToken') !== '' && xhr.getResponseHeader('freshToken') !== null) {
+            formToken = xhr.getResponseHeader('freshToken');
+        }
+
 
         try {
             content = JSON.parse(content);
@@ -151,8 +162,7 @@ function handleHtmlData(data, targetElement) {
  */
 function loadPage(loadURL, targetElement, callback = null) {
     if (targetElement === undefined) targetElement = 'content';
-    console.log('LOADING PAGE', loadURL);
-    sendRequest(loadURL, null, "GET", function(data) {
+        sendRequest(loadURL, null, "GET", function(data) {
         let processedHTML = '';
         if (document.getElementById(targetElement) !== null) {
             processedHTML = handleHtmlData(data, targetElement);
