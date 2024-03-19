@@ -65,14 +65,7 @@
                onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('{{ baseUrl }}/cms/dashboard', 'cms'); "><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-site-settings.svg">Site
                 Settings</a>
-            <a href="#" class="pages-link"
-               onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layout')"><img
-                        class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-page-layout.svg">Page
-                Layout</a>
-            <a href="#" class="pages-link"
-               onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layoutArticle')"><img
-                        class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-article-layout.svg">Article
-                Layout</a>
+
             <h3 class="pages-heading"><img class="pages-link-icon"
                                            src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Pages</h3>
             <div class="pages">
@@ -81,6 +74,17 @@
                        onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
                 {% endfor %}
             </div>
+
+            <h3 class="pages-heading"><img class="pages-link-icon"
+                                           src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Layouts</h3>
+            <a href="#" class="pages-link"
+               onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layout')"><img
+                        class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-page-layout.svg">Page
+                Layout</a>
+            <a href="#" class="pages-link"
+               onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layoutArticle')"><img
+                        class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-article-layout.svg">Article
+                Layout</a>
             <div class="site-selector-container">
                 {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
                     <h3 class="pages-heading"><img class="pages-link-icon"
@@ -301,10 +305,7 @@
         }
 
         editor.on('load', (event) => {
-
-            //const blockBtn = editor.Panels.getButton('views', 'open-blocks');
-            //blockBtn.set('active', 1);
-            //editor.runCommand('core:open-blocks');
+            editor.Panels.getButton('views', 'open-blocks').set('active', true);
         });
 
         editor.on('rte:enable', () => {

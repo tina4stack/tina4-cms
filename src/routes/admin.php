@@ -52,9 +52,9 @@
 
     if ((int)$users[0]["number"] === 0) {
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
-    } else {
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/login.twig", ["twigNameSpace" => $twigNameSpace]));
     }
+
+    return $response(\Tina4\renderTemplate($twigNameSpace."/admin/login.twig", ["twigNameSpace" => $twigNameSpace]));
 });
 
 \Tina4\Get::add("/cms/login/reset", function (\Tina4\Response $response) {
@@ -62,9 +62,9 @@
     $twigNameSpace = (new Content())->getTwigNameSpace();
     if ($users->number === 0) {
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
-    } else {
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/reset.twig", ["twigNameSpace" => $twigNameSpace]));
     }
+
+    return $response(\Tina4\renderTemplate($twigNameSpace."/admin/reset.twig", ["twigNameSpace" => $twigNameSpace]));
 });
 
 
@@ -124,9 +124,8 @@
         //display reset password screen
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/confirmReset.twig", ["twigNameSpace" => $twigNameSpace, "user" => $user->asArray()]));
     }
-      else {
-          \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Token has expired");
-      }
+
+    \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Token has expired");
 });
 
 \Tina4\Post::add("/cms/login/reset-confirm/{resetToken}", static function($resetToken, \Tina4\Response $response, \Tina4\Request $request) {
@@ -150,14 +149,15 @@
     $twigNameSpace = (new Content())->getTwigNameSpace();
     if (empty($users)) {
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
-    } else {
-        $menuItems = (new Content())->getCmsMenus();
-        $themes = (new Theme())->getThemes();
-        $site = (new Content())->getSite();
-        $sites = (new Content())->getSites();
-        $version = (new \Tina4\Migration)->getVersion('tina4cms');
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes,"version" => $version]));
     }
+
+    $menuItems = (new Content())->getCmsMenus();
+    $themes = (new Theme())->getThemes();
+    $site = (new Content())->getSite();
+    $sites = (new Content())->getSites();
+    $version = (new \Tina4\Migration)->getVersion('tina4cms');
+
+    return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes,"version" => $version]));
 });
 
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {
@@ -170,7 +170,6 @@
             $user->save();
             \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
         } else {
-
             \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login");
         }
     } else {
@@ -189,7 +188,6 @@
             \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Invalid email address or password");
         }
     }
-    return null;
 })::noCache();
 
 \Tina4\Get::add("/cms/logout", function (\Tina4\Response $response, \Tina4\Request $request) {
@@ -197,7 +195,5 @@
     session_write_close();
 
     \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login");
-
-    return null;
 });
 
