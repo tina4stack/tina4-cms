@@ -624,18 +624,22 @@ class Content extends Data
             $migration->setVersion("1.0.3", "Added article layouts", 'tina4cms');
         }
 
+        $cssFiles = ["page-builder.css", "grape.css", "bootstrap.min.css", "bootstrap-grid.min.css", "bootstrap-reboot.min.css", "bootstrap-utilities.min.css", "data-tables.css"];
         //Copy over the page builder css
-        $pageBuilderCSS = "./src/public/css/page-builder.css";
-        if (!file_exists($pageBuilderCSS))
-        {
-            file_put_contents($pageBuilderCSS, file_get_contents(__DIR__ . "/../public/css/page-builder.css"));
+        foreach ($cssFiles as $cssFile) {
+            $CSSFile = "./src/public/css/{$cssFile}";
+            if (!file_exists($CSSFile)) {
+                file_put_contents($CSSFile, file_get_contents(__DIR__ . "/../public/css/{$cssFile}"));
+            }
         }
 
+        $jsFiles = ["bootstrap.bundle.min.js", "boostrap-tagsinput.js", "data-tables.js", "grapes.min.js", "jquery.min.js", "jquery.validate.js", "tina4helper.js", "underscore.min.js"];
         //Copy over the page builder css
-        $grapeJsCss = "./src/public/css/grape.css";
-        if (!file_exists($grapeJsCss))
-        {
-            file_put_contents($grapeJsCss, file_get_contents(__DIR__ . "/../public/css/grape.css"));
+        foreach ($jsFiles as $jsFile) {
+            $JSFile = "./src/public/js/{$jsFile}";
+            if (!file_exists($JSFile)) {
+                file_put_contents($JSFile, file_get_contents(__DIR__ . "/../public/js/{$jsFile}"));
+            }
         }
 
         $iconFiles = ["blocks-icons", "nav-icons", "ui-icons"];
