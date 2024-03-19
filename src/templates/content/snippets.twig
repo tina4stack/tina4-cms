@@ -18,7 +18,12 @@
     $(document).ready(function () {
         snippetGrid = $('#snippetGrid').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '{{ baseUrl }}/api/admin/snippets?formToken={{ formToken("/api/admin/snippets") }}&siteId={{ session.siteId }}',
+            ajax: {
+                url: '{{ baseUrl }}/api/admin/snippets?siteId={{ session.siteId }}',
+                data: function (d) {
+                    d.formToken = formToken;
+                }
+            },
             columns: [
                 {"data": "id"},
                 {"data": "name"},
