@@ -105,6 +105,10 @@
                             <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
                         </form>
                     </div>
+                {% else %}
+                    {% for listSite in sites %}
+                    <script>document.getElementById('siteName').innerText = '{{ listSite.siteName }}';</script>
+                    {% endfor %}
                 {% endif %}
             </div>
 
