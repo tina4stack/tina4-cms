@@ -23,7 +23,10 @@ function sendRequest (url, request, method, callback) {
         console.log('Injecting new token');
         const regex = /formToken=(.*)/gm;
         const subst = `formToken=${formToken}`;
+        console.log('URL Before', url);
         url = url.replace(regex, subst);
+
+        console.log('URL', url);
 
         if (url.indexOf('formToken') === -1) {
             if (url.indexOf('?') === -1) {
@@ -39,10 +42,9 @@ function sendRequest (url, request, method, callback) {
 
     xhr.onload = function () {
         let content = xhr.response;
-        if (xhr.getResponseHeader('freshToken') !== '' && xhr.getResponseHeader('freshToken') !== null) {
+        if (xhr.getResponseHeader('FreshToken') !== '' && xhr.getResponseHeader('FreshToken') !== null) {
             formToken = xhr.getResponseHeader('freshToken');
         }
-
 
         try {
             content = JSON.parse(content);

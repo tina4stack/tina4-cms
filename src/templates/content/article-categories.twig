@@ -20,7 +20,12 @@
     $(document).ready(function () {
         articleCategoryTable = $('#articleCategoryTable').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '{{ baseUrl }}/api/admin/article-categories?formToken={{ formToken("/api/admin/article-categories") }}&siteId={{ session.siteId }}',
+            ajax: {
+                url: '{{ baseUrl }}/api/admin/article-categories?siteId={{ session.siteId }}',
+                data: function (d) {
+                    d.formToken = formToken;
+                }
+            },
             columns: [
                 {"data": "id"},
                 {"data": "name"},

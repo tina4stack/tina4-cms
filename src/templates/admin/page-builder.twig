@@ -132,8 +132,7 @@
     {% endif %}
     <script>
         function getFreshToken() {
-            postUrl('{{ baseUrl }}/cms/page-builder/fresh-token?formToken='+formToken, null, null, function(data){
-                console.log('FreshToken', data);
+            postUrl('{{ baseUrl }}/cms/page-builder/fresh-token', null, null, function(data){
                 formToken = data.formToken;
             });
         }
@@ -141,7 +140,7 @@
         function refreshToken() {
             console.log('Refreshing token');
             getFreshToken();
-            setTimeout(refreshToken, 100000);
+            setTimeout(refreshToken, 50000);
         }
 
         const editor = grapesjs.init({
