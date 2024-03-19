@@ -3,23 +3,23 @@
 
 \Tina4\Get::add("/cms/page-builder", function (\Tina4\Response $response) {
     if (empty($_SESSION["user"])) {
-        return (object)["httpCode" => 403, "message" => "No auth"];
+        return $response("No Auth", HTTP_UNAUTHORIZED);
     }
 
     $users = (new Users())->select("count(id) as number");
     $twigNameSpace = (new Content())->getTwigNameSpace();
     if (empty($users)) {
         return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
-    } else {
-        $menuItems = (new Content())->getCmsMenus();
-        $themes = (new Theme())->getThemes();
-        $site = (new Content())->getSite();
-        $sites = (new Content())->getSites();
-        $pages = (new Content())->getAllPages($site->id);
-        $snippets = (new Content())->getAllSnippets($site->id);
-        $version = (new \Tina4\Migration)->getVersion('tina4cms');
-        return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/page-builder.twig", ["menuItems" => $menuItems, "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes, "version"  => $version]));
     }
+
+    $menuItems = (new Content())->getCmsMenus();
+    $themes = (new Theme())->getThemes();
+    $site = (new Content())->getSite();
+    $sites = (new Content())->getSites();
+    $pages = (new Content())->getAllPages($site->id);
+    $snippets = (new Content())->getAllSnippets($site->id);
+    $version = (new \Tina4\Migration)->getVersion('tina4cms');
+    return $response(\Tina4\renderTemplate($twigNameSpace . "/admin/page-builder.twig", ["menuItems" => $menuItems, "pages" => $pages, "snippets" => $snippets, "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes, "version"  => $version]));
 })::noCache();
 
 \Tina4\Get::add("/cms/page-builder/pages", function (\Tina4\Response $response, \Tina4\Request $request) {
