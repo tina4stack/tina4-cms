@@ -20,14 +20,9 @@ function sendRequest (url, request, method, callback) {
 
     //Inject the new token
     if (formToken !== null) {
-        console.log('Injecting new token');
         const regex = /formToken=(.*)/gm;
         const subst = `formToken=${formToken}`;
-        console.log('URL Before', url);
         url = url.replace(regex, subst);
-
-        console.log('URL', url);
-
         if (url.indexOf('formToken') === -1) {
             if (url.indexOf('?') === -1) {
                 url += '?formToken='+formToken;

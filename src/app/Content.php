@@ -16,10 +16,10 @@ class Content extends Data
      * Set security attribute
      * @param $name
      * @param $options
-     * @param string $category
+     * @param string|null $category
      * @param int $roleId
      * @return void
-     * @throws Exception|\Psr\Cache\InvalidArgumentException
+     * @throws \Psr\Cache\InvalidArgumentException
      */
     public function setSecurityAttribute($name, $options, string $category = null, int $roleId = 1)
     {
