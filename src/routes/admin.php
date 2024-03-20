@@ -84,6 +84,7 @@
         }
 
         $user = new Users(); //use ORM to load a user with email
+        $user->excludeFields = ["password"];
         $messenger = new \Tina4\Messenger($messengerSettings);
         if ($user->load("email = ? and reset_token = ?", [$request->params["email"], ''])) { //if i can load the user with this email
             //reset the password
@@ -92,6 +93,11 @@
 
             $recipients[] = ["name" => $user->firstName." ".$user->lastName, "email" => $user->email];
             //send email with token so the user can input a new password!)
+
+            if (empty($website->siteUrl)) {
+                $website->siteUrl = TINA4_BASE_URL;
+            }
+
             if ($messenger->sendEmail($recipients, "Reset password {$website->siteName} ({$user->email})", ["template" => $twigNameSpace."/email/reset-token.twig", "data" => ["user" => $user->asArray(), "website" => $website->asArray()]], $website->siteName, $website->fromEmail)) {
                 \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Please check your email for a reset link");
             } else {
@@ -114,6 +120,8 @@
     } else {
         \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=No website found");
     }
+
+    return [];
 });
 
 
@@ -174,7 +182,6 @@
         }
     } else {
         $user = new Users();
-
         //perform login
         if ($user->load("email = ?", [$request->params["email"]])) {
             if (password_verify($request->params["password"],$user->password)) {
