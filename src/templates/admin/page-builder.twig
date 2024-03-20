@@ -68,11 +68,9 @@
 
             <h3 class="pages-heading"><img class="pages-link-icon"
                                            src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Pages</h3>
-            <div class="pages">
-                {% for page in pages %}
-                    <a href="#" class="pages-link"
-                       onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
-                {% endfor %}
+
+            <div id="renderPages">
+            {%  include "snippets/render-pages.twig" %}
             </div>
 
             <h3 class="pages-heading"><img class="pages-link-icon"
@@ -152,7 +150,7 @@
                 scripts: {{ Theme.Scripts(site.theme) | raw }},
                 styles: {{ Theme.Styles(site.theme) | raw }},
             },
-            plugins: ['grapesjs-custom-code', 'grapesjs-component-code-editor', 'grapesjs-parser-postcss'],
+            plugins: ['grapesjs-component-code-editor', 'grapesjs-parser-postcss', 'grapesjs-custom-code'],
             assetManager: {
                 // Upload endpoint, set `false` to disable upload, default `false`
                 upload: '{{ baseUrl }}/cms/page-builder/assets/upload?siteId={{ site.id }}&formToken={{ formToken }}'
@@ -350,12 +348,13 @@
         //Load tina4cms
         loadPage('{{ baseUrl }}/cms/dashboard?formToken={{formToken}}', 'cms');
     </script>
-    {% set blocks = Theme.Blocks(site.theme) %}
-    {% for block in blocks %}
-    <script src="{{ block }}"></script>
-    {% endfor %}
+
     {% set components = Theme.Components(site.theme) %}
     {% for component in components %}
     <script src="{{ component }}"></script>
+    {% endfor %}
+    {% set blocks = Theme.Blocks(site.theme) %}
+    {% for block in blocks %}
+        <script src="{{ block }}"></script>
     {% endfor %}
 {% endblock %}

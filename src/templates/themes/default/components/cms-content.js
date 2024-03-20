@@ -47,7 +47,7 @@ editor.Components.addType('cms-content', {
 
 editor.Blocks.add('cms-content', {
     label: 'Content Block',
-    category: 'Snippets',
+    category: {label: 'Basic', order: 0, open: true},
     media:`
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.5 44.5"><path d="M0 0h44.5v44.5H0z" style="fill:none;stroke-width:0"/><rect width="12" height="29.17" x="6.83" y="7.67" rx="3.08" ry="3.08" style="fill:none;stroke:#515962;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px"/><rect width="13.33" height="17.67" x="24.33" y="7.67" rx="3.08" ry="3.08" style="fill:none;stroke:#515962;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px"/><rect width="13.33" height="6.17" x="24.33" y="30.67" rx="3.08" ry="3.08" style="fill:none;stroke:#515962;stroke-linecap:round;stroke-linejoin:round;stroke-width:2.5px"/></svg>    
 `,

@@ -60,6 +60,7 @@
 \Tina4\Get::add("/cms/login/reset", function (\Tina4\Response $response) {
     $users = (new Users())->select("count(id) as number")->asObject()[0];
     $twigNameSpace = (new Content())->getTwigNameSpace();
+
     if ($users->number === 0) {
         return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
     }

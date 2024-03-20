@@ -1,0 +1,53 @@
+.article-title {
+    background: lightgrey;
+    padding: 5px;
+}
+
+.article-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.article-author {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.article-author:after {
+    contact: "•";
+    margin-left: 5px;
+}
+
+.article-related {
+
+}
+
+.article-tags {
+
+}
+
+.article-publish-date {
+    font-weight: bold;
+    opacity: .5;
+}
+
+.article-link {
+
+}
+
+.article-category a {
+    background: lightgrey;
+    padding: 5px;
+    color: #000;
+    border-radius: : 20px;
+    margin: 5px;
+}
+
+.article-navigation {
+    display: block;
+}
+
+.article-content {
+    padding: 1rem;
+}
