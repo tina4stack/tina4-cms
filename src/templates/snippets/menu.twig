@@ -1,0 +1,13 @@
+{% set menus = Content.getMenu("") %}
+{% for menu in menus %}
+<li class="nav-item {% if menu.children %} dropdown {% endif %}">
+    <a {% if menu.children %} id="navbarDropdown{{ menu.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false" {% endif %} class="nav-link {% if menu.children %} dropdown-toggle {% endif %}" href="{{ menu.url }}" >{{ menu.name }}</a>
+    {% if menu.children %}
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ menu.id }}">
+        {% for menu in menu.children %}
+            <li><a class="dropdown-item" href="{{ menu.url }}">{{ menu.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</li>
+{% endfor %}
