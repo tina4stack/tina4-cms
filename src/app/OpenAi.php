@@ -39,6 +39,8 @@ class OpenAi extends Api
      */
     function getCompletion($prompt, $maxTokens= null): array
     {
+        if (!$this->active) return [];
+
         $maxTokens = $maxTokens ?? 250;
         $request =  [ "model" => "gpt-3.5-turbo", "messages" => [(object)["role" => "user", "content" => $prompt]], "max_tokens" => $maxTokens, "temperature" => 0.25];
 
@@ -54,11 +56,13 @@ class OpenAi extends Api
     /**
      * Gets an image from the API
      * @param $prompt
-     * @param $noOfImages
-     * @return void
+     * @param int $noOfImages
+     * @return string
      */
-    function getImage($prompt, $noOfImages=1)
+    function getImage($prompt, int $noOfImages=1): ?string
     {
+        if (!$this->active) return null;
+
         $request =  [ "model" => "dall-e-3", "prompt" => $prompt, "size" => "1024x1024", "n" => $noOfImages];
         $response = $this->sendRequest("/v1/images/generations", "POST", $request);
 

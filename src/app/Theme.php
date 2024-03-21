@@ -7,9 +7,9 @@
  */
 class Theme
 {
-    private $themeName = "";
-    private $themePath = "";
-    private $deployPath = "";
+    public $themeName = "";
+    public $themePath = "";
+    public $deployPath = "";
     private $twigViews = [];
 
     /**
@@ -43,8 +43,6 @@ class Theme
 
     public function parseContentIncludes(string $content)
     {
-
-
         $templates = [];
         if (isset($_SESSION["tina4-cms:twigViews"])) {
             $templates = $_SESSION["tina4-cms:twigViews"];
@@ -82,8 +80,6 @@ class Theme
             $matchText = str_replace("Article Block", '{{ getArticle("'.$id.'") | raw }}', $matchText);
             $content = str_replace($match[0], $matchText, $content);
         }
-
-
 
         $re = '/cms-content="(.*)"(.*)Page Content<\/(span|div|ul)>/mUs';
 
@@ -156,16 +152,21 @@ class Theme
      */
     public function __construct(string $themeName="")
     {
-
+        $this->themePath = $this->getPath($themeName);
     }
     public function validateTheme()
     {
 
     }
 
-    public function deployTheme()
+    /**
+     * Deploy a single theme
+     * @param $force
+     * @return void
+     */
+    public function deployTheme($force=false)
     {
-
+        \Tina4\Utilities::recurseCopy( ".".DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$this->themeName, TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$this->themeName, $force);
     }
 
     /**
@@ -179,6 +180,10 @@ class Theme
         \Tina4\Utilities::recurseCopy($path.DIRECTORY_SEPARATOR."src".DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."themes", TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes", $force);
     }
 
+    /**
+     * Gets a list of themes
+     * @return array
+     */
     public function getThemes(): array
     {
         $themes = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes");
@@ -263,9 +268,24 @@ class Theme
         return json_encode($finalCss);
     }
 
+    /**
+     * Gets the relative path to the theme for use in templates - see {{Theme.Dir(site.theme)}
+     * @param string $themeName
+     * @return string
+     */
     public function getDir(string $themeName): string
     {
         return "/themes/".$themeName;
+    }
+
+    /**
+     * Gets the absolute path to the theme folder
+     * @param string $themeName
+     * @return string
+     */
+    public function getPath(string $themeName): string
+    {
+        return TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName;
     }
 
 }

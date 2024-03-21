@@ -34,6 +34,8 @@
             } else {
                 $title = "Edit Role";
                 $role->roleInfo = unserialize($role->roleInfo);
+
+
                 $savePath =  TINA4_SUB_FOLDER . "/api/admin/roles/".$role->id;
                 $content = \Tina4\renderTemplate("/api/admin/roles/form.twig", ["data" => $role]);
             }

@@ -21,8 +21,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "tina4stack/tina4php": "dev-master",
-        "ext-json": "*"
+        "tina4stack/tina4php": "^2.0",
+        "ext-json": "*",
+        "bissolli/php-css-js-minifier": "^1.1"
     },
     "scripts": {
         "tina4": "tina4",

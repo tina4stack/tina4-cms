@@ -13,66 +13,6 @@ class Content extends Data
     private $twigNamespace = "@tina4cms";
 
     /**
-     * Set security attribute
-     * @param $name
-     * @param $options
-     * @param string|null $category
-     * @param int $roleId
-     * @return void
-     * @throws \Psr\Cache\InvalidArgumentException
-     */
-    public function setSecurityAttribute($name, $options, string $category = null, int $roleId = 1)
-    {
-        $category = $category ?? "Default";
-        $role = new Role();
-        if ($role->load("id = ?", [$roleId])) {
-            $roleData = unserialize($role->roleInfo);
-            $roleData["roles"][$name] = array_merge($options, compact('category'));
-            $roleData["category"][$category][$name] = array_merge($options, ["category" => $category]);
-        } else {
-
-            $roleData = [];
-            $roleData["roles"][$name] = array_merge($options, compact('category'));
-            $roleData["category"][$category][$name] = array_merge($options, compact('category'));
-
-            $role->id = $roleId;
-            $role->name = "Default";
-        }
-        $role->roleInfo = serialize($roleData);
-        $role->save();
-    }
-
-    /**
-     * Get security attribute
-     * @param string|null $name
-     * @param int|null $roleId
-     * @return mixed|void
-     */
-    public function getSecurityAttribute(string $name = null, int $roleId = null)
-    {
-        $name = $name ?? "";
-        $roleId = $roleId ?? 1;
-        $role = new Role();
-        if ($role->load("id = ?", [$roleId])) {
-            $roles = unserialize($role->roleInfo);
-
-            if (!empty($name)) {
-                if (isset($roles["roles"])) {
-                    return $roles["roles"][$name];
-                } else {
-                    return $roles[$name];
-                }
-            } else {
-                if (isset($roles["category"])) {
-                    return $roles["category"];
-                } else {
-                    return $roles;
-                }
-            }
-        }
-    }
-
-    /**
      * Get a different twig name space for changing dashboard and other screens
      * @return string
      */
@@ -160,9 +100,23 @@ class Content extends Data
     public function getPageMeta($slug): Page
     {
         $page = (new Page());
-        $page->load("slug = ?", [$slug]);
+        if ($page->load("slug = ?", [$slug])) {
+            if (!file_exists("./cache/images/og-{$page->name}.png")) {
+                if (!empty($page->image)) {
+                    $imageUrl = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$page->name}.png";
+                    file_put_contents("./cache/images/og-{$page->name}.png", base64_decode($page->name));
+                } else {
+                    $imageUrl = null;
+                }
+            } else {
+                $imageUrl = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$page->name}.png";
+            }
 
-        return $page;
+            $page->imageUrl = $imageUrl;
+            return $page;
+        }
+
+        return new Page();
     }
 
     /**
@@ -173,13 +127,11 @@ class Content extends Data
     public function getPage($slug): string
     {
         $page = (new Page());
-        $page->load("slug = ?", [$slug]);
-
-        if (!empty($page->content)) {
+        if ($page->load("slug = ?", [$slug]) && !empty($page->content) && ($page->isPublished)) {
             return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
-        } else {
-            return "";
         }
+
+        return "";
     }
 
     /**
@@ -189,13 +141,18 @@ class Content extends Data
     public function getAllPages($siteId=1): array
     {
         $page = (new Page());
-        $pages = $page->select("*", 10000)->where("site_id = ?", [$siteId])->asObject();
+        $pages = $page->select("*", 10000)->where("site_id = ?", [$siteId]);
 
-        return $pages;
+        if (!empty($pages)) {
+            return $pages->asObject();
+        }
+
+        return [];
     }
 
     /**
      * Gets all the snippets
+     * @throws ReflectionException
      */
     public function getAllSnippets($siteId=1): array
     {
@@ -204,53 +161,11 @@ class Content extends Data
 
         if (!empty($snippets)) {
             return $snippets->asArray();
-        } else {
-            return [];
         }
+
+        return [];
     }
 
-    /**
-     * Get Articles
-     * @param string $category
-     * @param int|null $limit
-     * @param int|null $skip
-     * @param string $template
-     * @return array
-     * @throws ReflectionException
-     */
-    public function getArticles(string $category, int $limit = null, int $skip = null, string $template = "article.twig"): array
-    {
-
-        $skip = $skip ?? 0;
-        $limit = $limit ?? 10;
-        $articles = (new Article())->select("*", $limit, $skip)->where("1 = 1");
-        if ($category) {
-            $articles->and("id in (select article_id 
-                                                  from article_article_category 
-                                                 where article_category_id in ( select id from article_category where upper(name) = upper('{$category}')
-            ))");
-        }
-
-        $articles->and("id != 0 and is_published = 1");
-        $articles = $articles->orderBy(["published_date desc"])->asObject();
-
-        foreach ($articles as $id => $article) {
-            $articles[$id]->url = "/content/article/{$article->slug}";
-            $articles[$id]->content = $this->parseContent($article->content);
-            if (!file_exists("./cache/article-" . md5($article->id) . ".png")) {
-                if (!empty($article->image)) {
-                    file_put_contents("./cache/article-" . md5($article->id) . ".png", base64_decode($article->image));
-                    $articles[$id]->image = "/cache/article-" . md5($article->id) . ".png";
-                } else {
-                    $articles[$id]->image = null;
-                }
-            } else {
-                $articles[$id]->image = "/cache/article-" . md5($article->id) . ".png";
-            }
-        }
-
-        return $articles;
-    }
 
     /**
      * Get Article List
@@ -268,7 +183,7 @@ class Content extends Data
         if ($category) {
             $articles->and("article_category_id in (select id from article_category where upper(name) = upper('{$category}'))");
         }
-        $articles->orderBy("published_date desc");
+        $articles->orderBy(["published_date desc"]);
         return \Tina4\renderTemplate("article-list.twig", ["articles" => $articles->AsObject(), "className" => $className]);
     }
 
@@ -301,7 +216,6 @@ class Content extends Data
         return $this->renderArticle($article->title, $article->content, $article->image, $article, $template);
     }
 
-
     public function getArticleById($id): string
     {
         $article = new Article();
@@ -312,7 +226,7 @@ class Content extends Data
         //Get the article template
         $articleTemplate = $site->pageLayoutArticleHtml;
 
-        $renderedArticle = \Tina4\renderTemplate($articleTemplate, ["article" => $article]);
+        $renderedArticle = \Tina4\renderTemplate($articleTemplate, compact('article'));
 
         return $renderedArticle;
     }
@@ -368,7 +282,6 @@ class Content extends Data
 
     }
 
-
     /**
      * Gets articles
      * @param int|null $articleId
@@ -394,8 +307,11 @@ class Content extends Data
         }
         $sql = "select a.*,
                        (select count(id) from article_category where parent_id = a.id) as has_children,
-                       (select count(id) from article_article_category where article_category_id = a.id and article_id = $articleId) as is_selected 
-                    from article_category a {$filter} order by display_order asc";
+                       (select count(id) from article_article_category 
+                         where article_category_id = a.id 
+                           and article_id = {$articleId}) as is_selected 
+                    from article_category a {$filter} 
+                    order by display_order asc";
         $categories = $this->DBA->fetch($sql, 1000)->asArray();
 
         $lis = [];
@@ -422,7 +338,6 @@ class Content extends Data
 
         return $html;
     }
-
 
     /**
      * Gets a menu
@@ -490,9 +405,10 @@ class Content extends Data
     /**
      * Get next and previous articles
      * @param $article
+     * @param int $relatedArticles
      * @throws ReflectionException
      */
-    public function enhanceArticle($article)
+    public function enhanceArticle($article, $relatedArticles=4)
     {
         if (!empty($article->keywords)) {
             $keywords = explode(",", $article->keywords);
@@ -505,9 +421,11 @@ class Content extends Data
             $likes[] = "instr(keywords, '" . trim($keyword) . "')";
         }
         $filter = "id != {$article->id} and ( " . join(" or ", $likes) . " )";
-        $related = (new Article())->select("id,title,description,slug,image,author,published_date", 4)->where($filter)->orderBy(["published_date desc"]);
+        $related = (new Article())->select("id,title,description,slug,image,author,published_date", $relatedArticles)->where($filter)->orderBy(["published_date desc"]);
         $article->relatedArticles = $related->asObject();
         $article->url = "/content/article/" . $this->getSlug($article->title);
+
+
         foreach ($article->relatedArticles as $id => $articleData) {
             $article->relatedArticles[$id]->url = "/content/article/" . $this->getSlug($article->title);
             if (!file_exists("./cache/article-" . md5($articleData->id) . ".png")) {
@@ -599,20 +517,19 @@ class Content extends Data
     /**
      * Method to add Config methods on the CMS
      * @param Config $config
-     * @throws \Psr\Cache\InvalidArgumentException
+     * @throws \Psr\Cache\InvalidArgumentException|ReflectionException
      */
     public function addConfigMethods(Config $config): void
     {
         global $DBA;
 
         if ($DBA === null) {
-            if (class_exists("\Tina4\DataSQLite3")) {
+            if (class_exists(\Tina4\DataSQLite3::class)) {
                 $DBA = new \Tina4\DataSQLite3("cms.db");
             } else {
                 echo "Could not connect to database, please check your database settings: composer require tina4stack/tina4php-sqlite3\n";
                 die();
             }
-
         }
 
         $migration = new \Tina4\Migration(__DIR__ . "/../../migrations");
@@ -624,88 +541,90 @@ class Content extends Data
             $migration->setVersion("1.0.3", "Added article layouts", 'tina4cms');
         }
 
-        $cssFiles = ["page-builder.css", "grape.css", "bootstrap.min.css", "bootstrap-grid.min.css", "bootstrap-reboot.min.css", "bootstrap-utilities.min.css", "data-tables.css"];
-        //Copy over the page builder css
-        foreach ($cssFiles as $cssFile) {
-            $CSSFile = "./src/public/css/{$cssFile}";
-            if (!file_exists($CSSFile)) {
-                file_put_contents($CSSFile, file_get_contents(__DIR__ . "/../public/css/{$cssFile}"));
-            }
-        }
-
-        $jsFiles = ["bootstrap.bundle.min.js", "boostrap-tagsinput.js", "data-tables.js", "grapes.min.js", "jquery.min.js", "jquery.validate.js", "tina4helper.js", "underscore.min.js"];
-        //Copy over the page builder css
-        foreach ($jsFiles as $jsFile) {
-            $JSFile = "./src/public/js/{$jsFile}";
-            if (!file_exists($JSFile)) {
-                file_put_contents($JSFile, file_get_contents(__DIR__ . "/../public/js/{$jsFile}"));
-            }
-        }
-
-        $iconFiles = ["blocks-icons", "nav-icons", "ui-icons"];
-        if (!empty($iconFiles))
-        {
-            foreach ($iconFiles as $iconFile) {
-                if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."images" . DIRECTORY_SEPARATOR . $iconFile)) {
-                    \Tina4\Utilities::recurseCopy(
-                        __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . $iconFile,
-                        TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."images".DIRECTORY_SEPARATOR . $iconFile
-                    );
+        //Mechanism to stop the system from trying to copy over files all the time
+        if (!file_exists(".deployed")) {
+            $cssFiles = ["page-builder.css", "grape.css", "bootstrap.min.css", "bootstrap-grid.min.css", "bootstrap-reboot.min.css", "bootstrap-utilities.min.css", "data-tables.css"];
+            //Copy over the page builder css
+            foreach ($cssFiles as $cssFile) {
+                $CSSFile = "./src/public/css/{$cssFile}";
+                if (!file_exists($CSSFile)) {
+                    file_put_contents($CSSFile, file_get_contents(__DIR__ . "/../public/css/{$cssFile}"));
                 }
             }
+
+            $jsFiles = ["bootstrap.bundle.min.js", "boostrap-tagsinput.js", "data-tables.js", "grapes.min.js", "jquery.min.js", "jquery.validate.js", "tina4helper.js", "underscore.min.js"];
+            //Copy over the page builder css
+            foreach ($jsFiles as $jsFile) {
+                $JSFile = "./src/public/js/{$jsFile}";
+                if (!file_exists($JSFile)) {
+                    file_put_contents($JSFile, file_get_contents(__DIR__ . "/../public/js/{$jsFile}"));
+                }
+            }
+
+            $iconFiles = ["blocks-icons", "nav-icons", "ui-icons"];
+            if (!empty($iconFiles)) {
+                foreach ($iconFiles as $iconFile) {
+                    if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . $iconFile)) {
+                        \Tina4\Utilities::recurseCopy(
+                            __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . $iconFile,
+                            TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . $iconFile
+                        );
+                    }
+                }
+            }
+
+            //Copy over tinymce
+            if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "tinymce")) {
+                \Tina4\Utilities::recurseCopy(
+                    __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "tinymce",
+                    TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "tinymce"
+                );
+            }
+
+            //Copy over components
+            if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "components")) {
+                \Tina4\Utilities::recurseCopy(
+                    __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "components",
+                    TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "components"
+                );
+            }
+
+            //Copy over errors
+            if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "errors")) {
+                \Tina4\Utilities::recurseCopy(
+                    __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "errors",
+                    TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "errors"
+                );
+            }
+
+            $checkSite = new Site();
+            if (!$checkSite->load("id = 1")) {
+                $checkSite->id = 1;
+                $checkSite->siteName = "Tina4 CMS";
+                $checkSite->description = "My first CMS";
+                $checkSite->siteUrl = "";
+                $checkSite->theme = "default";
+                $checkSite->save();
+            }
+
+            if (!file_exists("./src/public/uploads")) {
+                mkdir("./src/public/uploads");
+            }
+
+            if (!file_exists("./cache")) {
+                mkdir("./cache");
+            }
+
+            if (!file_exists("./cache/images")) {
+                mkdir("./cache/images");
+            }
+            file_put_contents(".deployed", date("Y-m-d H:i:s"));
         }
 
-        //Copy over tinymce
-        if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."tinymce")) {
-            \Tina4\Utilities::recurseCopy(
-                __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "tinymce",
-                TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."tinymce"
-            );
-        }
-
-        //Copy over components
-        if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."components")) {
-            \Tina4\Utilities::recurseCopy(
-                __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "components",
-                TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."components"
-            );
-        }
-
-        //Copy over errors
-        if (!file_exists(TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public". DIRECTORY_SEPARATOR."errors")) {
-            \Tina4\Utilities::recurseCopy(
-                __DIR__ . DIRECTORY_SEPARATOR . ".." . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR . "errors",
-                TINA4_DOCUMENT_ROOT . "src" . DIRECTORY_SEPARATOR . "public" . DIRECTORY_SEPARATOR."errors"
-            );
-        }
-
-
-        //Copy over the page builder css
-        $checkSite = new Site();
-        if (!$checkSite->load("id = 1")) {
-            $checkSite->id = 1;
-            $checkSite->siteName = "Tina4 CMS";
-            $checkSite->description = "My first CMS";
-            $checkSite->siteUrl = "";
-            $checkSite->theme = "default";
-            $checkSite->save();
-        }
-
+        $config->addTwigGlobal("RoleHelper", new RoleHelper());
         $config->addTwigGlobal("Content", new Content());
         $config->addTwigGlobal("Snippet", new Content());
         $config->addTwigGlobal("Article", new Content());
-
-        if (!file_exists("./src/public/uploads")) {
-            mkdir("./src/public/uploads");
-        }
-
-        if (!file_exists("./cache")) {
-            mkdir("./cache");
-        }
-
-        if (!file_exists("./cache/images")) {
-            mkdir("./cache/images");
-        }
 
         $config->addTwigFunction("redirect", function ($url, $code = 301) {
             \Tina4\redirect($url, $code);
@@ -726,7 +645,6 @@ class Content extends Data
         $config->addTwigFunction("getArticle", static function ($id) {
             return new \Twig\Markup((new self())->getArticleById($id),'UTF-8');
         });
-
 
         $config->addTwigFunction("render", static function ($content) {
             return \Tina4\renderTemplate($content);
@@ -770,121 +688,26 @@ class Content extends Data
         return "";
     }
 
-
-    /**
-     * Returns a site map array
-     * @return array[]
-     * @throws ReflectionException
-     */
-    public function getSiteMap(): array
-    {
-        $urls = [];
-
-        $site = new Site();
-        if ($site->load("id = 1")) {
-            $pages = (new Page())->select("*", 10000)->where("is_published = 1")->asObject();
-
-            /**
-             * @var Page $page
-             */
-            foreach ($pages as $pId => $page) {
-                $locs = ["loc" => $site->siteUrl . "/content/" . $page->slug, "lastmod" => str_replace(" ", "T", $page->dateModified) . "+00:00"];
-
-                if (!empty($page->image)) {
-                    if (!file_exists("./cache/images/og-{$page->slug}.png")) {
-                        file_put_contents("./cache/images/og-{$page->slug}.png", base64_decode($page->image));
-                    }
-                    $image = $site->siteUrl . "/cache/images/og-{$page->slug}.png";
-                    $locs["image:image"] = ["image:loc" => $image];
-                }
-
-                $urls[] = ["url" => $locs];
-            }
-
-            $articles = (new Article())->select("*", 10000)->where("is_published = 1")->asObject();
-            /**
-             * @var Article $article
-             */
-            foreach ($articles as $aId => $article) {
-                $locs = ["loc" => $site->siteUrl . "/content/article/" . $article->slug, "lastmod" => str_replace(" ", "T", $article->publishedDate) . "+00:00"];
-                if (!empty($article->image)) {
-                    if (!file_exists("./cache/images/article-{$article->slug}.png")) {
-                        if (!empty($article->image)) {
-                            $image = $site->siteUrl . "/cache/images/article-{$article->slug}.png";
-                            file_put_contents("./cache/images/article-{$article->slug}.png", base64_decode($article->image));
-                        }
-                    }
-                    $image = $site->siteUrl . "/cache/images/article-{$article->slug}.png";
-                    $locs["image:image"] = ["image:loc" => $image];
-                }
-
-                $urls[] = ["url" => $locs];
-            }
-
-        }
-
-        return ['urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' => $urls];
-    }
-
-    /**
-     * Gets the data for the current site
-     * @return Site|null
-     */
-    public function getSite(): ?Site
-    {
-        if (!empty($_SESSION["siteId"]))
-        {
-            $siteId = $_SESSION["siteId"];
-        } else {
-            $siteId = 1;
-        }
-
-        $site = new Site();
-        if ($site->load("id = ?", [$siteId])) {
-            return $site;
-        }
-
-        return null;
-    }
-
-    /**
-     * Gets all the sites
-     * @return array
-     * @throws ReflectionException
-     */
-    public function getSites(): array
-    {
-        $site = new Site();
-        return $site->select("*", 10000)->asArray();
-    }
-
     /**
      * Renders a page with a layout
      * @param $pageName
      * @param $siteId
      * @return string
-     * @throws \Twig\Error\LoaderError
      */
     public function renderPage($pageName, $siteId): string
     {
-        $content = (new Content())->getPage($pageName);
-        $pageMeta = (new Content())->getPageMeta($pageName);
-
-        if (!file_exists("./cache/images/og-{$pageName}.png")) {
-            if (!empty($pageMeta->image)) {
-                $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
-                file_put_contents("./cache/images/og-{$pageName}.png", base64_decode($pageMeta->image));
-            } else {
-                $image = null;
-            }
-        } else {
-            $image = "https://" . $_SERVER["HTTP_HOST"] . "/cache/images/og-{$pageName}.png";
+        $content = $this->getPage($pageName);
+        if (empty($content)) {
+            return "";
         }
 
-        $template = "content.twig";
+        $pageMeta = $this->getPageMeta($pageName);
+
+        $template = "base.twig"; //fallback template
         $site = new Site();
         if ($site->load("id = ?", [$siteId]) && !empty($site->theme)) {
-            $template = "themes/{$site->theme}/page.twig";
+            $theme = new Theme($site->theme);
+            $template = $theme->themePath.DIRECTORY_SEPARATOR."page.twig";
             $layoutHtml = $site->pageLayoutHtml;
 
             if (!empty($layoutHtml)) {
@@ -898,7 +721,7 @@ class Content extends Data
             $site->custom = html_entity_decode($site->custom);
         }
 
-        return \Tina4\renderTemplate(\Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $image, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]));
+        return \Tina4\renderTemplate(\Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $pageMeta->imageUrl, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]));
     }
 
     /**

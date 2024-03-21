@@ -14,8 +14,8 @@
 
     $menuItems = (new Content())->getCmsMenus();
     $themes = (new Theme())->getThemes();
-    $site = (new Content())->getSite();
-    $sites = (new Content())->getSites();
+    $site = (new SiteHelper())->getSite();
+    $sites = (new SiteHelper())->getSites();
     $pages = (new Content())->getAllPages($site->id);
     $snippets = (new Content())->getAllSnippets($site->id);
     $version = (new \Tina4\Migration)->getVersion('tina4cms');

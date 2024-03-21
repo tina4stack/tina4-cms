@@ -32,4 +32,8 @@ class Page extends \Tina4\ORM
     public $layouts;
     public $trackingId;
 
+    public $imageUrl;
+
+    public $virtualFields = ["imageUrl", "isABTesting", "layouts", "trackingId"];
+
 }

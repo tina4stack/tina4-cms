@@ -157,13 +157,13 @@
     $users = (new Users())->select("count(id) as number");
     $twigNameSpace = (new Content())->getTwigNameSpace();
     if (empty($users)) {
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", compact('twigNameSpace')));
     }
 
     $menuItems = (new Content())->getCmsMenus();
     $themes = (new Theme())->getThemes();
-    $site = (new Content())->getSite();
-    $sites = (new Content())->getSites();
+    $site = (new SiteHelper())->getSite();
+    $sites = (new SiteHelper())->getSites();
     $version = (new \Tina4\Migration)->getVersion('tina4cms');
 
     return $response(\Tina4\renderTemplate($twigNameSpace."/admin/dashboard.twig", ["menuItems" => $menuItems , "twigNameSpace" => $twigNameSpace, "site" => $site, "sites" => $sites, "countSites" => count($sites), "themes" => $themes,"version" => $version]));
