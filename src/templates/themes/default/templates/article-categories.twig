@@ -1,5 +1,5 @@
 <div class="article-category">
     {% for category in categories %}
-        <a href="{{ baseUrl }}{{ articlePrefix }}"></a>
+        <a href="{{ websiteUrl }}/{{ articlePrefix }}/{{ category.name }}">{{ category.name }}</a>
     {%  endfor %}
 </div>

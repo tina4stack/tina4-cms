@@ -490,7 +490,7 @@ class Content extends Data
         $article->related = print_r ($article->relatedArticles,1);
 
         $article->categories = $this->DBA->fetch("select ac.id, ac.name, ac.parent_id from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = {$article->id}", 10)->asArray();
-        $article->category = $this->renderTemplate("article-categories.twig", ["categories" => $article->categories, "baseUrl" =>  TINA4_BASE_URL, "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
+        $article->category = $this->renderTemplate("article-categories.twig", ["categories" => $article->categories, "websiteUrl" =>  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]", "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
 
         if (count($article->relatedArticles) > 0)
         {
