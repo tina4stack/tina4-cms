@@ -6,9 +6,9 @@
         <th>Name</th>
         <th>Title</th>
         <th>Keywords</th>
-        <th>Is Published</th>
         <th>Date Created</th>
         <th>Date Modified</th>
+        <th>Is Published</th>
         {% if (not userRoles.Content.Pages or userRoles.Content.Pages.edit) or  (not userRoles.Content.Pages or userRoles.Content.Pages.delete) %}
         <th>Options</th>
         {% endif %}
@@ -31,14 +31,14 @@
                 {"data": "name"},
                 {"data": "title"},
                 {"data": "keywords"},
+                {"data": "dateCreated"},
+                {"data": "dateModified"},
                 {
                     "data": "isPublished",
                     "mRender": function (data, type, row) {
                         return (row.isPublished == 1) ? 'Yes' : 'No';
                     }
                 },
-                {"data": "dateCreated"},
-                {"data": "dateModified"},
                 {% if (not userRoles.Content.Pages or userRoles.Content.Pages.edit) or  (not userRoles.Content.Pages or userRoles.Content.Pages.delete) %}
                 {
                     "data": null,

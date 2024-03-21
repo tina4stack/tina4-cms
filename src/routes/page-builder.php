@@ -337,7 +337,12 @@
                 $apiResponse = (new OpenAi())->getCompletion(
                     strip_tags(html_entity_decode($request->params["prompt"]))
                 );
-                $text = $apiResponse["choices"][0]["message"]["content"];
+
+                if (!empty($apiResponse["choices"])) {
+                    $text = $apiResponse["choices"][0]["message"]["content"];
+                } else {
+                    $text = print_r ($apiResponse, 1);
+                }
             } else {
                 $imageFolder = "./src/public/uploads/".date("Y")."/".date("F");
                 if (! file_exists($imageFolder) && !mkdir($imageFolder, 0777, true) && !is_dir($imageFolder)) {

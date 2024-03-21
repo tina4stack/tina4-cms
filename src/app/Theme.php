@@ -126,14 +126,15 @@ class Theme
 
 
         $html = str_replace('Article Content', '{{ render(article.content) | raw }}', $html);
-        $html = str_replace('Article Title', '{{ article.title }}', $html);
-        $html = str_replace('Article Tags', '{% set keywords = article.keywords|split(",") %}{% for keyword in keywords %}<a href="/content/tags/{{ keyword | getSlug }}">{{ keyword }}</a>{% endfor %}', $html);
-        $html = str_replace('Publish Date', '{{ article.publishedDate }}', $html);
-        $html = str_replace('Article Link', '{{ article.slug }}', $html);
-        $html = str_replace('Article Navigation', '{{ article.navigation }}', $html);
-        $html = str_replace('Article Author', '{{ article.author }}', $html);
-
-        return $html;
+        $html = str_replace('Article Category', '{{ article.category  | raw }}', $html);
+        $html = str_replace('Article Title', '{{ article.title  | raw}}', $html);
+        $html = str_replace('Article Tags', '{{ article.tags | raw }}', $html);
+        $html = str_replace('Publish Date', '{{ article.publishedDate | raw }}', $html);
+        $html = str_replace('Article Link', '{{ article.slug | raw }}', $html);
+        $html = str_replace('Article Navigation', '{{ article.navigation | raw }}', $html);
+        $html = str_replace('Article List', '{{ article.list | raw }}', $html);
+        $html = str_replace('Related Articles', '{{ article.related | raw }}', $html);
+        return str_replace('Article Author', '{{ article.author | raw }}', $html);
     }
 
     private function deployAssets()

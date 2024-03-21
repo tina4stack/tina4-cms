@@ -71,7 +71,7 @@
                 $whereData[] = $siteId;
             }
 
-            $articles =   $article->select ("id, published_date, title, description, author, is_published", $filter["length"], $filter["start"])
+            $articles =   $article->select ("id, published_date, title, description, author, keywords, is_published", $filter["length"], $filter["start"])
                 ->where("{$where}", $whereData)
                 ->orderBy($filter["orderBy"])
                 ->asResult();

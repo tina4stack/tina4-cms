@@ -3,10 +3,10 @@
     <thead>
     <tr>
         <th>Id</th>
-        <th>Published Date</th>
         <th>Title</th>
-        <th>Description</th>
+        <th>Keywords</th>
         <th>Author</th>
+        <th>Published Date</th>
         <th>Is Published</th>
         {% if (not userRoles.Content.Articles or userRoles.Content.Articles.edit) or  (not userRoles.Content.Articles or userRoles.Content.Articles.delete) %}
         <th>Options</th>
@@ -28,10 +28,10 @@
             },
             columns: [
                 {"data": "id"},
-                {"data": "publishedDate"},
                 {"data": "title"},
-                {"data": "description"},
+                {"data": "keywords"},
                 {"data": "author"},
+                {"data": "publishedDate"},
                 {
                     "data": "isPublished",
                     "mRender": function (data, type, row) {

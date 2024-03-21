@@ -58,15 +58,18 @@ class SiteHelper
 
     /**
      * Gets the data for the current site
+     * @param int|null $siteId
      * @return Site|null
      */
-    public function getSite(): ?Site
+    public function getSite(?int $siteId=null): ?Site
     {
-        if (!empty($_SESSION["siteId"]))
+        if (!empty($_SESSION["siteId"]) && empty($siteId))
         {
             $siteId = $_SESSION["siteId"];
         } else {
-            $siteId = 1;
+            if (empty($siteId)) {
+                $siteId = 1;
+            }
         }
 
         $site = new Site();

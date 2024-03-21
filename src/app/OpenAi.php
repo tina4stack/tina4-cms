@@ -46,8 +46,9 @@ class OpenAi extends Api
 
         $response = $this->sendRequest("/v1/chat/completions", "POST", $request);
 
-        if (!empty($response["error"])) {
-            return $response;
+
+        if (!empty($response["body"]["error"])) {
+            return $response["body"]["error"];
         } else {
             return $response["body"];
         }
@@ -57,9 +58,9 @@ class OpenAi extends Api
      * Gets an image from the API
      * @param $prompt
      * @param int $noOfImages
-     * @return string
+     * @return array
      */
-    function getImage($prompt, int $noOfImages=1): ?string
+    function getImage($prompt, int $noOfImages=1): ?array
     {
         if (!$this->active) return null;
 

@@ -48,6 +48,10 @@
     display: block;
 }
 
+.article-navigation .next{
+    float:right;
+}
+
 .article-content {
     padding: 1rem;
 }

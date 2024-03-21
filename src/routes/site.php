@@ -47,14 +47,13 @@
             if ($action == "form") {
                 $title = "Add Site";
                 $savePath = TINA4_BASE_URL . "/api/admin/site";
-                $content = \Tina4\renderTemplate("/api/admin/site/form.twig", ["themes" => $themes]);
+                $content = \Tina4\renderTemplate("/api/admin/site/form.twig", compact('themes'));
             } else {
                 $title = "Edit Site";
                 $savePath = TINA4_BASE_URL . "/api/admin/site/" . $site->id;
                 $content = \Tina4\renderTemplate("/api/admin/site/form.twig", ["data" => $site, "themes" => $themes]);
             }
             return \Tina4\renderTemplate("components/modalForm.twig", ["title" => $title, "onclick" => "if ( $('#siteForm').valid() ) { saveForm('siteForm', '" . $savePath . "', 'message'); $('#formModal').modal('hide');}", "content" => $content]);
-            break;
         case "read":
             //Return a dataset to be consumed by the grid with a filter
             $where = "";
@@ -75,17 +74,16 @@
         case "afterCreate":
             //return needed
             return (object)["httpCode" => 200, "message" => "<script>siteGrid.ajax.reload(null, false); showMessage ('Site Created');</script>"];
-            break;
         case "afterUpdate":
             //return needed
             return (object)["httpCode" => 200, "message" => "<script>siteGrid.ajax.reload(null, false); showMessage ('Site Updated');</script>"];
-            break;
         case "delete":
             //Manipulate the $object here
             break;
         case "afterDelete":
             //return needed 
             return (object)["httpCode" => 200, "message" => "<script>siteGrid.ajax.reload(null, false); showMessage ('Site Deleted');</script>"];
-            break;
     }
+
+    return (object)["httpCode" => 400, "message" => "Bad CRUD request"];
 });
