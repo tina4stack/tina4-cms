@@ -623,18 +623,20 @@ class Content extends Data
                 $checkSite->save();
             }
 
-            if (!file_exists("./src/public/uploads")) {
-                mkdir("./src/public/uploads");
-            }
 
-            if (!file_exists("./cache")) {
-                mkdir("./cache");
-            }
-
-            if (!file_exists("./cache/images")) {
-                mkdir("./cache/images");
-            }
             file_put_contents(".deployed", date("Y-m-d H:i:s"));
+        }
+
+        if (!file_exists("./src/public/uploads")) {
+            mkdir("./src/public/uploads");
+        }
+
+        if (!file_exists("./cache")) {
+            mkdir("./cache");
+        }
+
+        if (!file_exists("./cache/images")) {
+            mkdir("./cache/images");
         }
 
         $config->addTwigGlobal("RoleHelper", new RoleHelper());
