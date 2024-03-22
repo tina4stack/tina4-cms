@@ -435,7 +435,7 @@ class Content extends Data
                 if (!empty($menu->specificRoute)) {
                     $menu->url = $menu->specificRoute;
                 } else {
-                    $menu->url = "/content/{$menu->slug}";
+                    $menu->url = "/{$menu->slug}";
                 }
 
             }
@@ -487,9 +487,9 @@ class Content extends Data
             $article->relatedArticles[$id] = $this->getArticleMeta($articleData)->asObject();
         }
 
-        $article->related = print_r ($article->relatedArticles,1);
+        $article->related =  $this->renderTemplate("article-related.twig", ["articles" => $article->relatedArticles, "websiteUrl" =>  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]", "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
 
-        $article->categories = $this->DBA->fetch("select ac.id, ac.name, ac.parent_id from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = {$article->id}", 10)->asArray();
+        $article->categories = $this->DBA->fetch("select ac.id, ac.name, lower(ac.name) as link_name, ac.parent_id from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = {$article->id}", 10)->asArray();
         $article->category = $this->renderTemplate("article-categories.twig", ["categories" => $article->categories, "websiteUrl" =>  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]", "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
 
         if (count($article->relatedArticles) > 0)
@@ -500,7 +500,7 @@ class Content extends Data
         }
 
         $article->navigation = $this->renderTemplate("article-navigation.twig", ["navigation" => $article->navigation], $article->siteId);
-        $article->tags = $article->keywords;
+        $article->tags = $this->renderTemplate("article-tags.twig", ["tags" => explode(",", $article->keywords), "websiteUrl" =>  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]", "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
     }
 
     /**

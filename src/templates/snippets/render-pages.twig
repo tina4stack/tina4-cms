@@ -1,6 +1,6 @@
 <div id="pages">
     {% for page in pages %}
         <a href="#" class="pages-link"
-           onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
+           onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.name | title }}</a>
     {% endfor %}
 </div>

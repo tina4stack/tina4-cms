@@ -14,6 +14,28 @@
 
 \Tina4\Get::add("/{pageName}", static function ($pageName, \Tina4\Response $response, \Tina4\Request $request) {
     $site = (new SiteHelper())->getSite();
+
+    //Output the sitemap
+    if ($pageName == "sitemap.xml") {
+        $siteMap = '<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"></sitemapindex>';
+        if ($site->load("id = ?", [$site->id]) && $site->allowCrawlers) {
+            $siteMap = (new SiteHelper())->getSiteMap();
+        }
+
+        return $response($siteMap, HTTP_OK, APPLICATION_XML);
+    }
+
+    //Output the robots
+    if ($pageName == "robots.txt") {
+        $robotText = "User-agent: *\nDisallow: /\n";
+
+        if ($site->load("id = ?", [$site->id]) && $site->allowCrawlers) {
+            $robotText = "User-agent: *\nDisallow: /cms/\nSitemap: {$site->siteUrl}/sitemap.xml";
+        }
+
+        return $response($robotText, HTTP_OK, TEXT_PLAIN);
+    }
+
     $html = (new Content())->renderPage($pageName, $site->id);
 
     if (empty($html)) {

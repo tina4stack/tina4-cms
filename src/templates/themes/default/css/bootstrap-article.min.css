@@ -20,7 +20,20 @@
 }
 
 .article-related {
+    border-radius: 15px;
+}
 
+.article-related .article {
+    border-radius: 10px;
+    padding-bottom: 30px;
+}
+
+.article-related .article img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    border: 1px solid lightslategrey;
 }
 
 .article-tags {
@@ -53,5 +66,5 @@
 }
 
 .article-content {
-    padding: 1rem;
+
 }
