@@ -1,0 +1,13 @@
+<div class="article-related">
+    {% for article in articles %}
+        <div class="article">
+            <img src="{{ article.imageUrl }}">
+            <b>{{ article.publishedDate }}</b>
+            <h4>{{ article.title }}</h4>
+            <p>
+                {{ article.description }}
+            </p>
+            <a href="{{ article.url }}">Readmore</a>
+        </div>
+    {% endfor %}
+</div>

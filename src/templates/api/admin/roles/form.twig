@@ -7,7 +7,7 @@
                    value="{{ data.name }}">
         </div>
         <div class="form-group col-md-12">
-            {% set roles = Content.getSecurityAttribute() %}
+            {% set roles = RoleHelper.getSecurityAttribute() %}
             {% for category, roleData in roles %}
                 <h5>{{category}} Permissions  </h5><a href="#" onclick="selectAll()">Select All</a> | <a href="#" onclick="selectNone()">Select None</a>
                 <div class="row">
@@ -16,7 +16,9 @@
                             <div class="alert alert-info">{{roleName|capitalize}}<br>
                                 {% for option,value in role %}
                                     {%  if (option != 'category') %}
-                                    <input type="checkbox" value="1" name="roleInfo[{{ role.category }}][{{roleName}}][{{option}}]" {% if ( data.roleInfo[role.category][roleName][option] == 1) %} checked {%endif%} > {{option | capitalize }}
+                                        <label>
+                                            <input type="checkbox" value="1" name="roleInfo[{{ role.category }}][{{roleName}}][{{option}}]" {% if ( data.roleInfo[role.category][roleName][option] == 1) %} checked {%endif%} >
+                                        </label> {{option | capitalize }}
                                     {% endif %}
                                 {% endfor %}
                             </div>
@@ -29,14 +31,14 @@
             function selectAll(){
                 let ele=document.getElementsByTagName('input');
                 for(let i=0; i<ele.length; i++){
-                    if(ele[i].type=='checkbox')
+                    if(ele[i].type==='checkbox')
                         ele[i].checked=true;
                 }
             }
             function selectNone(){
                 let ele=document.getElementsByTagName('input');
                 for(let i=0; i<ele.length; i++){
-                    if(ele[i].type=='checkbox')
+                    if(ele[i].type==='checkbox')
                         ele[i].checked=false;
 
                 }

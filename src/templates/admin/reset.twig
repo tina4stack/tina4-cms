@@ -1,11 +1,15 @@
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.min.js"></script>
+    <script src="{{ baseUrl }}/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ baseUrl }}/js/underscore.min.js"></script>
+    <script src="{{ baseUrl }}/js/jquery.validate.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.js"
-            integrity="sha256-xLhce0FUawd11QSwrvXSwST0oHhOolNoH9cUXAcsIAg=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"
-            integrity="sha256-NdDw7k+fJewgwI1XmH9NMR6OILvTX+3arqb/OgFicoM=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ baseUrl }}/css/bootstrap-utilities.min.css">
+
 
     <!-- Boostrap 4 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cerulean/bootstrap.min.css"
@@ -19,6 +23,13 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
             crossorigin="anonymous"></script>
     <style>
+        :root {
+            --color-dark-blue: #1E245C;
+            --color-bright-blue: #2A3382;
+            --color-dark-gray: #515962;
+            --color-medium-gray: #EBEBEB;
+            --color-light-gray: #FAFAFA;
+        }
 
         body{
             background-color:#1E245C;
@@ -86,8 +97,8 @@
                 width:50%;
             }
         }
-
     </style>
+
 {%  endblock %}
 {% block content %}
     <div class="reset-container ">

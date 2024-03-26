@@ -100,5 +100,12 @@
         }
     });
     console.log('Initializing editor');
+    // Prevent Bootstrap dialog from blocking focusin
+    document.addEventListener('focusin', (e) => {
+        if (e.target.closest(".tox-tinymce-aux, .moxman-window, .tam-assetmanager-root") !== null) {
+            e.stopImmediatePropagation();
+        }
+    });
+
 </script>
 <textarea id="saveContent" class="form-control" style="display:none; height: 300px" name="content">{{ data.content | raw }}</textarea>

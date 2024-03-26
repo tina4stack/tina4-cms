@@ -24,4 +24,15 @@ class Article extends \Tina4\ORM
     public $userId;
     public $slug;
     public $siteId;
+
+    public $url;
+    public $imageUrl;
+    public $categories;
+    public $navigation;
+    public $category;
+    public $related;
+    public $relatedArticles;
+
+
+    public $virtualFields = ["url", "imageUrl", "categories", "navigation", "category", "related", "relatedArticles"];
 }

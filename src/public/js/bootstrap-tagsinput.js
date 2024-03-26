@@ -37,7 +37,7 @@
             a.focus();
             var c = document.selection.createRange();
             c.moveStart("character", -a.value.length), b = c.text.length
-        } else (a.selectionStart || "0" == a.selectionStart) && (b = a.selectionStart);
+        } else (a.selectionStart || "0" === a.selectionStart) && (b = a.selectionStart);
         return b
     }
 
@@ -81,6 +81,7 @@
         trimValue: !1,
         allowDuplicates: !1
     };
+
     b.prototype = {
         constructor: b, add: function (b, c, d) {
             var f = this;

@@ -27,7 +27,7 @@ blockManager.add('bs-hero-left', {
     content: `<div class="container col-xxl-8 px-4 py-5">
     <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-            <img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
+            <img src="https://placehold.co/600x400/png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700"
                  height="500" loading="lazy">
         </div>
         <div class="col-lg-6">
@@ -42,4 +42,92 @@ blockManager.add('bs-hero-left', {
         </div>
     </div>
 </div>`
+});
+
+
+blockManager.add('bs-footer-complex', {
+    category: 'Bootstrap - Heroes',
+    label: 'Footer - Complex',
+    media: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.5 44.5"><path d="M0 0h44.5v44.5H0z" style="fill:none;stroke-width:0"/><path d="M37.96 34.08H27.63c-1.81 0-3.28-1.47-3.28-3.28V13.7c0-1.81 1.47-3.28 3.28-3.28h10.33c1.81 0 3.28 1.47 3.28 3.28v17.1c0 1.81-1.47 3.28-3.28 3.28ZM27.63 12.92c-.43 0-.78.35-.78.78v17.1c0 .43.35.78.78.78h10.33c.43 0 .78-.35.78-.78V13.7c0-.43-.35-.78-.78-.78H27.63ZM13.49 18.3H6.05c-1.54 0-2.79-1.25-2.79-2.79v-1.73c0-1.54 1.25-2.79 2.79-2.79h7.44c1.54 0 2.79 1.25 2.79 2.79v1.73c0 1.54-1.25 2.79-2.79 2.79Zm-7.44-4.81a.29.29 0 0 0-.29.29v1.73c0 .16.13.29.29.29h7.44c.16 0 .29-.13.29-.29v-1.73a.29.29 0 0 0-.29-.29H6.05ZM9.38 34.08H6.05c-1.54 0-2.79-1.25-2.79-2.79v-.52c0-1.54 1.25-2.79 2.79-2.79h3.33c1.54 0 2.79 1.25 2.79 2.79v.52c0 1.54-1.25 2.79-2.79 2.79Zm-3.33-3.61a.29.29 0 0 0-.29.29v.52c0 .16.13.29.29.29h3.33c.16 0 .29-.13.29-.29v-.52a.29.29 0 0 0-.29-.29H6.05ZM19.01 34.08h-3.33c-1.54 0-2.79-1.25-2.79-2.79v-.52c0-1.54 1.25-2.79 2.79-2.79h3.33c1.54 0 2.79 1.25 2.79 2.79v.52c0 1.54-1.25 2.79-2.79 2.79Zm-3.33-3.61a.29.29 0 0 0-.29.29v.52c0 .16.13.29.29.29h3.33c.16 0 .29-.13.29-.29v-.52a.29.29 0 0 0-.29-.29h-3.33ZM20.94 22.36H4.51a1.25 1.25 0 0 1 0-2.5h16.43a1.25 1.25 0 0 1 0 2.5ZM20.94 26.41H4.51a1.25 1.25 0 0 1 0-2.5h16.43a1.25 1.25 0 0 1 0 2.5Z" style="fill:#515962;stroke-width:0"/></svg>
+    `,
+    content: `<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+    <div class="col mb-3">
+        <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+            <img src="https://placehold.co/32x32/png" alt="logo">
+        </a>
+        <p class="text-body-secondary">© 2024</p>
+    </div>
+
+    <div class="col mb-3">
+
+    </div>
+
+    <div class="col mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+    </div>
+
+    <div class="col mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+    </div>
+
+    <div class="col mb-3">
+        <h5>Section</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+        </ul>
+    </div>
+</footer>`
+});
+
+
+blockManager.add('bs-footer-simple', {
+    category: 'Bootstrap - Heroes',
+    label: 'Footer - Simple',
+    media: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.5 44.5"><path d="M0 0h44.5v44.5H0z" style="fill:none;stroke-width:0"/><path d="M37.96 34.08H27.63c-1.81 0-3.28-1.47-3.28-3.28V13.7c0-1.81 1.47-3.28 3.28-3.28h10.33c1.81 0 3.28 1.47 3.28 3.28v17.1c0 1.81-1.47 3.28-3.28 3.28ZM27.63 12.92c-.43 0-.78.35-.78.78v17.1c0 .43.35.78.78.78h10.33c.43 0 .78-.35.78-.78V13.7c0-.43-.35-.78-.78-.78H27.63ZM13.49 18.3H6.05c-1.54 0-2.79-1.25-2.79-2.79v-1.73c0-1.54 1.25-2.79 2.79-2.79h7.44c1.54 0 2.79 1.25 2.79 2.79v1.73c0 1.54-1.25 2.79-2.79 2.79Zm-7.44-4.81a.29.29 0 0 0-.29.29v1.73c0 .16.13.29.29.29h7.44c.16 0 .29-.13.29-.29v-1.73a.29.29 0 0 0-.29-.29H6.05ZM9.38 34.08H6.05c-1.54 0-2.79-1.25-2.79-2.79v-.52c0-1.54 1.25-2.79 2.79-2.79h3.33c1.54 0 2.79 1.25 2.79 2.79v.52c0 1.54-1.25 2.79-2.79 2.79Zm-3.33-3.61a.29.29 0 0 0-.29.29v.52c0 .16.13.29.29.29h3.33c.16 0 .29-.13.29-.29v-.52a.29.29 0 0 0-.29-.29H6.05ZM19.01 34.08h-3.33c-1.54 0-2.79-1.25-2.79-2.79v-.52c0-1.54 1.25-2.79 2.79-2.79h3.33c1.54 0 2.79 1.25 2.79 2.79v.52c0 1.54-1.25 2.79-2.79 2.79Zm-3.33-3.61a.29.29 0 0 0-.29.29v.52c0 .16.13.29.29.29h3.33c.16 0 .29-.13.29-.29v-.52a.29.29 0 0 0-.29-.29h-3.33ZM20.94 22.36H4.51a1.25 1.25 0 0 1 0-2.5h16.43a1.25 1.25 0 0 1 0 2.5ZM20.94 26.41H4.51a1.25 1.25 0 0 1 0-2.5h16.43a1.25 1.25 0 0 1 0 2.5Z" style="fill:#515962;stroke-width:0"/></svg>
+    `,
+    content: `<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+        <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+           <img src="https://placehold.co/32x32/png" alt="logo">
+        </a>
+        <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Company, Inc</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3">
+        <a class="text-body-secondary" href="#">
+               <img src="https://placehold.co/32x32/png" alt="logo">
+        </a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#">
+            
+                <img src="https://placehold.co/32x32/png" alt="logo">
+            
+        </a></li>
+        <li class="ms-3"><a class="text-body-secondary" href="#">
+            
+                <img src="https://placehold.co/32x32/png" alt="logo">
+            
+        </a></li>
+    </ul>
+</footer>`
 });

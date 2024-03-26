@@ -1,8 +1,4 @@
 <style>
-    /*.input-container {*/
-    /*    position: relative;*/
-    /*}*/
-
     label.error {
         color: #fff;
         font-size: 0.8rem;
@@ -19,7 +15,6 @@
     }
 </style>
 <form id="usersForm" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
-    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <div class="row">
         <div class="form-group col-md-6">
             <label for="firstName">First Name</label>
@@ -59,13 +54,6 @@
     <input type="hidden" name="siteId" value="{{ siteId }}">
     {{ "usersForm" | formToken | raw }}
     <script>
-        // console.log('ok');
-        var passInput = document.getElementById('password');
-        // const hideCompleted = false
-        // const showPasswordButton = true
-        // const length = 16
-        var form = null;
-
         $(document).ready(function() {
 
             $.validator.addMethod("regex", function(value, element, regexpr) {
@@ -85,18 +73,5 @@
                 }
             });
         });
-
-        function togglePassword() {
-            passInput.type === "password" ? passInput.type = "text" : passInput.type = "password"
-        }
-
-        // $('#password').on('input', function() {
-        //     checkPasswordStrength();
-        // })
-
-        $("#show_password").click(function(){
-            togglePassword()
-        })
-
     </script>
 </form>

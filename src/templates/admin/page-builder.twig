@@ -65,6 +65,16 @@
                onclick="setActive(this); $('#gjs').hide(); $('#cms').show(); loadPage('{{ baseUrl }}/cms/dashboard', 'cms'); "><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-site-settings.svg">Site
                 Settings</a>
+
+            <h3 class="pages-heading"><img class="pages-link-icon"
+                                           src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Pages</h3>
+
+            <div id="renderPages">
+            {%  include "snippets/render-pages.twig" %}
+            </div>
+
+            <h3 class="pages-heading"><img class="pages-link-icon"
+                                           src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Layouts</h3>
             <a href="#" class="pages-link"
                onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layout')"><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-page-layout.svg">Page
@@ -73,14 +83,6 @@
                onclick="setActive(this); $('#gjs').show(); $('#cms').hide();  loadGrapeJsPage('layoutArticle')"><img
                         class="pages-link-icon" src="{{ baseUrl }}/images/nav-icons/nav-icon-article-layout.svg">Article
                 Layout</a>
-            <h3 class="pages-heading"><img class="pages-link-icon"
-                                           src="{{ baseUrl }}/images/nav-icons/nav-icon-pages.svg">Pages</h3>
-            <div class="pages">
-                {% for page in pages %}
-                    <a href="#" class="pages-link"
-                       onclick="setActive(this); $('#gjs').show(); $('#cms').hide(); loadGrapeJsPage('{{ page.id }}')">{{ page.title }}</a>
-                {% endfor %}
-            </div>
             <div class="site-selector-container">
                 {% if session.user is not null and countSites > 1 and session.user.siteId == 1 %}
                     <h3 class="pages-heading"><img class="pages-link-icon"
@@ -101,6 +103,10 @@
                             <input type="hidden" name="formToken" value="{{ formToken("siteSet") }}">
                         </form>
                     </div>
+                {% else %}
+                    {% for listSite in sites %}
+                    <script>document.getElementById('siteName').innerText = '{{ listSite.siteName }}';</script>
+                    {% endfor %}
                 {% endif %}
             </div>
 
@@ -124,8 +130,7 @@
     {% endif %}
     <script>
         function getFreshToken() {
-            postUrl('{{ baseUrl }}/cms/page-builder/fresh-token?formToken='+formToken, null, null, function(data){
-                console.log('FreshToken', data);
+            postUrl('{{ baseUrl }}/cms/page-builder/fresh-token', null, null, function(data){
                 formToken = data.formToken;
             });
         }
@@ -133,7 +138,7 @@
         function refreshToken() {
             console.log('Refreshing token');
             getFreshToken();
-            setTimeout(refreshToken, 100000);
+            setTimeout(refreshToken, 50000);
         }
 
         const editor = grapesjs.init({
@@ -145,7 +150,7 @@
                 scripts: {{ Theme.Scripts(site.theme) | raw }},
                 styles: {{ Theme.Styles(site.theme) | raw }},
             },
-            plugins: ['grapesjs-custom-code', 'grapesjs-component-code-editor', 'grapesjs-parser-postcss'],
+            plugins: ['grapesjs-component-code-editor', 'grapesjs-parser-postcss', 'grapesjs-custom-code'],
             assetManager: {
                 // Upload endpoint, set `false` to disable upload, default `false`
                 upload: '{{ baseUrl }}/cms/page-builder/assets/upload?siteId={{ site.id }}&formToken={{ formToken }}'
@@ -301,10 +306,7 @@
         }
 
         editor.on('load', (event) => {
-
-            //const blockBtn = editor.Panels.getButton('views', 'open-blocks');
-            //blockBtn.set('active', 1);
-            //editor.runCommand('core:open-blocks');
+            editor.Panels.getButton('views', 'open-blocks').set('active', true);
         });
 
         editor.on('rte:enable', () => {
@@ -346,12 +348,13 @@
         //Load tina4cms
         loadPage('{{ baseUrl }}/cms/dashboard?formToken={{formToken}}', 'cms');
     </script>
-    {% set blocks = Theme.Blocks(site.theme) %}
-    {% for block in blocks %}
-    <script src="{{ block }}"></script>
-    {% endfor %}
+
     {% set components = Theme.Components(site.theme) %}
     {% for component in components %}
     <script src="{{ component }}"></script>
+    {% endfor %}
+    {% set blocks = Theme.Blocks(site.theme) %}
+    {% for block in blocks %}
+        <script src="{{ block }}"></script>
     {% endfor %}
 {% endblock %}

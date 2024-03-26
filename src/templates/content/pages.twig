@@ -6,9 +6,9 @@
         <th>Name</th>
         <th>Title</th>
         <th>Keywords</th>
-        <th>Is Published</th>
         <th>Date Created</th>
         <th>Date Modified</th>
+        <th>Is Published</th>
         {% if (not userRoles.Content.Pages or userRoles.Content.Pages.edit) or  (not userRoles.Content.Pages or userRoles.Content.Pages.delete) %}
         <th>Options</th>
         {% endif %}
@@ -20,20 +20,25 @@
     $(document).ready(function () {
         pageGrid = $('#pageGrid').DataTable({
             dom: '<"row"<"col-md-6"B><"col-md-4"f><"col-md-2"l>><rtip>',
-            ajax: '{{ baseUrl }}/api/admin/pages?formToken={{ formToken("/api/admin/pages") }}&siteId={{ session.siteId }}',
+            ajax: {
+                url: '{{ baseUrl }}/api/admin/pages?siteId={{ session.siteId }}',
+                data: function (d) {
+                    d.formToken = formToken;
+                }
+            },
             columns: [
                 {"data": "id"},
                 {"data": "name"},
                 {"data": "title"},
                 {"data": "keywords"},
+                {"data": "dateCreated"},
+                {"data": "dateModified"},
                 {
                     "data": "isPublished",
                     "mRender": function (data, type, row) {
                         return (row.isPublished == 1) ? 'Yes' : 'No';
                     }
                 },
-                {"data": "dateCreated"},
-                {"data": "dateModified"},
                 {% if (not userRoles.Content.Pages or userRoles.Content.Pages.edit) or  (not userRoles.Content.Pages or userRoles.Content.Pages.delete) %}
                 {
                     "data": null,
@@ -41,10 +46,10 @@
                         let html = '';
                         //loadForm parameters: api to retrieve modal form, target div id to load form to, row data, title of
                         {% if (not userRoles.Content.Pages or userRoles.Content.Pages.edit) %}
-                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'{{ baseUrl }}/api/admin/pages/' + row.id + '?formToken={{ formToken("/api/admin/pages") }}&siteId={{ session.siteId }}\')">Edit</button>';
+                        html += '<button class="btn btn-primary small-button" onclick="showForm(\'edit\',\'{{ baseUrl }}/api/admin/pages/' + row.id + '?siteId={{ session.siteId }}\')">Edit</button>';
                         {% endif %}
                         {% if (not userRoles.Content.Pages or userRoles.Content.Pages.delete) %}
-                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'{{ baseUrl }}/api/admin/pages/' + row.id + '?formToken={{ formToken("/api/admin/pages") }}&siteId={{ session.siteId }}\');}">Del</button>';
+                        html += ' <button class="btn btn-danger small-button" onclick="if (confirm(\'Delete  record ?\')) { showForm(\'delete\',\'{{ baseUrl }}/api/admin/pages/' + row.id + '?siteId={{ session.siteId }}\');}">Del</button>';
                         {% endif %}
                         return html;
                     },
@@ -64,7 +69,7 @@
                     text: 'Create',
                     action: function (e, dt, node, config) {
                         let data = {};
-                        showForm('create', '{{ baseUrl }}api/admin/pages/form?formToken={{ formToken("/api/admin/pages") }}&siteId={{ session.siteId }}');
+                        showForm('create', '{{ baseUrl }}/api/admin/pages/form?siteId={{ session.siteId }}');
                     }
                 },
                 {% endif %}

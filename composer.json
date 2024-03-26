@@ -22,7 +22,8 @@
     "prefer-stable": true,
     "require": {
         "tina4stack/tina4php": "^2.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "bissolli/php-css-js-minifier": "^1.1"
     },
     "scripts": {
         "tina4": "tina4",

@@ -1,0 +1,6 @@
+<div class="article-tags">
+    Tags:
+    {% for tag in tags %}
+        <a href="{{ websiteUrl }}/{{ articlePrefix }}/tags/{{ tag }}">{{ tag }}</a>
+    {% endfor %}
+</div>
