@@ -18,20 +18,20 @@
             {% if (data.snippetType == 1) %}
                 {% include "snippets/content-editor.twig" %}
             {%  else %}
-                <div class="container-fluid">
-                    <div id="contentEditor" style="height:400px" >{{ data.content }}</div>
-                    <script>
-                    window.editorACE = ace.edit("contentEditor");
-                    window.editorACE.getSession().setUseWorker(false);
-                    window.editorACE.setTheme("ace/theme/sqlserver");
-                    window.editorACE.getSession().setMode("ace/mode/twig");
+                <br>
+                <div id="contentEditor" style="height:400px" >{{ data.content }}</div>
+                <script>
+                window.editorACE = ace.edit("contentEditor");
+                window.editorACE.getSession().setUseWorker(false);
+                window.editorACE.setTheme("ace/theme/sqlserver");
+                window.editorACE.getSession().setMode("ace/mode/twig");
 
-                    window.editorACE.getSession().on('change', function() {
-                        $('#saveContent').val(window.editorACE.getSession().getValue());
-                    });
-                   </script>
-                   <textarea id="saveContent" style="display:none" name="content">{{ data.content | raw }}</textarea>
-                </div>
+                window.editorACE.getSession().on('change', function() {
+                    $('#saveContent').val(window.editorACE.getSession().getValue());
+                });
+               </script>
+               <textarea id="saveContent" style="display:none" name="content">{{ data.content | raw }}</textarea>
+
             {% endif %}
         </div>
     </div>
