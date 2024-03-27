@@ -282,7 +282,8 @@ class Content extends Data
     }
 
     /**
-     * @throws ReflectionException
+     * Gets an article by it's id
+     * @throws ReflectionException|\Twig\Error\LoaderError
      */
     public function getArticleById($id): string
     {
@@ -735,6 +736,7 @@ class Content extends Data
      * @param array $data
      * @param $siteId
      * @return string
+     * @throws \Twig\Error\LoaderError
      */
     private function renderTemplate(string $template, array $data, $siteId): string
     {
@@ -742,5 +744,19 @@ class Content extends Data
         $theme = new Theme($site->theme);
         $template = $theme->themePath.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR.$template;
         return \Tina4\renderTemplate($template, $data);
+    }
+
+    /**
+     * Dump method
+     * @param $variable
+     * @return string
+     */
+    public function dump($variable) : string
+    {
+        if (TINA4_DEBUG) {
+            return _pre(print_r($variable, 1));
+        } else {
+            return "Illegal Operation!";
+        }
     }
 }
