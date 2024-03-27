@@ -1,7 +1,7 @@
 <div class="article-related">
     {% for article in articles %}
         <div class="article">
-            <img src="{{ article.imageUrl }}">
+            <img src="{{ article.imageUrl }}" alt="{{ article.title }}">
             <b>{{ article.publishedDate }}</b>
             <h4>{{ article.title }}</h4>
             <p>
