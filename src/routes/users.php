@@ -32,7 +32,7 @@
        case "form":
        case "fetch":
             //Return back a form to be submitted to the create
-            $roles = (new RoleHelper())->select('id,name', 1000)->asArray();
+            $roles = (new Role())->select('id,name', 1000)->asArray();
             if ($action == "form") {
                 $title = "Add Users";
                 $savePath =  TINA4_BASE_URL . "/api/admin/users";
