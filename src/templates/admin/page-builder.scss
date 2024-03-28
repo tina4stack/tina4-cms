@@ -10,6 +10,11 @@
   --top-bar-height: 50px;
 }
 
+/* STYLES FOR RESET PASSWORD PAGE */
+.mt-4{
+  margin-top: 21.5rem !important;
+}
+
 .gjs-field input, .gjs-field select, .gjs-field textarea {
   appearance: auto !important;
 }
@@ -25,9 +30,7 @@
 body, html {
   height: 100%;
   margin: 0;
-  background: #ffffff;
-}
-svg#clearcache {
+}  #clearcache {
   height: 24px;
   padding-right: 5px;
 }

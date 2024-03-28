@@ -53,6 +53,14 @@
 {% block navigation %}
 {% endblock %}
 {% block content %}
+    <style>
+        svg {
+            width: 15px;
+        }
+        svg#clearcache {
+            width: 25px;
+        }
+    </style>
     <div class="app-wrap">
         <div class="nav-sidebar">
             <div href="{{ baseUrl }}/" class="tina-logo"><a href="#" onclick="$('#cms').show(); loadPage('{{ baseUrl }}/cms/dashboard', 'cms');"><img src="{{ baseUrl }}/images/tina4-logo-icon.png" width="100%"></a>
@@ -91,7 +99,7 @@
                             .cls-2 {
                                 stroke-width: 0px;
                             }
-                            svg {
+                            #Layer_1 {
                                 vertical-align: middle;
                                 width: 25px;
                             }
