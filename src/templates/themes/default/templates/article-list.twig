@@ -1,1 +1,13 @@
-List of articles
+<div class="article-list">
+    {% for article in articles %}
+        <div class="article">
+            <img src="{{ article.imageUrl }}" alt="{{ article.title }}">
+            <b>{{ article.publishedDate }}</b>
+            <h4>{{ article.title }}</h4>
+            <p>
+                {{ article.description }}
+            </p>
+            <a href="{{ article.url }}">Readmore</a>
+        </div>
+    {% endfor %}
+</div>
