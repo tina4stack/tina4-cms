@@ -265,11 +265,24 @@
         if (empty($request->params["field"])) {
             $html = (new Content())->getArticleById($request->params["id"]);
         } else{
-            $article = new Article();
-            if ($article->load("id = ?", ["id" => $request->params["id"]])) {
-                $html = $article->{$request->params["field"]};
+            if ($request->params["field"] == "article-list") {
+                if (!empty($_SESSION["siteId"]))
+                {
+                    $siteId = $_SESSION["siteId"];
+                } else {
+                    $siteId = 1;
+                }
+
+                $articles = (new Content())->getAllArticles($siteId);
+
+                $html = \Tina4\renderTemplate("", ["articles" => $articles]);
             } else {
-                $html = "Article not found";
+                $article = new Article();
+                if ($article->load("id = ?", ["id" => $request->params["id"]])) {
+                    $html = $article->{$request->params["field"]};
+                } else {
+                    $html = "Article not found";
+                }
             }
         }
 

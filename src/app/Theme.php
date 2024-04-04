@@ -92,6 +92,8 @@ class Theme
             $content = str_replace($match[0], $matchText, $content);
         }
 
+        $content = $this->parseArticleIncludes($content);
+
         $content = str_replace('Â ', '&nbsp;', $content);
         $content = str_replace('\u00e2\u0080\u0099', '&rsquo;', $content);
 

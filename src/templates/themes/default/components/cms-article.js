@@ -127,11 +127,13 @@ editor.DomComponents.addType('cms-article-list', {
     },
     view: {
         onRender({ el }) {
-            let articleComponent = this.model.getTrait('cms-article-list');
-            if (articleComponent !== null) {
-
-                el.innerHTML = 'Render the list';
-            }
+            const articleId = this.model.getTrait('cms-article-list').attributes.value;
+            el.innerHTML = '<b>Rendering an article</b>';
+            fetch('/cms/page-builder/cms-articles/render?id='+articleId+'&field=article-list')
+                .then(async function(response) {
+                    const data = await response.text();
+                    el.innerHTML = data;
+                });
         },
     },
 });

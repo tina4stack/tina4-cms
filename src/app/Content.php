@@ -155,7 +155,14 @@ class Content extends Data
     {
         $page = (new Page());
         if ($page->load("slug = ?", [$slug]) && !empty($page->content) && ($page->isPublished)) {
-            return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST]);
+            //Determine how to render article list + article content
+
+            // @todo Rochelle
+            $list =  "Hello List"; // render the theme template for article list
+            $related = "Related!"; // render the theme template for articles related
+
+
+            return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST, "article" => ["list" => $list, "related" => $related]]);
         }
 
         return "";
@@ -222,6 +229,7 @@ class Content extends Data
             $template = $theme->themePath.DIRECTORY_SEPARATOR."page.twig";
             $layoutHtml = $site->pageLayoutHtml;
 
+
             if (!empty($layoutHtml)) {
                 //Try to inject a content tag if the user forgot to add one
                 if (strpos($layoutHtml, "[TINA4CMS_PAGE_CONTENT]") === false) {
@@ -237,6 +245,7 @@ class Content extends Data
         if (!empty($site->custom)) {
             $site->custom = html_entity_decode($site->custom);
         }
+
 
         return \Tina4\renderTemplate(\Tina4\renderTemplate($template, ["site" => $site, "content" => $content, "pageName" => $pageName, "title" => $pageMeta->title, "image" => $pageMeta->imageUrl, "description" => $pageMeta->description, "keywords" => $pageMeta->keywords]));
     }
