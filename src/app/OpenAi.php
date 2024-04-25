@@ -8,6 +8,10 @@ class OpenAi extends Api
     public $ignoreSSLValidation = true;
     public $active = true;
 
+    /**
+     * Constructor for OpenAi
+     * @param $siteId
+     */
     function __construct($siteId = null)
     {
         $siteId = $siteId ?? 1;

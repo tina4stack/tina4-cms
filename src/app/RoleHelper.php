@@ -4,8 +4,8 @@ class RoleHelper
 {
     /**
      * Set security attribute
-     * @param $name
-     * @param $options
+     * @param string $name The name of security attribute or group
+     * @param array $options - In twig, {'visible': 1, 'create': 1, 'edit': 1, 'delete': 1} => ["visible" => 1, "create" => 1, "edit" => 1, "delete" => 1]
      * @param string|null $category
      * @param int $roleId
      * @return void

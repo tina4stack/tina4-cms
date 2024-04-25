@@ -649,6 +649,7 @@ class Content extends Data
             mkdir("./cache/images");
         }
 
+        //Declaration of twig globals for use in the template engine
         $config->addTwigGlobal("RoleHelper", new RoleHelper());
         $config->addTwigGlobal("Content", new Content());
         $config->addTwigGlobal("Snippet", new Content());
