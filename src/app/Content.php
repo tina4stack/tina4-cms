@@ -12,13 +12,13 @@ use Tina4\Migration;
  */
 class Content extends Data
 {
-    private $twigNamespace = "@tina4cms";
+    private string $twigNamespace = "@tina4cms";
 
     /**
      * Get a different twig name space for changing dashboard and other screens
      * @return string
      */
-    public function getTwigNameSpace(): string
+    final public function getTwigNameSpace(): string
     {
         if (defined("CMS_TWIG_NAMESPACE")) {
             if (!empty(CMS_TWIG_NAMESPACE)) {
@@ -37,7 +37,7 @@ class Content extends Data
      * @param string $caption
      * @param string $icon
      */
-    public function addCmsMenu(?string $href, string $caption, string $icon="pages-link-icon"): void
+    final public function addCmsMenu(?string $href, string $caption, string $icon="pages-link-icon"): void
     {
         $href = $href ?? "";
         global $TINA4_CMS_MENU_ITEMS;
@@ -50,7 +50,7 @@ class Content extends Data
      * @tests
      *   assert is_array() === true, "Result must be an array"
      */
-    public function getCmsMenus(): array
+    final public function getCmsMenus(): array
     {
         global $TINA4_CMS_MENU_ITEMS;
 
@@ -67,7 +67,7 @@ class Content extends Data
      * @param string $separator
      * @return String
      */
-    public function getSlug(string $title, string $separator = '-'): string
+    final public function getSlug(string $title, string $separator = '-'): string
     {
         if (empty($title)) {
             return "";
@@ -96,10 +96,10 @@ class Content extends Data
 
     /**
      * Get Page Meta
-     * @param $slug
+     * @param string $slug
      * @return Page
      */
-    public function getPageMeta($slug): Page
+    final public function getPageMeta(string $slug): Page
     {
         $page = (new Page());
         if ($page->load("slug = ?", [$slug])) {
@@ -126,7 +126,7 @@ class Content extends Data
      * @param Article $article
      * @return Article
      */
-    public function getArticleMeta(Article $article) : Article
+    final public function getArticleMeta(Article $article) : Article
     {
         $imageHash = md5($article->id.$article->title.$article->siteId);
         if (!file_exists("./cache/images/og-article-{$imageHash}.png")) {
@@ -148,31 +148,35 @@ class Content extends Data
 
     /**
      * Get Pages
-     * @param $slug
+     * @param string $slug
      * @return string
      */
-    public function getPage($slug): string
+    final public function getPage(string $slug): string
     {
         $page = (new Page());
         if ($page->load("slug = ?", [$slug]) && !empty($page->content) && ($page->isPublished)) {
             //Determine how to render article list + article content
-
-            // @todo Rochelle
-            $list =  "Hello List"; // render the theme template for article list
-            $related = "Related!"; // render the theme template for articles related
-
+            $site = new Site();
+            if ($site->load("id = ?", [$page->siteId]) && !empty($site->theme)) {
+                $theme = new Theme($site->theme);
+                $templateArticleList = $theme->themePath.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."article-list.twig";
+                $templateArticleRelated = $theme->themePath.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."article-related.twig";
+                $related = \Tina4\renderTemplate($templateArticleRelated);
+                $list = \Tina4\renderTemplate($templateArticleList);
+            }
 
             return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST, "article" => ["list" => $list, "related" => $related]]);
         }
-
         return "";
     }
 
     /**
      * Gets all the pages
+     * @param int $siteId
+     * @return array
      * @throws ReflectionException
      */
-    public function getAllPages($siteId=1): array
+    final public function getAllPages(int $siteId=1): array
     {
         $page = (new Page());
         $pages = $page->select("*", 10000)->where("site_id = ?", [$siteId]);
@@ -185,9 +189,11 @@ class Content extends Data
 
     /**
      * Gets all the snippets
+     * @param int $siteId
+     * @return array
      * @throws ReflectionException
      */
-    public function getAllSnippets($siteId=1): array
+    final public function getAllSnippets(int $siteId=1): array
     {
         $snippet = (new Snippet());
         $snippets = $snippet->select("*", 10000)->where("site_id = ?", [$siteId]);
@@ -207,7 +213,7 @@ class Content extends Data
      * @param null $pageMeta
      * @return string
      */
-    public function renderPage(string $pageName, int $siteId, string $overrideContent="", $pageMeta=null): string
+    final public function renderPage(string $pageName, int $siteId, string $overrideContent="", $pageMeta=null): string
     {
         if ($overrideContent === "") {
             $content = $this->getPage($pageName);
@@ -259,7 +265,7 @@ class Content extends Data
      * @return string
      * @throws ReflectionException
      */
-    public function renderArticle(string $year, string $month, string $slug, int $siteId): string
+    final public function renderArticle(string $year, string $month, string $slug, int $siteId): string
     {
         $site = (new SiteHelper())->getSite($siteId);
         $articles = (new Article())->select("*"); //add filters here
@@ -357,7 +363,7 @@ class Content extends Data
      * @param string $parentId
      * @return string
      */
-    public function getCategories(?int $articleId = null, string $parentId = ""): string
+    final public function getCategories(?int $articleId = null, string $parentId = ""): string
     {
         if (!empty($_SESSION["siteId"]))
         {
@@ -414,7 +420,7 @@ class Content extends Data
      * @param int $level
      * @return array
      */
-    public function getMenu(?string $parentId = null, int $level = 0): array
+    final public function getMenu(?string $parentId = null, int $level = 0): array
     {
         if (!empty($_SESSION["siteId"]))
         {
@@ -451,9 +457,9 @@ class Content extends Data
             }
 
             return $menus;
-        } else {
-            return [];
         }
+
+        return [];
     }
 
     /**
@@ -462,7 +468,7 @@ class Content extends Data
      * @return mixed|string
      * @throws ReflectionException
      */
-    public function getEmailTemplate($name)
+    final public function getEmailTemplate($name)
     {
         $template = (new EmailTemplate())->select("*", 5)
             ->where("id != 0")
@@ -477,7 +483,7 @@ class Content extends Data
      * @param int $relatedArticles
      * @throws ReflectionException
      */
-    public function enhanceArticle(Article $article, int $relatedArticles=4)
+    final public function enhanceArticle(Article $article, int $relatedArticles=4): Article
     {
         if (!empty($article->keywords)) {
             $keywords = explode(",", $article->keywords);
@@ -518,7 +524,7 @@ class Content extends Data
      * @param $content
      * @return string
      */
-    public function parseContent($content): string
+    final public function parseContent($content): string
     {
         if (!empty($content)) {
             $content = html_entity_decode($content);
@@ -547,7 +553,7 @@ class Content extends Data
      * @param Config $config
      * @throws \Psr\Cache\InvalidArgumentException|ReflectionException
      */
-    public function addConfigMethods(Config $config): void
+    final public function addConfigMethods(Config $config): void
     {
         global $DBA;
 
@@ -638,15 +644,21 @@ class Content extends Data
         }
 
         if (!file_exists("./src/public/uploads")) {
-            mkdir("./src/public/uploads");
+            if (!mkdir("./src/public/uploads") && !is_dir("./src/public/uploads")) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', "./src/public/uploads"));
+            }
         }
 
         if (!file_exists("./cache")) {
-            mkdir("./cache");
+            if (!mkdir("./cache") && !is_dir("./cache")) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', "./cache"));
+            }
         }
 
         if (!file_exists("./cache/images")) {
-            mkdir("./cache/images");
+            if (!mkdir("./cache/images") && !is_dir("./cache/images")) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', "./cache/images"));
+            }
         }
 
         $config->addTwigGlobal("RoleHelper", new RoleHelper());
@@ -713,12 +725,11 @@ class Content extends Data
      * Get the tiny mce path
      * @return string
      */
-    public function getTinyMCEIncludePath(): string
+    final public function getTinyMCEIncludePath(): string
     {
         //For now returns nothing
         return "";
     }
-
 
 
     /**
@@ -727,7 +738,7 @@ class Content extends Data
      * @return array|string[]
      * @throws ReflectionException
      */
-    public function getAllArticles($siteId): array
+    final public function getAllArticles(int $siteId): array
     {
         $article = (new Article());
         $articles = $article->select("*", 10000)->where("site_id = ?", [$siteId]);
@@ -743,11 +754,11 @@ class Content extends Data
      * Renders templates from the site theme template folder themes/default/templates
      * @param string $template
      * @param array $data
-     * @param $siteId
+     * @param int $siteId
      * @return string
      * @throws \Twig\Error\LoaderError
      */
-    private function renderTemplate(string $template, array $data, $siteId): string
+    private function renderTemplate(string $template, array $data, int $siteId): string
     {
         $site = (new SiteHelper())->getSite($siteId);
         $theme = new Theme($site->theme);
@@ -760,12 +771,12 @@ class Content extends Data
      * @param $variable
      * @return string
      */
-    public function dump($variable) : string
+    final public function dump($variable) : string
     {
         if (TINA4_DEBUG) {
             return _pre(print_r($variable, 1));
-        } else {
-            return "Illegal Operation!";
         }
+
+        return "Illegal Operation!";
     }
 }

@@ -3,7 +3,7 @@
 
 \Tina4\Get::add("/cms/page-builder", function (\Tina4\Response $response) {
     if (empty($_SESSION["user"])) {
-        return $response("No Auth", HTTP_UNAUTHORIZED);
+        return $response("<script>location.href = '/cms/login'</script>", HTTP_OK);
     }
 
     $users = (new Users())->select("count(id) as number");
