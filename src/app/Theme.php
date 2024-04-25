@@ -119,6 +119,11 @@ class Theme
 
     }
 
+    /**
+     * Parses out the article inputs
+     * @param $html
+     * @return array|string|string[]
+     */
     public function parseArticleIncludes($html)
     {
         //Get rid of the body bits
@@ -127,10 +132,9 @@ class Theme
         $html = preg_replace($re, $subst, $html);
 
 
-        $html = str_replace('Article Content', '{{ render(article.content) | raw }}', $html);
-        $html = str_replace('Article Category', '{{ article.category  | raw }}', $html);
-        $html = str_replace('Article Title', '{{ article.title  | raw}}', $html);
-        $html = str_replace('Article Tags', '{{ article.tags | raw }}', $html);
+        $html = str_replace(array('Article Content', 'Article Category', 'Article Title', 'Article Tags'),
+                            array('{{ render(article.content) | raw }}', '{{ article.category  | raw }}',
+                                  '{{ article.title  | raw}}', '{{ article.tags | raw }}'), $html);
         $html = str_replace('Publish Date', '{{ article.publishedDate | raw }}', $html);
         $html = str_replace('Article Link', '{{ article.slug | raw }}', $html);
         $html = str_replace('Article Navigation', '{{ article.navigation | raw }}', $html);
