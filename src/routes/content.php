@@ -23,7 +23,7 @@
 });
 
 
-\Tina4\Get::add("/{pageName}~~/migrate", static function ($pageName, \Tina4\Response $response, \Tina4\Request $request) {
+\Tina4\Get::add("/{pageName}~~/migrate|/swagger", static function ($pageName, \Tina4\Response $response, \Tina4\Request $request) {
     $site = (new SiteHelper())->getSite();
 
     //Output the sitemap
