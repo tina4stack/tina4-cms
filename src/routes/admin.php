@@ -51,21 +51,21 @@
     $twigNameSpace = (new Content())->getTwigNameSpace();
 
     if ((int)$users[0]["number"] === 0) {
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", compact('twigNameSpace')));
     }
 
-    return $response(\Tina4\renderTemplate($twigNameSpace."/admin/login.twig", ["twigNameSpace" => $twigNameSpace]));
+    return $response(\Tina4\renderTemplate($twigNameSpace."/admin/login.twig", compact('twigNameSpace')));
 });
 
 \Tina4\Get::add("/cms/login/reset", function (\Tina4\Response $response) {
-    $users = (new Users())->select("count(id) as number")->asObject()[0];
+    $users = (new Users())->select("count(id) as number")->asArray();
     $twigNameSpace = (new Content())->getTwigNameSpace();
 
-    if ($users->number === 0) {
-        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", ["twigNameSpace" => $twigNameSpace]));
+    if ((int)$users[0]["number"] === 0) {
+        return $response(\Tina4\renderTemplate($twigNameSpace."/admin/setup.twig", compact('twigNameSpace')));
     }
 
-    return $response(\Tina4\renderTemplate($twigNameSpace."/admin/reset.twig", ["twigNameSpace" => $twigNameSpace]));
+    return $response(\Tina4\renderTemplate($twigNameSpace."/admin/reset.twig", compact('twigNameSpace')));
 });
 
 

@@ -156,6 +156,7 @@ class Content extends Data
         $page = (new Page());
         if ($page->load("slug = ?", [$slug]) && !empty($page->content) && ($page->isPublished)) {
             //Determine how to render article list + article content
+            $list = [];
             $site = new Site();
             if ($site->load("id = ?", [$page->siteId]) && !empty($site->theme)) {
                 $theme = new Theme($site->theme);
@@ -163,6 +164,8 @@ class Content extends Data
                 $templateArticleRelated = $theme->themePath.DIRECTORY_SEPARATOR."templates".DIRECTORY_SEPARATOR."article-related.twig";
                 $related = \Tina4\renderTemplate($templateArticleRelated);
                 $list = \Tina4\renderTemplate($templateArticleList);
+            } else {
+                $related = "";
             }
 
             return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST, "article" => ["list" => $list, "related" => $related]]);
@@ -481,7 +484,9 @@ class Content extends Data
      * Get next and previous articles
      * @param Article $article
      * @param int $relatedArticles
+     * @return Article
      * @throws ReflectionException
+     * @throws \Twig\Error\LoaderError
      */
     final public function enhanceArticle(Article $article, int $relatedArticles=4): Article
     {
@@ -517,6 +522,8 @@ class Content extends Data
 
         $article->navigation = $this->renderTemplate("article-navigation.twig", ["navigation" => $article->navigation], $article->siteId);
         $article->tags = $this->renderTemplate("article-tags.twig", ["tags" => explode(",", $article->keywords), "websiteUrl" =>  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]", "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
+
+        return $article;
     }
 
     /**

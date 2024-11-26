@@ -214,6 +214,10 @@ class Theme
      */
     public function getComponents(string $themeName): array
     {
+        if (empty($themeName)) {
+            $themeName = "default";
+        }
+
         $components = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."components");
 
         $finalComponents = [];
@@ -232,6 +236,10 @@ class Theme
      */
     public function getBlocks(string $themeName): array
     {
+        if (empty($themeName)) {
+            $themeName = "default";
+        }
+
         $blocks = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."blocks");
 
         $finalBlocks = [];
@@ -246,6 +254,10 @@ class Theme
 
     public function getScripts(string $themeName): string
     {
+        if (empty($themeName)) {
+            $themeName = "default";
+        }
+
         $scripts = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."js");
 
         $finalScripts = [];
@@ -260,6 +272,10 @@ class Theme
 
     public function getStyles(string $themeName) : string
     {
+        if (empty($themeName)) {
+            $themeName = "default";
+        }
+
         $css = scandir(TINA4_DOCUMENT_ROOT."src".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."themes".DIRECTORY_SEPARATOR.$themeName.DIRECTORY_SEPARATOR."css");
 
         $finalCss = [];
