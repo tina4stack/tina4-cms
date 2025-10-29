@@ -5,8 +5,8 @@ use Tina4\Api;
 class OpenAi extends Api
 {
 
-    public $ignoreSSLValidation = true;
-    public $active = true;
+    public bool $ignoreSSLValidation = true;
+    public bool $active = true;
 
     /**
      * Constructor for OpenAi
@@ -24,6 +24,8 @@ class OpenAi extends Api
             $this->active = false;
         }
         $baseURL = 'https://api.openai.com';
+
+        $this->ignoreSSLValidation = true;
         parent::__construct($baseURL, $authHeader);
     }
 

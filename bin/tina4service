@@ -37,8 +37,8 @@ gc_enable();
 
 while (TRUE && !file_exists($stopFileName)) {
     $service = new \Tina4\Service();
-    $processes = $service->getProcesses();
     sleep($service->getSleepTime());
+    $processes = $service->getProcesses();
     if (!empty($processes)) {
         foreach ($processes as $id => $process) {
             try {
@@ -52,7 +52,6 @@ while (TRUE && !file_exists($stopFileName)) {
                             $code = file_get_contents($reflection->getFileName());
                             $code = str_replace('<?php', '', $code);
                             $aliasNumber = rand(1000, 9999);
-
 
                             if (isset($settings[$process->name]) && $settings[$process->name]["hash"] == md5($code)) {
                                 $aliasNumber = $settings[$process->name]["instance"];
@@ -71,21 +70,26 @@ while (TRUE && !file_exists($stopFileName)) {
                             }
 
                             eval('$runner = new ' . get_class($process) . $aliasNumber . "('{$process->name}');");
-                            if ($runner->canRun()) {
-                                \Tina4\Debug::message(date("Y-m-d H:i:s") . " Running {$process->name}", TINA4_LOG_DEBUG);
-                                $runner->run();
+                            if ($process->timeToRun()){
+                                if ($runner->canRun()) {
+                                    \Tina4\Debug::message(date("Y-m-d H:i:s") . " Running {$process->name}", TINA4_LOG_DEBUG);
+                                    $runner->run();
+                                }
                             }
+
                             unset ($runner);
                             $runner = null;
                         } else {
-                            if ($process->canRun()) {
-                                \Tina4\Debug::message(date("Y-m-d H:i:s") . " Running {$process->name}");
-                                $process->run();
+                            if ($process->timeToRun()){
+                                if ($process->canRun()) {
+                                    \Tina4\Debug::message(date("Y-m-d H:i:s") . " Running {$process->name}");
+                                    $process->run();
+                                }
                             }
                             unset($process);
                         }
                     }
-                        catch (\Exception $exception)
+                    catch (\Exception $exception)
                     {
                         \Tina4\Debug::message("Exception happened in service:\n".$exception->getMessage());
                     }

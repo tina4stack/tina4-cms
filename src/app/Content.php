@@ -150,6 +150,7 @@ class Content extends Data
      * Get Pages
      * @param string $slug
      * @return string
+     * @throws \Twig\Error\LoaderError
      */
     final public function getPage(string $slug): string
     {

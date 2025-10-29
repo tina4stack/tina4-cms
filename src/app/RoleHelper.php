@@ -11,7 +11,7 @@ class RoleHelper
      * @return void
      * @throws \Psr\Cache\InvalidArgumentException
      */
-    public function setSecurityAttribute($name, $options, string $category = null, int $roleId = 1)
+    public function setSecurityAttribute($name, $options, ?string $category = null, int $roleId = 1)
     {
         $category = $category ?? "Default";
         $role = new Role();
