@@ -1,0 +1,170 @@
+unit uTina4CMS;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  System.IOUtils, StrUtils, JSON,
+{$IFDEF MSWINDOWS}
+  Winapi.ShellAPI, Winapi.Windows, FMX.Memo.Types, FMX.ScrollBox, FMX.Memo,
+  FMX.Controls.Presentation, FMX.StdCtrls;
+{$ELSE}
+  Posix.Base,
+  Posix.Fcntl,
+  Posix.Stdlib;
+{$ENDIF}
+
+type
+  TStreamHandle = pointer;
+
+  TAnoPipe = record
+    Input: THandle;
+    Output: THandle;
+  end;
+
+  TfrmTina4CMS = class(TForm)
+    Button1: TButton;
+    memRun: TMemo;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmTina4CMS: TfrmTina4CMS;
+
+implementation
+
+{$R *.fmx}
+
+{$IFDEF MSWINDOWS}
+function ExecAndCapture(const ACmdLine: string; var AOutput: string): Integer;
+const
+  cBufferSize = 2048;
+var
+  vBuffer: Pointer;
+  vStartupInfo: TStartUpInfo;
+  vSecurityAttributes: TSecurityAttributes;
+  vReadBytes: DWord;
+  vProcessInfo: TProcessInformation;
+  vStdInPipe : TAnoPipe;
+  vStdOutPipe: TAnoPipe;
+begin
+  Result := 0;
+
+  with vSecurityAttributes do
+  begin
+    nlength := SizeOf(TSecurityAttributes);
+    binherithandle := True;
+    lpsecuritydescriptor := nil;
+  end;
+
+  // Create anonymous pipe for standard input
+  if not CreatePipe(vStdInPipe.Output, vStdInPipe.Input, @vSecurityAttributes, 0) then
+    raise Exception.Create('Failed to create pipe for standard input. System error message: ' + SysErrorMessage(GetLastError));
+
+  try
+    // Create anonymous pipe for standard output (and also for standard error)
+    if not CreatePipe(vStdOutPipe.Output, vStdOutPipe.Input, @vSecurityAttributes, 0) then
+      raise Exception.Create('Failed to create pipe for standard output. System error message: ' + SysErrorMessage(GetLastError));
+
+    try
+      GetMem(vBuffer, cBufferSize);
+      try
+        // initialize the startup info to match our purpose
+        FillChar(vStartupInfo, Sizeof(TStartUpInfo), #0);
+        vStartupInfo.cb         := SizeOf(TStartUpInfo);
+        vStartupInfo.wShowWindow:= SW_HIDE;  // we don't want to show the process
+        // assign our pipe for the process' standard input
+        vStartupInfo.hStdInput  := vStdInPipe.Output;
+        // assign our pipe for the process' standard output
+        vStartupInfo.hStdOutput := vStdOutPipe.Input;
+        vStartupInfo.dwFlags    := STARTF_USESTDHANDLES or STARTF_USESHOWWINDOW;
+
+        if not CreateProcess(nil
+                             , PChar(ACmdLine)
+                             , @vSecurityAttributes
+                             , @vSecurityAttributes
+                             , True
+                             , NORMAL_PRIORITY_CLASS
+                             , nil
+                             , nil
+                             , vStartupInfo
+                             , vProcessInfo) then
+          raise Exception.Create('Failed creating the console process. System error msg: ' + SysErrorMessage(GetLastError));
+
+        try
+          // wait until the console program terminated
+          while WaitForSingleObject(vProcessInfo.hProcess, 50)=WAIT_TIMEOUT do
+            Sleep(0);
+
+          // clear the output storage
+          AOutput := '';
+          // Read text returned by the console program in its StdOut channel
+          repeat
+            ReadFile(vStdOutPipe.Output, vBuffer^, cBufferSize, vReadBytes, nil);
+            if vReadBytes > 0 then
+            begin
+              AOutput := AOutput + StrPas(PAnsiChar(vBuffer));
+              Inc(Result, vReadBytes);
+            end;
+          until (vReadBytes < cBufferSize);
+        finally
+          CloseHandle(vProcessInfo.hProcess);
+          CloseHandle(vProcessInfo.hThread);
+        end;
+      finally
+        FreeMem(vBuffer);
+      end;
+    finally
+      CloseHandle(vStdOutPipe.Input);
+      CloseHandle(vStdOutPipe.Output);
+    end;
+  finally
+    CloseHandle(vStdInPipe.Input);
+    CloseHandle(vStdInPipe.Output);
+  end;
+end;
+{$ELSE}
+
+function popen(const command: MarshaledAString; const _type: MarshaledAString): TStreamHandle; cdecl; external libc name _PU + 'popen';
+function pclose(filehandle: TStreamHandle): int32; cdecl; external libc name _PU + 'pclose';
+function fgets(buffer: pointer; size: int32; Stream: TStreamHAndle): pointer; cdecl; external libc name _PU + 'fgets';
+
+
+function RunCommandLine(ACommand : string) : TStringList;
+var
+  Handle: TStreamHandle;
+  Data: array[0..511] of uint8;
+  M : TMarshaller;
+
+begin
+  Result := TStringList.Create;
+  try
+    Handle := popen(M.AsAnsi(PWideChar(ACommand)).ToPointer,'r');
+    try
+      while fgets(@data[0],Sizeof(Data),Handle)<>nil do begin
+        Result.Add(Copy(UTF8ToString(@Data[0]),1,UTF8ToString(@Data[0]).Length -1));//,sizeof(Data)));
+      end;
+    finally
+      pclose(Handle);
+    end;
+  except
+    on E: Exception do
+      Result.Add(E.ClassName + ': ' + E.Message);
+  end;
+end;
+{$ENDIF}
+
+
+procedure TfrmTina4CMS.Button1Click(Sender: TObject);
+begin
+  var Output : String := '';
+  ExecAndCapture('c:/tina4/Tina4CMS/php.exe' , Output);
+  memRun.Text := Output;
+end;
+
+end.

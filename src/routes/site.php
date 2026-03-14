@@ -1,5 +1,10 @@
 <?php
 /**
+ * Tina4 - This is not a 4ramework.
+ * Copy-right 2007 - current Tina4
+ * License: MIT https://opensource.org/licenses/MIT
+ */
+/**
  * @secure
  */
 \Tina4\Post::add("/cms/site/set", function (\Tina4\Response $response, \Tina4\Request $request) {

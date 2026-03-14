@@ -1,4 +1,9 @@
 <?php
+/**
+ * Tina4 - This is not a 4ramework.
+ * Copy-right 2007 - current Tina4
+ * License: MIT https://opensource.org/licenses/MIT
+ */
 
 \Tina4\Get::add("/", static function (\Tina4\Response $response, \Tina4\Request $request) {
     $site = (new SiteHelper())->getSite();
@@ -133,5 +138,3 @@ if (!defined("TINA4_CMS_ARTICLES_FORMAT")) {
 \Tina4\Get::add(TINA4_CMS_ARTICLE_PREFIX."/tags/{tag}", static function($category, \Tina4\Response $response, \Tina4\Request $request) {
 
 });
-
-

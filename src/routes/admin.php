@@ -1,4 +1,9 @@
 <?php
+/**
+ * Tina4 - This is not a 4ramework.
+ * Copy-right 2007 - current Tina4
+ * License: MIT https://opensource.org/licenses/MIT
+ */
 
 /**
  * File browser
@@ -204,4 +209,3 @@
 
     \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login");
 });
-

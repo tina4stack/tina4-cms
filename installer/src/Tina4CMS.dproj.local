@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/02/04 11:14:53.000.355,=C:\Users\andre\Documents\Embarcadero\Studio\Projects\Unit73.pas</Transaction>
+    <Transaction>2024/02/04 11:15:59.000.365,D:\projects\php\tina4\tina4-cms\installer\src\uTina4CMS.pas=C:\Users\andre\Documents\Embarcadero\Studio\Projects\Unit73.pas</Transaction>
+    <Transaction>2024/02/04 11:15:59.000.365,D:\projects\php\tina4\tina4-cms\installer\src\uTina4CMS.fmx=C:\Users\andre\Documents\Embarcadero\Studio\Projects\Unit73.fmx</Transaction>
+    <Transaction>2024/02/04 11:16:10.000.378,D:\projects\php\tina4\tina4-cms\installer\src\Tina4CMS.dproj=C:\Users\andre\Documents\Embarcadero\Studio\Projects\Project69.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

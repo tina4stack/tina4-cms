@@ -1,0 +1,1 @@
+insert into site (id, site_name) values (1, 'Default Site');

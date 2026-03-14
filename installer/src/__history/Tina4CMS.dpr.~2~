@@ -1,0 +1,14 @@
+program Tina4CMS;
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  uTina4CMS in 'uTina4CMS.pas' {tina4cms};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(Ttina4cms, tina4cms);
+  Application.Run;
+end.

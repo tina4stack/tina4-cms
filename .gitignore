@@ -28,3 +28,5 @@ composer.phar
 /phpmetrics/
 /src/public/uploads/
 /src/routes/test/
+.phpunit.cache
+.claude/
