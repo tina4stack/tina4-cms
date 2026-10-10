@@ -15,7 +15,7 @@
     }
 
     $files = \Tina4\Utilities::iterateDirectory("./src/public/uploads", "", "onclick=\"previewFile($(this).attr('file-data'))\"");
-    return $response(\Tina4\renderTemplate("admin/file-browser.twig", ["files" => $files]));
+    return $response(\Tina4\renderTemplate("admin/file-browser.twig", ["files" => $files, "site" => (new SiteHelper())->getSite()]));
 });
 
 \Tina4\Post::add("/cms/upload", function (\Tina4\Response $response, \Tina4\Request $request) {

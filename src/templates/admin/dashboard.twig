@@ -1,6 +1,9 @@
 {% extends twigNameSpace ~ '/base.twig' %}
 {% block headers %}
     <link rel="stylesheet" href="/css/page-builder.css">
+    {% if site is defined and site and site.theme %}
+    <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/admin.css">
+    {% endif %}
 {% endblock %}
 {% block navigation %}
     <nav class="top-bar">

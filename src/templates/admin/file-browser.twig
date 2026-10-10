@@ -24,6 +24,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
+    {% if site is defined and site and site.theme %}
+    <link rel="stylesheet" type="text/css" href="{{ Theme.Dir(site.theme) }}/css/admin.css">
+    {% endif %}
 {% endblock %}
 
 {% block navigation %}
