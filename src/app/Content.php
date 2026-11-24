@@ -63,6 +63,24 @@ class Content extends Data
     }
 
     /**
+     * Whether the first-admin setup flow may create an account. Account creation
+     * through POST /cms/login is permitted ONLY when no users exist yet (the
+     * genuine initial setup). Once any user exists it must be refused, otherwise
+     * an unauthenticated request carrying a "confirmPassword" field could create
+     * an active admin account at any time (privilege escalation). This mirrors
+     * the GET /cms/login guard that renders the setup form only when the users
+     * table is empty.
+     *
+     * @return bool true only when the users table holds zero users
+     */
+    public static function canCreateFirstAdmin(): bool
+    {
+        $rows = (new Users())->select("count(id) as number")->asArray();
+
+        return (int) ($rows[0]["number"] ?? 0) === 0;
+    }
+
+    /**
      * Get a different twig name space for changing dashboard and other screens
      * @return string
      */
