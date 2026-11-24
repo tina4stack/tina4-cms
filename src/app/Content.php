@@ -81,6 +81,76 @@ class Content extends Data
     }
 
     /**
+     * Render user-authored page/snippet content as a Twig template inside a
+     * SANDBOX. Page content is stored by CMS editors and was previously rendered
+     * through the full (unsandboxed) Twig environment, which allowed template
+     * injection to reach method/function calls and achieve remote code execution
+     * (e.g. {{ _self.env.registerUndefinedFilterCallback('system') }} or
+     * {{ ['id']|filter('system') }}).
+     *
+     * The sandbox permits ordinary layout — control tags, variable/array access
+     * and a practical set of value filters — but forbids ALL object method and
+     * property access, the higher-order callback filters (map/filter/reduce/
+     * sort), and every function except a few pure ones. A blocked construct
+     * renders as empty rather than executing. Output autoescaping matches the
+     * normal page render (HTML), so reflected request values stay escaped.
+     *
+     * @param string $content the user-authored template content
+     * @param array  $data    the variables exposed to the template
+     * @return string the rendered HTML, or "" when the content is unsafe/invalid
+     */
+    public static function renderSandboxedContent(string $content, array $data = []): string
+    {
+        $policy = new \Twig\Sandbox\SecurityPolicy(
+            // tags
+            ["if", "for", "set", "block", "filter", "apply", "verbatim", "spaceless", "with", "autoescape"],
+            // filters (no map/filter/reduce/sort/reject — those take callables)
+            [
+                "escape", "e", "raw", "upper", "lower", "capitalize", "title", "trim",
+                "nl2br", "length", "join", "split", "default", "date", "date_modify",
+                "format", "number_format", "replace", "striptags", "url_encode",
+                "json_encode", "first", "last", "keys", "merge", "slice", "abs",
+                "round", "batch", "column", "reverse", "wordwrap", "spaceless",
+            ],
+            // methods — none
+            [],
+            // properties — none
+            [],
+            // functions — a few pure ones only (no attribute/constant/include/source/template_from_string/dump)
+            ["range", "max", "min", "cycle"]
+        );
+
+        $loader = new \Twig\Loader\ArrayLoader(["__cms_page__" => $content]);
+        $twig = new \Twig\Environment($loader, ["autoescape" => "html", "strict_variables" => false]);
+        $twig->addExtension(new \Twig\Extension\SandboxExtension($policy, true));
+
+        try {
+            return $twig->render("__cms_page__", $data);
+        } catch (\Twig\Sandbox\SecurityError $error) {
+            \Tina4\Debug::message("Tina4CMS: page content blocked by sandbox - " . $error->getMessage(), TINA4_LOG_WARNING);
+            return "";
+        } catch (\Twig\Error\Error $error) {
+            \Tina4\Debug::message("Tina4CMS: page content render error - " . $error->getMessage(), TINA4_LOG_ERROR);
+            return "";
+        }
+    }
+
+    /**
+     * Whether SCSS content carries an unsafe @import/@use/@forward — one that
+     * points at a URL, a protocol-relative or absolute path, a Windows drive, or
+     * a parent-directory traversal. Such a directive is refused before the
+     * content is written and compiled (defence against file disclosure / SSRF via
+     * the SCSS compiler). Ordinary relative partial imports are allowed.
+     *
+     * @param string $scss the SCSS content submitted by the editor
+     * @return bool true when the content must be refused
+     */
+    public static function hasUnsafeScssDirective(string $scss): bool
+    {
+        return (bool) preg_match('/@(?:import|use|forward)\s+[\'"]?\s*(?:https?:|\/\/|\/|[a-zA-Z]:[\\\\\/]|\.\.)/i', $scss);
+    }
+
+    /**
      * Get a different twig name space for changing dashboard and other screens
      * @return string
      */
@@ -235,7 +305,7 @@ class Content extends Data
                 $related = "";
             }
 
-            return \Tina4\renderTemplate(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST, "article" => ["list" => $list, "related" => $related]]);
+            return self::renderSandboxedContent(html_entity_decode($page->content, ENT_QUOTES), ["title" => $page->title, "description" => $page->description, "request" => $_REQUEST, "article" => ["list" => $list, "related" => $related]]);
         }
         return "";
     }
@@ -577,7 +647,7 @@ class Content extends Data
 
         $article->related =  $this->renderTemplate("article-related.twig", ["articles" => $article->relatedArticles, "websiteUrl" =>  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]", "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
 
-        $article->categories = $this->DBA->fetch("select ac.id, ac.name, lower(ac.name) as link_name, ac.parent_id from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = {$article->id}", 10)->asArray();
+        $article->categories = $this->DBA->fetch("select ac.id, ac.name, lower(ac.name) as link_name, ac.parent_id from article_category ac join article_article_category acc on acc.article_category_id = ac.id where acc.article_id = " . (int) $article->id, 10)->asArray();
         $article->category = $this->renderTemplate("article-categories.twig", ["categories" => $article->categories, "websiteUrl" =>  (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]", "articlePrefix" => TINA4_CMS_ARTICLE_PREFIX ], $article->siteId);
 
         if (count($article->relatedArticles) > 0)

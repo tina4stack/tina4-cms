@@ -38,7 +38,7 @@
                 $content = \Tina4\renderTemplate("/api/admin/roles/form.twig", []);
             } else {
                 $title = "Edit Role";
-                $role->roleInfo = unserialize($role->roleInfo);
+                $role->roleInfo = unserialize((string) $role->roleInfo, ["allowed_classes" => false]);
 
 
                 $savePath =  TINA4_SUB_FOLDER . "/api/admin/roles/".$role->id;
