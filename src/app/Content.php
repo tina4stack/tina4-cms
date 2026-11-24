@@ -20,6 +20,49 @@ class Content extends Data
     private string $twigNamespace = "@tina4cms";
 
     /**
+     * File extensions the content file browser is permitted to store. A strict
+     * ALLOW-LIST of non-executable asset types: a file whose final extension is
+     * not listed here is refused before it is written, so an uploaded
+     * PHP/CGI/script file can never land in a web-reachable path and be executed
+     * by the web server.
+     *
+     * @var string[]
+     */
+    public const ALLOWED_UPLOAD_EXTENSIONS = [
+        // images
+        "jpg", "jpeg", "png", "gif", "svg", "webp", "avif", "bmp", "ico",
+        // documents
+        "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "odt", "ods", "odp", "rtf", "txt", "csv",
+        // media
+        "mp4", "webm", "mov", "ogg", "mp3", "wav", "m4a",
+        // archives
+        "zip",
+    ];
+
+    /**
+     * Whether an uploaded file name may be stored by the file browser. Pure and
+     * side-effect-free: the stored extension is the LOWER-CASED final extension
+     * and must appear in self::ALLOWED_UPLOAD_EXTENSIONS, and the name must carry
+     * a non-empty base before that extension. "shell.php" / ".php" / "shell.PHP"
+     * / an extension-less name are rejected; "shell.php.jpg" is allowed because
+     * its stored extension is "jpg" and the "php" becomes part of the base name.
+     *
+     * @param string $fileName the client-supplied upload file name
+     * @return bool true when the file may be stored, false when it must be refused
+     */
+    public static function isAllowedUploadExtension(string $fileName): bool
+    {
+        $parts = explode(".", $fileName);
+        $extension = strtolower((string) array_pop($parts));
+
+        if ($extension === "" || implode("", $parts) === "") {
+            return false;
+        }
+
+        return in_array($extension, self::ALLOWED_UPLOAD_EXTENSIONS, true);
+    }
+
+    /**
      * Get a different twig name space for changing dashboard and other screens
      * @return string
      */
