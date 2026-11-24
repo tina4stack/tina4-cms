@@ -176,6 +176,16 @@
 
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {
     if (!empty($request->params["confirmPassword"])) {
+        // Security: creating an account through this endpoint is ONLY the initial
+        // first-admin setup, permitted when no users exist yet. Without this gate
+        // an unauthenticated request can create an active admin account at any
+        // time (privilege escalation). This mirrors the GET /cms/login guard that
+        // renders the setup form only when the users table is empty.
+        if (!Content::canCreateFirstAdmin()) {
+            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Setup is not available");
+            return;
+        }
+
         $user = new Users($request->params);
 
         if (!$user->load("email = ?", [$request->params["email"]])) {
