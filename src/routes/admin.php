@@ -186,11 +186,17 @@
             return;
         }
 
-        $user = new Users($request->params);
+        // Security: never mass-assign $request->params (it would let the request
+        // set id/roleId/siteId/isActive). Assign only the fields the setup form owns.
+        $user = new Users();
 
         if (!$user->load("email = ?", [$request->params["email"]])) {
+            $user->firstName = $request->params["firstName"] ?? "";
+            $user->lastName = $request->params["lastName"] ?? "";
+            $user->email = $request->params["email"] ?? "";
             $user->isActive = 1;
-            $user->password = password_hash($user->password, PASSWORD_BCRYPT);
+            $user->roleId = 1;
+            $user->password = password_hash($request->params["password"] ?? "", PASSWORD_BCRYPT);
             $user->save();
             \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
         } else {

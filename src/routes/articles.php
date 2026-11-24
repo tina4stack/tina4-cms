@@ -98,10 +98,10 @@
 
             if (!empty($request->params["article_categories"])) {
 
-                $article->DBA->exec("delete from article_article_category where article_id = {$article->id}");
+                $article->DBA->exec("delete from article_article_category where article_id = ?", $article->id);
                 foreach ($request->params["article_categories"] as $id => $value) {
                     if ($value != 0) {
-                        $article->DBA->exec("insert into article_article_category (article_id, article_category_id) values ({$article->id}, {$id})");
+                        $article->DBA->exec("insert into article_article_category (article_id, article_category_id) values (?, ?)", $article->id, (int) $id);
                     }
                 }
             }
@@ -123,10 +123,10 @@
             //return needed
 
             if (!empty($request->params["article_categories"])) {
-                $article->DBA->exec("delete from article_article_category where article_id = {$article->id}");
+                $article->DBA->exec("delete from article_article_category where article_id = ?", $article->id);
                 foreach ($request->params["article_categories"] as $id => $value) {
                     if ($value != 0) {
-                        $article->DBA->exec("insert into article_article_category (article_id, article_category_id) values ({$article->id}, {$id})");
+                        $article->DBA->exec("insert into article_article_category (article_id, article_category_id) values (?, ?)", $article->id, (int) $id);
                     }
                 }
             }

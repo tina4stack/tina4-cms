@@ -21,7 +21,7 @@ class RoleHelper
         $category = $category ?? "Default";
         $role = new Role();
         if ($role->load("id = ?", [$roleId])) {
-            $roleData = unserialize($role->roleInfo);
+            $roleData = unserialize((string) $role->roleInfo, ["allowed_classes" => false]);
 
             $roleData["roles"][$name] = array_merge($options, compact('category'));
             $roleData["category"][$category][$name] = array_merge($options, compact('category'));
@@ -50,7 +50,7 @@ class RoleHelper
         $roleId = $roleId ?? 1;
         $role = new Role();
         if ($role->load("id = ?", [$roleId])) {
-            $roles = unserialize($role->roleInfo);
+            $roles = unserialize((string) $role->roleInfo, ["allowed_classes" => false]);
 
             if (!empty($name)) {
                 if (isset($roles["roles"])) {

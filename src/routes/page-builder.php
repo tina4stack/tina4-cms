@@ -117,7 +117,9 @@
 
             //Save CSS to SCSS folder for compilation
             if (!empty($request->data->css)) {
-                file_put_contents("./src/scss/page-{$page->id}.scss", $request->data->css);
+                if (!Content::hasUnsafeScssDirective((string) ($request->data->css ?? ""))) {
+                    file_put_contents("./src/scss/page-{$page->id}.scss", $request->data->css);
+                }
             }
 
             $site = new Site();
@@ -194,7 +196,7 @@
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         $template = (new Snippet());
         $template->load("name = ?", [$request->params["id"]]);
-        $html = \Tina4\renderTemplate($template->content);
+        $html = Content::renderSandboxedContent($template->content);
     } else {
         $html = "Choose template to render";
     }
@@ -231,7 +233,7 @@
     if (isset($request->params["id"]) && !empty($request->params["id"]) && $request->params["id"] !== "undefined") {
         $page = (new Page());
         $page->load("name = ?", [$request->params["id"]]);
-        $html = \Tina4\renderTemplate($page->content);
+        $html = Content::renderSandboxedContent($page->content);
     } else {
         $html = "Choose page to render";
     }
