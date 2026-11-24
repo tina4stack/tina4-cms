@@ -33,9 +33,19 @@
 
     $result = (object)[];
     foreach ($_FILES as $name => $file) {
-        $filename = explode(".", $file["name"]);
-        $extension = array_pop($filename);
-        $filename = (new Content())->getSlug(implode('_', $filename));
+        // Refuse anything that is not an allow-listed, non-executable asset type.
+        // Without this, a file named e.g. "shell.php" is written into the
+        // web-reachable ./uploads/ directory and executed by the web server (RCE).
+        if (!Content::isAllowedUploadExtension($file["name"])) {
+            $result->uploaded = 0;
+            $result->fileName = $file["name"];
+            $result->error = (object)["message" => "File type not allowed"];
+            continue;
+        }
+
+        $parts = explode(".", $file["name"]);
+        $extension = strtolower((string) array_pop($parts));
+        $filename = (new Content())->getSlug(implode('_', $parts));
         if (move_uploaded_file($file["tmp_name"], "./uploads/{$filename}.{$extension}")) {
             $result->uploaded = 1;
             $result->fileName = $filename;
