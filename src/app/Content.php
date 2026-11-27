@@ -63,21 +63,107 @@ class Content extends Data
     }
 
     /**
-     * Whether the first-admin setup flow may create an account. Account creation
-     * through POST /cms/login is permitted ONLY when no users exist yet (the
-     * genuine initial setup). Once any user exists it must be refused, otherwise
-     * an unauthenticated request carrying a "confirmPassword" field could create
-     * an active admin account at any time (privilege escalation). This mirrors
-     * the GET /cms/login guard that renders the setup form only when the users
-     * table is empty.
+     * Whether the first-admin bootstrap may create an account. Account creation
+     * is permitted ONLY when no users exist yet (the genuine initial setup).
+     * Once any user exists it must be refused, otherwise an unauthenticated
+     * request could mint an active admin at any time (privilege escalation).
      *
-     * @return bool true only when the users table holds zero users
+     * FAIL CLOSED: if the user count cannot be determined for any reason (the
+     * query errors, or returns no row), this returns false and refuses setup.
+     * The previous "?? 0" defaulted a missing count to zero, which would OPEN
+     * the gate on a transient database error — the wrong direction for a
+     * security control.
+     *
+     * @return bool true only when the users table is confirmed empty
      */
     public static function canCreateFirstAdmin(): bool
     {
-        $rows = (new Users())->select("count(id) as number")->asArray();
+        try {
+            $rows = (new Users())->select("count(id) as number")->asArray();
+        } catch (\Throwable $e) {
+            return false;
+        }
 
-        return (int) ($rows[0]["number"] ?? 0) === 0;
+        if (!isset($rows[0]["number"])) {
+            return false;
+        }
+
+        return (int) $rows[0]["number"] === 0;
+    }
+
+    /**
+     * Authenticate a login request. This is the ONLY thing POST /cms/login does:
+     * it NEVER creates a user. An unknown email or a wrong password is an
+     * authentication failure (returns null), not a sign-up — removing the
+     * original "create the user if the email is not found" behaviour that let
+     * anyone walk through the front door.
+     *
+     * A single generic failure (null) is returned for both "no such user" and
+     * "wrong password" so the endpoint cannot be used to enumerate accounts.
+     *
+     * @param array<string,mixed> $params the request params (email, password)
+     * @return Users|null the authenticated user, or null on any failure
+     */
+    public static function authenticate(array $params): ?Users
+    {
+        $email = (string) ($params["email"] ?? "");
+        $password = (string) ($params["password"] ?? "");
+
+        if ($email === "" || $password === "") {
+            return null;
+        }
+
+        $user = new Users();
+        if (!$user->load("email = ?", [$email])) {
+            return null;
+        }
+
+        if (!password_verify($password, (string) $user->password)) {
+            return null;
+        }
+
+        return $user;
+    }
+
+    /**
+     * Create the first administrator. This is the ONLY unauthenticated path that
+     * may create a user, and it is permitted exclusively when the users table is
+     * confirmed empty (see canCreateFirstAdmin, which fails closed). Only the
+     * fields the setup form owns are assigned — never mass-assigned from the
+     * request — so the caller cannot set id/roleId/siteId/isActive itself.
+     *
+     * @param array<string,mixed> $params the setup params (firstName, lastName, email, password)
+     * @return Users|null the created admin, or null if setup is not permitted or input is missing
+     */
+    public static function createFirstAdmin(array $params): ?Users
+    {
+        if (!self::canCreateFirstAdmin()) {
+            return null;
+        }
+
+        $email = (string) ($params["email"] ?? "");
+        $password = (string) ($params["password"] ?? "");
+        if ($email === "" || $password === "") {
+            return null;
+        }
+
+        // Defence in depth: never create a second account through this path even
+        // if the email happens to exist (canCreateFirstAdmin already guarantees
+        // an empty table, but keep the create strictly conditional on a miss).
+        $user = new Users();
+        if ($user->load("email = ?", [$email])) {
+            return null;
+        }
+
+        $user->firstName = (string) ($params["firstName"] ?? "");
+        $user->lastName = (string) ($params["lastName"] ?? "");
+        $user->email = $email;
+        $user->isActive = 1;
+        $user->roleId = 1;
+        $user->password = password_hash($password, PASSWORD_BCRYPT);
+        $user->save();
+
+        return $user;
     }
 
     /**
