@@ -175,48 +175,34 @@
 });
 
 \Tina4\Post::add("/cms/login", function (\Tina4\Response $response, \Tina4\Request $request) {
-    if (!empty($request->params["confirmPassword"])) {
-        // Security: creating an account through this endpoint is ONLY the initial
-        // first-admin setup, permitted when no users exist yet. Without this gate
-        // an unauthenticated request can create an active admin account at any
-        // time (privilege escalation). This mirrors the GET /cms/login guard that
-        // renders the setup form only when the users table is empty.
-        if (!Content::canCreateFirstAdmin()) {
-            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Setup is not available");
-            return;
-        }
+    // Authentication ONLY. This endpoint never creates a user: an unknown email
+    // or a wrong password is an authentication failure, not a sign-up. First-admin
+    // bootstrap lives in POST /cms/setup and is gated to an empty users table.
+    $user = Content::authenticate($request->params);
 
-        // Security: never mass-assign $request->params (it would let the request
-        // set id/roleId/siteId/isActive). Assign only the fields the setup form owns.
-        $user = new Users();
-
-        if (!$user->load("email = ?", [$request->params["email"]])) {
-            $user->firstName = $request->params["firstName"] ?? "";
-            $user->lastName = $request->params["lastName"] ?? "";
-            $user->email = $request->params["email"] ?? "";
-            $user->isActive = 1;
-            $user->roleId = 1;
-            $user->password = password_hash($request->params["password"] ?? "", PASSWORD_BCRYPT);
-            $user->save();
-            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
-        } else {
-            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login");
-        }
-    } else {
-        $user = new Users();
-        //perform login
-        if ($user->load("email = ?", [$request->params["email"]])) {
-            if (password_verify($request->params["password"],$user->password)) {
-                $_SESSION["user"] = $user->asArray();
-                $_SESSION["siteId"] = $user->siteId;
-                \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
-            } else {
-                \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Invalid password");
-            }
-        } else {
-            \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Invalid email address or password");
-        }
+    if ($user !== null) {
+        $_SESSION["user"] = $user->asArray();
+        $_SESSION["siteId"] = $user->siteId;
+        \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
+        return;
     }
+
+    \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Invalid email address or password");
+})::noCache();
+
+\Tina4\Post::add("/cms/setup", function (\Tina4\Response $response, \Tina4\Request $request) {
+    // First-admin bootstrap ONLY. Content::createFirstAdmin creates an account
+    // exclusively when the users table is confirmed empty (fails closed), and
+    // assigns only the fields the setup form owns. It is the single
+    // unauthenticated path permitted to create a user.
+    $user = Content::createFirstAdmin($request->params);
+
+    if ($user !== null) {
+        \Tina4\redirect(TINA4_SUB_FOLDER."/cms/page-builder");
+        return;
+    }
+
+    \Tina4\redirect(TINA4_SUB_FOLDER."/cms/login?error=Setup is not available");
 })::noCache();
 
 \Tina4\Get::add("/cms/logout", function (\Tina4\Response $response, \Tina4\Request $request) {
